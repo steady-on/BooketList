@@ -1,2 +1,2 @@
-# PersonalTemplate
-개인 프로젝트 템플릿
+# BookitList
+당신의 책읽기에 관한 모든 것을 기록합니다.
