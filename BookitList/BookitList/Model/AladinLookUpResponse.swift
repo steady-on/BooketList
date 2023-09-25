@@ -8,12 +8,9 @@
 import Foundation
 
 struct AladinLookUpResponse: Decodable {
-    let totalResults, startIndex, itemsPerPage: Int
-    let query: String
     let itemDetail: [ItemDetail]
 
     enum CodingKeys: String, CodingKey {
-        case totalResults, startIndex, itemsPerPage, query
         case itemDetail = "item"
     }
 }
