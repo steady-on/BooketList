@@ -13,6 +13,7 @@
 		63BB13BE2AC164D70060073D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63BB13BD2AC164D70060073D /* Assets.xcassets */; };
 		63BB13C12AC164D70060073D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */; };
 		63BB13CA2AC17A610060073D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 63BB13C92AC17A610060073D /* Alamofire */; };
+		63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D22AC181C10060073D /* AladinSearchResponse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		63BB13BD2AC164D70060073D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63BB13C02AC164D70060073D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63BB13C22AC164D70060073D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		63BB13D22AC181C10060073D /* AladinSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinSearchResponse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,11 +61,29 @@
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
 				63BB13B82AC164D50060073D /* ViewController.swift */,
-				63BB13BD2AC164D70060073D /* Assets.xcassets */,
+				63BB13D12AC1816C0060073D /* Model */,
+				63BB13CB2AC17A910060073D /* Network */,
 				63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */,
+				63BB13BD2AC164D70060073D /* Assets.xcassets */,
 				63BB13C22AC164D70060073D /* Info.plist */,
 			);
 			path = BookitList;
+			sourceTree = "<group>";
+		};
+		63BB13CB2AC17A910060073D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				63BB13CF2AC17BAB0060073D /* APIKey.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		63BB13D12AC1816C0060073D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63BB13D22AC181C10060073D /* AladinSearchResponse.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +165,8 @@
 				63BB13B92AC164D50060073D /* ViewController.swift in Sources */,
 				63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */,
 				63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */,
+				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
+				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
