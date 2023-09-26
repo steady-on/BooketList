@@ -15,6 +15,7 @@
 		63A6734D2AC34C2E004F43F4 /* ReadingRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6734C2AC34C2E004F43F4 /* ReadingRecord.swift */; };
 		63A6734F2AC35810004F43F4 /* ProgressRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6734E2AC35810004F43F4 /* ProgressRecord.swift */; };
 		63A673512AC35AE3004F43F4 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673502AC35AE3004F43F4 /* Note.swift */; };
+		63A673532AC36132004F43F4 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673522AC36132004F43F4 /* Comment.swift */; };
 		63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B42AC164D50060073D /* AppDelegate.swift */; };
 		63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B62AC164D50060073D /* SceneDelegate.swift */; };
 		63BB13B92AC164D50060073D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* ViewController.swift */; };
@@ -35,6 +36,7 @@
 		63A6734C2AC34C2E004F43F4 /* ReadingRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecord.swift; sourceTree = "<group>"; };
 		63A6734E2AC35810004F43F4 /* ProgressRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRecord.swift; sourceTree = "<group>"; };
 		63A673502AC35AE3004F43F4 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		63A673522AC36132004F43F4 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BB13B42AC164D50060073D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BB13B62AC164D50060073D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				63A6734C2AC34C2E004F43F4 /* ReadingRecord.swift */,
 				63A6734E2AC35810004F43F4 /* ProgressRecord.swift */,
 				63A673502AC35AE3004F43F4 /* Note.swift */,
+				63A673522AC36132004F43F4 /* Comment.swift */,
 			);
 			path = RealmModel;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
 				63A6734B2AC3451C004F43F4 /* Author.swift in Sources */,
 				63A673512AC35AE3004F43F4 /* Note.swift in Sources */,
+				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				63A673492AC3447B004F43F4 /* StatusOfReading.swift in Sources */,
 				63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */,
 				63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */,

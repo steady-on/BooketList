@@ -18,6 +18,8 @@ final class Note: Object {
     
     @Persisted var readingRecord: ReadingRecord?
     
+    @Persisted var comments: List<Comment>
+    
     enum NoteType: Int, PersistableEnum {
         case quote
         case summary
