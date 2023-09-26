@@ -17,6 +17,7 @@
 		63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13CF2AC17BAB0060073D /* APIKey.swift */; };
 		63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D22AC181C10060073D /* AladinSearchResponse.swift */; };
 		63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D42AC189160060073D /* AladinLookUpResponse.swift */; };
+		63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		63BB13CF2AC17BAB0060073D /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		63BB13D22AC181C10060073D /* AladinSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinSearchResponse.swift; sourceTree = "<group>"; };
 		63BB13D42AC189160060073D /* AladinLookUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinLookUpResponse.swift; sourceTree = "<group>"; };
+		63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinAPIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +81,9 @@
 		63BB13CB2AC17A910060073D /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				63BB13CC2AC17B510060073D /* AladinRouter.swift */,
 				63BB13CF2AC17BAB0060073D /* APIKey.swift */,
+				63BB13CC2AC17B510060073D /* AladinRouter.swift */,
+				63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
 				63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */,
+				63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
