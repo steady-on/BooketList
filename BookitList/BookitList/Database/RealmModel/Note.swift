@@ -20,6 +20,8 @@ final class Note: Object {
     
     @Persisted var comments: List<Comment>
     
+    @Persisted(originProperty: "notes") var book: LinkingObjects<Book>
+    
     enum NoteType: Int, PersistableEnum {
         case quote
         case summary
