@@ -19,6 +19,8 @@ final class ReadingRecord: Object {
     
     @Persisted var progressRecord: List<ProgressRecord>
     
+    @Persisted(originProperty: "readingRecord") var note: LinkingObjects<Note>
+    
     enum Status: Int, PersistableEnum {
         case reading
         case finished
