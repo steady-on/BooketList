@@ -47,6 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		63A673322AC307DF004F43F4 /* AladinAPI */ = {
+			isa = PBXGroup;
+			children = (
+				63BB13CC2AC17B510060073D /* AladinRouter.swift */,
+				63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */,
+			);
+			path = AladinAPI;
+			sourceTree = "<group>";
+		};
 		63BB13A82AC164D50060073D = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +78,6 @@
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
 				63BB13B82AC164D50060073D /* ViewController.swift */,
-				63BB13D12AC1816C0060073D /* Model */,
 				63BB13CB2AC17A910060073D /* Network */,
 				63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */,
 				63BB13BD2AC164D70060073D /* Assets.xcassets */,
@@ -82,8 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				63BB13CF2AC17BAB0060073D /* APIKey.swift */,
-				63BB13CC2AC17B510060073D /* AladinRouter.swift */,
-				63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */,
+				63BB13D12AC1816C0060073D /* Model */,
+				63A673322AC307DF004F43F4 /* AladinAPI */,
 			);
 			path = Network;
 			sourceTree = "<group>";
