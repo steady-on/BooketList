@@ -12,12 +12,6 @@
 		63BB13B92AC164D50060073D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* ViewController.swift */; };
 		63BB13BE2AC164D70060073D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63BB13BD2AC164D70060073D /* Assets.xcassets */; };
 		63BB13C12AC164D70060073D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */; };
-		63BB13CA2AC17A610060073D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 63BB13C92AC17A610060073D /* Alamofire */; };
-		63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13CC2AC17B510060073D /* AladinRouter.swift */; };
-		63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13CF2AC17BAB0060073D /* APIKey.swift */; };
-		63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D22AC181C10060073D /* AladinSearchResponse.swift */; };
-		63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D42AC189160060073D /* AladinLookUpResponse.swift */; };
-		63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,11 +22,6 @@
 		63BB13BD2AC164D70060073D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63BB13C02AC164D70060073D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63BB13C22AC164D70060073D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		63BB13CC2AC17B510060073D /* AladinRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinRouter.swift; sourceTree = "<group>"; };
-		63BB13CF2AC17BAB0060073D /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		63BB13D22AC181C10060073D /* AladinSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinSearchResponse.swift; sourceTree = "<group>"; };
-		63BB13D42AC189160060073D /* AladinLookUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinLookUpResponse.swift; sourceTree = "<group>"; };
-		63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinAPIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,22 +29,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63BB13CA2AC17A610060073D /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		63A673322AC307DF004F43F4 /* AladinAPI */ = {
-			isa = PBXGroup;
-			children = (
-				63BB13CC2AC17B510060073D /* AladinRouter.swift */,
-				63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */,
-			);
-			path = AladinAPI;
-			sourceTree = "<group>";
-		};
 		63BB13A82AC164D50060073D = {
 			isa = PBXGroup;
 			children = (
@@ -78,31 +57,11 @@
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
 				63BB13B82AC164D50060073D /* ViewController.swift */,
-				63BB13CB2AC17A910060073D /* Network */,
-				63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */,
 				63BB13BD2AC164D70060073D /* Assets.xcassets */,
+				63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */,
 				63BB13C22AC164D70060073D /* Info.plist */,
 			);
 			path = BookitList;
-			sourceTree = "<group>";
-		};
-		63BB13CB2AC17A910060073D /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				63BB13CF2AC17BAB0060073D /* APIKey.swift */,
-				63BB13D12AC1816C0060073D /* Model */,
-				63A673322AC307DF004F43F4 /* AladinAPI */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		63BB13D12AC1816C0060073D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				63BB13D22AC181C10060073D /* AladinSearchResponse.swift */,
-				63BB13D42AC189160060073D /* AladinLookUpResponse.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -121,9 +80,6 @@
 			dependencies = (
 			);
 			name = BookitList;
-			packageProductDependencies = (
-				63BB13C92AC17A610060073D /* Alamofire */,
-			);
 			productName = BookitList;
 			productReference = 63BB13B12AC164D50060073D /* BookitList.app */;
 			productType = "com.apple.product-type.application";
@@ -152,9 +108,6 @@
 				Base,
 			);
 			mainGroup = 63BB13A82AC164D50060073D;
-			packageReferences = (
-				63BB13C82AC17A610060073D /* XCRemoteSwiftPackageReference "Alamofire" */,
-			);
 			productRefGroup = 63BB13B22AC164D50060073D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -184,11 +137,6 @@
 				63BB13B92AC164D50060073D /* ViewController.swift in Sources */,
 				63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */,
 				63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */,
-				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
-				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
-				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
-				63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */,
-				63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,25 +357,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		63BB13C82AC17A610060073D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.8.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		63BB13C92AC17A610060073D /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 63BB13C82AC17A610060073D /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 63BB13A92AC164D50060073D /* Project object */;
 }
