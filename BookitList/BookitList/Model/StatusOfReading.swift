@@ -12,5 +12,6 @@ enum StatusOfReading: Int, PersistableEnum {
     case notYet
     case reading
     case finished
-    case giveUp
+    case pause
+    case stop
 }
