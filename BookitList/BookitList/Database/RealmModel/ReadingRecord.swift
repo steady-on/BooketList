@@ -17,6 +17,8 @@ final class ReadingRecord: Object {
     @Persisted var rate: Double?
     @Persisted var presentReadingPage: Int
     
+    @Persisted var progressRecord: List<ProgressRecord>
+    
     enum Status: Int, PersistableEnum {
         case reading
         case finished
