@@ -13,7 +13,6 @@ final class Book: Object {
     @Persisted var title: String
     @Persisted var originalTitle: String?
     @Persisted var overview: String?
-    @Persisted var coverURL: String?
     @Persisted var coverData: Data?
     @Persisted var totalPage: Int?
     @Persisted var publishedAt: Date?
