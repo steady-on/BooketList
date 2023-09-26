@@ -36,12 +36,13 @@ enum AladinRouter: URLRequestConvertible {
                 "Query" : query,
                 "MaxResults" : "\(20)",
                 "SearchTarget" : isEbook ? "eBook" : "Book",
-                "start" : "\(page)"
+                "Start" : "\(page)",
+                "Cover" : "Big"
             ]
             return commonParameters.merging(additionalParameters) { current, _ in current }
         case .itemLookUp(let isbn):
             let additionalParameters = [
-                "itemIdType" : "ISBN13",
+                "ItemIdType" : "ISBN13",
                 "ItemId" : isbn,
                 "OptResult" : "packing"
             ]
