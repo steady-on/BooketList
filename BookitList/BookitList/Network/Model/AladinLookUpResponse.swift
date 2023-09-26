@@ -16,12 +16,12 @@ struct ItemDetail: Decodable {
     let isbn13: String
     let title, author, description: String
     let pubDate, publisher: String
-    let cover: String
+    let cover, stockstatus: String
     let subInfo: SubInfo
 
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"
-        case isbn13, title, author, description, pubDate, publisher, cover, subInfo
+        case isbn13, title, author, description, pubDate, publisher, cover, stockstatus, subInfo
     }
 }
 
