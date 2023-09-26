@@ -11,6 +11,7 @@
 		63A673422AC33AFD004F43F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A673412AC33AFD004F43F4 /* RealmSwift */; };
 		63A673462AC33BCD004F43F4 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673452AC33BCD004F43F4 /* Book.swift */; };
 		63A673492AC3447B004F43F4 /* StatusOfReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673482AC3447B004F43F4 /* StatusOfReading.swift */; };
+		63A6734B2AC3451C004F43F4 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6734A2AC3451C004F43F4 /* Author.swift */; };
 		63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B42AC164D50060073D /* AppDelegate.swift */; };
 		63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B62AC164D50060073D /* SceneDelegate.swift */; };
 		63BB13B92AC164D50060073D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* Begin PBXFileReference section */
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		63A673482AC3447B004F43F4 /* StatusOfReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfReading.swift; sourceTree = "<group>"; };
+		63A6734A2AC3451C004F43F4 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
 		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BB13B42AC164D50060073D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BB13B62AC164D50060073D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				63A673452AC33BCD004F43F4 /* Book.swift */,
+				63A6734A2AC3451C004F43F4 /* Author.swift */,
 			);
 			path = RealmModel;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63A673462AC33BCD004F43F4 /* Book.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
+				63A6734B2AC3451C004F43F4 /* Author.swift in Sources */,
 				63A673492AC3447B004F43F4 /* StatusOfReading.swift in Sources */,
 				63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */,
 				63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */,
