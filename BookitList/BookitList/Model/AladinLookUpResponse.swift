@@ -8,11 +8,7 @@
 import Foundation
 
 struct AladinLookUpResponse: Decodable {
-    let itemDetail: [ItemDetail]
-
-    enum CodingKeys: String, CodingKey {
-        case itemDetail = "item"
-    }
+    let item: [ItemDetail]
 }
 
 struct ItemDetail: Decodable {

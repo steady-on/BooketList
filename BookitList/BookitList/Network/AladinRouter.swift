@@ -27,7 +27,8 @@ enum AladinRouter: URLRequestConvertible {
         let commonParameters = [
             "ttbkey" : APIKey.aladinTTBKey,
             "output" : "js",
-            "Version" : "20131101"
+            "Version" : "20131101",
+            "Cover" : "Big"
         ]
         
         switch self {
@@ -36,8 +37,7 @@ enum AladinRouter: URLRequestConvertible {
                 "Query" : query,
                 "MaxResults" : "\(20)",
                 "SearchTarget" : isEbook ? "eBook" : "Book",
-                "Start" : "\(page)",
-                "Cover" : "Big"
+                "Start" : "\(page)"
             ]
             return commonParameters.merging(additionalParameters) { current, _ in current }
         case .itemLookUp(let isbn):
