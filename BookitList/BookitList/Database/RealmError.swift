@@ -17,7 +17,7 @@ enum RealmError: Error, CustomDebugStringConvertible {
     var debugDescription: String {
         switch self {
         case .notInitialized:
-            return "데이터베이스를 초기화에 문제가 발생했습니다. 다시 시도해 주세요."
+            return "데이터베이스 초기화에 문제가 발생했습니다. 다시 시도해 주세요."
         case .failToCreateItem:
             return "데이터를 추가하는 도중 문제가 발생했습니다. 다시 시도해 주세요."
         case .failToUpdateItem:
