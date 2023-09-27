@@ -19,6 +19,7 @@ final class ReadingHistory: Object {
     
     @Persisted var readingRecords: List<ReadingRecord>
     
+    @Persisted(originProperty: "readingHistories") var book: LinkingObjects<Book>
     @Persisted(originProperty: "readingHistory") var note: LinkingObjects<Note>
     
     enum Status: Int, PersistableEnum {
