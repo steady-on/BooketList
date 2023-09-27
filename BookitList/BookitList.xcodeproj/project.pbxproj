@@ -21,6 +21,7 @@
 		63A6735A2AC3FD6B004F43F4 /* CheckoutHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673592AC3FD6B004F43F4 /* CheckoutHistory.swift */; };
 		63A6735C2AC40380004F43F4 /* Series.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6735B2AC40380004F43F4 /* Series.swift */; };
 		63A6735E2AC41488004F43F4 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6735D2AC41488004F43F4 /* Tag.swift */; };
+		63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673692AC4A25B004F43F4 /* RealmError.swift */; };
 		63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B42AC164D50060073D /* AppDelegate.swift */; };
 		63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B62AC164D50060073D /* SceneDelegate.swift */; };
 		63BB13B92AC164D50060073D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* ViewController.swift */; };
@@ -47,6 +48,7 @@
 		63A673592AC3FD6B004F43F4 /* CheckoutHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutHistory.swift; sourceTree = "<group>"; };
 		63A6735B2AC40380004F43F4 /* Series.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Series.swift; sourceTree = "<group>"; };
 		63A6735D2AC41488004F43F4 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		63A673692AC4A25B004F43F4 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BB13B42AC164D50060073D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BB13B62AC164D50060073D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 		63A673432AC33B99004F43F4 /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				63A673692AC4A25B004F43F4 /* RealmError.swift */,
 				63A673442AC33BA4004F43F4 /* RealmModel */,
 			);
 			path = Database;
