@@ -28,5 +28,6 @@ final class Note: Object {
         case thinking
         case question
         case report
+        case memory
     }
 }
