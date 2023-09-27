@@ -9,7 +9,7 @@ import UIKit
 import RealmSwift
 
 final class Series: Object {
-    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted(primaryKey: true) var _id = ObjectId()
     @Persisted var title: String
     @Persisted var definition: String?
     @Persisted var createdAt: Date

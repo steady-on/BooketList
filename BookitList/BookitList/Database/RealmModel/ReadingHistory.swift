@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class ReadingHistory: Object {
-    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted(primaryKey: true) var _id = ObjectId()
     @Persisted var round: Int
     @Persisted var status: Status
     @Persisted var startedAt: Date

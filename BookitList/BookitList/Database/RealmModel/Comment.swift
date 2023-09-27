@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class Comment: Object {
-    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted(primaryKey: true) var _id = ObjectId()
     @Persisted var createdAt: Date
     @Persisted var content: String
 }

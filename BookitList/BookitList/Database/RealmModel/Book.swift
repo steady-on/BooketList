@@ -9,7 +9,8 @@ import Foundation
 import RealmSwift
 
 final class Book: Object {
-    @Persisted(primaryKey: true) var isbn: String
+    @Persisted(primaryKey: true) var _id = ObjectId()
+    @Persisted(indexed: true) var isbn: String?
     @Persisted var title: String
     @Persisted var originalTitle: String?
     @Persisted var overview: String?
@@ -20,7 +21,7 @@ final class Book: Object {
     @Persisted var width: Int?
     @Persisted var height: Int?
     @Persisted var depth: Int?
-    @Persisted var isOutOfPrint: Bool
+    @Persisted var isOutOfPrint: Bool?
     @Persisted var statusOfReading: StatusOfReading
     
     @Persisted var authors: List<Author>
