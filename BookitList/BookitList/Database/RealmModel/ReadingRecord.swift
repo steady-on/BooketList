@@ -10,21 +10,7 @@ import RealmSwift
 
 final class ReadingRecord: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var round: Int
-    @Persisted var status: Status
-    @Persisted var startedAt: Date
-    @Persisted var finishedAt: Date?
-    @Persisted var rate: Double?
-    @Persisted var presentReadingPage: Int
-    
-    @Persisted var progressRecord: List<ProgressRecord>
-    
-    @Persisted(originProperty: "readingRecord") var note: LinkingObjects<Note>
-    
-    enum Status: Int, PersistableEnum {
-        case reading
-        case finished
-        case pause
-        case stop
-    }
+    @Persisted var startedAt: Date?
+    @Persisted var recordedAt: Date
+    @Persisted var markedPage: Int
 }
