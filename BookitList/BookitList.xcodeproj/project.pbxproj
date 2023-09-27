@@ -79,12 +79,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		637B5C482AC4D83600730C01 /* Base */ = {
+		637B5C482AC4D83600730C01 /* BaseUI */ = {
 			isa = PBXGroup;
 			children = (
 				63BB13B82AC164D50060073D /* BaseViewController.swift */,
 			);
-			path = Base;
+			path = BaseUI;
 			sourceTree = "<group>";
 		};
 		63A673322AC307DF004F43F4 /* AladinAPI */ = {
@@ -153,7 +153,7 @@
 			children = (
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
-				637B5C482AC4D83600730C01 /* Base */,
+				637B5C482AC4D83600730C01 /* BaseUI */,
 				63A673472AC34411004F43F4 /* Model */,
 				63A673432AC33B99004F43F4 /* Database */,
 				63BB13CB2AC17A910060073D /* Network */,
