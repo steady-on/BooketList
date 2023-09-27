@@ -12,6 +12,4 @@ final class Author: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted(indexed: true) var authorID: Int?
     @Persisted var name: String
-    
-    @Persisted var books: List<Book>
 }
