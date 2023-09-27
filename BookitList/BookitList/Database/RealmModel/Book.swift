@@ -23,6 +23,7 @@ final class Book: Object {
     @Persisted var depth: Int?
     @Persisted var isOutOfPrint: Bool?
     @Persisted var statusOfReading: StatusOfReading
+    @Persisted var registeredAt: Date
     
     @Persisted var authors: List<Author>
     @Persisted var readingHistories: List<ReadingHistory>
