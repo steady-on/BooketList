@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */; };
+		637B5C4D2AC4E71D00730C01 /* ReadingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */; };
+		637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */; };
+		637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C502AC4E79900730C01 /* NoteViewController.swift */; };
+		637B5C532AC4E7AB00730C01 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
 		63A673422AC33AFD004F43F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A673412AC33AFD004F43F4 /* RealmSwift */; };
 		63A673462AC33BCD004F43F4 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673452AC33BCD004F43F4 /* Book.swift */; };
@@ -25,7 +30,7 @@
 		63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673692AC4A25B004F43F4 /* RealmError.swift */; };
 		63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B42AC164D50060073D /* AppDelegate.swift */; };
 		63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B62AC164D50060073D /* SceneDelegate.swift */; };
-		63BB13B92AC164D50060073D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* ViewController.swift */; };
+		63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* BaseViewController.swift */; };
 		63BB13BE2AC164D70060073D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63BB13BD2AC164D70060073D /* Assets.xcassets */; };
 		63BB13C12AC164D70060073D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */; };
 		63BB13CA2AC17A610060073D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 63BB13C92AC17A610060073D /* Alamofire */; };
@@ -37,6 +42,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordViewController.swift; sourceTree = "<group>"; };
+		637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
+		637B5C502AC4E79900730C01 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		63A673482AC3447B004F43F4 /* StatusOfReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfReading.swift; sourceTree = "<group>"; };
 		63A6734A2AC3451C004F43F4 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
@@ -54,7 +64,7 @@
 		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BB13B42AC164D50060073D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BB13B62AC164D50060073D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63BB13B82AC164D50060073D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		63BB13B82AC164D50060073D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		63BB13BD2AC164D70060073D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63BB13C02AC164D70060073D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63BB13C22AC164D70060073D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -79,6 +89,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		637B5C482AC4D83600730C01 /* BaseUI */ = {
+			isa = PBXGroup;
+			children = (
+				63BB13B82AC164D50060073D /* BaseViewController.swift */,
+			);
+			path = BaseUI;
+			sourceTree = "<group>";
+		};
+		637B5C492AC4E15400730C01 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */,
+				637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */,
+				637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */,
+				637B5C502AC4E79900730C01 /* NoteViewController.swift */,
+				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		63A673322AC307DF004F43F4 /* AladinAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,7 +175,8 @@
 			children = (
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
-				63BB13B82AC164D50060073D /* ViewController.swift */,
+				637B5C492AC4E15400730C01 /* ViewController */,
+				637B5C482AC4D83600730C01 /* BaseUI */,
 				63A673472AC34411004F43F4 /* Model */,
 				63A673432AC33B99004F43F4 /* Database */,
 				63BB13CB2AC17A910060073D /* Network */,
@@ -254,28 +285,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63BB13B92AC164D50060073D /* ViewController.swift in Sources */,
+				63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */,
 				63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */,
 				63A6735A2AC3FD6B004F43F4 /* CheckoutHistory.swift in Sources */,
 				63A6735C2AC40380004F43F4 /* Series.swift in Sources */,
 				63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */,
 				63A673572AC3FD13004F43F4 /* BookType.swift in Sources */,
+				637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */,
 				63A6734D2AC34C2E004F43F4 /* ReadingHistory.swift in Sources */,
 				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63A673462AC33BCD004F43F4 /* Book.swift in Sources */,
+				637B5C4D2AC4E71D00730C01 /* ReadingRecordViewController.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
 				63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */,
 				63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */,
 				63A6734B2AC3451C004F43F4 /* Author.swift in Sources */,
+				637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */,
 				63A6735E2AC41488004F43F4 /* Tag.swift in Sources */,
 				63A673512AC35AE3004F43F4 /* Note.swift in Sources */,
+				637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */,
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				63A673552AC3F555004F43F4 /* PurchaseHistory.swift in Sources */,
 				63A673492AC3447B004F43F4 /* StatusOfReading.swift in Sources */,
 				63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */,
 				63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */,
 				63A6734F2AC35810004F43F4 /* ReadingRecord.swift in Sources */,
+				637B5C532AC4E7AB00730C01 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
