@@ -16,22 +16,31 @@ struct ItemDetail: Decodable {
     let isbn13: String
     let title, author, description: String
     let pubDate, publisher: String
-    let cover, stockstatus: String
+    let cover, stockStatus: String
     let subInfo: SubInfo
 
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"
-        case isbn13, title, author, description, pubDate, publisher, cover, stockstatus, subInfo
+        case isbn13, title, author, description, pubDate, publisher, cover, stockStatus, subInfo
     }
 }
 
 struct SubInfo: Decodable {
     let originalTitle: String
     let packing: Packing
+    let previewImgList: [String]
+    let authors: [Artist]
 }
 
 struct Packing: Decodable {
     let sizeDepth: Int
     let sizeHeight: Int
     let sizeWidth: Int
+}
+
+struct Artist: Decodable {
+    let authorId: Int
+    let authorName: String
+    let authorType: String
+    let authorTypeDesc: String
 }
