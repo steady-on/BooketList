@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */; };
-		637B5C4D2AC4E71D00730C01 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* HomeViewController.swift */; };
+		637B5C4D2AC4E71D00730C01 /* ReadingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */; };
 		637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */; };
 		637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C502AC4E79900730C01 /* NoteViewController.swift */; };
 		637B5C532AC4E7AB00730C01 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */; };
@@ -43,7 +43,7 @@
 
 /* Begin PBXFileReference section */
 		637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		637B5C4C2AC4E71D00730C01 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordViewController.swift; sourceTree = "<group>"; };
 		637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
 		637B5C502AC4E79900730C01 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -101,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */,
-				637B5C4C2AC4E71D00730C01 /* HomeViewController.swift */,
+				637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */,
 				637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */,
 				637B5C502AC4E79900730C01 /* NoteViewController.swift */,
 				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
@@ -296,7 +296,7 @@
 				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63A673462AC33BCD004F43F4 /* Book.swift in Sources */,
-				637B5C4D2AC4E71D00730C01 /* HomeViewController.swift in Sources */,
+				637B5C4D2AC4E71D00730C01 /* ReadingRecordViewController.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
 				63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */,
 				63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */,

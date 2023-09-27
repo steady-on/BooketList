@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomeViewController: BaseViewController {
+class ReadingRecordViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
