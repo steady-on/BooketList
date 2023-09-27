@@ -44,7 +44,7 @@ enum AladinRouter: URLRequestConvertible {
             let additionalParameters = [
                 "ItemIdType" : "ISBN13",
                 "ItemId" : isbn,
-                "OptResult" : "packing"
+                "OptResult" : "packing,previewImgList,authors"
             ]
             return commonParameters.merging(additionalParameters) { current, _ in current }
         }
