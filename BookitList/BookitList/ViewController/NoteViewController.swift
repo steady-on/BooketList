@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NoteViewController: BaseViewController {
+final class NoteViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }

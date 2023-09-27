@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BookShelfViewController: BaseViewController {
+final class BookShelfViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
