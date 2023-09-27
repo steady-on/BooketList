@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-final class Comment: Object {
+final class Comment: EmbeddedObject {
     @Persisted(primaryKey: true) var _id = ObjectId()
     @Persisted var createdAt: Date
     @Persisted var content: String
