@@ -14,12 +14,11 @@ final class Note: Object {
     @Persisted var type: NoteType
     @Persisted var page: Int?
     @Persisted var content: String?
+    
     @Persisted var imagePaths: List<String>
-    
-    @Persisted var readingHistory: ReadingHistory?
-    
     @Persisted var comments: List<Comment>
     
+    @Persisted var readingHistory: ReadingHistory?
     @Persisted(originProperty: "notes") var book: LinkingObjects<Book>
     
     enum NoteType: Int, PersistableEnum {
