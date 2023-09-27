@@ -26,4 +26,6 @@ final class Book: Object {
     @Persisted var authors: List<Author>
     @Persisted var readingHistories: List<ReadingHistory>
     @Persisted var notes: List<Note>
+    @Persisted var purchasedHistories: List<PurchaseHistory>
+    @Persisted var checkoutHistories: List<CheckoutHistory>
 }
