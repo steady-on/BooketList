@@ -11,7 +11,9 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        AladinAPIManager().request(type: AladinSearchResponse.self, api: .itemSearch(query: "", isEbook: false, page: 1)) { result in
+            dump(result)
+        }
     }
 
 
