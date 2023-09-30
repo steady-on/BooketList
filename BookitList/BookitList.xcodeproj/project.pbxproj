@@ -15,6 +15,7 @@
 		637B5C562AC6DB5600730C01 /* SearchBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C552AC6DB5600730C01 /* SearchBookViewController.swift */; };
 		637B5C5C2AC86BB300730C01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5C5B2AC86BB300730C01 /* SnapKit */; };
 		637B5C5E2AC86BB300730C01 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5C5D2AC86BB300730C01 /* SnapKit-Dynamic */; };
+		637B5C602AC86BE000730C01 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C5F2AC86BE000730C01 /* BaseView.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
 		63A673422AC33AFD004F43F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A673412AC33AFD004F43F4 /* RealmSwift */; };
 		63A673462AC33BCD004F43F4 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673452AC33BCD004F43F4 /* Book.swift */; };
@@ -51,6 +52,7 @@
 		637B5C502AC4E79900730C01 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		637B5C552AC6DB5600730C01 /* SearchBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookViewController.swift; sourceTree = "<group>"; };
+		637B5C5F2AC86BE000730C01 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		63A673482AC3447B004F43F4 /* StatusOfReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfReading.swift; sourceTree = "<group>"; };
 		63A6734A2AC3451C004F43F4 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				63BB13B82AC164D50060073D /* BaseViewController.swift */,
+				637B5C5F2AC86BE000730C01 /* BaseView.swift */,
 			);
 			path = BaseUI;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				637B5C602AC86BE000730C01 /* BaseView.swift in Sources */,
 				63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */,
 				63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */,
 				63A6735A2AC3FD6B004F43F4 /* CheckoutHistory.swift in Sources */,
