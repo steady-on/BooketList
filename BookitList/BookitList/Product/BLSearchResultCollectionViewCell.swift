@@ -6,8 +6,23 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class BLSearchResultCollectionViewCell: BaseCollectionViewCell {
+    
+    var item: Item? {
+        didSet {
+            guard let item else { return }
+            
+            let url = URL(string: item.cover)
+            coverImageView.kf.indicatorType = .activity
+            coverImageView.kf.setImage(with: url)
+            titleLabel.text = item.title
+            authorLabel.text = item.author
+            overviewTextView.text = item.description
+            bookmarkImageView.isHidden = item.isRegister == false
+        }
+    }
     
     private let backdropView: UIView = {
         let view = UIView()

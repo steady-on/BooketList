@@ -18,6 +18,7 @@ struct Item: Decodable {
     let title, author, description: String
     let pubDate, publisher: String
     let cover: String
+    var isRegister: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"
