@@ -27,6 +27,7 @@ final class SearchBookViewController: BaseViewController {
     
     override func configureHiararchy() {
         super.configureHiararchy()
+        definesPresentationContext = true
         
         configureNavigationBar()
         
