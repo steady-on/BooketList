@@ -17,6 +17,8 @@ final class SearchBookViewController: BaseViewController {
         searchController.searchBar.returnKeyType = .search
         return searchController
     }()
+    
+    private let placeholderView = BLDirectionView(symbolName: "magnifyingglass", direction: "검색어를 입력해주세요.")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +29,21 @@ final class SearchBookViewController: BaseViewController {
         super.configureHiararchy()
         
         configureNavigationBar()
+        
+        view.addSubview(placeholderView)
     }
     
     private func configureNavigationBar() {
         title = "도서 검색"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+    }
+    
+    override func setConstraints() {
+        placeholderView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
+        }
     }
 }
