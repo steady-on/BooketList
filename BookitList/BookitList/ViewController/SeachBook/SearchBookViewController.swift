@@ -38,6 +38,7 @@ final class SearchBookViewController: BaseViewController {
         searchController.searchBar.searchTextField.clearButtonMode = .always
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.returnKeyType = .search
+        searchController.searchBar.becomeFirstResponder()
         return searchController
     }()
     
@@ -146,6 +147,7 @@ extension SearchBookViewController {
 extension SearchBookViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyword = searchBar.text else { return }
+        searchBar.resignFirstResponder()
         viewModel.search(for: keyword)
     }
 }
