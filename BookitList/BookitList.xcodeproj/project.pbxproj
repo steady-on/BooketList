@@ -23,6 +23,7 @@
 		637B5C762AC98F2600730C01 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5C752AC98F2600730C01 /* Kingfisher */; };
 		637B5C7A2ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C792ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift */; };
 		637B5C7E2ACAA13900730C01 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C7D2ACAA13900730C01 /* Observable.swift */; };
+		637B5C852ACAAA2200730C01 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C842ACAAA2200730C01 /* BaseTableViewCell.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
 		63A673422AC33AFD004F43F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A673412AC33AFD004F43F4 /* RealmSwift */; };
 		63A673462AC33BCD004F43F4 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673452AC33BCD004F43F4 /* Book.swift */; };
@@ -66,6 +67,7 @@
 		637B5C722AC987DB00730C01 /* BLBookmarkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLBookmarkImageView.swift; sourceTree = "<group>"; };
 		637B5C792ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsCollectionViewController.swift; sourceTree = "<group>"; };
 		637B5C7D2ACAA13900730C01 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		637B5C842ACAAA2200730C01 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		63A673482AC3447B004F43F4 /* StatusOfReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfReading.swift; sourceTree = "<group>"; };
 		63A6734A2AC3451C004F43F4 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				63BB13B82AC164D50060073D /* BaseViewController.swift */,
 				637B5C5F2AC86BE000730C01 /* BaseView.swift */,
 				637B5C6E2AC97D2300730C01 /* BaseCollectionViewCell.swift */,
+				637B5C842ACAAA2200730C01 /* BaseTableViewCell.swift */,
 			);
 			path = BaseUI;
 			sourceTree = "<group>";
@@ -147,10 +150,17 @@
 			isa = PBXGroup;
 			children = (
 				637B5C622AC877B200730C01 /* BLDirectionView.swift */,
-				637B5C702AC980F700730C01 /* BLSearchResultCollectionViewCell.swift */,
 				637B5C722AC987DB00730C01 /* BLBookmarkImageView.swift */,
 			);
 			path = Product;
+			sourceTree = "<group>";
+		};
+		637B5C812ACAA90C00730C01 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				637B5C702AC980F700730C01 /* BLSearchResultCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		63A673322AC307DF004F43F4 /* AladinAPI */ = {
@@ -221,6 +231,7 @@
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
 				637B5C492AC4E15400730C01 /* ViewController */,
+				637B5C812ACAA90C00730C01 /* Cell */,
 				637B5C612AC86CB300730C01 /* Product */,
 				637B5C482AC4D83600730C01 /* BaseUI */,
 				63A673472AC34411004F43F4 /* Model */,
@@ -357,6 +368,7 @@
 				63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */,
 				63A6734B2AC3451C004F43F4 /* Author.swift in Sources */,
 				637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */,
+				637B5C852ACAAA2200730C01 /* BaseTableViewCell.swift in Sources */,
 				637B5C7A2ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift in Sources */,
 				637B5C562AC6DB5600730C01 /* SearchBookViewController.swift in Sources */,
 				63A6735E2AC41488004F43F4 /* Tag.swift in Sources */,
