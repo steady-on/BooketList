@@ -8,9 +8,14 @@
 import UIKit
 
 class BLBookmarkImageView: UIImageView {
-    
-    override func draw(_ rect: CGRect) {
+    init() {
+        super.init(frame: .zero)
         configureHiararchy()
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func configureHiararchy() {
@@ -18,7 +23,7 @@ class BLBookmarkImageView: UIImageView {
         let image = UIImage(systemName: "bookmark.fill", withConfiguration: symbolConfig)
         
         self.image = image
-        tintColor = .highlight
+        tintColor = .accent
         contentMode = .scaleToFill
     }
 }
