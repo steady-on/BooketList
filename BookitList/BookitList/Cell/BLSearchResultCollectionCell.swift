@@ -1,5 +1,5 @@
 //
-//  BLSearchResultCollectionViewCell.swift
+//  BLSearchResultCollectionCell.swift
 //  BookitList
 //
 //  Created by Roen White on 2023/10/01.
@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-final class BLSearchResultCollectionViewCell: BaseCollectionViewCell {
+final class BLSearchResultCollectionCell: BaseCollectionViewCell {
     
     var item: Item? {
         didSet {
