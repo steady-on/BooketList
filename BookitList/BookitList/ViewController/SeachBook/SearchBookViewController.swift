@@ -27,9 +27,10 @@ final class SearchBookViewController: BaseViewController {
     private var searchResultsCollectionView: UICollectionView!
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     
+    private let noResultView = BLDirectionView(symbolName: "tray", direction: "검색 결과가 없습니다.\n책제목, ISBN, 작가이름으로 검색어를 입력해주세요.")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func configureHiararchy() {
@@ -39,9 +40,10 @@ final class SearchBookViewController: BaseViewController {
         configureNavigationBar()
         
         searchResultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
+        searchResultsCollectionView.backgroundColor = .background
         configureDataSource()
         
-        let components = [placeholderView, searchResultsCollectionView]
+        let components = [placeholderView, searchResultsCollectionView, noResultView]
         components.forEach { component in view.addSubview(component!) }
     }
     
@@ -53,13 +55,17 @@ final class SearchBookViewController: BaseViewController {
     
     override func setConstraints() {
         placeholderView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
         }
         
         searchResultsCollectionView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        noResultView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
         }
     }
     
