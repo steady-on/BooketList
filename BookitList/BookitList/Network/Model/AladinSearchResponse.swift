@@ -12,7 +12,7 @@ struct AladinSearchResponse: Decodable {
     let item: [Item]
 }
 
-struct Item: Decodable {
+struct Item: Decodable, Hashable {
     let itemID: Int
     let isbn13: String
     let title, author, description: String
