@@ -115,19 +115,12 @@ extension SearchBookViewController {
 
 extension SearchBookViewController {
     private func createCollectionViewLayout() -> UICollectionViewLayout {
-        let estimatedHeight = CGFloat(152)
-        let spacing = CGFloat(8)
-        
+        let cellHeight = CGFloat(144)
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                               heightDimension: .estimated(estimatedHeight))
+                                               heightDimension: .absolute(cellHeight))
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize,
-                                                       subitem: item,
-                                                       count: 1)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-        section.interGroupSpacing = spacing
-        
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
