@@ -9,6 +9,8 @@ import UIKit
 
 final class SearchBookViewController: BaseViewController {
     
+    private let viewModel = SearchBookViewModel()
+    
     private var state: State! {
         didSet {
             switch state {
@@ -48,11 +50,16 @@ final class SearchBookViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        combine()
+        state = .enter
     }
     
     override func configureHiararchy() {
         super.configureHiararchy()
         definesPresentationContext = true
+        
+        searchController.searchBar.delegate = self
         
         configureNavigationBar()
         
@@ -62,8 +69,6 @@ final class SearchBookViewController: BaseViewController {
         
         let components = [placeholderView, searchResultsCollectionView, noResultView]
         components.forEach { component in view.addSubview(component!) }
-        
-        state = .enter
     }
     
     private func configureNavigationBar() {
@@ -85,6 +90,13 @@ final class SearchBookViewController: BaseViewController {
         noResultView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
+        }
+    }
+    
+    private func combine() {
+        viewModel.searchResultItems.bind { [weak self] items in
+            self?.updateSnapshot()
+            self?.state = items.isEmpty ? .noSearchResult : .existSearchResult
         }
     }
 }
@@ -125,15 +137,22 @@ extension SearchBookViewController {
             cell.item = itemIdentifier
         }
         
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: searchResultsCollectionView) { collectionView, indexPath, itemIdentifier -> UICollectionViewCell in
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: searchResultsCollectionView) { collectionView, indexPath, itemIdentifier in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
     }
     
-    private func updateSnapshot(for newItems: [Item]) {
+    private func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(newItems)
+        snapshot.appendItems(viewModel.searchResultItems.value)
         dataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+extension SearchBookViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let keyword = searchBar.text else { return }
+        viewModel.search(for: keyword)
     }
 }
