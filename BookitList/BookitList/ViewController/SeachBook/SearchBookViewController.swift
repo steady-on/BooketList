@@ -87,16 +87,41 @@ final class SearchBookViewController: BaseViewController {
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
         }
     }
+}
+
+extension SearchBookViewController {
+    enum Section {
+        case main
+    }
     
+    enum State {
+        case enter
+        case existSearchResult
+        case noSearchResult
+    }
+}
+
+extension SearchBookViewController {
     private func createCollectionViewLayout() -> UICollectionViewLayout {
-        var configuration = UICollectionLayoutListConfiguration(appearance: .grouped)
-        configuration.showsSeparators = false
-        let layout = UICollectionViewCompositionalLayout.list(using: configuration)
+        let estimatedHeight = CGFloat(152)
+        let spacing = CGFloat(8)
+        
+        let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                               heightDimension: .estimated(estimatedHeight))
+        let item = NSCollectionLayoutItem(layoutSize: layoutSize)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize,
+                                                       subitem: item,
+                                                       count: 1)
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = .init(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        section.interGroupSpacing = spacing
+        
+        let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
     }
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<BLSearchResultCollectionViewCell, Item> { cell, indexPath, itemIdentifier in
+        let cellRegistration = UICollectionView.CellRegistration<BLSearchResultCollectionCell, Item> { cell, indexPath, itemIdentifier in
             cell.item = itemIdentifier
         }
         
@@ -110,17 +135,5 @@ final class SearchBookViewController: BaseViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(newItems)
         dataSource.apply(snapshot, animatingDifferences: false)
-    }
-}
-
-extension SearchBookViewController {
-    enum Section {
-        case main
-    }
-    
-    enum State {
-        case enter
-        case existSearchResult
-        case noSearchResult
     }
 }

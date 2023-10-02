@@ -22,7 +22,7 @@ final class SearchResultsCollectionViewController: UICollectionViewController {
     }
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<BLSearchResultCollectionViewCell, Item> { cell, indexPath, itemIdentifier in
+        let cellRegistration = UICollectionView.CellRegistration<BLSearchResultCollectionCell, Item> { cell, indexPath, itemIdentifier in
             cell.item = itemIdentifier
         }
         
