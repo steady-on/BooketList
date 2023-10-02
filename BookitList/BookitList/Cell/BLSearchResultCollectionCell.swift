@@ -17,6 +17,7 @@ final class BLSearchResultCollectionCell: BaseCollectionViewCell {
             let url = URL(string: item.cover)
             coverImageView.kf.indicatorType = .activity
             coverImageView.kf.setImage(with: url)
+            
             titleLabel.text = item.title
             authorLabel.text = item.author
             overviewTextView.text = item.description
@@ -71,10 +72,20 @@ final class BLSearchResultCollectionCell: BaseCollectionViewCell {
         textView.textContainer.lineBreakMode = .byTruncatingTail
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = .zero
+        textView.textContainer.maximumNumberOfLines = 3
         return textView
     }()
     
     private let bookmarkImageView  = BLBookmarkImageView()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        coverImageView.image = nil
+        titleLabel.text = nil
+        authorLabel.text = nil
+        overviewTextView.text = nil
+    }
     
     override func configureHiararchy() {
         contentView.backgroundColor = .background
@@ -84,7 +95,10 @@ final class BLSearchResultCollectionCell: BaseCollectionViewCell {
         components.forEach { component in backdropView.addSubview(component) }
         
         let stackComponents = [titleLabel, authorLabel, overviewTextView]
-        stackComponents.forEach { component in infoTextStackView.addSubview(component) }
+        stackComponents.forEach { component in infoTextStackView.addArrangedSubview(component) }
+        
+        titleLabel.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
+        overviewTextView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
     }
     
     override func setConstraints() {
@@ -93,20 +107,21 @@ final class BLSearchResultCollectionCell: BaseCollectionViewCell {
         }
         
         coverImageView.snp.makeConstraints { make in
-            make.verticalEdges.leading.equalToSuperview()
-            make.height.equalToSuperview()
-            make.width.equalTo(coverImageView.snp.width).multipliedBy(2/3)
+            make.verticalEdges.leading.height.equalToSuperview()
+            make.width.equalTo(coverImageView.snp.height).multipliedBy(0.7)
         }
         
         bookmarkImageView.snp.makeConstraints { make in
-            make.top.trailing.equalTo(coverImageView).inset(8)
+            make.top.equalTo(coverImageView)
+            make.trailing.equalTo(coverImageView).inset(4)
             make.width.equalTo(coverImageView).multipliedBy(0.2)
             make.height.equalTo(bookmarkImageView.snp.width).multipliedBy(1.2)
         }
         
         infoTextStackView.snp.makeConstraints { make in
-            make.verticalEdges.trailing.equalTo(backdropView.layoutMarginsGuide)
+            make.top.trailing.equalTo(backdropView.layoutMarginsGuide)
             make.leading.equalTo(coverImageView.snp.trailing).offset(12)
+            make.bottom.lessThanOrEqualTo(backdropView.layoutMarginsGuide)
         }
     }
 }
