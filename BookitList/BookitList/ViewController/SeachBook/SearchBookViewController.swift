@@ -9,8 +9,25 @@ import UIKit
 
 final class SearchBookViewController: BaseViewController {
     
-    enum Section {
-        case main
+    private var state: State! {
+        didSet {
+            switch state {
+            case .enter:
+                placeholderView.isHidden = false
+                searchResultsCollectionView.isHidden = true
+                noResultView.isHidden = true
+            case .existSearchResult:
+                placeholderView.isHidden = true
+                searchResultsCollectionView.isHidden = false
+                noResultView.isHidden = true
+            case .noSearchResult:
+                placeholderView.isHidden = true
+                searchResultsCollectionView.isHidden = true
+                noResultView.isHidden = false
+            case .none:
+                break
+            }
+        }
     }
     
     private let searchController: UISearchController = {
@@ -45,6 +62,8 @@ final class SearchBookViewController: BaseViewController {
         
         let components = [placeholderView, searchResultsCollectionView, noResultView]
         components.forEach { component in view.addSubview(component!) }
+        
+        state = .enter
     }
     
     private func configureNavigationBar() {
@@ -91,5 +110,17 @@ final class SearchBookViewController: BaseViewController {
         snapshot.appendSections([.main])
         snapshot.appendItems(newItems)
         dataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+extension SearchBookViewController {
+    enum Section {
+        case main
+    }
+    
+    enum State {
+        case enter
+        case existSearchResult
+        case noSearchResult
     }
 }
