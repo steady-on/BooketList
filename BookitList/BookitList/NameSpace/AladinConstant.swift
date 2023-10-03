@@ -9,4 +9,5 @@ import Foundation
 
 enum AladinConstant {
     static let maxResultCount = 20
+    static let maximumResultCount = 200
 }
