@@ -65,9 +65,11 @@ final class SearchBookViewController: BaseViewController {
         configureNavigationBar()
         
         searchResultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
+        searchResultsCollectionView.prefetchDataSource = self
         searchResultsCollectionView.backgroundColor = .background
+
         configureDataSource()
-        
+                
         let components = [placeholderView, searchResultsCollectionView, noResultView]
         components.forEach { component in view.addSubview(component!) }
     }
@@ -148,6 +150,15 @@ extension SearchBookViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyword = searchBar.text else { return }
         searchBar.resignFirstResponder()
-        viewModel.search(for: keyword)
+        viewModel.requestSearchResult(for: keyword)
+    }
+}
+
+extension SearchBookViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        
+        for indexPath in indexPaths where indexPath.item == viewModel.resultItemCount - 2 {
+            viewModel.requestNextPage()
+        }
     }
 }
