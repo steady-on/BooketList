@@ -25,6 +25,7 @@
 		637B5C7E2ACAA13900730C01 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C7D2ACAA13900730C01 /* Observable.swift */; };
 		637B5C802ACAA24100730C01 /* SearchBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C7F2ACAA24100730C01 /* SearchBookViewModel.swift */; };
 		637B5C852ACAAA2200730C01 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C842ACAAA2200730C01 /* BaseTableViewCell.swift */; };
+		637B5C8D2ACB06D300730C01 /* AladinConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C8C2ACB06D300730C01 /* AladinConstant.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
 		63A673422AC33AFD004F43F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A673412AC33AFD004F43F4 /* RealmSwift */; };
 		63A673462AC33BCD004F43F4 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673452AC33BCD004F43F4 /* Book.swift */; };
@@ -70,6 +71,7 @@
 		637B5C7D2ACAA13900730C01 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		637B5C7F2ACAA24100730C01 /* SearchBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookViewModel.swift; sourceTree = "<group>"; };
 		637B5C842ACAAA2200730C01 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		637B5C8C2ACB06D300730C01 /* AladinConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinConstant.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		63A673482AC3447B004F43F4 /* StatusOfReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfReading.swift; sourceTree = "<group>"; };
 		63A6734A2AC3451C004F43F4 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
@@ -166,6 +168,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		637B5C8B2ACB06AF00730C01 /* NameSpace */ = {
+			isa = PBXGroup;
+			children = (
+				637B5C8C2ACB06D300730C01 /* AladinConstant.swift */,
+			);
+			path = NameSpace;
+			sourceTree = "<group>";
+		};
 		63A673322AC307DF004F43F4 /* AladinAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +243,7 @@
 			children = (
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
+				637B5C8B2ACB06AF00730C01 /* NameSpace */,
 				637B5C492AC4E15400730C01 /* ViewController */,
 				637B5C812ACAA90C00730C01 /* Cell */,
 				637B5C612AC86CB300730C01 /* Product */,
@@ -376,6 +387,7 @@
 				637B5C7A2ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift in Sources */,
 				637B5C562AC6DB5600730C01 /* SearchBookViewController.swift in Sources */,
 				63A6735E2AC41488004F43F4 /* Tag.swift in Sources */,
+				637B5C8D2ACB06D300730C01 /* AladinConstant.swift in Sources */,
 				63A673512AC35AE3004F43F4 /* Note.swift in Sources */,
 				637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */,
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,

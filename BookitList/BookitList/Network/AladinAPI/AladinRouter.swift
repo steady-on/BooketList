@@ -35,7 +35,7 @@ enum AladinRouter: URLRequestConvertible {
         case .itemSearch(let query, let isEbook, let page):
             let additionalParameters = [
                 "Query" : query,
-                "MaxResults" : "\(20)",
+                "MaxResults" : "\(AladinConstant.maxResultCount)",
                 "SearchTarget" : isEbook ? "eBook" : "Book",
                 "Start" : "\(page)"
             ]
