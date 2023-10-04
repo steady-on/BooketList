@@ -73,6 +73,7 @@ final class BLSearchResultCollectionCell: BaseCollectionViewCell {
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = .zero
         textView.textContainer.maximumNumberOfLines = 3
+        textView.isSelectable = false
         return textView
     }()
     
