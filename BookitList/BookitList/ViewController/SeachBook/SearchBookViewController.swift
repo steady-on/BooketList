@@ -165,11 +165,11 @@ final class SearchBookViewController: BaseViewController {
 }
 
 extension SearchBookViewController {
-    enum Section {
+    fileprivate enum Section {
         case main
     }
     
-    enum State {
+    fileprivate enum State {
         case enter
         case existSearchResult
         case noSearchResult
