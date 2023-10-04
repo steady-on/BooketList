@@ -163,9 +163,18 @@ extension SearchBookViewController {
 
 extension SearchBookViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let keyword = searchBar.text else { return }
+        guard var keyword = searchBar.text else { return }
+        
+        keyword = arrangeKeword(keyword)
+        searchBar.text = keyword
+        
         searchBar.resignFirstResponder()
         viewModel.requestSearchResult(for: keyword)
+    }
+    
+    private func arrangeKeword(_ keyword: String) -> String {
+        let words = keyword.components(separatedBy: " ").filter { $0.isEmpty == false }
+        return words.joined(separator: " ")
     }
 }
 
