@@ -49,6 +49,8 @@ final class SearchBookViewController: BaseViewController {
     
     private let noResultView = BLDirectionView(symbolName: "tray", direction: "검색 결과가 없습니다.\n책제목, ISBN, 작가이름으로 검색어를 입력해주세요.")
     
+    private let indicatorView = BLIndicatorView(direction: "검색 중...")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,8 +72,9 @@ final class SearchBookViewController: BaseViewController {
 
         configureDataSource()
                 
-        let components = [placeholderView, searchResultsCollectionView, noResultView]
+        let components = [placeholderView, searchResultsCollectionView, noResultView, indicatorView]
         components.forEach { component in view.addSubview(component!) }
+        indicatorView.isHidden = true
     }
     
     private func configureNavigationBar() {
@@ -93,6 +96,10 @@ final class SearchBookViewController: BaseViewController {
         noResultView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
+        }
+        
+        indicatorView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
