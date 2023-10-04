@@ -58,7 +58,7 @@ final class SearchBookViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        combine()
+        bindComponentWithObservable()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,13 +76,7 @@ final class SearchBookViewController: BaseViewController {
         searchController.searchBar.delegate = self
         
         configureNavigationBar()
-        
-        searchResultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
-        searchResultsCollectionView.prefetchDataSource = self
-        searchResultsCollectionView.keyboardDismissMode = .onDrag
-        searchResultsCollectionView.bounces = false
-        searchResultsCollectionView.backgroundColor = .background
-
+        configureCollectionView()
         configureDataSource()
                 
         let components = [placeholderView, searchResultsCollectionView, noResultView, indicatorView, requiresConnectionView]
@@ -122,7 +116,7 @@ final class SearchBookViewController: BaseViewController {
         }
     }
     
-    private func combine() {
+    private func bindComponentWithObservable() {
         viewModel.searchResultItems.bind { [weak self] items in
             self?.updateSnapshot()
             self?.state = items.isEmpty ? .noSearchResult : .existSearchResult
@@ -178,6 +172,14 @@ extension SearchBookViewController {
 }
 
 extension SearchBookViewController {
+    private func configureCollectionView() {
+        searchResultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
+        searchResultsCollectionView.prefetchDataSource = self
+        searchResultsCollectionView.keyboardDismissMode = .onDrag
+        searchResultsCollectionView.bounces = false
+        searchResultsCollectionView.backgroundColor = .background
+    }
+    
     private func createCollectionViewLayout() -> UICollectionViewLayout {
         let cellHeight = CGFloat(144)
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
