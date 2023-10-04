@@ -44,6 +44,24 @@ final class SearchBookViewController: BaseViewController {
         return searchController
     }()
     
+    private let ebookButton: UIButton = {
+        let button = UIButton()
+        button.setTitle(" e-book 검색하기", for: .normal)
+        button.setTitleColor(.systemGray, for: .normal)
+        button.titleLabel?.font = .preferredFont(forTextStyle: .callout)
+        
+        button.setImage(UIImage(systemName: "circle"), for: .normal)
+        button.setImage(UIImage(systemName: "circle.inset.filled"), for: .selected)
+        button.tintColor = .systemGray
+        
+//        var config = UIButton.Configuration.plain()
+//        config.imagePadding = 4
+//        config.buttonSize = .small
+//        button.configuration = config
+        
+        return button
+    }()
+    
     private let placeholderView = BLDirectionView(symbolName: "magnifyingglass", direction: "검색어를 입력해주세요.")
 
     private var searchResultsCollectionView: UICollectionView!
@@ -79,8 +97,10 @@ final class SearchBookViewController: BaseViewController {
         configureCollectionView()
         configureDataSource()
                 
-        let components = [placeholderView, searchResultsCollectionView, noResultView, indicatorView, requiresConnectionView]
+        let components = [ebookButton, placeholderView, searchResultsCollectionView, noResultView, indicatorView, requiresConnectionView]
         components.forEach { component in view.addSubview(component!) }
+        
+        ebookButton.addTarget(self, action: #selector(ebookButtonClicked), for: .touchUpInside)
         
         state = .enter
     }
@@ -91,27 +111,41 @@ final class SearchBookViewController: BaseViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
+    @objc func ebookButtonClicked(_ sender: UIButton) {
+        sender.isSelected.toggle()
+    }
+    
     override func setConstraints() {
+        ebookButton.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+        
         placeholderView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(ebookButton.snp.bottom).offset(8)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
         }
         
         searchResultsCollectionView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(ebookButton.snp.bottom).offset(8)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         noResultView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(ebookButton.snp.bottom).offset(8)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
         }
         
         indicatorView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(ebookButton.snp.bottom).offset(8)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         requiresConnectionView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(ebookButton.snp.bottom).offset(8)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
         }
     }
