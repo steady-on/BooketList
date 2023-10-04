@@ -38,7 +38,6 @@ final class SearchBookViewController: BaseViewController {
         searchController.searchBar.searchTextField.clearButtonMode = .always
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.returnKeyType = .search
-        searchController.searchBar.becomeFirstResponder()
         return searchController
     }()
     
@@ -56,6 +55,14 @@ final class SearchBookViewController: BaseViewController {
         
         combine()
         state = .enter
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        DispatchQueue.main.async {
+            self.searchController.searchBar.becomeFirstResponder()
+        }
     }
     
     override func configureHiararchy() {
