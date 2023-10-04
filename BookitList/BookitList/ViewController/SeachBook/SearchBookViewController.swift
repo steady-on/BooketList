@@ -251,7 +251,7 @@ extension SearchBookViewController: UISearchBarDelegate {
         searchBar.text = keyword
         
         searchBar.resignFirstResponder()
-        viewModel.requestSearchResult(for: keyword)
+        viewModel.requestSearchResult(for: keyword, isEbookSearch: ebookButton.isSelected)
     }
     
     private func arrangeKeword(_ keyword: String) -> String {
