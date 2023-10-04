@@ -23,6 +23,8 @@ final class SearchBookViewModel {
     var resultItemCount: Int { searchResultItems.value.count }
     
     let isRequesting = Observable(false)
+    let scrollToTop = Observable(false)
+    
     func requestSearchResult(for newKeyword: String) {
         guard newKeyword != keyword else { return }
         
@@ -31,6 +33,7 @@ final class SearchBookViewModel {
         totalResults = AladinConstant.maximumResultCount
         
         isRequesting.value.toggle()
+        scrollToTop.value = false
         AladinAPIManager().request(type: AladinSearchResponse.self, api: .itemSearch(query: keyword, isEbook: false, page: currentPage)) { [weak self] result in
             
             switch result {
@@ -41,6 +44,7 @@ final class SearchBookViewModel {
                 
                 self?.searchResultItems.value = data.item
                 
+                if data.item.isEmpty == false { self?.scrollToTop.value = true }
                 
             case .failure(let failure):
                 dump(failure)

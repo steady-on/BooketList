@@ -111,6 +111,11 @@ final class SearchBookViewController: BaseViewController {
         viewModel.isRequesting.bind { [weak self] bool in
             self?.indicatorView.isHidden = bool == false
         }
+        
+        viewModel.scrollToTop.bind { [weak self] bool in
+            guard bool else { return }
+            self?.searchResultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+        }
     }
 }
 
@@ -160,12 +165,7 @@ extension SearchBookViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyword = searchBar.text else { return }
         searchBar.resignFirstResponder()
-        
         viewModel.requestSearchResult(for: keyword)
-        
-        if searchResultsCollectionView.isHidden == false {
-            searchResultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
-        }
     }
 }
 
