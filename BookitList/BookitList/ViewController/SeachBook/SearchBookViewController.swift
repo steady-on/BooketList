@@ -68,6 +68,8 @@ final class SearchBookViewController: BaseViewController {
         
         searchResultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         searchResultsCollectionView.prefetchDataSource = self
+        searchResultsCollectionView.keyboardDismissMode = .onDrag
+        searchResultsCollectionView.bounces = false
         searchResultsCollectionView.backgroundColor = .background
 
         configureDataSource()
