@@ -22,6 +22,7 @@ final class SearchBookViewModel {
     let searchResultItems: Observable<[Item]> = Observable([])
     var resultItemCount: Int { searchResultItems.value.count }
     
+    let isRequesting = Observable(false)
     func requestSearchResult(for newKeyword: String) {
         guard newKeyword != keyword else { return }
         
@@ -29,32 +30,42 @@ final class SearchBookViewModel {
         currentPage = 1
         totalResults = AladinConstant.maximumResultCount
         
-        AladinAPIManager().request(type: AladinSearchResponse.self, api: .itemSearch(query: keyword, isEbook: false, page: currentPage)) { result in
+        isRequesting.value.toggle()
+        AladinAPIManager().request(type: AladinSearchResponse.self, api: .itemSearch(query: keyword, isEbook: false, page: currentPage)) { [weak self] result in
+            
             switch result {
             case .success(let data):
                 if data.totalResults < AladinConstant.maxResultCount {
-                    self.totalResults = data.totalResults
+                    self?.totalResults = data.totalResults
                 }
-                self.searchResultItems.value = data.item
+                
+                self?.searchResultItems.value = data.item
+                
+                
             case .failure(let failure):
                 dump(failure)
             }
+            
+            self?.isRequesting.value.toggle()
         }
     }
     
     func requestNextPage() {
         guard currentPage + 1 <= maxPage else { return }
         currentPage += 1
-
-        AladinAPIManager().request(type: AladinSearchResponse.self, api: .itemSearch(query: keyword, isEbook: false, page: currentPage)) { result in
+        
+        isRequesting.value.toggle()
+        AladinAPIManager().request(type: AladinSearchResponse.self, api: .itemSearch(query: keyword, isEbook: false, page: currentPage)) { [weak self] result in
             switch result {
             case .success(let data):
-                self.searchResultItems.value.append(contentsOf: data.item)
+                self?.searchResultItems.value.append(contentsOf: data.item)
                 let coverURls = data.item.compactMap { URL(string: $0.cover) }
                 ImagePrefetcher(urls: coverURls).start()
             case .failure(let failure):
                 dump(failure)
             }
+            
+            self?.isRequesting.value.toggle()
         }
     }
 }

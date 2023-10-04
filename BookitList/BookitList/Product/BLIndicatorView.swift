@@ -57,7 +57,7 @@ class BLIndicatorView: BaseView {
     }
     
     override func configureHiararchy() {
-        backgroundColor = .reverseBackground.withAlphaComponent(0.75)
+        backgroundColor = .reverseBackground.withAlphaComponent(0.5)
         
         addSubview(backdropView)
         backdropView.addSubview(stackView)
