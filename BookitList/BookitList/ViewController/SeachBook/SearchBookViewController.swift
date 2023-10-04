@@ -31,7 +31,7 @@ final class SearchBookViewController: BaseViewController {
                 break
             }
             
-            searchController.searchBar.searchTextField.isEnabled = requiresConnectionView.isHidden == false
+            searchController.searchBar.searchTextField.isEnabled = requiresConnectionView.isHidden
         }
     }
     
