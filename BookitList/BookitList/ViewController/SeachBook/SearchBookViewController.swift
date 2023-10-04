@@ -150,7 +150,12 @@ extension SearchBookViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let keyword = searchBar.text else { return }
         searchBar.resignFirstResponder()
+        
         viewModel.requestSearchResult(for: keyword)
+        
+        if searchResultsCollectionView.isHidden == false {
+            searchResultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+        }
     }
 }
 
