@@ -13,22 +13,25 @@ final class SearchBookViewController: BaseViewController {
     
     private var state: State! {
         didSet {
+            placeholderView.isHidden = true
+            searchResultsCollectionView.isHidden = true
+            noResultView.isHidden = true
+            requiresConnectionView.isHidden = true
+            
             switch state {
             case .enter:
                 placeholderView.isHidden = false
-                searchResultsCollectionView.isHidden = true
-                noResultView.isHidden = true
             case .existSearchResult:
-                placeholderView.isHidden = true
                 searchResultsCollectionView.isHidden = false
-                noResultView.isHidden = true
             case .noSearchResult:
-                placeholderView.isHidden = true
-                searchResultsCollectionView.isHidden = true
                 noResultView.isHidden = false
+            case .requiresConnection:
+                requiresConnectionView.isHidden = false
             case .none:
                 break
             }
+            
+            searchController.searchBar.searchTextField.isEnabled = requiresConnectionView.isHidden == false
         }
     }
     
@@ -48,13 +51,14 @@ final class SearchBookViewController: BaseViewController {
     
     private let noResultView = BLDirectionView(symbolName: "tray", direction: "검색 결과가 없습니다.\n책제목, ISBN, 작가이름으로 검색어를 입력해주세요.")
     
+    private let requiresConnectionView = BLDirectionView(symbolName: "wifi.slash", direction: "도서 검색은 인터넷 연결이 필요합니다.\n\n오프라인 상태에서 책을 등록하려면\n오른쪽 상단의 + 버튼을 눌러 책 정보를 직접 입력해주세요.")
+    
     private let indicatorView = BLIndicatorView(direction: "책 가져오는 중...")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         combine()
-        state = .enter
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,8 +85,10 @@ final class SearchBookViewController: BaseViewController {
 
         configureDataSource()
                 
-        let components = [placeholderView, searchResultsCollectionView, noResultView, indicatorView]
+        let components = [placeholderView, searchResultsCollectionView, noResultView, indicatorView, requiresConnectionView]
         components.forEach { component in view.addSubview(component!) }
+        
+        state = .enter
     }
     
     private func configureNavigationBar() {
@@ -109,6 +115,11 @@ final class SearchBookViewController: BaseViewController {
         indicatorView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        
+        requiresConnectionView.snp.makeConstraints { make in
+            make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
+        }
     }
     
     private func combine() {
@@ -125,6 +136,31 @@ final class SearchBookViewController: BaseViewController {
             guard bool else { return }
             self?.searchResultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         }
+        
+        NetworkMonitor.shared.currentStatus.bind { [weak self] status in
+            switch status {
+            case .satisfied:
+                self?.state = .enter
+                self?.searchController.searchBar.searchTextField.isEnabled = true
+            case .unsatisfied:
+                self?.state = .requiresConnection
+                self?.searchController.searchBar.searchTextField.isEnabled = false
+                self?.presentNetworkAlert()
+            case .none, .requiresConnection:
+                break
+            @unknown default:
+                break
+            }
+        }
+    }
+    
+    private func presentNetworkAlert() {
+        let alert = UIAlertController(title: "인터넷 연결 필요", message: "도서 검색은 인터넷 연결이 필요합니다. 오프라인 상태에서 책을 등록하려면 오른쪽 상단의 + 버튼을 눌러 책 정보를 직접 입력해주세요.", preferredStyle: .alert)
+        
+        let okay = UIAlertAction(title: "알겠어요!", style: .cancel)
+        alert.addAction(okay)
+        
+        present(alert, animated: true)
     }
 }
 
@@ -137,6 +173,7 @@ extension SearchBookViewController {
         case enter
         case existSearchResult
         case noSearchResult
+        case requiresConnection
     }
 }
 
