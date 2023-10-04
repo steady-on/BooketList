@@ -12,12 +12,13 @@ struct AladinSearchResponse: Decodable {
     let item: [Item]
 }
 
-struct Item: Decodable {
+struct Item: Decodable, Hashable {
     let itemID: Int
     let isbn13: String
     let title, author, description: String
     let pubDate, publisher: String
     let cover: String
+    var isRegister: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"
