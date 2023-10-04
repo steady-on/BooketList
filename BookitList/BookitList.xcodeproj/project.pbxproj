@@ -272,6 +272,7 @@
 		63BB13CB2AC17A910060073D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */,
 				63BB13CF2AC17BAB0060073D /* APIKey.swift */,
 				63BB13D12AC1816C0060073D /* Model */,
 				63A673322AC307DF004F43F4 /* AladinAPI */,
@@ -388,6 +389,7 @@
 				637B5C732AC987DB00730C01 /* BLBookmarkImageView.swift in Sources */,
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63A673462AC33BCD004F43F4 /* Book.swift in Sources */,
+				637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */,
 				637B5C4D2AC4E71D00730C01 /* ReadingRecordViewController.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
 				63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */,
