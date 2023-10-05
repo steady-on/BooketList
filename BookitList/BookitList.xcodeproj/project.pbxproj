@@ -43,6 +43,7 @@
 		63A6735E2AC41488004F43F4 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A6735D2AC41488004F43F4 /* Tag.swift */; };
 		63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673612AC4772E004F43F4 /* RealmRepository.swift */; };
 		63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673692AC4A25B004F43F4 /* RealmError.swift */; };
+		63B5B35B2ACE88DE00477536 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B35A2ACE88DE00477536 /* UIImageView+.swift */; };
 		63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B42AC164D50060073D /* AppDelegate.swift */; };
 		63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B62AC164D50060073D /* SceneDelegate.swift */; };
 		63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* BaseViewController.swift */; };
@@ -89,6 +90,7 @@
 		63A6735D2AC41488004F43F4 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		63A673612AC4772E004F43F4 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		63A673692AC4A25B004F43F4 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
+		63B5B35A2ACE88DE00477536 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BookitList.app; path = "/Users/Roen_White/Desktop/BookitList/BookitList/build/Debug-iphoneos/BookitList.app"; sourceTree = "<absolute>"; };
 		63BB13B42AC164D50060073D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BB13B62AC164D50060073D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -225,6 +227,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		63B5B3592ACE88CD00477536 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				63B5B35A2ACE88DE00477536 /* UIImageView+.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		63BB13A82AC164D50060073D = {
 			isa = PBXGroup;
 			children = (
@@ -245,6 +255,7 @@
 				63A673472AC34411004F43F4 /* Model */,
 				63A673432AC33B99004F43F4 /* Database */,
 				63BB13CB2AC17A910060073D /* Network */,
+				63B5B3592ACE88CD00477536 /* Extension */,
 				63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */,
 				63BB13BD2AC164D70060073D /* Assets.xcassets */,
 				63BB13C22AC164D70060073D /* Info.plist */,
@@ -369,6 +380,7 @@
 				63A6734D2AC34C2E004F43F4 /* ReadingHistory.swift in Sources */,
 				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
 				637B5C712AC980F700730C01 /* BLSearchResultCollectionCell.swift in Sources */,
+				63B5B35B2ACE88DE00477536 /* UIImageView+.swift in Sources */,
 				637B5C732AC987DB00730C01 /* BLBookmarkImageView.swift in Sources */,
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63A673462AC33BCD004F43F4 /* Book.swift in Sources */,
