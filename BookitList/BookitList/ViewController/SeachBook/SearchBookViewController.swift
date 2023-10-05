@@ -54,11 +54,6 @@ final class SearchBookViewController: BaseViewController {
         button.setImage(UIImage(systemName: "circle.inset.filled"), for: .selected)
         button.tintColor = .systemGray
         
-//        var config = UIButton.Configuration.plain()
-//        config.imagePadding = 4
-//        config.buttonSize = .small
-//        button.configuration = config
-        
         return button
     }()
     
@@ -144,7 +139,7 @@ final class SearchBookViewController: BaseViewController {
         }
         
         requiresConnectionView.snp.makeConstraints { make in
-            make.top.equalTo(ebookButton.snp.bottom).offset(8)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
@@ -252,6 +247,20 @@ extension SearchBookViewController: UISearchBarDelegate {
         
         searchBar.resignFirstResponder()
         viewModel.requestSearchResult(for: keyword, isEbookSearch: ebookButton.isSelected)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchResultsCollectionView.snp.remakeConstraints { make in
+            make.top.equalTo(ebookButton.snp.bottom).offset(8)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchResultsCollectionView.snp.remakeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
     
     private func arrangeKeword(_ keyword: String) -> String {
