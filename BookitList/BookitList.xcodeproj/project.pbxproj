@@ -89,7 +89,7 @@
 		63A6735D2AC41488004F43F4 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		63A673612AC4772E004F43F4 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		63A673692AC4A25B004F43F4 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
-		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BookitList.app; path = "/Users/Roen_White/Desktop/BookitList/BookitList/build/Debug-iphoneos/BookitList.app"; sourceTree = "<absolute>"; };
 		63BB13B42AC164D50060073D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BB13B62AC164D50060073D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		63BB13B82AC164D50060073D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -130,7 +130,7 @@
 			path = BaseUI;
 			sourceTree = "<group>";
 		};
-		637B5C492AC4E15400730C01 /* ViewController */ = {
+		637B5C492AC4E15400730C01 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
 				637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */,
@@ -141,7 +141,7 @@
 				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
 				637B5C792ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift */,
 			);
-			path = ViewController;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		637B5C542AC6DB3800730C01 /* SeachBook */ = {
@@ -177,13 +177,6 @@
 				637B5C8C2ACB06D300730C01 /* AladinConstant.swift */,
 			);
 			path = NameSpace;
-			sourceTree = "<group>";
-		};
-		637B5CCF2ACD7E4F00730C01 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		63A673322AC307DF004F43F4 /* AladinAPI */ = {
@@ -236,17 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				63BB13B32AC164D50060073D /* BookitList */,
-				63BB13B22AC164D50060073D /* Products */,
-				637B5CCF2ACD7E4F00730C01 /* Frameworks */,
 			);
-			sourceTree = "<group>";
-		};
-		63BB13B22AC164D50060073D /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				63BB13B12AC164D50060073D /* BookitList.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		63BB13B32AC164D50060073D /* BookitList */ = {
@@ -255,7 +238,7 @@
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
 				637B5C8B2ACB06AF00730C01 /* NameSpace */,
-				637B5C492AC4E15400730C01 /* ViewController */,
+				637B5C492AC4E15400730C01 /* Scene */,
 				637B5C812ACAA90C00730C01 /* Cell */,
 				637B5C612AC86CB300730C01 /* Product */,
 				637B5C482AC4D83600730C01 /* BaseUI */,
@@ -346,7 +329,7 @@
 				637B5C742AC98F2600730C01 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				637B5CD32ACD807A00730C01 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
-			productRefGroup = 63BB13B22AC164D50060073D /* Products */;
+			productRefGroup = 63BB13A82AC164D50060073D;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
