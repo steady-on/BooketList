@@ -124,7 +124,7 @@ final class SearchBookViewController: BaseViewController {
         placeholderView.snp.makeConstraints { make in
             make.top.equalTo(ebookButton.snp.bottom).offset(8)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
         
         searchResultsCollectionView.snp.makeConstraints { make in
@@ -135,18 +135,18 @@ final class SearchBookViewController: BaseViewController {
         noResultView.snp.makeConstraints { make in
             make.top.equalTo(ebookButton.snp.bottom).offset(8)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
         
         indicatorView.snp.makeConstraints { make in
-            make.top.equalTo(ebookButton.snp.bottom).offset(8)
+            make.top.equalTo(view.safeAreaLayoutGuide)
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         requiresConnectionView.snp.makeConstraints { make in
             make.top.equalTo(ebookButton.snp.bottom).offset(8)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(view.safeAreaLayoutGuide).multipliedBy(0.5)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
     }
     
