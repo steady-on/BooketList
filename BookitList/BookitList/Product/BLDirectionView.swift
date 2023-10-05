@@ -28,7 +28,7 @@ final class BLDirectionView: BaseView {
     private let stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.spacing = 4
+        stackView.spacing = 8
         stackView.alignment = .center
         return stackView
     }()
@@ -53,7 +53,7 @@ final class BLDirectionView: BaseView {
         }
         
         symbolImageView.snp.makeConstraints { make in
-            make.width.equalTo(layoutMarginsGuide).multipliedBy(0.25)
+            make.width.equalTo(layoutMarginsGuide).multipliedBy(0.2)
             make.height.equalTo(symbolImageView.snp.width)
         }
     }
