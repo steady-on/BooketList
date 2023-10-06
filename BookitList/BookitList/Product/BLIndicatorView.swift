@@ -35,6 +35,7 @@ class BLIndicatorView: BaseView {
     private let directionLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .callout)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .secondaryLabel
         label.textAlignment = .center
         label.numberOfLines = 0
