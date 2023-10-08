@@ -94,14 +94,19 @@ final class BLTextField: UITextField {
         addTarget(self, action: #selector(handleEditing), for: .allEditingEvents)
     }
 
-    @objc
-    private func handleEditing() {
+    @objc private func handleEditing() {
         updateLabel()
         updateBorder()
     }
 
     private func updateBorder() {
-        let borderColor: UIColor = isFirstResponder ? .highlight : .secondaryAccent
+        var borderColor: UIColor {
+            guard isFirstResponder == false else {
+                return .highlight
+            }
+            return isEmpty ? .placeholderText : .secondaryAccent
+        }
+        
         UIView.animate(withDuration: animationTimeInterval) {
             self.underLine.backgroundColor = borderColor
         }
