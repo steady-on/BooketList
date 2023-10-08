@@ -44,6 +44,7 @@
 		63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673612AC4772E004F43F4 /* RealmRepository.swift */; };
 		63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673692AC4A25B004F43F4 /* RealmError.swift */; };
 		63B5B35B2ACE88DE00477536 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B35A2ACE88DE00477536 /* UIImageView+.swift */; };
+		63B5B3692AD1CA2100477536 /* BLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B3682AD1CA2100477536 /* BLTextField.swift */; };
 		63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B42AC164D50060073D /* AppDelegate.swift */; };
 		63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B62AC164D50060073D /* SceneDelegate.swift */; };
 		63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* BaseViewController.swift */; };
@@ -91,6 +92,7 @@
 		63A673612AC4772E004F43F4 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		63A673692AC4A25B004F43F4 /* RealmError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmError.swift; sourceTree = "<group>"; };
 		63B5B35A2ACE88DE00477536 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
+		63B5B3682AD1CA2100477536 /* BLTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTextField.swift; sourceTree = "<group>"; };
 		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BookitList.app; path = "/Users/Roen_White/Desktop/BookitList/BookitList/build/Debug-iphoneos/BookitList.app"; sourceTree = "<absolute>"; };
 		63BB13B42AC164D50060073D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BB13B62AC164D50060073D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				637B5C622AC877B200730C01 /* BLDirectionView.swift */,
 				637B5C722AC987DB00730C01 /* BLBookmarkImageView.swift */,
 				637B5C902ACC202200730C01 /* BLIndicatorView.swift */,
+				63B5B3682AD1CA2100477536 /* BLTextField.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -397,6 +400,7 @@
 				63A6735E2AC41488004F43F4 /* Tag.swift in Sources */,
 				637B5C8D2ACB06D300730C01 /* AladinConstant.swift in Sources */,
 				63A673512AC35AE3004F43F4 /* Note.swift in Sources */,
+				63B5B3692AD1CA2100477536 /* BLTextField.swift in Sources */,
 				637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */,
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				637B5C6F2AC97D2300730C01 /* BaseCollectionViewCell.swift in Sources */,
