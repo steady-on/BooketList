@@ -30,16 +30,17 @@ final class BLTextField: UITextField {
     private var textInsets: UIEdgeInsets {
         UIEdgeInsets(top: labelHeight, left: 0, bottom: underLineOffset, right: 0)
     }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
+    
+    init(placeholder: String) {
+        super.init(frame: .zero)
+        self.placeholder = placeholder
+        configureHiararchy()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI()
+        configureHiararchy()
     }
 
     override func layoutSubviews() {
@@ -73,7 +74,7 @@ final class BLTextField: UITextField {
         return bounds.inset(by: textInsets)
     }
 
-    private func setupUI() {
+    private func configureHiararchy() {
         borderStyle = .none
 
         underLine.backgroundColor = .placeholderText
@@ -87,7 +88,7 @@ final class BLTextField: UITextField {
         addSubview(placeholderLabel)
 
         attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [
-            NSAttributedString.Key.foregroundColor: UIColor.secondaryAccent
+            NSAttributedString.Key.foregroundColor: UIColor.placeholderText
         ])
 
         addTarget(self, action: #selector(handleEditing), for: .allEditingEvents)
