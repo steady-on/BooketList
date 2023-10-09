@@ -91,8 +91,6 @@ class BLSelectButtonFromEnum<T: ButtonMakable & CaseIterable & RawRepresentable<
         buttonGroup.forEach { button in
             button.isSelected = button.tag == sender.tag
         }
-        
-        print(seletedButtonTag)
     }
     
     private func makeButton(title: String, tag: Int) -> UIButton {
