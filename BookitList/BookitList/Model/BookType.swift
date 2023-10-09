@@ -9,10 +9,12 @@ import Foundation
 import RealmSwift
 
 enum BookType: Int, CaseIterable, PersistableEnum {
-    case paper
+    case paper = 1
     case ebook
     case audio
-    
+}
+
+extension BookType: ButtonMakable {
     var buttonTitle: String {
         switch self {
         case .paper: return "종이책"
