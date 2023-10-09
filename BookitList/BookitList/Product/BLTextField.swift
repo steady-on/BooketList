@@ -13,6 +13,7 @@ final class BLTextField: UITextField {
     private let placeholderLabel = UILabel()
     
     private let underLineOffset: CGFloat = 8
+    private let labelOffset: CGFloat = 4
     private let animationTimeInterval: TimeInterval = 0.25
 
     private var labelHeight: CGFloat {
@@ -28,7 +29,7 @@ final class BLTextField: UITextField {
     }
 
     private var textInsets: UIEdgeInsets {
-        UIEdgeInsets(top: labelHeight, left: 0, bottom: underLineOffset, right: 0)
+        UIEdgeInsets(top: labelHeight + labelOffset, left: 0, bottom: underLineOffset, right: 0)
     }
     
     init(placeholder: String) {
