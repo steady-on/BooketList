@@ -48,12 +48,15 @@ final class BLTextField: UITextField {
     init(placeholder: String) {
         super.init(frame: .zero)
         self.placeholder = placeholder
-        configureHiararchy()
     }
     
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        configureHiararchy()
+    }
+    
+    override func draw(_ rect: CGRect) {
         configureHiararchy()
     }
 
