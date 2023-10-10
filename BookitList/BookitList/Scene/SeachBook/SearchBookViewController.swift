@@ -77,6 +77,7 @@ final class SearchBookViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        guard viewModel.searchResultItems.value.isEmpty else { return }
         DispatchQueue.main.async {
             self.searchController.searchBar.becomeFirstResponder()
         }
@@ -204,6 +205,7 @@ extension SearchBookViewController {
     private func configureCollectionView() {
         searchResultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         searchResultsCollectionView.prefetchDataSource = self
+        searchResultsCollectionView.delegate = self
         searchResultsCollectionView.keyboardDismissMode = .onDrag
         searchResultsCollectionView.bounces = false
         searchResultsCollectionView.backgroundColor = .background
@@ -275,5 +277,13 @@ extension SearchBookViewController: UICollectionViewDataSourcePrefetching {
         for indexPath in indexPaths where indexPath.item == viewModel.resultItemCount - 2 {
             viewModel.requestNextPage()
         }
+    }
+}
+
+extension SearchBookViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let addBookDetailInfoView = AddBookDetailInfoViewController(isbn: viewModel.selectedItemISBN(at: indexPath))
+        
+        navigationController?.pushViewController(addBookDetailInfoView, animated: true)
     }
 }
