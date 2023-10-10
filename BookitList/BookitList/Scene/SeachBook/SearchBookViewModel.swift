@@ -74,4 +74,8 @@ final class SearchBookViewModel {
             self?.isRequesting.value.toggle()
         }
     }
+    
+    func selectedItemISBN(at indexPath: IndexPath) -> String {
+        return searchResultItems.value[indexPath.item].isbn13
+    }
 }
