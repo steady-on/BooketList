@@ -9,8 +9,21 @@ import UIKit
 
 final class BLTextField: UITextField {
 
-    private let underLine = UIView()
-    private let placeholderLabel = UILabel()
+    private let underLine: UIView = {
+        let view = UIView()
+        view.backgroundColor = .placeholderText
+        view.isUserInteractionEnabled = false
+        return view
+    }()
+    
+    
+    private let placeholderLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .secondaryLabel
+        label.font = .preferredFont(forTextStyle: .caption1)
+        label.isUserInteractionEnabled = false
+        return label
+    }()
     
     private let underLinePadding: CGFloat = 8
     private let labelPadding: CGFloat = 4
@@ -77,16 +90,12 @@ final class BLTextField: UITextField {
 
     private func configureHiararchy() {
         borderStyle = .none
-
-        underLine.backgroundColor = .placeholderText
-        underLine.isUserInteractionEnabled = false
-        addSubview(underLine)
-
-        placeholderLabel.textColor = .secondaryLabel
-        placeholderLabel.font = .preferredFont(forTextStyle: .caption1)
         placeholderLabel.text = placeholder
-        placeholderLabel.isUserInteractionEnabled = false
-        addSubview(placeholderLabel)
+
+        let components = [placeholderLabel, underLine]
+        components.forEach { component in
+            addSubview(component)
+        }
 
         attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [
             NSAttributedString.Key.foregroundColor: UIColor.placeholderText
