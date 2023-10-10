@@ -12,15 +12,15 @@ final class BLTextField: UITextField {
     private let underLine = UIView()
     private let placeholderLabel = UILabel()
     
-    private let underLineOffset: CGFloat = 8
-    private let labelOffset: CGFloat = 4
+    private let underLinePadding: CGFloat = 8
+    private let labelPadding: CGFloat = 4
     private let animationTimeInterval: TimeInterval = 0.25
 
     private var labelHeight: CGFloat {
         ceil(font?.pointSize ?? 0)
     }
 
-    private var textHeight: CGFloat {
+    private var textFieldHeight: CGFloat {
         ceil(font?.lineHeight ?? 0)
     }
 
@@ -29,7 +29,7 @@ final class BLTextField: UITextField {
     }
 
     private var textInsets: UIEdgeInsets {
-        UIEdgeInsets(top: labelHeight + labelOffset, left: 0, bottom: underLineOffset, right: 0)
+        UIEdgeInsets(top: labelHeight + labelPadding, left: 0, bottom: underLinePadding, right: 0)
     }
     
     init(placeholder: String) {
@@ -51,7 +51,7 @@ final class BLTextField: UITextField {
     }
 
     override var intrinsicContentSize: CGSize {
-        return CGSize(width: bounds.width, height: textInsets.top + textHeight + textInsets.bottom)
+        return CGSize(width: bounds.width, height: textInsets.top + textFieldHeight + textInsets.bottom)
     }
 
     override var placeholder: String? {
