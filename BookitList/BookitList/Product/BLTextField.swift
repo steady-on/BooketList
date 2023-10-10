@@ -16,7 +16,6 @@ final class BLTextField: UITextField {
         return view
     }()
     
-    
     private let placeholderLabel: UILabel = {
         let label = UILabel()
         label.textColor = .secondaryLabel
