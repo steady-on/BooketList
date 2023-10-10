@@ -6,8 +6,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AddBookDetailInfoViewController: BaseViewController {
+    
+    private let viewModel = AddBookDetailInfoViewModel()
+    private let isbn: String
     
     private let scrollView = {
         let scrollView = UIScrollView()
@@ -25,6 +29,7 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     private let backdropImageView = {
         let imageView = UIImageView()
+        imageView.kf.indicatorType = .activity
         imageView.contentMode = .scaleToFill
         imageView.applyBlurEffect()
         imageView.backgroundColor = .systemFill
@@ -42,11 +47,13 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     private let coverImageView = {
         let imageView = UIImageView()
+        imageView.kf.indicatorType = .activity
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "photo")
         imageView.tintColor = .secondaryAccent
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 5
+        imageView.layer.shadowOffset = .init(width: 3, height: 3)
+        imageView.layer.shadowColor = UIColor.systemGray.cgColor
+        imageView.layer.shadowOpacity = 0.7
         return imageView
     }()
     
@@ -83,19 +90,30 @@ class AddBookDetailInfoViewController: BaseViewController {
         return textView
     }()
     
+    private let indicatorView = BLIndicatorView(direction: "책 정보를 불러오는 중 입니다.")
+    
+    init(isbn: String) {
+        self.isbn = isbn
+        super.init()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        backdropImageView.image = UIImage.bookCover
-        coverImageView.image = UIImage.bookCover
+        bindComponentWithObservable()
+        viewModel.requestBookDetailInfo(for: isbn)
     }
     
     override func configureHiararchy() {
         super.configureHiararchy()
+        configureNavigationBar()
         
-        title = "책 등록하기"
+        let components = [scrollView, indicatorView]
+        components.forEach { component in
+            view.addSubview(component)
+        }
         
-        view.addSubview(scrollView)
+        indicatorView.isHidden = true
         
         scrollView.addSubview(contentView)
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -117,6 +135,10 @@ class AddBookDetailInfoViewController: BaseViewController {
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
         }
         
+        indicatorView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
@@ -130,15 +152,15 @@ class AddBookDetailInfoViewController: BaseViewController {
         }
         
         formView.snp.makeConstraints { make in
-            make.top.equalTo(backdropImageView.snp.bottom).inset(16)
+            make.top.equalTo(backdropImageView.snp.bottom).inset(12)
             make.horizontalEdges.bottom.equalToSuperview()
         }
 
         coverImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.4)
-            make.height.equalTo(coverImageView.snp.width).multipliedBy(1.5)
-            make.bottom.equalTo(backdropImageView.snp.bottom).offset(4)
+            make.width.equalToSuperview().multipliedBy(0.35)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(1.3)
+            make.bottom.equalTo(formView.snp.top).inset(8)
         }
         
         formStackView.snp.makeConstraints { make in
@@ -156,6 +178,43 @@ class AddBookDetailInfoViewController: BaseViewController {
             make.horizontalEdges.equalTo(formView.layoutMarginsGuide)
             make.bottom.equalTo(formView.layoutMarginsGuide)
         }
+    }
+    
+    private func bindComponentWithObservable() {
+        viewModel.selectedBook.bind { [weak self] itemDetail in
+            let urlString = itemDetail?.subInfo.previewImgList.first ?? itemDetail?.cover
+            let url = URL(string: urlString ?? "")
+            let roundCorner = RoundCornerImageProcessor(cornerRadius: 10)
+            
+            self?.backdropImageView.kf.setImage(with: url)
+            self?.coverImageView.kf.setImage(with: url, options: [.processor(roundCorner),
+                .cacheSerializer(FormatIndicatedCacheSerializer.png)])
+            
+            self?.titleTextField.text = itemDetail?.title
+            self?.authorTextField.text = itemDetail?.author
+            self?.publisherTextField.text = itemDetail?.publisher
+            self?.isbnTextField.text = itemDetail?.isbn13
+            self?.totalPagesTextField.text = "\(itemDetail?.subInfo.itemPage ?? 0)"
+            self?.overviewTextView.text = itemDetail?.description
+        }
+        
+        viewModel.isRequesting.bind { [weak self] bool in
+            self?.indicatorView.isHidden = bool == false
+        }
+    }
+}
+
+extension AddBookDetailInfoViewController {
+    private func configureNavigationBar() {
+        let navigationAppearance = UINavigationBarAppearance()
+        navigationAppearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = navigationAppearance
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveBarButtonTapped))
+    }
+    
+    @objc private func saveBarButtonTapped() {
+        dump(viewModel.selectedBook)
     }
 }
 

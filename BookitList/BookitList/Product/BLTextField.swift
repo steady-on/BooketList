@@ -113,10 +113,12 @@ final class BLTextField: UITextField {
 
     private func updateBorder() {
         var borderColor: UIColor {
-            guard isFirstResponder == false else {
-                return .highlight
-            }
-            return isEmpty ? .placeholderText : .secondaryAccent
+            var color: UIColor
+            
+            color = isEmpty ? .placeholderText : .secondaryAccent
+            if isFirstResponder { color = .highlight }
+            
+            return color
         }
         
         UIView.animate(withDuration: animationTimeInterval) {

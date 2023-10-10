@@ -48,6 +48,7 @@
 		63B5B3692AD1CA2100477536 /* BLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B3682AD1CA2100477536 /* BLTextField.swift */; };
 		63B5B36B2AD475B400477536 /* BLSelectButtonFromEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */; };
 		63B5B36E2AD47CD500477536 /* ButtonMakable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B36D2AD47CD500477536 /* ButtonMakable.swift */; };
+		63B5B3762AD52A2800477536 /* AddBookDetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B3752AD52A2800477536 /* AddBookDetailInfoViewModel.swift */; };
 		63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B42AC164D50060073D /* AppDelegate.swift */; };
 		63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B62AC164D50060073D /* SceneDelegate.swift */; };
 		63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13B82AC164D50060073D /* BaseViewController.swift */; };
@@ -99,6 +100,7 @@
 		63B5B3682AD1CA2100477536 /* BLTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTextField.swift; sourceTree = "<group>"; };
 		63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLSelectButtonFromEnum.swift; sourceTree = "<group>"; };
 		63B5B36D2AD47CD500477536 /* ButtonMakable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMakable.swift; sourceTree = "<group>"; };
+		63B5B3752AD52A2800477536 /* AddBookDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookDetailInfoViewModel.swift; sourceTree = "<group>"; };
 		63BB13B12AC164D50060073D /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = BookitList.app; path = "/Users/Roen_White/Desktop/BookitList/BookitList/build/Debug-iphoneos/BookitList.app"; sourceTree = "<absolute>"; };
 		63BB13B42AC164D50060073D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BB13B62AC164D50060073D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				63B5B3572ACE81AB00477536 /* AddBookDetailInfoViewController.swift */,
+				63B5B3752AD52A2800477536 /* AddBookDetailInfoViewModel.swift */,
 			);
 			path = AddBookDetailInfo;
 			sourceTree = "<group>";
@@ -410,6 +413,7 @@
 				637B5C802ACAA24100730C01 /* SearchBookViewModel.swift in Sources */,
 				63A6734D2AC34C2E004F43F4 /* ReadingHistory.swift in Sources */,
 				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
+				63B5B3762AD52A2800477536 /* AddBookDetailInfoViewModel.swift in Sources */,
 				637B5C712AC980F700730C01 /* BLSearchResultCollectionCell.swift in Sources */,
 				63B5B35B2ACE88DE00477536 /* UIImageView+.swift in Sources */,
 				637B5C732AC987DB00730C01 /* BLBookmarkImageView.swift in Sources */,
