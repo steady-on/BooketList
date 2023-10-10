@@ -26,6 +26,7 @@ struct ItemDetail: Decodable {
 }
 
 struct SubInfo: Decodable {
+    let itemPage: Int
     let originalTitle: String
     let packing: Packing
     let previewImgList: [String]
