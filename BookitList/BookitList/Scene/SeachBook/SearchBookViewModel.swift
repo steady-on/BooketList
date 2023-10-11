@@ -75,7 +75,7 @@ final class SearchBookViewModel {
         }
     }
     
-    func selectedItemISBN(at indexPath: IndexPath) -> String {
-        return searchResultItems.value[indexPath.item].isbn13
+    func selectedItemID(at indexPath: IndexPath) -> Int {
+        return searchResultItems.value[indexPath.item].itemID
     }
 }

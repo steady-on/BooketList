@@ -282,7 +282,7 @@ extension SearchBookViewController: UICollectionViewDataSourcePrefetching {
 
 extension SearchBookViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let addBookDetailInfoView = AddBookDetailInfoViewController(isbn: viewModel.selectedItemISBN(at: indexPath))
+        let addBookDetailInfoView = AddBookDetailInfoViewController(itemID:  viewModel.selectedItemID(at: indexPath))
         
         navigationController?.pushViewController(addBookDetailInfoView, animated: true)
     }

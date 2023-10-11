@@ -12,10 +12,10 @@ final class AddBookDetailInfoViewModel {
     
     let isRequesting = Observable(false)
     
-    func requestBookDetailInfo(for isbn: String) {
+    func requestBookDetailInfo(for itemID: Int) {
         isRequesting.value.toggle()
         
-        AladinAPIManager().request(type: AladinLookUpResponse.self, api: .itemLookUp(isbn: isbn)) { [weak self] result in
+        AladinAPIManager().request(type: AladinLookUpResponse.self, api: .itemLookUp(itemID: itemID)) { [weak self] result in
             switch result {
             case .success(let data):
                 self?.selectedBook.value = data.item.first

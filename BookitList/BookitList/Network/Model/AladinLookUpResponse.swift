@@ -13,7 +13,7 @@ struct AladinLookUpResponse: Decodable {
 
 struct ItemDetail: Decodable {
     let itemID: Int
-    let isbn13: String
+    let isbn, isbn13: String
     let title, author, description: String
     let pubDate, publisher: String
     let cover, stockStatus: String
@@ -21,7 +21,7 @@ struct ItemDetail: Decodable {
 
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"
-        case isbn13, title, author, description, pubDate, publisher, cover, stockStatus, subInfo
+        case isbn, isbn13, title, author, description, pubDate, publisher, cover, stockStatus, subInfo
     }
 }
 
@@ -43,5 +43,4 @@ struct Artist: Decodable {
     let authorId: Int
     let authorName: String
     let authorType: String
-    let authorTypeDesc: String
 }

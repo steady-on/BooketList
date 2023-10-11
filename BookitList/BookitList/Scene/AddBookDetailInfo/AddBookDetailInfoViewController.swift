@@ -11,7 +11,7 @@ import Kingfisher
 class AddBookDetailInfoViewController: BaseViewController {
     
     private let viewModel = AddBookDetailInfoViewModel()
-    private let isbn: String
+    private let itemID: Int
     
     private let scrollView = {
         let scrollView = UIScrollView()
@@ -92,8 +92,8 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     private let indicatorView = BLIndicatorView(direction: "책 정보를 불러오는 중 입니다.")
     
-    init(isbn: String) {
-        self.isbn = isbn
+    init(itemID: Int) {
+        self.itemID = itemID
         super.init()
     }
     
@@ -101,7 +101,7 @@ class AddBookDetailInfoViewController: BaseViewController {
         super.viewDidLoad()
         
         bindComponentWithObservable()
-        viewModel.requestBookDetailInfo(for: isbn)
+        viewModel.requestBookDetailInfo(for: itemID)
     }
     
     override func configureHiararchy() {

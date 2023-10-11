@@ -10,7 +10,9 @@ import RealmSwift
 
 final class Book: Object {
     @Persisted(primaryKey: true) var _id = ObjectId()
-    @Persisted(indexed: true) var isbn: String?
+    @Persisted(indexed: true) var itemID: Int
+    @Persisted var isbn: String?
+    @Persisted var isbn13: String?
     @Persisted var title: String
     @Persisted var originalTitle: String?
     @Persisted var overview: String?
