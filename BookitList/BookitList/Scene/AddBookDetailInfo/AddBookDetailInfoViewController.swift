@@ -182,7 +182,7 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     private func bindComponentWithObservable() {
         viewModel.selectedBook.bind { [weak self] itemDetail in
-            let urlString = itemDetail?.subInfo.previewImgList.first ?? itemDetail?.cover
+            let urlString = itemDetail?.subInfo.previewImgList?.first ?? itemDetail?.cover
             let url = URL(string: urlString ?? "")
             let roundCorner = RoundCornerImageProcessor(cornerRadius: 10)
             
@@ -193,9 +193,9 @@ class AddBookDetailInfoViewController: BaseViewController {
             self?.titleTextField.text = itemDetail?.title
             self?.authorTextField.text = itemDetail?.author
             self?.publisherTextField.text = itemDetail?.publisher
-            self?.isbnTextField.text = itemDetail?.isbn13
+            self?.isbnTextField.text = itemDetail?.isbn13 ?? itemDetail?.isbn
             self?.totalPagesTextField.text = "\(itemDetail?.subInfo.itemPage ?? 0)"
-            self?.overviewTextView.text = itemDetail?.description
+            self?.overviewTextView.text = itemDetail?.description ?? itemDetail?.fullDescription
         }
         
         viewModel.isRequesting.bind { [weak self] bool in
