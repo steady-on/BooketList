@@ -11,6 +11,7 @@ final class AddBookDetailInfoViewModel {
     let selectedBook: Observable<ItemDetail?> = Observable(nil)
     
     let isRequesting = Observable(false)
+    let isShowingCaution = Observable(false)
     
     func requestBookDetailInfo(for itemID: Int) {
         isRequesting.value.toggle()
@@ -18,8 +19,13 @@ final class AddBookDetailInfoViewModel {
         AladinAPIManager().request(type: AladinLookUpResponse.self, api: .itemLookUp(itemID: itemID)) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.selectedBook.value = data.item.first
+                guard let itemDetail = data.item.first else {
+                    self?.isShowingCaution.value = true
+                    return
+                }
+                self?.selectedBook.value = itemDetail
             case .failure(let error):
+                self?.isShowingCaution.value = true
                 dump(error)
             }
             

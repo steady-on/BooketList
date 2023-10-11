@@ -169,22 +169,13 @@ final class SearchBookViewController: BaseViewController {
             case .unsatisfied:
                 self?.state = .requiresConnection
                 self?.searchController.searchBar.searchTextField.isEnabled = false
-                self?.presentNetworkAlert()
+                self?.presentCautionAlert(title: "인터넷 연결 필요", message: "도서 검색은 인터넷 연결이 필요합니다. 오프라인 상태에서 책을 등록하려면 오른쪽 상단의 + 버튼을 눌러 책 정보를 직접 입력해주세요.")
             case .none, .requiresConnection:
                 break
             @unknown default:
                 break
             }
         }
-    }
-    
-    private func presentNetworkAlert() {
-        let alert = UIAlertController(title: "인터넷 연결 필요", message: "도서 검색은 인터넷 연결이 필요합니다. 오프라인 상태에서 책을 등록하려면 오른쪽 상단의 + 버튼을 눌러 책 정보를 직접 입력해주세요.", preferredStyle: .alert)
-        
-        let okay = UIAlertAction(title: "알겠어요!", style: .cancel)
-        alert.addAction(okay)
-        
-        present(alert, animated: true)
     }
 }
 

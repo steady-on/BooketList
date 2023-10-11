@@ -100,8 +100,8 @@ class AddBookDetailInfoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        bindComponentWithObservable()
         viewModel.requestBookDetailInfo(for: itemID)
+        bindComponentWithObservable()
     }
     
     override func configureHiararchy() {
@@ -200,6 +200,13 @@ class AddBookDetailInfoViewController: BaseViewController {
         
         viewModel.isRequesting.bind { [weak self] bool in
             self?.indicatorView.isHidden = bool == false
+        }
+        
+        viewModel.isShowingCaution.bind { [weak self] bool in
+            guard bool else { return }
+            self?.presentCautionAlert(title: "오류", message: "해당 도서의 정보를 찾을 수 없습니다. 다시 시도해 주세요.") {
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
     }
 }

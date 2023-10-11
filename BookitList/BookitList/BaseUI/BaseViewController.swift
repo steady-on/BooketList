@@ -30,5 +30,14 @@ class BaseViewController: UIViewController {
     }
     
     func setConstraints() {}
+    
+    func presentCautionAlert(title: String, message: String? = nil, handler: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        let okay = UIAlertAction(title: "알겠어요!", style: .cancel) { _ in handler?() }
+        alert.addAction(okay)
+        
+        present(alert, animated: true)
+    }
 }
 
