@@ -16,13 +16,11 @@ final class Book: Object {
     @Persisted var title: String
     @Persisted var originalTitle: String?
     @Persisted var overview: String?
-    @Persisted var coverPath: String?
+    @Persisted var coverPath: CoverPath?
     @Persisted var totalPage: Int?
     @Persisted var publishedAt: Date?
     @Persisted var publisher: String?
-    @Persisted var width: Int?
-    @Persisted var height: Int?
-    @Persisted var depth: Int?
+    @Persisted var size: Size?
     @Persisted var isOutOfPrint: Bool?
     @Persisted var statusOfReading: StatusOfReading
     @Persisted var registeredAt: Date
@@ -34,4 +32,15 @@ final class Book: Object {
     @Persisted var checkoutHistories: List<CheckoutHistory>
     @Persisted var series: List<Series>
     @Persisted var tags: List<Tag>
+}
+
+final class CoverPath: EmbeddedObject {
+    @Persisted var thumbnail: String
+    @Persisted var full: String
+}
+
+final class Size: EmbeddedObject {
+    @Persisted var width: Int?
+    @Persisted var height: Int?
+    @Persisted var depth: Int?
 }
