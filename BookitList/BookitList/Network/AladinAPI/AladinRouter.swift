@@ -28,7 +28,7 @@ enum AladinRouter: URLRequestConvertible {
             "ttbkey" : APIKey.aladinTTBKey,
             "output" : "js",
             "Version" : "20131101",
-            "Cover" : "Big"
+            "Cover" : "MidBig"
         ]
         
         switch self {
