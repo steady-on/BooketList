@@ -223,11 +223,13 @@ extension AddBookDetailInfoViewController {
         navigationAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = navigationAppearance
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveBarButtonTapped))
+        let saveButton = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveBarButtonTapped))
+        
+        navigationItem.rightBarButtonItem = saveButton
     }
     
     @objc private func saveBarButtonTapped() {
-        dump(viewModel.selectedBook)
+        viewModel.saveBookInfo(thumbnail: backdropImageView.image, full: coverImageView.image)
     }
 }
 
