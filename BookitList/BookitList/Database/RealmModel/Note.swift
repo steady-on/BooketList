@@ -15,7 +15,7 @@ final class Note: Object {
     @Persisted var page: Int?
     @Persisted var content: String?
     
-    @Persisted var imagePaths: List<String>
+    @Persisted var haveImage: Bool
     @Persisted var comments: List<Comment>
     
     @Persisted var readingHistory: ReadingHistory?
