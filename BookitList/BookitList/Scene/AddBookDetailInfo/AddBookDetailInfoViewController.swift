@@ -127,6 +127,10 @@ class AddBookDetailInfoViewController: BaseViewController {
         
         let formStackViewComponents = [titleTextField, authorTextField, publisherTextField, isbnTextField, totalPagesTextField]
         formStackViewComponents.forEach { formStackView.addArrangedSubview($0) }
+        
+        publisherTextField.isUserInteractionEnabled = false
+        isbnTextField.isUserInteractionEnabled = false
+        totalPagesTextField.isUserInteractionEnabled = false
     }
     
     override func setConstraints() {
@@ -208,6 +212,15 @@ class AddBookDetailInfoViewController: BaseViewController {
                 self?.navigationController?.popViewController(animated: true)
             }
         }
+        
+        titleTextField.addTarget(self, action: #selector(titleValueChanged), for: .editingChanged)
+    }
+}
+
+extension AddBookDetailInfoViewController {
+    @objc func titleValueChanged(_ sender: UITextField) {
+        guard let title = sender.text else { return }
+        viewModel.selectedBook.value?.title = title
     }
 }
 

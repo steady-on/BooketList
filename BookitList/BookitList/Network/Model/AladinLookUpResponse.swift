@@ -14,8 +14,8 @@ struct AladinLookUpResponse: Decodable {
 struct ItemDetail: Decodable {
     let itemID: Int
     let isbn, isbn13: String?
-    let title, author: String
-    let description, fullDescription, cover: String?
+    var title, author: String
+    var description, fullDescription, cover: String?
     let pubDate, publisher: String
     let stockStatus: String
     let subInfo: SubInfo
