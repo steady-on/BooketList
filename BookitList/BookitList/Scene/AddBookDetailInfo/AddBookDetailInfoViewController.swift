@@ -208,9 +208,9 @@ class AddBookDetailInfoViewController: BaseViewController {
             self?.indicatorView.isHidden = bool == false
         }
         
-        viewModel.isShowingCaution.bind { [weak self] bool in
-            guard bool else { return }
-            self?.presentCautionAlert(title: "오류", message: "해당 도서의 정보를 찾을 수 없습니다. 다시 시도해 주세요.") {
+        viewModel.caution.bind { [weak self] caution in
+            guard caution.isPresent else { return }
+            self?.presentCautionAlert(title: caution.title, message: caution.message) {
                 self?.navigationController?.popViewController(animated: true)
             }
         }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		631821EA2AD7DEBE0034573B /* FileManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821E92AD7DEBE0034573B /* FileManageError.swift */; };
+		631821EC2AD8016B0034573B /* Caution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821EB2AD8016B0034573B /* Caution.swift */; };
 		637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */; };
 		637B5C4D2AC4E71D00730C01 /* ReadingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */; };
 		637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */; };
@@ -68,6 +69,7 @@
 /* Begin PBXFileReference section */
 		631821D42AD77C0B0034573B /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		631821E92AD7DEBE0034573B /* FileManageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManageError.swift; sourceTree = "<group>"; };
+		631821EB2AD8016B0034573B /* Caution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caution.swift; sourceTree = "<group>"; };
 		637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordViewController.swift; sourceTree = "<group>"; };
 		637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				63A673482AC3447B004F43F4 /* StatusOfReading.swift */,
 				63A673562AC3FD13004F43F4 /* BookType.swift */,
+				631821EB2AD8016B0034573B /* Caution.swift */,
 				637B5C7D2ACAA13900730C01 /* Observable.swift */,
 			);
 			path = Model;
@@ -464,6 +467,7 @@
 				63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */,
 				63A6734F2AC35810004F43F4 /* ReadingRecord.swift in Sources */,
 				637B5C532AC4E7AB00730C01 /* SettingsViewController.swift in Sources */,
+				631821EC2AD8016B0034573B /* Caution.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

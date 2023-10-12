@@ -11,7 +11,10 @@ final class AddBookDetailInfoViewModel {
     let selectedBook: Observable<ItemDetail?> = Observable(nil)
     
     let isRequesting = Observable(false)
-    let isShowingCaution = Observable(false)
+    let caution = Observable(Caution(isPresent: false))
+    
+    private let imageManager = ImageFileManager()
+    private lazy var realmRepository = RealmRepository()
     
     func requestBookDetailInfo(for itemID: Int) {
         isRequesting.value.toggle()
@@ -20,12 +23,12 @@ final class AddBookDetailInfoViewModel {
             switch result {
             case .success(let data):
                 guard let itemDetail = data.item.first else {
-                    self?.isShowingCaution.value = true
+                    self?.caution.value = Caution(isPresent: true, title: "해당 도서의 정보를 찾을 수 없습니다. 다시 시도해 주세요.")
                     return
                 }
                 self?.selectedBook.value = itemDetail
             case .failure(let error):
-                self?.isShowingCaution.value = true
+                self?.caution.value = Caution(isPresent: true, title: "해당 도서의 정보를 찾을 수 없습니다. 다시 시도해 주세요.")
                 dump(error)
             }
             
