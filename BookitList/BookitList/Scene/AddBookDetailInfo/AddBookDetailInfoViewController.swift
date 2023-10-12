@@ -182,20 +182,14 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     private func bindComponentWithObservable() {
         viewModel.selectedBook.bind { [weak self] itemDetail in
-            let urlString = itemDetail?.subInfo.previewImgList?.first ?? itemDetail?.cover
+            let thumbnailURLString = itemDetail?.cover ?? ""
+            let fullURLString = itemDetail?.subInfo.previewImgList?.first ?? thumbnailURLString
             
-            if let url = URL(string: urlString ?? "") {
-                KingfisherManager.shared.retrieveImage(with: url) { result in
-                    switch result {
-                    case .success(let imageData):
-                        self?.backdropImageView.image = imageData.image
-                        self?.coverImageView.image = imageData.image
-                    case .failure(_):
-                        self?.presentCautionAlert(title: "에러", message: "책 표지 정보를 불러올 수 없습니다. 다시 시도하거나 직접 등록해주세요.")
-                    }
-                }
-            }
+            let thumbnailURL = URL(string: thumbnailURLString)
+            let fullURL = URL(string: fullURLString)
             
+            self?.backdropImageView.kf.setImage(with: thumbnailURL)
+            self?.coverImageView.kf.setImage(with: fullURL)
             self?.titleTextField.text = itemDetail?.title
             self?.authorTextField.text = itemDetail?.author
             self?.publisherTextField.text = itemDetail?.publisher
