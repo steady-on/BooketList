@@ -11,45 +11,48 @@ import RealmSwift
 final class RealmRepository {
     private let realm = try? Realm()
     
-    func addItem<T: Object>(_ item: T) throws {
-        guard let realm else { throw RealmError.notInitialized }
+    func addItem<T: Object>(_ item: T) -> Result<Void, RealmError> {
+        guard let realm else { return .failure(.notInitialized) }
         
         do {
             try realm.write { realm.add(item) }
+            return .success(())
         } catch {
-            throw RealmError.failToCreateItem
+            return .failure(.failToCreateItem)
         }
     }
     
-    func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) throws -> Results<T> {
-        guard let realm else { throw RealmError.notInitialized }
+    func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Result<Results<T>, RealmError> {
+        guard let realm else { return .failure(.notInitialized) }
         
         let fetchData = realm.objects(T.self).sorted(byKeyPath: keypath, ascending: ascending)
-        return fetchData
+        return .success(fetchData)
     }
     
-    func updateItem<T: Object>(_ updatedItem: T) throws {
-        guard let realm else { throw RealmError.notInitialized }
+    func updateItem<T: Object>(_ updatedItem: T) -> Result<Void, RealmError> {
+        guard let realm else { return .failure(.notInitialized) }
         
         do {
             try realm.write { realm.add(updatedItem, update: .modified) }
+            return .success(())
         } catch {
-            throw RealmError.failToUpdateItem
+            return .failure(.failToUpdateItem)
         }
     }
     
-    func deleteItem<T: Object>(_ item: T) throws {
-        guard let realm else { throw RealmError.notInitialized }
+    func deleteItem<T: Object>(_ item: T) -> Result<Void, RealmError> {
+        guard let realm else { return .failure(.notInitialized) }
         
         do {
             try realm.write { realm.delete(item) }
+            return .success(())
         } catch {
-            throw RealmError.failToDelete
+            return .failure(.failToDelete)
         }
     }
     
-    func deleteBook(_ book: Book) throws {
-        guard let realm else { throw RealmError.notInitialized }
+    func deleteBook(_ book: Book) -> Result<Void, RealmError> {
+        guard let realm else { return .failure(.notInitialized) }
         
         do {
             try realm.write {
@@ -59,8 +62,9 @@ final class RealmRepository {
                 realm.delete(book.checkoutHistories)
                 realm.delete(book)
             }
+            return .success(())
         } catch {
-            throw RealmError.failToDelete
+            return .failure(.failToDelete)
         }
     }
 }
