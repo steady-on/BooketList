@@ -41,10 +41,12 @@ struct ItemDetail: Decodable {
         let description = try container.decode(String.self, forKey: .description)
         self.description = description.isEmpty ? nil : description
 
-        var fullDescription = try container.decode(String.self, forKey: .fullDescription)
+        let fullDescription = try container.decode(String.self, forKey: .fullDescription)
         self.fullDescription = fullDescription.isEmpty ? nil : fullDescription.replacingOccurrences(of: "<br>", with: "")
 
-        self.cover = try container.decode(String.self, forKey: .cover)
+        let cover = try container.decode(String.self, forKey: .cover)
+        self.cover = cover.isEmpty ? nil : cover
+        
         self.pubDate = try container.decode(String.self, forKey: .pubDate)
         self.publisher = try container.decode(String.self, forKey: .publisher)
         self.stockStatus = try container.decode(String.self, forKey: .stockStatus)
