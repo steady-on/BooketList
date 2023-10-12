@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class CheckoutHistory: Object {
-    @Persisted(primaryKey: true) var _id = ObjectId()
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var type: BookType
     @Persisted var checkedoutAt: Date?
     @Persisted var returnedAt: Date?

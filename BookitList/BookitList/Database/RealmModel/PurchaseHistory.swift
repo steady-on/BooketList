@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class PurchaseHistory: Object {
-    @Persisted(primaryKey: true) var _id = ObjectId()
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var type: BookType
     @Persisted var puchasedAt: Date?
     @Persisted var memo: String?

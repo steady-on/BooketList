@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class Note: Object {
-    @Persisted(primaryKey: true) var _id = ObjectId()
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var createdAt: Date
     @Persisted var type: NoteType
     @Persisted var page: Int?
