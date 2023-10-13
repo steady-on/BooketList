@@ -8,6 +8,7 @@
 import UIKit
 
 final class AddBookDetailInfoViewModel {
+    
     let selectedBook: Observable<ItemDetail?> = Observable(nil)
     
     let isRequesting = Observable(false)

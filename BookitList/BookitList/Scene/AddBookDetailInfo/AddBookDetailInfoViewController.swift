@@ -101,7 +101,6 @@ class AddBookDetailInfoViewController: BaseViewController {
         super.viewDidLoad()
         
         viewModel.requestBookDetailInfo(for: itemID)
-        bindComponentWithObservable()
     }
     
     override func configureHiararchy() {
@@ -184,7 +183,7 @@ class AddBookDetailInfoViewController: BaseViewController {
         }
     }
     
-    private func bindComponentWithObservable() {
+    override func bindComponentWithObservable() {
         viewModel.selectedBook.bind { [weak self] itemDetail in
             let thumbnailURLString = itemDetail?.cover ?? ""
             let fullURLString = itemDetail?.subInfo.previewImgList?.first ?? thumbnailURLString

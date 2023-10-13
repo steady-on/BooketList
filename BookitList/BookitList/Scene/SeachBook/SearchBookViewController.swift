@@ -70,8 +70,6 @@ final class SearchBookViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bindComponentWithObservable()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -148,7 +146,7 @@ final class SearchBookViewController: BaseViewController {
         }
     }
     
-    private func bindComponentWithObservable() {
+    override func bindComponentWithObservable() {
         viewModel._searchResultItems.bind { [weak self] items in
             self?.updateSnapshot()
             self?.state = items.isEmpty ? .noSearchResult : .existSearchResult
@@ -245,7 +243,7 @@ extension SearchBookViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard var keyword = searchBar.text else { return }
         
-        keyword = arrangeKeword(keyword)
+        keyword = arrangeKeyword(keyword)
         searchBar.text = keyword
         
         searchBar.resignFirstResponder()
@@ -266,7 +264,7 @@ extension SearchBookViewController: UISearchBarDelegate {
         }
     }
     
-    private func arrangeKeword(_ keyword: String) -> String {
+    private func arrangeKeyword(_ keyword: String) -> String {
         let words = keyword.components(separatedBy: " ").filter { $0.isEmpty == false }
         return words.joined(separator: " ")
     }
