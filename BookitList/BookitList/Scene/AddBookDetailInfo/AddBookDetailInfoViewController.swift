@@ -65,11 +65,13 @@ class AddBookDetailInfoViewController: BaseViewController {
         return stackView
     }()
     
-    private let titleTextField = BLTextField(placeholder: "제목(필수)")
-    private let authorTextField = BLTextField(placeholder: "작가(필수)")
-    private let publisherTextField = BLTextField(placeholder: "출판사(선택)")
-    private let isbnTextField = BLTextField(placeholder: "ISBN(선택)")
-    private let totalPagesTextField = BLTextField(placeholder: "전체 페이지 수(선택)")
+    private let titleTextField = BLTextField(placeholder: "제목")
+    private let originalTitleTextField = BLTextField(placeholder: "원제")
+    private let authorTextField = BLTextField(placeholder: "작가")
+    private let isbnTextField = BLTextField(placeholder: "ISBN")
+    private let publisherTextField = BLTextField(placeholder: "출판사")
+    private let publishedAtTextField = BLTextField(placeholder: "출판일")
+    private let totalPagesTextField = BLTextField(placeholder: "전체 페이지 수")
     
     private let overviewLabel: UILabel = {
         let label = UILabel()
@@ -124,10 +126,11 @@ class AddBookDetailInfoViewController: BaseViewController {
         let formViewComponents = [formStackView, overviewLabel, overviewTextView]
         formViewComponents.forEach { formView.addSubview($0) }
         
-        let formStackViewComponents = [titleTextField, authorTextField, publisherTextField, isbnTextField, totalPagesTextField]
+        let formStackViewComponents = [titleTextField, originalTitleTextField, authorTextField, publisherTextField, publishedAtTextField, isbnTextField, totalPagesTextField]
         formStackViewComponents.forEach { formStackView.addArrangedSubview($0) }
         
         publisherTextField.isUserInteractionEnabled = false
+        publishedAtTextField.isUserInteractionEnabled = false
         isbnTextField.isUserInteractionEnabled = false
         totalPagesTextField.isUserInteractionEnabled = false
     }
@@ -185,20 +188,30 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     override func bindComponentWithObservable() {
         viewModel.selectedBook.bind { [weak self] itemDetail in
-            let thumbnailURLString = itemDetail?.cover ?? ""
-            let fullURLString = itemDetail?.subInfo.previewImgList?.first ?? thumbnailURLString
+            guard itemDetail != nil else { return }
+            
+            let thumbnailURLString = itemDetail!.cover ?? ""
+            let fullURLString = itemDetail!.subInfo.previewImgList?.first ?? thumbnailURLString
             
             let thumbnailURL = URL(string: thumbnailURLString)
             let fullURL = URL(string: fullURLString)
             
             self?.backdropImageView.kf.setImage(with: thumbnailURL)
             self?.coverImageView.kf.setImage(with: fullURL)
-            self?.titleTextField.text = itemDetail?.title
-            self?.authorTextField.text = itemDetail?.author
-            self?.publisherTextField.text = itemDetail?.publisher
-            self?.isbnTextField.text = itemDetail?.isbn13 ?? itemDetail?.isbn
-            self?.totalPagesTextField.text = "\(itemDetail?.subInfo.itemPage ?? 0)"
-            self?.overviewTextView.text = itemDetail?.description ?? itemDetail?.fullDescription
+            self?.titleTextField.text = itemDetail!.title
+            self?.isbnTextField.text = itemDetail!.isbn13 ?? itemDetail?.isbn
+            self?.authorTextField.text = itemDetail!.author
+            self?.publisherTextField.text = itemDetail!.publisher
+            self?.publishedAtTextField.text = itemDetail!.pubDate
+            self?.totalPagesTextField.text = "\(itemDetail!.subInfo.itemPage)"
+            self?.overviewTextView.text = itemDetail!.description ?? itemDetail?.fullDescription
+            
+            guard let originalTitle = itemDetail!.subInfo.originalTitle else {
+                self?.originalTitleTextField.isHidden = true
+                return
+            }
+            
+            self?.originalTitleTextField.text = originalTitle
         }
         
         viewModel.isRequesting.bind { [weak self] bool in
