@@ -20,7 +20,7 @@ struct ImageFileManager {
 
     func saveImage(_ image: UIImage, to filePath: ImageFilePath) throws {
         do {
-            let folderURL = try prepareFolder(named: filePath.folderPath)
+            try prepareFolder(named: filePath.folderPath)
             let data = try convertToData(from: image)
             try saveData(data, to: filePath.filePath)
         } catch {
@@ -47,13 +47,12 @@ struct ImageFileManager {
         return data
     }
     
-    private func prepareFolder(named folderName: String) throws -> URL {
+    private func prepareFolder(named folderName: String) throws {
         // TODO: 버전 대응: appendingPathComponent -> append(path:directoryHint:)
         let folderURL = documentDirectory.appendingPathComponent(folderName)
         
         do {
             try fileManager.createDirectory(at: folderURL, withIntermediateDirectories: true)
-            return folderURL
         } catch {
             throw FileManageError.failToCreateFolder
         }
