@@ -19,7 +19,6 @@ struct ItemDetail: Decodable {
     let pubDate, publisher: String
     let stockStatus: String
     let subInfo: SubInfo
-    var isRegistered: Bool = false
 
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"

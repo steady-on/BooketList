@@ -44,7 +44,7 @@ final class AddBookDetailInfoViewModel {
         
         guard let item = selectedBook.value else { return }
         let book = Book(from: item)
-        
+
         if let thumbnail {
             let isSavedThumbnail = saveBookCoverFile(for: book._id.stringValue, image: thumbnail, type: .thumbnail)
             
@@ -52,7 +52,7 @@ final class AddBookDetailInfoViewModel {
             case .success(_):
                 book.existCover?.thumbnail = true
             case .failure(let failure):
-                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 오류", message: "책 표지 정보를 저장하는 도중 에러가 발생했습니다. error: " + String(describing: failure))
+                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 실패", message: String(describing: failure))
             }
         }
         
@@ -63,7 +63,7 @@ final class AddBookDetailInfoViewModel {
             case .success(_):
                 book.existCover?.full = true
             case .failure(let failure):
-                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 오류", message: "책 표지 정보를 저장하는 도중 에러가 발생했습니다. error: " + String(describing: failure))
+                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 실패", message: String(describing: failure))
             }
         }
         

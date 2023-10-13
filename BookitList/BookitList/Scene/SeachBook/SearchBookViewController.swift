@@ -77,7 +77,9 @@ final class SearchBookViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        guard viewModel.searchResultItems.value.isEmpty else { return }
+        updateSnapshot()
+        
+        guard viewModel.searchResultItems.isEmpty else { return }
         DispatchQueue.main.async {
             self.searchController.searchBar.becomeFirstResponder()
         }
@@ -147,7 +149,7 @@ final class SearchBookViewController: BaseViewController {
     }
     
     private func bindComponentWithObservable() {
-        viewModel.searchResultItems.bind { [weak self] items in
+        viewModel._searchResultItems.bind { [weak self] items in
             self?.updateSnapshot()
             self?.state = items.isEmpty ? .noSearchResult : .existSearchResult
         }
@@ -159,6 +161,13 @@ final class SearchBookViewController: BaseViewController {
         viewModel.scrollToTop.bind { [weak self] bool in
             guard bool else { return }
             self?.searchResultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
+        }
+        
+        viewModel.caution.bind { [weak self] caution in
+            guard caution.isPresent else { return }
+            self?.presentCautionAlert(title: caution.title, message: caution.message) {
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
         
         NetworkMonitor.shared.currentStatus.bind { [weak self] status in
@@ -227,7 +236,7 @@ extension SearchBookViewController {
     private func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(viewModel.searchResultItems.value)
+        snapshot.appendItems(viewModel.searchResultItems)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }

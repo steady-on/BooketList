@@ -16,15 +16,28 @@ final class SearchBookViewModel {
         let portion = totalResults / AladinConstant.maxResultCount
         return portion + ((totalResults % AladinConstant.maxResultCount == 0) ? 0 : 1)
     }
+    
+    private lazy var realmRepository = try? RealmRepository()
 
     private var keyword: String = ""
     private var isEbookSearch: Bool = false
     
-    let searchResultItems: Observable<[Item]> = Observable([])
-    var resultItemCount: Int { searchResultItems.value.count }
+    let _searchResultItems: Observable<[Item]> = Observable([])
+    
+    var searchResultItems: [Item] {
+        guard let realmRepository else {
+            caution.value = Caution(isPresent: true, title: "DB 에러", message: String(describing: RealmError.notInitialized))
+            return []
+        }
+        
+        return realmRepository.checkBooksInTable(for: _searchResultItems.value)
+    }
+    
+    var resultItemCount: Int { _searchResultItems.value.count }
     
     let isRequesting = Observable(false)
     let scrollToTop = Observable(false)
+    let caution = Observable(Caution(isPresent: false))
     
     func requestSearchResult(for newKeyword: String, isEbookSearch: Bool) {
         guard newKeyword != keyword || self.isEbookSearch != isEbookSearch else { return }
@@ -44,7 +57,7 @@ final class SearchBookViewModel {
                     self?.totalResults = data.totalResults
                 }
                 
-                self?.searchResultItems.value = data.item
+                self?._searchResultItems.value = data.item
                 
                 if data.item.isEmpty == false { self?.scrollToTop.value = true }
                 
@@ -64,7 +77,7 @@ final class SearchBookViewModel {
         AladinAPIManager().request(type: AladinSearchResponse.self, api: .itemSearch(query: keyword, isEbook: false, page: currentPage)) { [weak self] result in
             switch result {
             case .success(let data):
-                self?.searchResultItems.value.append(contentsOf: data.item)
+                self?._searchResultItems.value.append(contentsOf: data.item)
                 let coverURls = data.item.compactMap { URL(string: $0.cover) }
                 ImagePrefetcher(urls: coverURls).start()
             case .failure(let failure):
@@ -76,6 +89,6 @@ final class SearchBookViewModel {
     }
     
     func selectedItemID(at indexPath: IndexPath) -> Int {
-        return searchResultItems.value[indexPath.item].itemID
+        return searchResultItems[indexPath.item].itemID
     }
 }

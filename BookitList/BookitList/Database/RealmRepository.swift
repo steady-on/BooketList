@@ -30,7 +30,7 @@ final class RealmRepository {
         }
     }
     
-    func checkBooksInTable(for items: [ItemDetail]) -> [ItemDetail] {
+    func checkBooksInTable(for items: [Item]) -> [Item] {
         let syncedItems = items.map { item in
             var item = item
             
