@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AddBookDetailInfoViewModel {
+final class AddBookDetailInfoViewModel: Cautionable {
     
     let selectedBook: Observable<ItemDetail?> = Observable(nil)
     

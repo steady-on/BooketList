@@ -8,7 +8,7 @@
 import Foundation
 import Kingfisher
 
-final class SearchBookViewModel {
+final class SearchBookViewModel: Cautionable {
     
     private var currentPage = 1
     private var totalResults = AladinConstant.maximumResultCount
