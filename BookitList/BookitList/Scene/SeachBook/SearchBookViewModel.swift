@@ -88,7 +88,7 @@ final class SearchBookViewModel: Cautionable {
         }
     }
     
-    func selectedItemID(at indexPath: IndexPath) -> Int {
-        return searchResultItems[indexPath.item].itemID
+    func selectedItemID(at indexPath: IndexPath) -> Item {
+        return searchResultItems[indexPath.item]
     }
 }
