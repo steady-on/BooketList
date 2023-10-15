@@ -92,4 +92,5 @@ struct Artist: Decodable {
     let authorId: Int
     let authorName: String
     let authorType: String
+    let authorTypeDesc: String
 }

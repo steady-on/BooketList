@@ -251,4 +251,3 @@ extension AddBookDetailInfoViewController {
         viewModel.saveBookInfo(thumbnail: backdropImageView.image, full: coverImageView.image)
     }
 }
-
