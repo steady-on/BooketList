@@ -26,7 +26,7 @@ final class SearchBookViewModel: Cautionable {
     
     var searchResultItems: [Item] {
         guard let realmRepository else {
-            caution.value = Caution(isPresent: true, title: "DB 에러", message: String(describing: RealmError.notInitialized))
+            caution.value = Caution(isPresent: true, title: "DB 에러", message: String(describing: RealmError.notInitialized), willDismiss: false)
             return []
         }
         
@@ -37,7 +37,7 @@ final class SearchBookViewModel: Cautionable {
     
     let isRequesting = Observable(false)
     let scrollToTop = Observable(false)
-    let caution = Observable(Caution(isPresent: false))
+    let caution = Observable(Caution(isPresent: false, willDismiss: false))
     
     func requestSearchResult(for newKeyword: String, isEbookSearch: Bool) {
         guard newKeyword != keyword || self.isEbookSearch != isEbookSearch else { return }

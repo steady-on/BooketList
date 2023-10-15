@@ -11,4 +11,5 @@ struct Caution {
     var isPresent: Bool
     var title: String?
     var message: String?
+    var willDismiss: Bool
 }

@@ -18,7 +18,7 @@ struct ItemDetail: Decodable {
     var description, fullDescription, cover: String?
     let pubDate, publisher: String
     let stockStatus: String
-    let subInfo: SubInfo
+    var subInfo: SubInfo
 
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"
@@ -59,7 +59,7 @@ struct SubInfo: Decodable {
     let originalTitle: String?
     let packing: Packing
     let previewImgList: [String]?
-    let authors: [Artist]
+    var authors: [Artist]
     
     enum CodingKeys: CodingKey {
         case itemPage, originalTitle, packing, previewImgList, authors
@@ -93,4 +93,9 @@ struct Artist: Decodable {
     let authorName: String
     let authorType: String
     let authorTypeDesc: String
+    var willRegister: Bool = false
+    
+    enum CodingKeys: CodingKey {
+        case authorId, authorName, authorType, authorTypeDesc
+    }
 }

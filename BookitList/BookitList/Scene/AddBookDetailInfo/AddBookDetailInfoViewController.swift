@@ -224,9 +224,14 @@ class AddBookDetailInfoViewController: BaseViewController {
         
         viewModel.caution.bind { [weak self] caution in
             guard caution.isPresent else { return }
-            self?.presentCautionAlert(title: caution.title, message: caution.message) {
+            
+            let popViewAction = { () -> Void in
                 self?.navigationController?.popViewController(animated: true)
             }
+            
+            let handler: () -> Void = caution.willDismiss ? popViewAction : {}
+            
+            self?.presentCautionAlert(title: caution.title, message: caution.message, handler: handler)
         }
         
         titleTextField.addTarget(self, action: #selector(titleValueChanged), for: .editingChanged)
@@ -243,11 +248,14 @@ class AddBookDetailInfoViewController: BaseViewController {
         coverImageView.kf.setImage(with: fullURL)
         titleTextField.text = itemDetail.title
         isbnTextField.text = itemDetail.isbn13 ?? itemDetail.isbn
-        authors = itemDetail.subInfo.authors
         publisherTextField.text = itemDetail.publisher
         publishedAtTextField.text = itemDetail.pubDate
         totalPagesTextField.text = "\(itemDetail.subInfo.itemPage)"
         overviewTextView.text = itemDetail.description ?? itemDetail.fullDescription
+
+        if authors == nil {
+            authors = itemDetail.subInfo.authors
+        }
         
         guard let originalTitle = itemDetail.subInfo.originalTitle else {
             originalTitleTextField.isHidden = true
@@ -255,18 +263,24 @@ class AddBookDetailInfoViewController: BaseViewController {
         }
         
         originalTitleTextField.text = originalTitle
-        
+    }
+}
+
+extension AddBookDetailInfoViewController {
+    @objc func titleValueChanged(_ sender: UITextField) {
+        guard let title = sender.text else { return }
+        viewModel.selectedBook.value?.title = title
     }
     
     private func arrangeArtistButtons(for authors: [Artist]) {
-        authors.forEach { artist in
-            let button = makeButton(for: artist)
+        zip(authors, 1...).forEach { (artist, tagValue) in
+            let button = makeButton(for: artist, tagValue: tagValue)
             button.addTarget(self, action: #selector(buttonSelected), for: .touchUpInside)
             selectAuthorView.addArrangedSubview(button)
         }
     }
     
-    private func makeButton(for artist: Artist) -> UIButton {
+    private func makeButton(for artist: Artist, tagValue: Int) -> UIButton {
         let button = UIButton()
         button.contentHorizontalAlignment = .leading
         
@@ -276,18 +290,13 @@ class AddBookDetailInfoViewController: BaseViewController {
         config.titleAlignment = .leading
         
         button.configuration = config
+        button.tag = tagValue
         return button
     }
     
     @objc private func buttonSelected(_ sender: UIButton) {
         sender.isSelected.toggle()
-    }
-}
-
-extension AddBookDetailInfoViewController {
-    @objc func titleValueChanged(_ sender: UITextField) {
-        guard let title = sender.text else { return }
-        viewModel.selectedBook.value?.title = title
+        viewModel.selectRegisterAuthor(tag: sender.tag)
     }
 }
 
