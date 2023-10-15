@@ -56,7 +56,7 @@ struct ItemDetail: Decodable {
 
 struct SubInfo: Decodable {
     let itemPage: Int
-    let originalTitle: String?
+    var originalTitle: String?
     let packing: Packing
     let previewImgList: [String]?
     var authors: [Artist]

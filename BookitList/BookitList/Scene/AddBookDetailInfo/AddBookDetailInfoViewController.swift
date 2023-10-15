@@ -235,6 +235,7 @@ class AddBookDetailInfoViewController: BaseViewController {
         }
         
         titleTextField.addTarget(self, action: #selector(titleValueChanged), for: .editingChanged)
+        originalTitleTextField.addTarget(self, action: #selector(originalTitleValueChanged), for: .editingChanged)
     }
     
     private func configureComponents(for itemDetail: ItemDetail) {
@@ -270,6 +271,11 @@ extension AddBookDetailInfoViewController {
     @objc func titleValueChanged(_ sender: UITextField) {
         guard let title = sender.text else { return }
         viewModel.selectedBook.value?.title = title
+    }
+    
+    @objc func originalTitleValueChanged(_ sender: UITextField) {
+        guard let originalTitle = sender.text else { return }
+        viewModel.selectedBook.value?.subInfo.originalTitle = originalTitle
     }
     
     private func arrangeArtistButtons(for authors: [Artist]) {
