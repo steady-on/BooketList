@@ -313,5 +313,6 @@ extension AddBookDetailInfoViewController {
     
     @objc private func saveBarButtonTapped() {
         viewModel.saveBookInfo(thumbnail: backdropImageView.image, full: coverImageView.image)
+        navigationController?.popViewController(animated: true)
     }
 }

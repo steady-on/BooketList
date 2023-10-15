@@ -46,14 +46,16 @@ final class AddBookDetailInfoViewModel: Cautionable {
         }
         
         guard let item = selectedBook.value else { return }
-        
+                
         guard artists.filter({ $0.willRegister }).isEmpty == false else {
             caution.value = Caution(isPresent: true, title: "작가 선택", message: "등록할 작가를 반드시 한 명 이상 선택해 주세요.", willDismiss: false)
             return
         }
         
+        artists = artists.filter { realmRepository.checkAuthorInTable(for: $0.authorId) == false }
+        
         let book = Book(from: item, artists: artists)
-
+        
         if let thumbnail {
             let isSavedThumbnail = saveBookCoverFile(for: book._id.stringValue, image: thumbnail, type: .thumbnail)
             
