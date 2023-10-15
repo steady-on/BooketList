@@ -297,6 +297,7 @@ extension AddBookDetailInfoViewController {
         
         button.configuration = config
         button.tag = tagValue
+        button.isSelected = artist.willRegister
         return button
     }
     

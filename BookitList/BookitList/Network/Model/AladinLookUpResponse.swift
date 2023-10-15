@@ -93,9 +93,21 @@ struct Artist: Decodable {
     let authorName: String
     let authorType: String
     let authorTypeDesc: String
-    var willRegister: Bool = false
+    var willRegister: Bool
     
     enum CodingKeys: CodingKey {
         case authorId, authorName, authorType, authorTypeDesc
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.authorId = try container.decode(Int.self, forKey: .authorId)
+        self.authorName = try container.decode(String.self, forKey: .authorName)
+        self.authorType = try container.decode(String.self, forKey: .authorType)
+        
+        let authorTypeDesc = try container.decode(String.self, forKey: .authorTypeDesc)
+        self.authorTypeDesc = authorTypeDesc
+        
+        self.willRegister = ["지은이", "원작"].contains(authorTypeDesc)
     }
 }

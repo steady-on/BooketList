@@ -52,7 +52,7 @@ final class AddBookDetailInfoViewModel: Cautionable {
             return
         }
         
-        artists = artists.filter { realmRepository.checkAuthorInTable(for: $0.authorId) == false }
+        let unRegisteredArtists = artists.filter { realmRepository.checkAuthorInTable(for: $0.authorId) == false }
         
         let book = Book(from: item, artists: artists)
         
