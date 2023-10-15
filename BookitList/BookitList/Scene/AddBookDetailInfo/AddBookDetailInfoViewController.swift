@@ -12,6 +12,12 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     private let viewModel = AddBookDetailInfoViewModel()
     private let itemID: Int
+    private var authors: [Artist]? {
+        didSet {
+            guard let authors else { return }
+            arrangeArtistButtons(for: authors)
+        }
+    }
     
     private let scrollView = {
         let scrollView = UIScrollView()
@@ -67,12 +73,30 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     private let titleTextField = BLTextField(placeholder: "제목")
     private let originalTitleTextField = BLTextField(placeholder: "원제")
-    private let authorTextField = BLTextField(placeholder: "작가")
+    
+    private let authorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "도서에 등록할 작가를 선택해주세요."
+        label.textColor = .label
+        label.font = .preferredFont(forTextStyle: .body)
+        label.isUserInteractionEnabled = false
+        return label
+    }()
+    
+    private lazy var selectAuthorView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 4
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        return stackView
+    }()
+    
     private let isbnTextField = BLTextField(placeholder: "ISBN")
     private let publisherTextField = BLTextField(placeholder: "출판사")
     private let publishedAtTextField = BLTextField(placeholder: "출판일")
     private let totalPagesTextField = BLTextField(placeholder: "전체 페이지 수")
-    
+        
     private let overviewLabel: UILabel = {
         let label = UILabel()
         label.text = "책 소개"
@@ -126,8 +150,10 @@ class AddBookDetailInfoViewController: BaseViewController {
         let formViewComponents = [formStackView, overviewLabel, overviewTextView]
         formViewComponents.forEach { formView.addSubview($0) }
         
-        let formStackViewComponents = [titleTextField, originalTitleTextField, authorTextField, publisherTextField, publishedAtTextField, isbnTextField, totalPagesTextField]
+        let formStackViewComponents = [titleTextField, originalTitleTextField, selectAuthorView, publisherTextField, publishedAtTextField, isbnTextField, totalPagesTextField]
         formStackViewComponents.forEach { formStackView.addArrangedSubview($0) }
+        
+        selectAuthorView.addArrangedSubview(authorLabel)
         
         publisherTextField.isUserInteractionEnabled = false
         publishedAtTextField.isUserInteractionEnabled = false
@@ -189,29 +215,7 @@ class AddBookDetailInfoViewController: BaseViewController {
     override func bindComponentWithObservable() {
         viewModel.selectedBook.bind { [weak self] itemDetail in
             guard itemDetail != nil else { return }
-            
-            let thumbnailURLString = itemDetail!.cover ?? ""
-            let fullURLString = itemDetail!.subInfo.previewImgList?.first ?? thumbnailURLString
-            
-            let thumbnailURL = URL(string: thumbnailURLString)
-            let fullURL = URL(string: fullURLString)
-            
-            self?.backdropImageView.kf.setImage(with: thumbnailURL)
-            self?.coverImageView.kf.setImage(with: fullURL)
-            self?.titleTextField.text = itemDetail!.title
-            self?.isbnTextField.text = itemDetail!.isbn13 ?? itemDetail?.isbn
-            self?.authorTextField.text = itemDetail!.author
-            self?.publisherTextField.text = itemDetail!.publisher
-            self?.publishedAtTextField.text = itemDetail!.pubDate
-            self?.totalPagesTextField.text = "\(itemDetail!.subInfo.itemPage)"
-            self?.overviewTextView.text = itemDetail!.description ?? itemDetail?.fullDescription
-            
-            guard let originalTitle = itemDetail!.subInfo.originalTitle else {
-                self?.originalTitleTextField.isHidden = true
-                return
-            }
-            
-            self?.originalTitleTextField.text = originalTitle
+            self?.configureComponents(for: itemDetail!)
         }
         
         viewModel.isRequesting.bind { [weak self] bool in
@@ -226,6 +230,57 @@ class AddBookDetailInfoViewController: BaseViewController {
         }
         
         titleTextField.addTarget(self, action: #selector(titleValueChanged), for: .editingChanged)
+    }
+    
+    private func configureComponents(for itemDetail: ItemDetail) {
+        let thumbnailURLString = itemDetail.cover ?? ""
+        let fullURLString = itemDetail.subInfo.previewImgList?.first ?? thumbnailURLString
+        
+        let thumbnailURL = URL(string: thumbnailURLString)
+        let fullURL = URL(string: fullURLString)
+        
+        backdropImageView.kf.setImage(with: thumbnailURL)
+        coverImageView.kf.setImage(with: fullURL)
+        titleTextField.text = itemDetail.title
+        isbnTextField.text = itemDetail.isbn13 ?? itemDetail.isbn
+        authors = itemDetail.subInfo.authors
+        publisherTextField.text = itemDetail.publisher
+        publishedAtTextField.text = itemDetail.pubDate
+        totalPagesTextField.text = "\(itemDetail.subInfo.itemPage)"
+        overviewTextView.text = itemDetail.description ?? itemDetail.fullDescription
+        
+        guard let originalTitle = itemDetail.subInfo.originalTitle else {
+            originalTitleTextField.isHidden = true
+            return
+        }
+        
+        originalTitleTextField.text = originalTitle
+        
+    }
+    
+    private func arrangeArtistButtons(for authors: [Artist]) {
+        authors.forEach { artist in
+            let button = makeButton(for: artist)
+            button.addTarget(self, action: #selector(buttonSelected), for: .touchUpInside)
+            selectAuthorView.addArrangedSubview(button)
+        }
+    }
+    
+    private func makeButton(for artist: Artist) -> UIButton {
+        let button = UIButton()
+        button.contentHorizontalAlignment = .leading
+        
+        var config = UIButton.Configuration.tinted()
+        config.title = artist.authorName
+        config.subtitle = artist.authorTypeDesc
+        config.titleAlignment = .leading
+        
+        button.configuration = config
+        return button
+    }
+    
+    @objc private func buttonSelected(_ sender: UIButton) {
+        sender.isSelected.toggle()
     }
 }
 
