@@ -10,7 +10,7 @@ import Alamofire
 
 enum AladinRouter: URLRequestConvertible {
     case itemSearch(query: String, isEbook: Bool, page: Int)
-    case itemLookUp(isbn: String)
+    case itemLookUp(itemID: Int)
     
     private var baseURL: URL? {
         URL(string: "http://www.aladin.co.kr/ttb/api/")
@@ -28,7 +28,7 @@ enum AladinRouter: URLRequestConvertible {
             "ttbkey" : APIKey.aladinTTBKey,
             "output" : "js",
             "Version" : "20131101",
-            "Cover" : "Big"
+            "Cover" : "MidBig"
         ]
         
         switch self {
@@ -40,11 +40,11 @@ enum AladinRouter: URLRequestConvertible {
                 "Start" : "\(page)"
             ]
             return commonParameters.merging(additionalParameters) { current, _ in current }
-        case .itemLookUp(let isbn):
+        case .itemLookUp(let itemID):
             let additionalParameters = [
-                "ItemIdType" : "ISBN13",
-                "ItemId" : isbn,
-                "OptResult" : "packing,previewImgList,authors"
+                "ItemIdType" : "ItemId",
+                "ItemId" : "\(itemID)",
+                "OptResult" : "packing,previewImgList,authors,fulldescription"
             ]
             return commonParameters.merging(additionalParameters) { current, _ in current }
         }

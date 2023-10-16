@@ -70,13 +70,14 @@ final class SearchBookViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        bindComponentWithObservable()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        updateSnapshot()
+        
+        guard viewModel.searchResultItems.isEmpty else { return }
         DispatchQueue.main.async {
             self.searchController.searchBar.becomeFirstResponder()
         }
@@ -145,8 +146,8 @@ final class SearchBookViewController: BaseViewController {
         }
     }
     
-    private func bindComponentWithObservable() {
-        viewModel.searchResultItems.bind { [weak self] items in
+    override func bindComponentWithObservable() {
+        viewModel._searchResultItems.bind { [weak self] items in
             self?.updateSnapshot()
             self?.state = items.isEmpty ? .noSearchResult : .existSearchResult
         }
@@ -160,6 +161,13 @@ final class SearchBookViewController: BaseViewController {
             self?.searchResultsCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: false)
         }
         
+        viewModel.caution.bind { [weak self] caution in
+            guard caution.isPresent else { return }
+            self?.presentCautionAlert(title: caution.title, message: caution.message) {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
+        
         NetworkMonitor.shared.currentStatus.bind { [weak self] status in
             switch status {
             case .satisfied:
@@ -168,22 +176,13 @@ final class SearchBookViewController: BaseViewController {
             case .unsatisfied:
                 self?.state = .requiresConnection
                 self?.searchController.searchBar.searchTextField.isEnabled = false
-                self?.presentNetworkAlert()
+                self?.presentCautionAlert(title: "인터넷 연결 필요", message: "도서 검색은 인터넷 연결이 필요합니다. 오프라인 상태에서 책을 등록하려면 오른쪽 상단의 + 버튼을 눌러 책 정보를 직접 입력해주세요.")
             case .none, .requiresConnection:
                 break
             @unknown default:
                 break
             }
         }
-    }
-    
-    private func presentNetworkAlert() {
-        let alert = UIAlertController(title: "인터넷 연결 필요", message: "도서 검색은 인터넷 연결이 필요합니다. 오프라인 상태에서 책을 등록하려면 오른쪽 상단의 + 버튼을 눌러 책 정보를 직접 입력해주세요.", preferredStyle: .alert)
-        
-        let okay = UIAlertAction(title: "알겠어요!", style: .cancel)
-        alert.addAction(okay)
-        
-        present(alert, animated: true)
     }
 }
 
@@ -204,6 +203,7 @@ extension SearchBookViewController {
     private func configureCollectionView() {
         searchResultsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         searchResultsCollectionView.prefetchDataSource = self
+        searchResultsCollectionView.delegate = self
         searchResultsCollectionView.keyboardDismissMode = .onDrag
         searchResultsCollectionView.bounces = false
         searchResultsCollectionView.backgroundColor = .background
@@ -214,6 +214,7 @@ extension SearchBookViewController {
         let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                heightDimension: .absolute(cellHeight))
         let item = NSCollectionLayoutItem(layoutSize: layoutSize)
+        // TODO: 버전 대응: horizontal(layoutSize:subitem:count:) -> horizontal(layoutSize:repeatingSubitem:count:)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: layoutSize, subitem: item, count: 1)
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -233,7 +234,7 @@ extension SearchBookViewController {
     private func updateSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(viewModel.searchResultItems.value)
+        snapshot.appendItems(viewModel.searchResultItems)
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
@@ -242,7 +243,7 @@ extension SearchBookViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard var keyword = searchBar.text else { return }
         
-        keyword = arrangeKeword(keyword)
+        keyword = arrangeKeyword(keyword)
         searchBar.text = keyword
         
         searchBar.resignFirstResponder()
@@ -263,7 +264,7 @@ extension SearchBookViewController: UISearchBarDelegate {
         }
     }
     
-    private func arrangeKeword(_ keyword: String) -> String {
+    private func arrangeKeyword(_ keyword: String) -> String {
         let words = keyword.components(separatedBy: " ").filter { $0.isEmpty == false }
         return words.joined(separator: " ")
     }
@@ -275,5 +276,22 @@ extension SearchBookViewController: UICollectionViewDataSourcePrefetching {
         for indexPath in indexPaths where indexPath.item == viewModel.resultItemCount - 2 {
             viewModel.requestNextPage()
         }
+    }
+}
+
+extension SearchBookViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedItem = viewModel.selectedItemID(at: indexPath)
+        
+        let viewController: BaseViewController
+        
+        if selectedItem.isRegistered {
+            // TODO: 등록된 책을 보여주는 view로 추후 변경
+            viewController = AddBookDetailInfoViewController(itemID: selectedItem.itemID)
+        } else {
+            viewController = AddBookDetailInfoViewController(itemID: selectedItem.itemID)
+        }
+
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }

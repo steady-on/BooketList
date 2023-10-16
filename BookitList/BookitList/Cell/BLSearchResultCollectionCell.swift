@@ -21,7 +21,7 @@ final class BLSearchResultCollectionCell: BaseCollectionViewCell {
             titleLabel.text = item.title
             authorLabel.text = item.author
             overviewTextView.text = item.description
-            bookmarkImageView.isHidden = item.isRegister == false
+            bookmarkImageView.isHidden = item.isRegistered == false
         }
     }
     

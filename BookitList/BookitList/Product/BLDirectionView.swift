@@ -19,6 +19,7 @@ final class BLDirectionView: BaseView {
     private let directionLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.adjustsFontForContentSizeCategory = true
         label.textColor = .placeholderText
         label.textAlignment = .center
         label.numberOfLines = 0

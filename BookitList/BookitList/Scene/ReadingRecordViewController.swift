@@ -9,11 +9,8 @@ import UIKit
 
 final class ReadingRecordViewController: BaseViewController {
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     override func configureHiararchy() {

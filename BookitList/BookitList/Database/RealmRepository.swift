@@ -9,48 +9,82 @@ import Foundation
 import RealmSwift
 
 final class RealmRepository {
-    private let realm = try? Realm()
+    private let realm: Realm
     
-    func addItem<T: Object>(_ item: T) throws {
-        guard let realm else { throw RealmError.notInitialized }
+    init() throws {
+        do {
+            self.realm = try Realm()
+        } catch {
+            throw RealmError.notInitialized
+        }
+    }
+    
+    func addItem<T: Object>(_ item: T) -> Result<Void, RealmError> {
+        print(realm.configuration.fileURL)
         
         do {
             try realm.write { realm.add(item) }
+            return .success(())
         } catch {
-            throw RealmError.failToCreateItem
+            return .failure(.failToCreateItem)
         }
     }
     
-    func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) throws -> Results<T> {
-        guard let realm else { throw RealmError.notInitialized }
-        
-        let fetchData = realm.objects(T.self).sorted(byKeyPath: keypath, ascending: ascending)
-        return fetchData
+    func checkBooksInTable(for items: [Item]) -> [Item] {
+        let syncedItems = items.map { item in
+            var item = item
+            
+            guard checkBookInTable(for: item.itemID) else {
+                return item
+            }
+            
+            item.isRegistered = true
+            return item
+        }
+
+        return syncedItems
     }
     
-    func updateItem<T: Object>(_ updatedItem: T) throws {
-        guard let realm else { throw RealmError.notInitialized }
-        
+    func checkBookInTable(for itemId: Int) -> Bool {
+        let books = realm.objects(Book.self)
+        let filteredObjects = books.where {
+            $0.itemID == itemId
+        }
+        return filteredObjects.isEmpty ? false : true
+    }
+    
+    func checkAuthorInTable(for authorId: Int) -> Bool {
+        let authors = realm.objects(Author.self)
+        let filteredObjects = authors.where {
+            $0.authorID == authorId
+        }
+        return filteredObjects.isEmpty ? false : true
+    }
+    
+    func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Result<Results<T>, RealmError> {
+        let fetchData = realm.objects(T.self).sorted(byKeyPath: keypath, ascending: ascending)
+        return .success(fetchData)
+    }
+    
+    func updateItem<T: Object>(_ updatedItem: T) -> Result<Void, RealmError> {
         do {
             try realm.write { realm.add(updatedItem, update: .modified) }
+            return .success(())
         } catch {
-            throw RealmError.failToUpdateItem
+            return .failure(.failToUpdateItem)
         }
     }
     
-    func deleteItem<T: Object>(_ item: T) throws {
-        guard let realm else { throw RealmError.notInitialized }
-        
+    func deleteItem<T: Object>(_ item: T) -> Result<Void, RealmError> {
         do {
             try realm.write { realm.delete(item) }
+            return .success(())
         } catch {
-            throw RealmError.failToDelete
+            return .failure(.failToDelete)
         }
     }
     
-    func deleteBook(_ book: Book) throws {
-        guard let realm else { throw RealmError.notInitialized }
-        
+    func deleteBook(_ book: Book) -> Result<Void, RealmError> {
         do {
             try realm.write {
                 realm.delete(book.readingHistories)
@@ -59,8 +93,9 @@ final class RealmRepository {
                 realm.delete(book.checkoutHistories)
                 realm.delete(book)
             }
+            return .success(())
         } catch {
-            throw RealmError.failToDelete
+            return .failure(.failToDelete)
         }
     }
 }

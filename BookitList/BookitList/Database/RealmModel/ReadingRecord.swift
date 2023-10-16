@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 
 final class ReadingRecord: EmbeddedObject {
-    @Persisted(primaryKey: true) var _id = ObjectId()
+    @Persisted var id: ObjectId
     @Persisted var startedAt: Date?
     @Persisted var recordedAt: Date
     @Persisted var markedPage: Int
