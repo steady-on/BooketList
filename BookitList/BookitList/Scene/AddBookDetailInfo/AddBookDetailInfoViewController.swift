@@ -57,9 +57,11 @@ class AddBookDetailInfoViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "photo")
         imageView.tintColor = .secondaryAccent
-        imageView.layer.shadowOffset = .init(width: 3, height: 3)
         imageView.layer.shadowColor = UIColor.systemGray.cgColor
+        imageView.layer.shadowOffset = .init(width: 3, height: 3)
         imageView.layer.shadowOpacity = 0.7
+        // TODO: 디버깅 필요
+//        imageView.layer.shadowPath = UIBezierPath(ovalIn: renderRect).cgPath
         return imageView
     }()
     
