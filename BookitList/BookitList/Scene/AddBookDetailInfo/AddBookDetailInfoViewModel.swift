@@ -54,7 +54,7 @@ final class AddBookDetailInfoViewModel: Cautionable {
         
         let unRegisteredArtists = artists.filter { realmRepository.checkAuthorInTable(for: $0.authorId) == false }
         
-        let book = Book(from: item, artists: artists)
+        let book = Book(from: item, artists: unRegisteredArtists)
         
         if let thumbnail {
             let isSavedThumbnail = saveBookCoverFile(for: book._id.stringValue, image: thumbnail, type: .thumbnail)
