@@ -321,6 +321,12 @@ extension AddBookDetailInfoViewController {
     }
     
     @objc private func saveBarButtonTapped() {
+        guard let titleValue = titleTextField.text, titleValue.isEmpty == false else {
+            viewModel.caution.value = Caution(isPresent: true, title: "책 제목을 입력해주세요.", message: "책 제목은 반드시 입력되어야 합니다. 제목을 입력해주세요.", willDismiss: false)
+            titleTextField.becomeFirstResponder()
+            return
+        }
+        
         viewModel.saveBookInfo(thumbnail: backdropImageView.image, full: coverImageView.image)
         navigationController?.popViewController(animated: true)
     }
