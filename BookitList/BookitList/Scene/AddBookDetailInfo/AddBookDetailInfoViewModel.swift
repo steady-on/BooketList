@@ -57,24 +57,20 @@ final class AddBookDetailInfoViewModel: Cautionable {
         let book = Book(from: item, artists: unRegisteredArtists)
         
         if let thumbnail {
-            let isSavedThumbnail = saveBookCoverFile(for: book._id.stringValue, image: thumbnail, type: .thumbnail)
-            
-            switch isSavedThumbnail {
-            case .success(_):
+            do {
+                try imageManager.saveImage(thumbnail, to: .cover(bookID: book._id.stringValue, type: .thumbnail))
                 book.existCover?.thumbnail = true
-            case .failure(let failure):
-                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 실패", message: String(describing: failure), willDismiss: false)
+            } catch {
+                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 실패", message: String(describing: error), willDismiss: false)
             }
         }
         
         if let full {
-            let isSavedFull = saveBookCoverFile(for: book._id.stringValue, image: full, type: .full)
-            
-            switch isSavedFull {
-            case .success(_):
+            do {
+                try imageManager.saveImage(full, to: .cover(bookID: book._id.stringValue, type: .full))
                 book.existCover?.full = true
-            case .failure(let failure):
-                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 실패", message: String(describing: failure), willDismiss: false)
+            } catch {
+                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 실패", message: String(describing: error), willDismiss: false)
             }
         }
         
@@ -84,15 +80,6 @@ final class AddBookDetailInfoViewModel: Cautionable {
             print("저장성공!")
         case .failure(let failure):
             self.caution.value = Caution(isPresent: true, title: "DB 저장 오류", message: "데이터를 저장하는 도중 에러가 발생했습니다. error: " + String(describing: failure), willDismiss: false)
-        }
-    }
-    
-    private func saveBookCoverFile(for id: String, image: UIImage, type: CoverType) -> Result<Void, Error> {
-        do {
-            try imageManager.saveImage(image, to: .cover(bookID: id, type: type))
-            return .success(())
-        } catch {
-            return .failure(error)
         }
     }
     
