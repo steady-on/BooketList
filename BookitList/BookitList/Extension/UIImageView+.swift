@@ -15,4 +15,12 @@ extension UIImageView {
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(blurEffectView)
     }
+    
+    func darkfilterEffect() {
+        let darkFilterView = UIView()
+        darkFilterView.backgroundColor = .reverseBackground.withAlphaComponent(0.4)
+        darkFilterView.frame = bounds
+        darkFilterView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        addSubview(darkFilterView)
+    }
 }
