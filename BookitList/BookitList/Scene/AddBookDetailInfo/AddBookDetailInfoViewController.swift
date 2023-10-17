@@ -55,12 +55,11 @@ class AddBookDetailInfoViewController: BaseViewController {
         let imageView = UIImageView()
         imageView.kf.indicatorType = .activity
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "photo")
         imageView.tintColor = .secondaryAccent
         imageView.layer.shadowColor = UIColor.systemGray.cgColor
         imageView.layer.shadowOffset = .init(width: 3, height: 3)
         imageView.layer.shadowOpacity = 0.7
-        // TODO: 디버깅 필요
+        // FIXME: shadowPath 설정
 //        imageView.layer.shadowPath = UIBezierPath(ovalIn: renderRect).cgPath
         return imageView
     }()
@@ -246,9 +245,10 @@ class AddBookDetailInfoViewController: BaseViewController {
         
         let thumbnailURL = URL(string: thumbnailURLString)
         let fullURL = URL(string: fullURLString)
+        let placeholderImage = UIImage(systemName: "photo")
         
-        backdropImageView.kf.setImage(with: thumbnailURL)
-        coverImageView.kf.setImage(with: fullURL)
+        backdropImageView.kf.setImage(with: thumbnailURL, placeholder: placeholderImage)
+        coverImageView.kf.setImage(with: fullURL, placeholder: placeholderImage)
         titleTextField.text = itemDetail.title
         isbnTextField.text = itemDetail.isbn13 ?? itemDetail.isbn
         publisherTextField.text = itemDetail.publisher
