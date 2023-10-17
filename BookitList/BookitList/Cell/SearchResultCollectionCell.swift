@@ -1,5 +1,5 @@
 //
-//  BLSearchResultCollectionCell.swift
+//  SearchResultCollectionCell.swift
 //  BookitList
 //
 //  Created by Roen White on 2023/10/01.
@@ -8,15 +8,15 @@
 import UIKit
 import Kingfisher
 
-final class BLSearchResultCollectionCell: BaseCollectionViewCell {
+final class SearchResultCollectionCell: BaseCollectionViewCell {
     
     var item: Item? {
         didSet {
             guard let item else { return }
             
             let url = URL(string: item.cover)
-            coverImageView.kf.indicatorType = .activity
-            coverImageView.kf.setImage(with: url)
+            let placeholderImage = UIImage(systemName: "photo")
+            coverImageView.kf.setImage(with: url, placeholder: placeholderImage)
             
             titleLabel.text = item.title
             authorLabel.text = item.author
@@ -35,6 +35,7 @@ final class BLSearchResultCollectionCell: BaseCollectionViewCell {
     
     private let coverImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.kf.indicatorType = .activity
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView

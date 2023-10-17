@@ -222,7 +222,7 @@ extension SearchBookViewController {
     }
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<BLSearchResultCollectionCell, Item> { cell, indexPath, itemIdentifier in
+        let cellRegistration = UICollectionView.CellRegistration<SearchResultCollectionCell, Item> { cell, indexPath, itemIdentifier in
             cell.item = itemIdentifier
         }
         
