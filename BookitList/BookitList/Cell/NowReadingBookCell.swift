@@ -13,16 +13,18 @@ class NowReadingBookCell: BaseCollectionViewCell {
         didSet {
             let path = ImageFilePath.cover(bookID: book._id.stringValue, type: .full)
             let url = ImageFileManager().makeFullFilePath(from: path)
-            coverImageButton.kf.setBackgroundImage(with: url, for: .normal)
+            let provider = LocalFileImageDataProvider(fileURL: url)
+            coverImageView.kf.setImage(with: provider)
             titleLabel.text = book.title
         }
     }
     
-    private let coverImageButton = UIButton()
+    private let coverImageView = UIImageView()
     
     private let accessoryView: UIView = {
         let view = UIView()
         view.backgroundColor = .black.withAlphaComponent(0.4)
+        view.isHidden = true
         return view
     }()
     
@@ -52,6 +54,7 @@ class NowReadingBookCell: BaseCollectionViewCell {
     private let bottomAccessoryView = {
         let view = UIView()
         view.backgroundColor = .secondaryBackground
+        view.isHidden = true
         return view
     }()
     
@@ -77,7 +80,7 @@ class NowReadingBookCell: BaseCollectionViewCell {
     }()
     
     override func configureHiararchy() {
-        let components = [coverImageButton, accessoryView, bottomAccessoryView]
+        let components = [coverImageView, accessoryView, bottomAccessoryView]
         components.forEach { component in
             contentView.addSubview(component)
         }
@@ -90,22 +93,19 @@ class NowReadingBookCell: BaseCollectionViewCell {
         detailInfoButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         
-        accessoryView.isHidden = true
-        
         let bottomAccessoryComponents = [readingProgressView, addReadingRecordButton, addNoteButton]
         bottomAccessoryComponents.forEach { component in
             bottomAccessoryView.addSubview(component)
         }
-        
-        coverImageButton.addTarget(self, action: #selector(coverImageButtonTapped), for: .touchUpInside)
     }
     
-    @objc private func coverImageButtonTapped() {
+    func toggleIsHiddenAccessaryView() {
         accessoryView.isHidden.toggle()
+        bottomAccessoryView.isHidden.toggle()
     }
     
     override func setConstraints() {
-        coverImageButton.snp.makeConstraints { make in
+        coverImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
         
@@ -133,7 +133,6 @@ class NowReadingBookCell: BaseCollectionViewCell {
         
         bottomAccessoryView.snp.makeConstraints { make in
             make.bottom.horizontalEdges.equalToSuperview()
-            make.height.equalToSuperview().dividedBy(8)
         }
         
         readingProgressView.snp.makeConstraints { make in
@@ -144,7 +143,7 @@ class NowReadingBookCell: BaseCollectionViewCell {
             make.leading.bottom.equalTo(bottomAccessoryView.layoutMarginsGuide)
             make.top.equalTo(readingProgressView.snp.bottom).offset(8)
             make.width.equalToSuperview().dividedBy(8)
-            make.height.equalTo(detailInfoButton.snp.width)
+            make.height.equalTo(detailInfoButton.snp.width).multipliedBy(1.2)
         }
         
         addNoteButton.snp.makeConstraints { make in
