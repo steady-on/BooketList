@@ -79,7 +79,14 @@ class NowReadingBookCell: BaseCollectionViewCell {
         return button
     }()
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+    }
+    
     override func configureHiararchy() {
+        configureShadow()
+    
         let components = [coverImageView, accessoryView, bottomAccessoryView]
         components.forEach { component in
             contentView.addSubview(component)
@@ -140,17 +147,24 @@ class NowReadingBookCell: BaseCollectionViewCell {
         }
         
         addReadingRecordButton.snp.makeConstraints { make in
-            make.leading.bottom.equalTo(bottomAccessoryView.layoutMarginsGuide)
             make.top.equalTo(readingProgressView.snp.bottom).offset(8)
+            make.leading.bottom.equalTo(bottomAccessoryView.layoutMarginsGuide)
             make.width.equalToSuperview().dividedBy(8)
             make.height.equalTo(detailInfoButton.snp.width).multipliedBy(1.2)
         }
         
         addNoteButton.snp.makeConstraints { make in
-            make.trailing.bottom.equalTo(bottomAccessoryView.layoutMarginsGuide)
-            make.top.equalTo(readingProgressView.snp.bottom).offset(8)
+            make.centerY.equalTo(addReadingRecordButton)
+            make.trailing.equalTo(bottomAccessoryView.layoutMarginsGuide).offset(-4)
             make.width.equalToSuperview().dividedBy(8)
             make.height.equalTo(detailInfoButton.snp.width)
         }
+    }
+    
+    private func configureShadow() {
+        layer.shadowOffset = CGSize(width: 3, height: 3)
+        layer.shadowOpacity = 0.7
+        layer.shadowColor = UIColor.black.cgColor
+        layer.masksToBounds = false
     }
 }
