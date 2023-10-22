@@ -61,9 +61,9 @@ final class RealmRepository {
         return filteredObjects.first
     }
     
-    func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Result<Results<T>, RealmError> {
+    func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Results<T> {
         let fetchData = realm.objects(T.self).sorted(byKeyPath: keypath, ascending: ascending)
-        return .success(fetchData)
+        return fetchData
     }
     
     func updateItem<T: Object>(_ updatedItem: T) -> Result<Void, RealmError> {
