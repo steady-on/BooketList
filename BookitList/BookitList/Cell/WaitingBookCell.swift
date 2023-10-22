@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WaitingBookCell: BaseCollectionViewCell {
+final class WaitingBookCell: BaseCollectionViewCell {
     var book: Book! {
         didSet {
             titleLabel.text = book.title

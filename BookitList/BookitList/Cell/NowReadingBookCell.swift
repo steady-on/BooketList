@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class NowReadingBookCell: BaseCollectionViewCell {
+final class NowReadingBookCell: BaseCollectionViewCell {
     var book: Book! {
         didSet {
             let path = ImageFilePath.cover(bookID: book._id.stringValue, type: .full)
