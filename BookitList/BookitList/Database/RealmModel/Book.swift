@@ -85,14 +85,14 @@ final class ExistCover: EmbeddedObject {
 }
 
 final class Size: EmbeddedObject {
-    @Persisted var width: Int?
-    @Persisted var height: Int?
-    @Persisted var depth: Int?
+    @Persisted var width: Double = 0
+    @Persisted var height: Double = 0
+    @Persisted var depth: Double = 0
     
     convenience init(width: Int?, height: Int?, depth: Int?) {
         self.init()
-        self.width = width
-        self.height = height
-        self.depth = depth
+        self.width = Double(width ?? 0)
+        self.height = Double(height ?? 0)
+        self.depth = Double(depth ?? 0)
     }
 }

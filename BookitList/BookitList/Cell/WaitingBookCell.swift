@@ -8,9 +8,22 @@
 import UIKit
 
 class WaitingBookCell: BaseCollectionViewCell {
-    var bookTitle: String! {
-        didSet { titleLabel.text = bookTitle }
+    var book: Book! {
+        didSet {
+            titleLabel.text = book.title
+            setConstraints(for: book.size)
+        }
     }
+    
+    private let backdropView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.layer.borderColor = UIColor.reverseBackground.cgColor
+        view.layer.borderWidth = 1
+        view.layer.cornerRadius = 7
+        view.directionalLayoutMargins = .init(top: 8, leading: 4, bottom: 4, trailing: 4)
+        return view
+    }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -21,30 +34,41 @@ class WaitingBookCell: BaseCollectionViewCell {
     }()
     
     override func configureHiararchy() {
-        directionalLayoutMargins = .init(top: 8, leading: 4, bottom: 4, trailing: 4)
-        backgroundColor = .systemBackground
-        configureBorder()
         
-        addSubview(titleLabel)
+        addSubview(backdropView)
+        backdropView.addSubview(titleLabel)
     }
     
-    override func setConstraints() {
-        titleLabel.snp.makeConstraints { make in
-            make.center.equalTo(layoutMarginsGuide)
-            make.height.equalTo(layoutMarginsGuide.snp.width)
-            make.width.equalTo(layoutMarginsGuide.snp.height)
+    private func setConstraints(for size: Size?) {
+        
+        let minimumWidth = titleLabel.font.lineHeight + backdropView.layoutMargins.left + backdropView.layoutMargins.right
+        let maximumHeight = bounds.height
+        let standardHeight = maximumHeight * 0.9
+        
+        let width = size?.depth ?? minimumWidth
+        let height = size?.height ?? standardHeight
+        let heightRatio = standardHeight / height
+        
+        let cellWidth = width < minimumWidth ? minimumWidth : width
+        let cellHeight = maximumHeight * heightRatio
+        
+        backdropView.snp.makeConstraints { make in
+            make.width.equalTo(cellWidth)
+            make.height.equalTo(cellHeight)
+            make.top.greaterThanOrEqualToSuperview()
+            make.horizontalEdges.bottom.equalToSuperview()
         }
-    }
-    
-    private func configureBorder() {
-        layer.borderColor = UIColor.reverseBackground.cgColor
-        layer.borderWidth = 1
-        layer.cornerRadius = 7
+        
+        titleLabel.snp.makeConstraints { make in
+            make.center.equalTo(backdropView.layoutMarginsGuide)
+            make.height.equalTo(backdropView.layoutMarginsGuide.snp.width)
+            make.width.equalTo(backdropView.layoutMarginsGuide.snp.height)
+        }
     }
     
     // TODO: 버전 대응
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        layer.borderColor = UIColor.reverseBackground.cgColor
+        backdropView.layer.borderColor = UIColor.reverseBackground.cgColor
     }
 }
