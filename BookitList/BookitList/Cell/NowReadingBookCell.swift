@@ -163,8 +163,8 @@ class NowReadingBookCell: BaseCollectionViewCell {
     
     private func configureShadow() {
         layer.shadowOffset = CGSize(width: 3, height: 3)
-        layer.shadowOpacity = 0.7
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.5
+        layer.shadowColor = UIColor.systemGray.cgColor
         layer.masksToBounds = false
     }
 }
