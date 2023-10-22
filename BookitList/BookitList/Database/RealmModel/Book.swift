@@ -33,7 +33,7 @@ final class Book: Object {
     @Persisted var series: List<Series>
     @Persisted var tags: List<Tag>
     
-    convenience init(from item: ItemDetail, artists: [Artist]) {
+    convenience init(from item: ItemDetail, artists: [Author]) {
         self.init()
         
         self.itemID = item.itemID
@@ -56,13 +56,10 @@ final class Book: Object {
         self.statusOfReading = .notYet
         self.registeredAt = Date.now
         
-        let authors = List<Author>()
-        artists.forEach { artist in
-            guard artist.willRegister else { return }
-            let author = Author(authorID: artist.authorId, name: artist.authorName)
-            authors.append(author)
+        self.authors = List<Author>()
+        artists.forEach { author in
+            self.authors.append(author)
         }
-        self.authors = authors
         
         self.readingHistories = List<ReadingHistory>()
         self.notes = List<Note>()

@@ -46,15 +46,21 @@ final class AddBookDetailInfoViewModel: Cautionable {
         }
         
         guard let item = selectedBook.value else { return }
-                
-        guard artists.filter({ $0.willRegister }).isEmpty == false else {
+            
+        let selectedArtist = artists.filter { $0.willRegister }
+        guard selectedArtist.isEmpty == false else {
             caution.value = Caution(isPresent: true, title: "작가 선택", message: "등록할 작가를 반드시 한 명 이상 선택해 주세요.", willDismiss: false)
             return
+        } 
+        
+        let authors = selectedArtist.map { artist in
+            guard let registeredAuthor = realmRepository.searchAuthorInTable(for: artist.authorId) else {
+                return Author(authorID: artist.authorId, name: artist.authorName)
+            }
+            return registeredAuthor
         }
         
-        let unRegisteredArtists = artists.filter { realmRepository.checkAuthorInTable(for: $0.authorId) == false }
-        
-        let book = Book(from: item, artists: unRegisteredArtists)
+        let book = Book(from: item, artists: authors)
         
         if let thumbnail {
             do {

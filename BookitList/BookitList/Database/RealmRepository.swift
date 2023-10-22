@@ -53,12 +53,12 @@ final class RealmRepository {
         return filteredObjects.isEmpty ? false : true
     }
     
-    func checkAuthorInTable(for authorId: Int) -> Bool {
+    func searchAuthorInTable(for authorId: Int) -> Author? {
         let authors = realm.objects(Author.self)
         let filteredObjects = authors.where {
             $0.authorID == authorId
         }
-        return filteredObjects.isEmpty ? false : true
+        return filteredObjects.first
     }
     
     func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Result<Results<T>, RealmError> {
