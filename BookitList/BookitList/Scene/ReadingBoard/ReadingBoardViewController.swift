@@ -10,6 +10,8 @@ import RealmSwift
 
 final class ReadingBoardViewController: BaseViewController {
     
+    private let viewModel = ReadingBoardViewModel()
+    
     private let nowReadingBookTitleButton = BLTitleSupplementaryButton(title: "지금, 읽고 있는 책")
     private var nowReadingBookCollectionView: UICollectionView! = nil
     private var nowReadingBookdataSource: UICollectionViewDiffableDataSource<Int, Book>! = nil
@@ -21,6 +23,12 @@ final class ReadingBoardViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.fetchBooks()
     }
     
     override func configureHiararchy() {
@@ -71,6 +79,28 @@ final class ReadingBoardViewController: BaseViewController {
         let searchBookView = SearchBookViewController()
         searchBookView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(searchBookView, animated: true)
+    }
+    
+    override func bindComponentWithObservable() {
+        viewModel.nowReadingBooks.bind { [weak self] books in
+            self?.updateNowReadingBooksSnapshot(for: books)
+        }
+        
+        viewModel.waitingBooks.bind { [weak self] books in
+            self?.updateWaitingBooksSnapshot(for: books)
+        }
+        
+        viewModel.caution.bind { [weak self] caution in
+            guard caution.isPresent else { return }
+            
+            let popViewAction = { () -> Void in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            
+            let handler: () -> Void = caution.willDismiss ? popViewAction : {}
+            
+            self?.presentCautionAlert(title: caution.title, message: caution.message, handler: handler)
+        }
     }
 }
 
