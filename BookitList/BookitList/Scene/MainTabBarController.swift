@@ -9,7 +9,7 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
-    private let readingRecordViewController = ReadingRecordViewController()
+    private let readingRecordViewController = ReadingBoardViewController()
     private let bookShelfViewController = BookShelfViewController()
     private let noteViewController = NoteViewController()
     private let settingsViewController = SettingsViewController()

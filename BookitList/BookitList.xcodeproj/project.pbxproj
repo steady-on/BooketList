@@ -12,7 +12,7 @@
 		631821EC2AD8016B0034573B /* Caution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821EB2AD8016B0034573B /* Caution.swift */; };
 		631821EE2AD983B90034573B /* Cautionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821ED2AD983B90034573B /* Cautionable.swift */; };
 		637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */; };
-		637B5C4D2AC4E71D00730C01 /* ReadingRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */; };
+		637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */; };
 		637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */; };
 		637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C502AC4E79900730C01 /* NoteViewController.swift */; };
 		637B5C532AC4E7AB00730C01 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */; };
@@ -32,6 +32,7 @@
 		637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */; };
 		637B5CD52ACD807A00730C01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5CD42ACD807A00730C01 /* SnapKit */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
+		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
 		63A673422AC33AFD004F43F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63A673412AC33AFD004F43F4 /* RealmSwift */; };
 		63A673462AC33BCD004F43F4 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A673452AC33BCD004F43F4 /* Book.swift */; };
@@ -77,7 +78,7 @@
 		631821EB2AD8016B0034573B /* Caution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caution.swift; sourceTree = "<group>"; };
 		631821ED2AD983B90034573B /* Cautionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cautionable.swift; sourceTree = "<group>"; };
 		637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
-		637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordViewController.swift; sourceTree = "<group>"; };
+		637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewController.swift; sourceTree = "<group>"; };
 		637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
 		637B5C502AC4E79900730C01 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
 		637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		637B5C902ACC202200730C01 /* BLIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLIndicatorView.swift; sourceTree = "<group>"; };
 		637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
+		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		63A673482AC3447B004F43F4 /* StatusOfReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusOfReading.swift; sourceTree = "<group>"; };
 		63A6734A2AC3451C004F43F4 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
@@ -172,7 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */,
-				637B5C4C2AC4E71D00730C01 /* ReadingRecordViewController.swift */,
+				639F358A2AE5B1F500226402 /* ReadingBoard */,
 				637B5C542AC6DB3800730C01 /* SeachBook */,
 				63B5B3562ACE801F00477536 /* AddBookDetailInfo */,
 				637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */,
@@ -221,6 +223,15 @@
 				637B5C8C2ACB06D300730C01 /* AladinConstant.swift */,
 			);
 			path = NameSpace;
+			sourceTree = "<group>";
+		};
+		639F358A2AE5B1F500226402 /* ReadingBoard */ = {
+			isa = PBXGroup;
+			children = (
+				637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */,
+				639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */,
+			);
+			path = ReadingBoard;
 			sourceTree = "<group>";
 		};
 		63A673322AC307DF004F43F4 /* AladinAPI */ = {
@@ -455,8 +466,9 @@
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63A673462AC33BCD004F43F4 /* Book.swift in Sources */,
 				637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */,
-				637B5C4D2AC4E71D00730C01 /* ReadingRecordViewController.swift in Sources */,
+				637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
+				639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */,
 				63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */,
 				63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */,
 				63A6734B2AC3451C004F43F4 /* Author.swift in Sources */,
