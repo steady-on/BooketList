@@ -19,7 +19,12 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         }
     }
     
-    private let coverImageView = UIImageView()
+    private let coverImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
+    }()
     
     private let accessoryView: UIView = {
         let view = UIView()
