@@ -10,10 +10,15 @@ import RealmSwift
 
 final class ReadingBoardViewModel: Cautionable {
     
+    private var books: [Book] = []
     let nowReadingBooks: Observable<[Book]> = Observable([])
     let waitingBooks: Observable<[Book]> = Observable([])
     
-    var caution = Observable(Caution(isPresent: false, willDismiss: false))
+    var isEmptyBooks: Bool { books.isEmpty }
+    var isEmptyNowReadingBooks: Bool { nowReadingBooks.value.isEmpty }
+    var isEmptyWaitingBooks: Bool { waitingBooks.value.isEmpty }
+    
+    let caution = Observable(Caution(isPresent: false, willDismiss: false))
     
     private lazy var realmRepository = try? RealmRepository()
     
@@ -23,8 +28,9 @@ final class ReadingBoardViewModel: Cautionable {
             return
         }
         
-        let books: Results<Book> = realmRepository.fetchTable(sortedBy: "registeredAt")
-        nowReadingBooks.value = books.filter { $0.statusOfReading == .reading }
-        waitingBooks.value = books.filter { $0.statusOfReading == .notYet }
+        let fetchedBooks: Results<Book> = realmRepository.fetchTable(sortedBy: "registeredAt")
+        self.books = Array(fetchedBooks)
+        self.nowReadingBooks.value = fetchedBooks.filter { $0.statusOfReading == .reading }
+        self.waitingBooks.value = fetchedBooks.filter { $0.statusOfReading == .notYet }
     }
 }

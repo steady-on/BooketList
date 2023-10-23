@@ -39,6 +39,7 @@ final class BLDirectionView: BaseView {
         self.directionLabel.text = direction
         
         super.init()
+        backgroundColor = .background
     }
     
     override func configureHiararchy() {

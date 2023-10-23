@@ -16,10 +16,13 @@ final class ReadingBoardViewController: BaseViewController {
     private var nowReadingBookCollectionView: UICollectionView! = nil
     private var nowReadingBookdataSource: UICollectionViewDiffableDataSource<Int, Book>! = nil
     
-    private let waitingBookTitleButton = BLTitleSupplementaryButton(title: "읽으려고 꽂아둔 책")
+    private let waitingBookTitleButton = BLTitleSupplementaryButton(title: "나의 북킷리스트")
     private var waitingBookCollectionView: UICollectionView! = nil
     private var waitingBookDataSource: UICollectionViewDiffableDataSource<Int, Book>! = nil
     
+    private let placeholderView = BLDirectionView(symbolName: "book", direction: "아직 등록된 책이 없습니다.\n오른쪽 위의 돋보기 버튼을 눌러 책을 검색하고 추가해 보세요.")
+    private let emptyNowReadingBookView = BLDirectionView(symbolName: "book", direction: "지금 읽고 있는 책이 없습니다.\n아래의 책꽂이에서 읽을 책을 골라보세요.")
+    private let emptyWaitingBookView = BLDirectionView(symbolName: "books.vertical", direction: "책꽂이에 읽으려고 꽂아둔 책이 없습니다.\n오른쪽 위의 돋보기 버튼을 눌러 책을 검색하고 추가해 보세요.")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,7 @@ final class ReadingBoardViewController: BaseViewController {
         super.viewDidAppear(animated)
         
         viewModel.fetchBooks()
+        placeholderView.isHidden = viewModel.isEmptyBooks == false
     }
     
     override func configureHiararchy() {
@@ -37,7 +41,7 @@ final class ReadingBoardViewController: BaseViewController {
         configureNavigationBar()
         configureCollectionView()
         
-        let components = [nowReadingBookTitleButton, nowReadingBookCollectionView, waitingBookTitleButton, waitingBookCollectionView]
+        let components = [nowReadingBookTitleButton, nowReadingBookCollectionView, waitingBookTitleButton, waitingBookCollectionView, emptyNowReadingBookView, emptyWaitingBookView, placeholderView]
         components.forEach { component in
             guard let component else { return }
             view.addSubview(component)
@@ -63,11 +67,22 @@ final class ReadingBoardViewController: BaseViewController {
             make.leading.equalTo(view.safeAreaLayoutGuide)
         }
         
-        
         waitingBookCollectionView.snp.makeConstraints { make in
             make.top.equalTo(waitingBookTitleButton.snp.bottom)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        emptyNowReadingBookView.snp.makeConstraints { make in
+            make.edges.equalTo(nowReadingBookCollectionView)
+        }
+        
+        emptyWaitingBookView.snp.makeConstraints { make in
+            make.edges.equalTo(waitingBookCollectionView)
+        }
+        
+        placeholderView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
     
@@ -83,11 +98,17 @@ final class ReadingBoardViewController: BaseViewController {
     
     override func bindComponentWithObservable() {
         viewModel.nowReadingBooks.bind { [weak self] books in
+            guard let viewModel = self?.viewModel else { return }
             self?.updateNowReadingBooksSnapshot(for: books)
+            self?.emptyNowReadingBookView.isHidden = viewModel.isEmptyNowReadingBooks == false
+            self?.nowReadingBookTitleButton.isEnabled = viewModel.isEmptyNowReadingBooks == false
         }
         
         viewModel.waitingBooks.bind { [weak self] books in
+            guard let viewModel = self?.viewModel else { return }
             self?.updateWaitingBooksSnapshot(for: books)
+            self?.emptyWaitingBookView.isHidden = viewModel.isEmptyWaitingBooks == false
+            self?.waitingBookTitleButton.isEnabled = viewModel.isEmptyWaitingBooks == false
         }
         
         viewModel.caution.bind { [weak self] caution in
