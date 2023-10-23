@@ -25,7 +25,7 @@ class BLTitleSupplementaryButton: UIButton {
         contentHorizontalAlignment = .leading
         
         var titleContainer = AttributeContainer()
-        titleContainer.font = .preferredFont(forTextStyle: .title2)
+        titleContainer.font = .preferredFont(forTextStyle: .title3)
         titleContainer.foregroundColor = .label
         
         var config = UIButton.Configuration.plain()
