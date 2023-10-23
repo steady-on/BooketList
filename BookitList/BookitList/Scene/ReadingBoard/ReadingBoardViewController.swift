@@ -22,7 +22,7 @@ final class ReadingBoardViewController: BaseViewController {
     
     private let placeholderView = BLDirectionView(symbolName: "book", direction: "아직 등록된 책이 없습니다.\n오른쪽 위의 돋보기 버튼을 눌러 책을 검색하고 추가해 보세요.")
     private let emptyNowReadingBookView = BLDirectionView(symbolName: "book", direction: "지금 읽고 있는 책이 없습니다.\n아래의 책꽂이에서 읽을 책을 골라보세요.")
-    private let emptyWaitingBookView = BLDirectionView(symbolName: "books.vertical", direction: "책꽂이에 읽으려고 꽂아둔 책이 없습니다.\n오른쪽 위의 돋보기 버튼을 눌러 책을 검색하고 추가해 보세요.")
+    private let emptyWaitingBookView = BLDirectionView(symbolName: "books.vertical", direction: "아직 읽지 않은 상태의 책이 없습니다.")
     
     override func viewDidLoad() {
         super.viewDidLoad()
