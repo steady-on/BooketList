@@ -93,6 +93,7 @@ class AllRecordsForBookViewController: BaseViewController {
         config.image = UIImage(systemName: "chevron.down")
         config.imagePlacement = .trailing
         config.imagePadding = 4
+        config.contentInsets = .init(top: 7, leading: 0, bottom: 7, trailing: 12)
         button.configuration = config
         return button
     }()
@@ -188,8 +189,7 @@ class AllRecordsForBookViewController: BaseViewController {
         
         overviewTextView.snp.makeConstraints { make in
             make.top.equalTo(overviewButton.snp.bottom)
-            make.leading.equalTo(allRecordsView.layoutMarginsGuide).offset(8)
-            make.trailing.equalTo(allRecordsView.layoutMarginsGuide)
+            make.horizontalEdges.equalTo(allRecordsView.layoutMarginsGuide)
         }
     }
     
