@@ -69,6 +69,7 @@
 		63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D42AC189160060073D /* AladinLookUpResponse.swift */; };
 		63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */; };
 		63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */; };
+		63DA06142AE90B9D007FF18E /* BLStatusOfReadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +132,7 @@
 		63BB13D42AC189160060073D /* AladinLookUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinLookUpResponse.swift; sourceTree = "<group>"; };
 		63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinAPIManager.swift; sourceTree = "<group>"; };
 		63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowReadingBookCell.swift; sourceTree = "<group>"; };
+		63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLStatusOfReadingLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 				63B5B3682AD1CA2100477536 /* BLTextField.swift */,
 				63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */,
 				639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */,
+				63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -442,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */,
+				63DA06142AE90B9D007FF18E /* BLStatusOfReadingLabel.swift in Sources */,
 				637B5C632AC877B200730C01 /* BLDirectionView.swift in Sources */,
 				637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */,
 				63B5B36E2AD47CD500477536 /* ButtonMakable.swift in Sources */,
