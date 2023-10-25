@@ -139,7 +139,6 @@ extension ReadingBoardViewController {
     }
     
     private func createReadingBooksLayout() -> UICollectionViewLayout {
-        let config = UICollectionViewCompositionalLayoutConfiguration()
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -153,7 +152,7 @@ extension ReadingBoardViewController {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPagingCentered
         
-        let layout = UICollectionViewCompositionalLayout(section: section, configuration: config)
+        let layout = UICollectionViewCompositionalLayout(section: section)
         
         return layout
     }
