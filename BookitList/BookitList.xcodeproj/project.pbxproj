@@ -71,6 +71,8 @@
 		63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */; };
 		63DA060E2AE78AC0007FF18E /* AllRecordsForBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */; };
 		63DA06142AE90B9D007FF18E /* BLStatusOfReadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */; };
+		63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */; };
+		63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -135,6 +137,8 @@
 		63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowReadingBookCell.swift; sourceTree = "<group>"; };
 		63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordsForBookViewController.swift; sourceTree = "<group>"; };
 		63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLStatusOfReadingLabel.swift; sourceTree = "<group>"; };
+		63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordCell.swift; sourceTree = "<group>"; };
+		63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +213,7 @@
 				63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */,
 				639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */,
 				63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */,
+				63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -219,6 +224,7 @@
 				637B5C702AC980F700730C01 /* SearchResultCollectionCell.swift */,
 				63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */,
 				63023E6E2AE1CF18000B26A9 /* WaitingBookCell.swift */,
+				63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -476,6 +482,7 @@
 				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
 				63B5B3762AD52A2800477536 /* AddBookDetailInfoViewModel.swift in Sources */,
 				637B5C712AC980F700730C01 /* SearchResultCollectionCell.swift in Sources */,
+				63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */,
 				63B5B35B2ACE88DE00477536 /* UIImageView+.swift in Sources */,
 				637B5C732AC987DB00730C01 /* BLBookmarkImageView.swift in Sources */,
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
@@ -501,6 +508,7 @@
 				63B5B3692AD1CA2100477536 /* BLTextField.swift in Sources */,
 				637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */,
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
+				63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */,
 				639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */,
 				637B5C6F2AC97D2300730C01 /* BaseCollectionViewCell.swift in Sources */,
 				63A673552AC3F555004F43F4 /* PurchaseHistory.swift in Sources */,
