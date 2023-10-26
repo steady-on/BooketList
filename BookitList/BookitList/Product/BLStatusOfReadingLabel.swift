@@ -43,7 +43,7 @@ final class BLStatusOfReadingLabel: UIButton {
     
     private func configure() {        
         var config = UIButton.Configuration.filled()
-        config.title = statusOfReading.label
+        config.title = statusOfReading.title
         config.cornerStyle = .capsule
         config.buttonSize = .mini
         config.baseBackgroundColor = baseBackgroundColor
