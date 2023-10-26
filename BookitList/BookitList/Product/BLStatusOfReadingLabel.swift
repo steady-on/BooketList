@@ -41,7 +41,9 @@ final class BLStatusOfReadingLabel: UIButton {
         configure()
     }
     
-    private func configure() {        
+    private func configure() {
+        showsMenuAsPrimaryAction = true
+        
         var config = UIButton.Configuration.filled()
         config.title = statusOfReading.title
         config.cornerStyle = .capsule

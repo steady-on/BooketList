@@ -105,7 +105,7 @@ class AllRecordsForBookViewController: BaseViewController {
         textView.textColor = .secondaryLabel
         textView.textContainerInset = .zero
         textView.textContainer.lineBreakMode = .byTruncatingTail
-        textView.textContainer.maximumNumberOfLines = 1
+        textView.textContainer.maximumNumberOfLines = 0
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.isSelectable = false
@@ -113,8 +113,16 @@ class AllRecordsForBookViewController: BaseViewController {
     }()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        backdropImageView.image = UIImage.bookCover
+        coverImageView.image = UIImage.bookCover
+        titleLabel.text = "방금 떠나온 세계"
+        authorLabel.text = "김초엽"
+        statusOfReadingLabel.menu = configureStatusOfReadingButtonMenu(now: .finished)
+        overviewTextView.text = "사람들에게서 행복과 풍요로움을 주는 시간을 빼앗아간 회색 신사들과 여자 아이 모모, 호라 박사 등이 벌이는 모험을 다룬 소설. 꿈 속에서 벌어질 법한 갖은 이야기들이 줄줄이 펼쳐진다."
     }
     
     override func configureHiararchy() {
@@ -134,7 +142,7 @@ class AllRecordsForBookViewController: BaseViewController {
             allRecordsView.addSubview(component)
         }
         
-        overviewButton.addTarget(self, action: #selector(overviewButtonTapped), for: .touchUpInside)
+//        overviewButton.addTarget(self, action: #selector(overviewButtonTapped), for: .touchUpInside)
         
         let infoStackComponents = [titleLabel, authorLabel]
         infoStackComponents.forEach { component in
@@ -213,3 +221,4 @@ class AllRecordsForBookViewController: BaseViewController {
         return menu
     }
 }
+
