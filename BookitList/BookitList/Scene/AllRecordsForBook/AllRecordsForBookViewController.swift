@@ -198,4 +198,18 @@ class AllRecordsForBookViewController: BaseViewController {
         overviewTextView.textContainer.maximumNumberOfLines = currentNumberOfLines == 0 ? 1 : 0
         overviewTextView.invalidateIntrinsicContentSize()
     }
+    
+    private func configureStatusOfReadingButtonMenu(now: StatusOfReading) -> UIMenu {
+        let actions: [UIAction] = StatusOfReading.allCases.map { status in
+            UIAction(title: status.title) { _ in
+                self.statusOfReadingLabel.setStatus(for: status)
+            }
+        }
+        
+        actions[now.rawValue].state = .on
+        statusOfReadingLabel.setStatus(for: now)
+        
+        let menu = UIMenu(title: "독서 상태", options: .singleSelection, children: actions)
+        return menu
+    }
 }
