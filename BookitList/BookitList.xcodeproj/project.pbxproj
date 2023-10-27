@@ -11,6 +11,7 @@
 		631821EA2AD7DEBE0034573B /* FileManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821E92AD7DEBE0034573B /* FileManageError.swift */; };
 		631821EC2AD8016B0034573B /* Caution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821EB2AD8016B0034573B /* Caution.swift */; };
 		631821EE2AD983B90034573B /* Cautionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821ED2AD983B90034573B /* Cautionable.swift */; };
+		63222D542AEA4B890070F43A /* SimpleNoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63222D532AEA4B890070F43A /* SimpleNoteCell.swift */; };
 		63222D562AEA569A0070F43A /* NoteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63222D552AEA569A0070F43A /* NoteType.swift */; };
 		63222D582AEA5BA70070F43A /* BLNoteTypeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63222D572AEA5BA70070F43A /* BLNoteTypeLabel.swift */; };
 		63222D5A2AEBC2240070F43A /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63222D592AEBC2240070F43A /* Date+.swift */; };
@@ -85,6 +86,7 @@
 		631821E92AD7DEBE0034573B /* FileManageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManageError.swift; sourceTree = "<group>"; };
 		631821EB2AD8016B0034573B /* Caution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caution.swift; sourceTree = "<group>"; };
 		631821ED2AD983B90034573B /* Cautionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cautionable.swift; sourceTree = "<group>"; };
+		63222D532AEA4B890070F43A /* SimpleNoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleNoteCell.swift; sourceTree = "<group>"; };
 		63222D552AEA569A0070F43A /* NoteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteType.swift; sourceTree = "<group>"; };
 		63222D572AEA5BA70070F43A /* BLNoteTypeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLNoteTypeLabel.swift; sourceTree = "<group>"; };
 		63222D592AEBC2240070F43A /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */,
 				63023E6E2AE1CF18000B26A9 /* WaitingBookCell.swift */,
 				63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */,
+				63222D532AEA4B890070F43A /* SimpleNoteCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -481,6 +484,7 @@
 				63B5B36E2AD47CD500477536 /* ButtonMakable.swift in Sources */,
 				631821EA2AD7DEBE0034573B /* FileManageError.swift in Sources */,
 				637B5C602AC86BE000730C01 /* BaseView.swift in Sources */,
+				63222D542AEA4B890070F43A /* SimpleNoteCell.swift in Sources */,
 				63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */,
 				63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */,
 				63B5B3582ACE81AB00477536 /* AddBookDetailInfoViewController.swift in Sources */,
