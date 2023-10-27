@@ -9,7 +9,7 @@ import UIKit
 
 final class BLNoteTypeLabel: BaseView {
     
-    private let noteType: NoteType
+    private var noteType: NoteType
     
     private let typeLabel = UILabel()
     private let iconImage = UIImageView()
@@ -83,5 +83,16 @@ final class BLNoteTypeLabel: BaseView {
         let symbolConfig = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .callout))
         iconImage.image = UIImage(systemName: iconImageName, withConfiguration: symbolConfig)
         iconImage.tintColor = labelColor
+    }
+    
+    private func updateLayout() {
+        configureTypeLabel()
+        configureIconImage()
+        backgroundColor = labelColor.withAlphaComponent(0.1)
+    }
+    
+    func setNoteType(to noteType: NoteType) {
+        self.noteType = noteType
+        updateLayout()
     }
 }
