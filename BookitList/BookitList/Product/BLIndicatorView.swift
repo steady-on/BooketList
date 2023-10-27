@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BLIndicatorView: BaseView {
+final class BLIndicatorView: BaseView {
     
     private let backdropView: UIView = {
         let view = UIView()

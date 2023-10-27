@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BLTitleSupplementaryButton: UIButton {
+final class BLTitleSupplementaryButton: UIButton {
     let title: String
     
     init(title: String) {

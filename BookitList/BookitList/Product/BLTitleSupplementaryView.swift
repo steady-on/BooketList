@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BLTitleSupplementaryView: BaseCollectionViewCell {
+final class BLTitleSupplementaryView: BaseCollectionViewCell {
     var title: String! {
         didSet { label.text = title }
     }
