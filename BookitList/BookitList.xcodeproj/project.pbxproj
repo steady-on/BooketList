@@ -14,6 +14,7 @@
 		63222D562AEA569A0070F43A /* NoteType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63222D552AEA569A0070F43A /* NoteType.swift */; };
 		63222D582AEA5BA70070F43A /* BLNoteTypeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63222D572AEA5BA70070F43A /* BLNoteTypeLabel.swift */; };
 		63222D5A2AEBC2240070F43A /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63222D592AEBC2240070F43A /* Date+.swift */; };
+		63222D5C2AEBC80C0070F43A /* ReuseIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63222D5B2AEBC80C0070F43A /* ReuseIdentifier.swift */; };
 		637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */; };
 		637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */; };
 		637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */; };
@@ -87,6 +88,7 @@
 		63222D552AEA569A0070F43A /* NoteType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteType.swift; sourceTree = "<group>"; };
 		63222D572AEA5BA70070F43A /* BLNoteTypeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLNoteTypeLabel.swift; sourceTree = "<group>"; };
 		63222D592AEBC2240070F43A /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		63222D5B2AEBC80C0070F43A /* ReuseIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifier.swift; sourceTree = "<group>"; };
 		637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewController.swift; sourceTree = "<group>"; };
 		637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		63B5B36C2AD47CB700477536 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				63222D5B2AEBC80C0070F43A /* ReuseIdentifier.swift */,
 				63B5B36D2AD47CD500477536 /* ButtonMakable.swift */,
 				631821ED2AD983B90034573B /* Cautionable.swift */,
 			);
@@ -501,6 +504,7 @@
 				637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
 				639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */,
+				63222D5C2AEBC80C0070F43A /* ReuseIdentifier.swift in Sources */,
 				63222D562AEA569A0070F43A /* NoteType.swift in Sources */,
 				63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */,
 				63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */,
