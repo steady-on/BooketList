@@ -19,9 +19,9 @@ enum NoteType: Int, CaseIterable, PersistableEnum {
     var title: String {
         switch self {
         case .quote: return "책속의 한줄"
-        case .summary: return "요약"
-        case .thinking: return "생각"
-        case .question: return "의문/질문"
+        case .summary: return "내용 요약"
+        case .thinking: return "떠오른 생각"
+        case .question: return "의문점"
         case .report: return "감상"
         case .memory: return "추억"
         }
