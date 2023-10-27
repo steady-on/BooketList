@@ -112,7 +112,19 @@ class AllRecordsForBookViewController: BaseViewController {
         return textView
     }()
     
+    private let noteTableHeaderView = BLTitleSupplementaryButton(title: "작성된 노트")
     
+    private let noteTableView: BLContentWrappingTableView = {
+        let tableView = BLContentWrappingTableView()
+        tableView.register(SimpleNoteCell.self, forCellReuseIdentifier: SimpleNoteCell.identifier)
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.backgroundColor = .clear
+        tableView.separatorStyle = .none
+        tableView.isScrollEnabled = false
+        return tableView
+    }()
+    
+    private var noteDataSource: UITableViewDiffableDataSource<Int, Note>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -137,7 +149,7 @@ class AllRecordsForBookViewController: BaseViewController {
             contentView.addSubview(component)
         }
         
-        let allRecordsComponents = [infoStackView, overviewButton, overviewTextView]
+        let allRecordsComponents = [infoStackView, overviewButton, overviewTextView, noteTableHeaderView, noteTableView]
         allRecordsComponents.forEach { component in
             allRecordsView.addSubview(component)
         }
@@ -148,6 +160,9 @@ class AllRecordsForBookViewController: BaseViewController {
         infoStackComponents.forEach { component in
             infoStackView.addArrangedSubview(component)
         }
+        
+        configureNoteDataSource()
+        updateSnapshot()
     }
     
     override func setConstraints() {
@@ -158,7 +173,6 @@ class AllRecordsForBookViewController: BaseViewController {
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
             make.width.equalToSuperview()
-            make.height.equalTo(1000)
         }
         
         backdropImageView.snp.makeConstraints { make in
@@ -199,6 +213,17 @@ class AllRecordsForBookViewController: BaseViewController {
             make.top.equalTo(overviewButton.snp.bottom)
             make.horizontalEdges.equalTo(allRecordsView.layoutMarginsGuide)
         }
+        
+        noteTableHeaderView.snp.makeConstraints { make in
+            make.top.equalTo(overviewTextView.snp.bottom).offset(16)
+            make.leading.equalTo(allRecordsView.layoutMarginsGuide)
+        }
+        
+        noteTableView.snp.makeConstraints { make in
+            make.top.equalTo(noteTableHeaderView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(allRecordsView.layoutMarginsGuide)
+        }
     }
     
     @objc private func overviewButtonTapped() {
@@ -222,3 +247,19 @@ class AllRecordsForBookViewController: BaseViewController {
     }
 }
 
+extension AllRecordsForBookViewController {
+    private func configureNoteDataSource() {
+        noteDataSource = UITableViewDiffableDataSource<Int, Note>(tableView: noteTableView) { tableView, indexPath, itemIdentifier in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SimpleNoteCell.identifier) as? SimpleNoteCell else { return UITableViewCell() }
+            cell.note = itemIdentifier
+            return cell
+        }
+    }
+    
+    private func updateSnapshot() {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Note>()
+        snapshot.appendSections([0])
+        snapshot.appendItems([])
+        noteDataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
