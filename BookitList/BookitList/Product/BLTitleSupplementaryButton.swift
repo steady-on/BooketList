@@ -34,6 +34,7 @@ final class BLTitleSupplementaryButton: UIButton {
         config.imagePlacement = .trailing
         config.imagePadding = 8
         config.attributedTitle = AttributedString(title, attributes: titleContainer)
+        config.contentInsets = .init(top: 8, leading: 0, bottom: 8, trailing: 4)
         configuration = config
     }
 }

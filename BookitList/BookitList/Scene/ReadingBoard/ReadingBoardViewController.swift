@@ -53,7 +53,7 @@ final class ReadingBoardViewController: BaseViewController {
     override func setConstraints() {
         nowReadingBookTitleButton.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide)
-            make.leading.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalTo(view.layoutMarginsGuide)
         }
         
         nowReadingBookCollectionView.snp.makeConstraints { make in
@@ -64,7 +64,7 @@ final class ReadingBoardViewController: BaseViewController {
         
         waitingBookTitleButton.snp.makeConstraints { make in
             make.top.equalTo(nowReadingBookCollectionView.snp.bottom)
-            make.leading.equalTo(view.safeAreaLayoutGuide)
+            make.leading.equalTo(view.layoutMarginsGuide)
         }
         
         waitingBookCollectionView.snp.makeConstraints { make in

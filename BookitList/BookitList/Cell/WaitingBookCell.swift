@@ -43,7 +43,7 @@ final class WaitingBookCell: BaseCollectionViewCell {
         
         let minimumWidth = titleLabel.font.lineHeight + backdropView.layoutMargins.left + backdropView.layoutMargins.right
         let maximumHeight = bounds.height
-        let standardHeight = maximumHeight * 0.9
+        let standardHeight = maximumHeight * 0.8
         
         let width = size?.depth ?? minimumWidth
         let height = size?.height ?? standardHeight
