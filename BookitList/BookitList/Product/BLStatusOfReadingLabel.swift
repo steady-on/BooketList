@@ -43,11 +43,15 @@ final class BLStatusOfReadingLabel: UIButton {
     
     private func configure() {
         showsMenuAsPrimaryAction = true
+        let symbolConfig = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .caption1))
         
         var config = UIButton.Configuration.filled()
         config.title = statusOfReading.title
         config.cornerStyle = .capsule
         config.buttonSize = .mini
+        config.image = UIImage(systemName: "chevron.down", withConfiguration: symbolConfig)
+        config.imagePlacement = .trailing
+        config.imagePadding = 8
         config.baseBackgroundColor = baseBackgroundColor
         configuration = config
     }
