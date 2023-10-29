@@ -45,6 +45,14 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
         return label
     }()
     
+    private let noteImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        return imageView
+    }()
+    
     private let noteContentTextView: UITextView = {
         let textView = UITextView()
         textView.font = .preferredFont(forTextStyle: .body)
@@ -60,7 +68,7 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
         backgroundColor = .clear
         addSubview(backdropView)
         
-        let components = [typeLabel, pageLabel, createdAtLabel, noteContentTextView]
+        let components = [typeLabel, pageLabel, createdAtLabel, noteImageView, noteContentTextView]
         components.forEach { component in
             backdropView.addSubview(component)
         }
@@ -83,6 +91,12 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
         createdAtLabel.snp.makeConstraints { make in
             make.top.trailing.equalTo(backdropView.layoutMarginsGuide)
             make.centerY.equalTo(typeLabel)
+        }
+        
+        noteImageView.snp.makeConstraints { make in
+            make.top.equalTo(typeLabel.snp.bottom).offset(4)
+            make.horizontalEdges.equalTo(backdropView.layoutMarginsGuide)
+            make.height.equalTo(noteImageView.snp.width)
         }
         
         noteContentTextView.snp.makeConstraints { make in
