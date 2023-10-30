@@ -11,7 +11,7 @@ import Kingfisher
 final class NowReadingBookCell: BaseCollectionViewCell {
     var book: Book! {
         didSet {
-            let path = ImageFilePath.cover(bookID: book._id.stringValue, type: .full)
+            let path = ImageFilePath.cover(bookID: book._id.stringValue)
             let url = ImageFileManager().makeFullFilePath(from: path)
             let provider = LocalFileImageDataProvider(fileURL: url)
             coverImageView.kf.setImage(with: provider)

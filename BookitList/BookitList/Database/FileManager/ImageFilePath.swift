@@ -8,13 +8,13 @@
 import Foundation
 
 enum ImageFilePath {
-    case cover(bookID: String, type: CoverType)
+    case cover(bookID: String)
     case note(noteID: String, order: Int)
     
     private var fileName: String {
         switch self {
-        case .cover(let bookID, let type):
-            return "\(bookID)_\(type.rawValue)"
+        case .cover(let bookID):
+            return "\(bookID)"
         case .note(let noteID, let order):
             return "\(noteID)_\(order)"
         }
@@ -35,9 +35,4 @@ enum ImageFilePath {
             return "\(folderPath)/\(fileName)"
         }
     }
-}
-
-enum CoverType: String {
-    case thumbnail
-    case full
 }

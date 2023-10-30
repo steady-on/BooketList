@@ -16,7 +16,7 @@ final class Book: Object {
     @Persisted var title: String
     @Persisted var originalTitle: String?
     @Persisted var overview: String?
-    @Persisted var existCover: ExistCover?
+    @Persisted var existCover: Bool
     @Persisted var totalPage: Int?
     @Persisted var publishedAt: String?
     @Persisted var publisher: String?
@@ -42,7 +42,7 @@ final class Book: Object {
         self.title = item.title
         self.originalTitle = item.subInfo.originalTitle
         self.overview = item.description ?? item.fullDescription
-        self.existCover = ExistCover()
+        self.existCover = false
         self.totalPage = item.subInfo.itemPage
         self.publishedAt = item.pubDate
         self.publisher = item.publisher
@@ -67,17 +67,6 @@ final class Book: Object {
         self.checkoutHistories = List<CheckoutHistory>()
         self.series = List<Series>()
         self.tags = List<Tag>()
-    }
-}
-
-final class ExistCover: EmbeddedObject {
-    @Persisted var thumbnail: Bool
-    @Persisted var full: Bool
-    
-    convenience init(thumbnail: Bool = false, full: Bool = false) {
-        self.init()
-        self.thumbnail = thumbnail
-        self.full = full
     }
 }
 

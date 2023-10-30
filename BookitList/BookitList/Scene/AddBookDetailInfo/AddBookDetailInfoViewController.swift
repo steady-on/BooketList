@@ -327,7 +327,7 @@ extension AddBookDetailInfoViewController {
             return
         }
         
-        viewModel.saveBookInfo(thumbnail: backdropImageView.image, full: coverImageView.image)
+        viewModel.saveBookInfo(coverImage: backdropImageView.image)
         navigationController?.popViewController(animated: true)
     }
 }
