@@ -6,8 +6,16 @@
 //
 
 import UIKit
+import Kingfisher
 
 class AllRecordsForBookViewController: BaseViewController {
+    
+    private let viewModel: AllRecordsForBokViewModel
+    
+    init(book: Book) {
+        self.viewModel = AllRecordsForBokViewModel(book: book)
+        super.init()
+    }
 
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -128,13 +136,6 @@ class AllRecordsForBookViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        backdropImageView.image = UIImage.bookCover
-        coverImageView.image = UIImage.bookCover
-        titleLabel.text = "방금 떠나온 세계"
-        authorLabel.text = "김초엽"
-        statusOfReadingLabel.menu = configureStatusOfReadingButtonMenu(now: .finished)
-        overviewTextView.text = "사람들에게서 행복과 풍요로움을 주는 시간을 빼앗아간 회색 신사들과 여자 아이 모모, 호라 박사 등이 벌이는 모험을 다룬 소설. 꿈 속에서 벌어질 법한 갖은 이야기들이 줄줄이 펼쳐진다."
     }
     
     override func configureHiararchy() {
@@ -162,7 +163,6 @@ class AllRecordsForBookViewController: BaseViewController {
         }
         
         configureNoteDataSource()
-        updateSnapshot()
     }
     
     override func setConstraints() {
@@ -195,13 +195,13 @@ class AllRecordsForBookViewController: BaseViewController {
         }
         
         statusOfReadingLabel.snp.makeConstraints { make in
-            make.leading.equalTo(coverImageView.snp.trailing).offset(8)
+            make.leading.equalTo(coverImageView.snp.trailing).offset(16)
             make.bottom.equalTo(allRecordsView.snp.top).offset(-8)
         }
         
         infoStackView.snp.makeConstraints { make in
             make.top.trailing.equalTo(allRecordsView.layoutMarginsGuide)
-            make.leading.equalTo(coverImageView.snp.trailing).offset(8)
+            make.leading.equalTo(coverImageView.snp.trailing).offset(16)
         }
         
         overviewButton.snp.makeConstraints { make in
@@ -226,13 +226,36 @@ class AllRecordsForBookViewController: BaseViewController {
         }
     }
     
+    override func bindComponentWithObservable() {
+        viewModel.book.bind { [weak self] book in
+            self?.configureComponents(for: book)
+        }
+    }
+    
+    private func configureComponents(for book: Book) {
+        let imagePath = viewModel.checkCoverImagePath()
+        let provider = LocalFileImageDataProvider(fileURL: imagePath)
+        let placeholder = BLDirectionView(symbolName: "photo", direction: nil)
+        backdropImageView.kf.setImage(with: provider, placeholder: placeholder)
+        coverImageView.kf.setImage(with: provider, placeholder: placeholder)
+        titleLabel.text = book.title
+        
+        let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
+        authorLabel.text = authors
+        configureStatusOfReadingButtonMenu(now: book.statusOfReading)
+        overviewTextView.text = book.overview
+        
+        let notes = Array(book.notes)
+        updateNoteSnapshot(for: notes)
+    }
+    
     @objc private func overviewButtonTapped() {
         let currentNumberOfLines = overviewTextView.textContainer.maximumNumberOfLines
         overviewTextView.textContainer.maximumNumberOfLines = currentNumberOfLines == 0 ? 1 : 0
         overviewTextView.invalidateIntrinsicContentSize()
     }
     
-    private func configureStatusOfReadingButtonMenu(now: StatusOfReading) -> UIMenu {
+    private func configureStatusOfReadingButtonMenu(now: StatusOfReading) {
         let actions: [UIAction] = StatusOfReading.allCases.map { status in
             UIAction(title: status.title) { _ in
                 self.statusOfReadingLabel.setStatus(for: status)
@@ -243,7 +266,8 @@ class AllRecordsForBookViewController: BaseViewController {
         statusOfReadingLabel.setStatus(for: now)
         
         let menu = UIMenu(title: "독서 상태", options: .singleSelection, children: actions)
-        return menu
+        
+        statusOfReadingLabel.menu = menu
     }
 }
 
@@ -256,10 +280,10 @@ extension AllRecordsForBookViewController {
         }
     }
     
-    private func updateSnapshot() {
+    private func updateNoteSnapshot(for notes: [Note]) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Note>()
         snapshot.appendSections([0])
-        snapshot.appendItems([])
+        snapshot.appendItems(notes)
         noteDataSource.apply(snapshot, animatingDifferences: true)
     }
 }
