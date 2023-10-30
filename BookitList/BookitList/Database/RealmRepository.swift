@@ -65,25 +65,23 @@ final class RealmRepository {
         return fetchData
     }
     
-    func updateItem<T: Object>(_ updatedItem: T) -> Result<Void, RealmError> {
+    func updateItem(handler: @escaping () -> Void) throws {
         do {
-            try realm.write { realm.add(updatedItem, update: .modified) }
-            return .success(())
+            try realm.write { handler() }
         } catch {
-            return .failure(.failToUpdateItem)
+            throw RealmError.failToUpdateItem
         }
     }
     
-    func deleteItem<T: Object>(_ item: T) -> Result<Void, RealmError> {
+    func deleteItem<T: Object>(_ item: T) throws {
         do {
             try realm.write { realm.delete(item) }
-            return .success(())
         } catch {
-            return .failure(.failToDelete)
+            throw RealmError.failToDelete
         }
     }
     
-    func deleteBook(_ book: Book) -> Result<Void, RealmError> {
+    func deleteBook(_ book: Book) throws {
         do {
             try realm.write {
                 realm.delete(book.readingHistories)
@@ -92,9 +90,8 @@ final class RealmRepository {
                 realm.delete(book.checkoutHistories)
                 realm.delete(book)
             }
-            return .success(())
         } catch {
-            return .failure(.failToDelete)
+            throw RealmError.failToDelete
         }
     }
 }

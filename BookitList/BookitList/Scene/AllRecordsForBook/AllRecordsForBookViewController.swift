@@ -259,6 +259,7 @@ class AllRecordsForBookViewController: BaseViewController {
         let actions: [UIAction] = StatusOfReading.allCases.map { status in
             UIAction(title: status.title) { _ in
                 self.statusOfReadingLabel.setStatus(for: status)
+                self.viewModel.updateStatusOfReading(to: status)
             }
         }
         
