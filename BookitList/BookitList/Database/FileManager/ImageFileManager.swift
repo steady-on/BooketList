@@ -57,4 +57,14 @@ struct ImageFileManager {
             throw FileManageError.failToCreateFolder
         }
     }
+    
+    func deleteData(from filePath: ImageFilePath) throws {
+        let fileURL = documentDirectory.appendingPathComponent(filePath.filePath)
+        
+        do {
+            try fileManager.removeItem(at: fileURL)
+        } catch {
+            throw FileManageError.failToDeleteImage
+        }
+    }
 }

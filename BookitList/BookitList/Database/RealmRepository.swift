@@ -19,14 +19,13 @@ final class RealmRepository {
         }
     }
     
-    func addItem<T: Object>(_ item: T) -> Result<Void, RealmError> {
+    func addItem<T: Object>(_ item: T) throws {
         print(realm.configuration.fileURL)
         
         do {
             try realm.write { realm.add(item) }
-            return .success(())
         } catch {
-            return .failure(.failToCreateItem)
+            throw RealmError.failToCreateItem
         }
     }
     

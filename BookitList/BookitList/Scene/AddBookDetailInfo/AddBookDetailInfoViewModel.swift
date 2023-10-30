@@ -62,22 +62,23 @@ final class AddBookDetailInfoViewModel: Cautionable {
         
         let book = Book(from: item, artists: authors)
         
-        if let coverImage {
-            do {
+        do {
+            if let coverImage {
                 try imageManager.saveImage(coverImage, to: .cover(bookID: book._id.stringValue))
                 book.existCover = true
-            } catch {
-                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 실패", message: String(describing: error), willDismiss: false)
             }
-        }
-        
-        let saveResult = realmRepository.addItem(book)
-        switch saveResult {
-        case .success(_):
-            print("저장성공!")
-        case .failure(let failure):
-            self.caution.value = Caution(isPresent: true, title: "DB 저장 오류", message: "데이터를 저장하는 도중 에러가 발생했습니다. error: " + String(describing: failure), willDismiss: false)
+            try realmRepository.addItem(book)
+        } catch {
+            if let error = error as? FileManageError {
+                self.caution.value = Caution(isPresent: true, title: "책 표지 저장 실패", message: String(describing: error), willDismiss: false)
+                return
+            }
             
+            if book.existCover {
+                try? imageManager.deleteData(from: .cover(bookID: book._id.stringValue))
+            }
+            
+            self.caution.value = Caution(isPresent: true, title: "DB 저장 오류", message: "데이터를 저장하는 도중 에러가 발생했습니다. error: " + String(describing: error), willDismiss: false)
         }
     }
     
