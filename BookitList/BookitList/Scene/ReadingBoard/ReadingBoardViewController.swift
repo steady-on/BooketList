@@ -205,8 +205,14 @@ extension ReadingBoardViewController {
 
 extension ReadingBoardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? NowReadingBookCell else { return }
+        if collectionView == nowReadingBookCollectionView {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? NowReadingBookCell else { return }
+            cell.toggleIsHiddenAccessaryView()
+            return
+        }
         
-        cell.toggleIsHiddenAccessaryView()
+        let book = viewModel.selectWaitingBook(for: indexPath)
+        let allRecordsForBookViewController = AllRecordsForBookViewController(book: book)
+        navigationController?.pushViewController(allRecordsForBookViewController, animated: true)
     }
 }

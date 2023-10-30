@@ -33,4 +33,8 @@ final class ReadingBoardViewModel: Cautionable {
         self.nowReadingBooks.value = fetchedBooks.filter { $0.statusOfReading == .reading }
         self.waitingBooks.value = fetchedBooks.filter { $0.statusOfReading == .notYet }
     }
+    
+    func selectWaitingBook(for indexPath: IndexPath) -> Book {
+        return waitingBooks.value[indexPath.item]
+    }
 }
