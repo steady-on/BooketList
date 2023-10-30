@@ -46,10 +46,17 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     private let playButton: UIButton = {
         let button = UIButton()
-        let symbolConfig = UIImage.SymbolConfiguration(paletteColors: [.white, .highlight])
-        let backgroundImage = UIImage(systemName: "play.circle.fill")?.withConfiguration(symbolConfig)
-        button.setBackgroundImage(backgroundImage, for: .normal)
+        // let symbolConfig = UIImage.SymbolConfiguration(paletteColors: [.white, .highlight])
+//        let backgroundImage = UIImage(systemName: "play.circle.fill")?.withConfiguration(symbolConfig)
+//        button.setBackgroundImage(backgroundImage, for: .normal)
         button.tintColor = .highlight
+        
+        var config = UIButton.Configuration.filled()
+        config.cornerStyle = .capsule
+        config.image = UIImage(systemName: "note.text.badge.plus")
+        let symbolConfig = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .title1))
+        config.preferredSymbolConfigurationForImage = symbolConfig
+        button.configuration = config
         return button
     }()
     
@@ -95,7 +102,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     override func configureHiararchy() {
         configureShadow()
     
-        let components = [coverImageView, accessoryView, bottomAccessoryView]
+        let components = [coverImageView, accessoryView] // bottomAccessoryView
         components.forEach { component in
             contentView.addSubview(component)
         }
@@ -108,17 +115,17 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         detailInfoButton.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         
-        let bottomAccessoryComponents = [readingProgressView, addReadingRecordButton, addNoteButton]
-        bottomAccessoryComponents.forEach { component in
-            bottomAccessoryView.addSubview(component)
-        }
+//        let bottomAccessoryComponents = [readingProgressView, addReadingRecordButton, addNoteButton]
+//        bottomAccessoryComponents.forEach { component in
+//            bottomAccessoryView.addSubview(component)
+//        }
         
         detailInfoButton.addTarget(self, action: #selector(detailInfoButtonTapped), for: .touchUpInside)
     }
     
     func toggleIsHiddenAccessaryView() {
         accessoryView.isHidden.toggle()
-        bottomAccessoryView.isHidden.toggle()
+//        bottomAccessoryView.isHidden.toggle()
     }
     
     override func setConstraints() {
@@ -148,27 +155,27 @@ final class NowReadingBookCell: BaseCollectionViewCell {
             make.height.greaterThanOrEqualTo(10)
         }
         
-        bottomAccessoryView.snp.makeConstraints { make in
-            make.bottom.horizontalEdges.equalToSuperview()
-        }
+//        bottomAccessoryView.snp.makeConstraints { make in
+//            make.bottom.horizontalEdges.equalToSuperview()
+//        }
         
-        readingProgressView.snp.makeConstraints { make in
-            make.top.horizontalEdges.equalToSuperview()
-        }
-        
-        addReadingRecordButton.snp.makeConstraints { make in
-            make.top.equalTo(readingProgressView.snp.bottom).offset(8)
-            make.leading.bottom.equalTo(bottomAccessoryView.layoutMarginsGuide)
-            make.width.equalToSuperview().dividedBy(8)
-            make.height.equalTo(detailInfoButton.snp.width).multipliedBy(1.2)
-        }
-        
-        addNoteButton.snp.makeConstraints { make in
-            make.centerY.equalTo(addReadingRecordButton)
-            make.trailing.equalTo(bottomAccessoryView.layoutMarginsGuide).offset(-4)
-            make.width.equalToSuperview().dividedBy(8)
-            make.height.equalTo(detailInfoButton.snp.width)
-        }
+//        readingProgressView.snp.makeConstraints { make in
+//            make.top.horizontalEdges.equalToSuperview()
+//        }
+//        
+//        addReadingRecordButton.snp.makeConstraints { make in
+//            make.top.equalTo(readingProgressView.snp.bottom).offset(8)
+//            make.leading.bottom.equalTo(bottomAccessoryView.layoutMarginsGuide)
+//            make.width.equalToSuperview().dividedBy(8)
+//            make.height.equalTo(detailInfoButton.snp.width).multipliedBy(1.2)
+//        }
+//        
+//        addNoteButton.snp.makeConstraints { make in
+//            make.centerY.equalTo(addReadingRecordButton)
+//            make.trailing.equalTo(bottomAccessoryView.layoutMarginsGuide).offset(-4)
+//            make.width.equalToSuperview().dividedBy(8)
+//            make.height.equalTo(detailInfoButton.snp.width)
+//        }
     }
     
     private func configureShadow() {
