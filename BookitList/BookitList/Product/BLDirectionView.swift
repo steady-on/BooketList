@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class BLDirectionView: BaseView {
     private let symbolImageView: UIImageView = {
@@ -34,11 +35,12 @@ final class BLDirectionView: BaseView {
         return stackView
     }()
     
-    init(symbolName: String, direction: String) {
+    init(symbolName: String, direction: String?) {
         self.symbolImageView.image = UIImage(systemName: symbolName)
         self.directionLabel.text = direction
         
         super.init()
+        backgroundColor = .background
     }
     
     override func configureHiararchy() {
@@ -59,3 +61,5 @@ final class BLDirectionView: BaseView {
         }
     }
 }
+
+extension BLDirectionView: Placeholder {}

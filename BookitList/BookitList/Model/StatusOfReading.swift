@@ -8,10 +8,20 @@
 import Foundation
 import RealmSwift
 
-enum StatusOfReading: Int, PersistableEnum {
+enum StatusOfReading: Int, CaseIterable, PersistableEnum {
     case notYet
     case reading
     case finished
     case pause
     case stop
+    
+    var title: String {
+        switch self {
+        case .notYet: return "아직 안 읽음"
+        case .reading: return "지금 읽는 중"
+        case .finished: return "다 읽음"
+        case .pause: return "잠시 읽기 중단 중"
+        case .stop: return "읽기 중단"
+        }
+    }
 }

@@ -20,13 +20,4 @@ final class Note: Object {
     
     @Persisted var readingHistory: ReadingHistory?
     @Persisted(originProperty: "notes") var book: LinkingObjects<Book>
-    
-    enum NoteType: Int, PersistableEnum {
-        case quote
-        case summary
-        case thinking
-        case question
-        case report
-        case memory
-    }
 }

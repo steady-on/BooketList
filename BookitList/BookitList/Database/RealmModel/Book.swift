@@ -16,7 +16,7 @@ final class Book: Object {
     @Persisted var title: String
     @Persisted var originalTitle: String?
     @Persisted var overview: String?
-    @Persisted var existCover: ExistCover?
+    @Persisted var existCover: Bool
     @Persisted var totalPage: Int?
     @Persisted var publishedAt: String?
     @Persisted var publisher: String?
@@ -33,7 +33,7 @@ final class Book: Object {
     @Persisted var series: List<Series>
     @Persisted var tags: List<Tag>
     
-    convenience init(from item: ItemDetail, artists: [Artist]) {
+    convenience init(from item: ItemDetail, artists: [Author]) {
         self.init()
         
         self.itemID = item.itemID
@@ -42,7 +42,7 @@ final class Book: Object {
         self.title = item.title
         self.originalTitle = item.subInfo.originalTitle
         self.overview = item.description ?? item.fullDescription
-        self.existCover = ExistCover()
+        self.existCover = false
         self.totalPage = item.subInfo.itemPage
         self.publishedAt = item.pubDate
         self.publisher = item.publisher
@@ -56,13 +56,10 @@ final class Book: Object {
         self.statusOfReading = .notYet
         self.registeredAt = Date.now
         
-        let authors = List<Author>()
-        artists.forEach { artist in
-            guard artist.willRegister else { return }
-            let author = Author(authorID: artist.authorId, name: artist.authorName)
-            authors.append(author)
+        self.authors = List<Author>()
+        artists.forEach { author in
+            self.authors.append(author)
         }
-        self.authors = authors
         
         self.readingHistories = List<ReadingHistory>()
         self.notes = List<Note>()
@@ -73,26 +70,15 @@ final class Book: Object {
     }
 }
 
-final class ExistCover: EmbeddedObject {
-    @Persisted var thumbnail: Bool
-    @Persisted var full: Bool
-    
-    convenience init(thumbnail: Bool = false, full: Bool = false) {
-        self.init()
-        self.thumbnail = thumbnail
-        self.full = full
-    }
-}
-
 final class Size: EmbeddedObject {
-    @Persisted var width: Int?
-    @Persisted var height: Int?
-    @Persisted var depth: Int?
+    @Persisted var width: Double = 0
+    @Persisted var height: Double = 0
+    @Persisted var depth: Double = 0
     
     convenience init(width: Int?, height: Int?, depth: Int?) {
         self.init()
-        self.width = width
-        self.height = height
-        self.depth = depth
+        self.width = Double(width ?? 0)
+        self.height = Double(height ?? 0)
+        self.depth = Double(depth ?? 0)
     }
 }

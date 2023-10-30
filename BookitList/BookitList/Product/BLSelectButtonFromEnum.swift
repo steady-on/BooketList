@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BLSelectButtonFromEnum<T: ButtonMakable & CaseIterable & RawRepresentable<Int>>: UIStackView {
+final class BLSelectButtonFromEnum<T: ButtonMakable & CaseIterable & RawRepresentable<Int>>: UIStackView {
     
     var seletedButtonTag: Int {
         guard let selectedButton = buttonGroup.first(where: { $0.isSelected }) else { return 0 }

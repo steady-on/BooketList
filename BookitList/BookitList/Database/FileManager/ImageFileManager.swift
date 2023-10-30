@@ -13,9 +13,9 @@ struct ImageFileManager {
         fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
-    func checkFilePath(_ filePath: ImageFilePath) -> Bool {
+    func makeFullFilePath(from filePath: ImageFilePath) -> URL {
         let fileURL = documentDirectory.appendingPathComponent(filePath.filePath)
-        return fileManager.fileExists(atPath: fileURL.path)
+        return fileURL
     }
 
     func saveImage(_ image: UIImage, to filePath: ImageFilePath) throws {
@@ -55,6 +55,16 @@ struct ImageFileManager {
             try fileManager.createDirectory(at: folderURL, withIntermediateDirectories: true)
         } catch {
             throw FileManageError.failToCreateFolder
+        }
+    }
+    
+    func deleteData(from filePath: ImageFilePath) throws {
+        let fileURL = documentDirectory.appendingPathComponent(filePath.filePath)
+        
+        do {
+            try fileManager.removeItem(at: fileURL)
+        } catch {
+            throw FileManageError.failToDeleteImage
         }
     }
 }

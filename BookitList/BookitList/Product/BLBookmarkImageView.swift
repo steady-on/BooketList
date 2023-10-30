@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BLBookmarkImageView: UIImageView {
+final class BLBookmarkImageView: UIImageView {
     init() {
         super.init(frame: .zero)
         configureHiararchy()

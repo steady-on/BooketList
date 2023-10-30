@@ -12,6 +12,7 @@ enum FileManageError: Error, CustomDebugStringConvertible {
     case failToSaveFile
     case failToConvertImageToData
     case notExistFile
+    case failToDeleteImage
     
     var debugDescription: String {
         switch self {
@@ -19,6 +20,7 @@ enum FileManageError: Error, CustomDebugStringConvertible {
         case .failToSaveFile: return "파일 저장에 실패했습니다."
         case .failToConvertImageToData: return "이미지 변환에 실패했습니다."
         case .notExistFile: return "이미지 파일 경로가 잘못되었거나 존재하지 않는 파일입니다."
+        case .failToDeleteImage: return "이미지 삭제에 실패했습니다."
         }
     }
 }

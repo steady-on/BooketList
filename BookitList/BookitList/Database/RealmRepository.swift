@@ -19,14 +19,13 @@ final class RealmRepository {
         }
     }
     
-    func addItem<T: Object>(_ item: T) -> Result<Void, RealmError> {
+    func addItem<T: Object>(_ item: T) throws {
         print(realm.configuration.fileURL)
         
         do {
             try realm.write { realm.add(item) }
-            return .success(())
         } catch {
-            return .failure(.failToCreateItem)
+            throw RealmError.failToCreateItem
         }
     }
     
@@ -53,38 +52,36 @@ final class RealmRepository {
         return filteredObjects.isEmpty ? false : true
     }
     
-    func checkAuthorInTable(for authorId: Int) -> Bool {
+    func searchAuthorInTable(for authorId: Int) -> Author? {
         let authors = realm.objects(Author.self)
         let filteredObjects = authors.where {
             $0.authorID == authorId
         }
-        return filteredObjects.isEmpty ? false : true
+        return filteredObjects.first
     }
     
-    func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Result<Results<T>, RealmError> {
+    func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Results<T> {
         let fetchData = realm.objects(T.self).sorted(byKeyPath: keypath, ascending: ascending)
-        return .success(fetchData)
+        return fetchData
     }
     
-    func updateItem<T: Object>(_ updatedItem: T) -> Result<Void, RealmError> {
+    func updateItem(handler: @escaping () -> Void) throws {
         do {
-            try realm.write { realm.add(updatedItem, update: .modified) }
-            return .success(())
+            try realm.write { handler() }
         } catch {
-            return .failure(.failToUpdateItem)
+            throw RealmError.failToUpdateItem
         }
     }
     
-    func deleteItem<T: Object>(_ item: T) -> Result<Void, RealmError> {
+    func deleteItem<T: Object>(_ item: T) throws {
         do {
             try realm.write { realm.delete(item) }
-            return .success(())
         } catch {
-            return .failure(.failToDelete)
+            throw RealmError.failToDelete
         }
     }
     
-    func deleteBook(_ book: Book) -> Result<Void, RealmError> {
+    func deleteBook(_ book: Book) throws {
         do {
             try realm.write {
                 realm.delete(book.readingHistories)
@@ -93,9 +90,8 @@ final class RealmRepository {
                 realm.delete(book.checkoutHistories)
                 realm.delete(book)
             }
-            return .success(())
         } catch {
-            return .failure(.failToDelete)
+            throw RealmError.failToDelete
         }
     }
 }
