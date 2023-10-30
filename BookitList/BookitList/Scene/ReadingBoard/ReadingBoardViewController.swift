@@ -173,6 +173,11 @@ extension ReadingBoardViewController {
     private func configureDataSource() {
         let nowReadingBookCellRegistration = UICollectionView.CellRegistration<NowReadingBookCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
+            cell.detailInfoButtonHandler = {
+                let book = self.viewModel.selectNowReadingBook(for: indexPath)
+                let allRecordsForBookViewController = AllRecordsForBookViewController(book: book)
+                self.navigationController?.pushViewController(allRecordsForBookViewController, animated: true)
+            }
         }
         
         nowReadingBookdataSource = UICollectionViewDiffableDataSource<Int, Book>(collectionView: nowReadingBookCollectionView) { collectionView, indexPath, itemIdentifier in

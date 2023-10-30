@@ -20,6 +20,8 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         }
     }
     
+    var detailInfoButtonHandler: (() -> Void)!
+    
     private let coverImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -110,6 +112,8 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         bottomAccessoryComponents.forEach { component in
             bottomAccessoryView.addSubview(component)
         }
+        
+        detailInfoButton.addTarget(self, action: #selector(detailInfoButtonTapped), for: .touchUpInside)
     }
     
     func toggleIsHiddenAccessaryView() {
@@ -172,5 +176,9 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         layer.shadowOpacity = 0.5
         layer.shadowColor = UIColor.systemGray.cgColor
         layer.masksToBounds = false
+    }
+    
+    @objc func detailInfoButtonTapped() {
+        detailInfoButtonHandler()
     }
 }

@@ -37,4 +37,8 @@ final class ReadingBoardViewModel: Cautionable {
     func selectWaitingBook(for indexPath: IndexPath) -> Book {
         return waitingBooks.value[indexPath.item]
     }
+    
+    func selectNowReadingBook(for indexPath: IndexPath) -> Book {
+        return nowReadingBooks.value[indexPath.item]
+    }
 }
