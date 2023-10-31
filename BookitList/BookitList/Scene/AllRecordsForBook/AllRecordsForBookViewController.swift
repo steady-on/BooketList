@@ -62,7 +62,11 @@ class AllRecordsForBookViewController: BaseViewController {
         return view
     }()
     
-    private let statusOfReadingLabel = BLStatusOfReadingLabel(for: .notYet)
+    private lazy var statusOfReadingLabel: BLShowingMenuButtonFromEnum<StatusOfReading> = {
+        BLShowingMenuButtonFromEnum(selectedCase: .notYet) { selectedCase in
+            self.viewModel.updateStatusOfReading(to: selectedCase)
+        }
+    }()
     
     private let infoStackView: UIStackView = {
         let stackView = UIStackView()
@@ -242,7 +246,8 @@ class AllRecordsForBookViewController: BaseViewController {
         
         let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
         authorLabel.text = authors
-        configureStatusOfReadingButtonMenu(now: book.statusOfReading)
+        statusOfReadingLabel.setSelectedCase(to: book.statusOfReading)
+//        configureStatusOfReadingButtonMenu(now: book.statusOfReading)
         overviewTextView.text = book.overview
         
         let notes = Array(book.notes)
@@ -255,21 +260,21 @@ class AllRecordsForBookViewController: BaseViewController {
         overviewTextView.invalidateIntrinsicContentSize()
     }
     
-    private func configureStatusOfReadingButtonMenu(now: StatusOfReading) {
-        let actions: [UIAction] = StatusOfReading.allCases.map { status in
-            UIAction(title: status.title) { _ in
-                self.statusOfReadingLabel.setStatus(for: status)
-                self.viewModel.updateStatusOfReading(to: status)
-            }
-        }
-        
-        actions[now.rawValue].state = .on
-        statusOfReadingLabel.setStatus(for: now)
-        
-        let menu = UIMenu(title: "독서 상태", options: .singleSelection, children: actions)
-        
-        statusOfReadingLabel.menu = menu
-    }
+//    private func configureStatusOfReadingButtonMenu(now: StatusOfReading) {
+//        let actions: [UIAction] = StatusOfReading.allCases.map { status in
+//            UIAction(title: status.title) { _ in
+////                self.statusOfReadingLabel.setStatus(for: status)
+//                self.viewModel.updateStatusOfReading(to: status)
+//            }
+//        }
+//        
+//        actions[now.rawValue].state = .on
+//        statusOfReadingLabel.setStatus(for: now)
+//        
+//        let menu = UIMenu(title: "독서 상태", options: .singleSelection, children: actions)
+//        
+//        statusOfReadingLabel.menu = menu
+//    }
 }
 
 extension AllRecordsForBookViewController {

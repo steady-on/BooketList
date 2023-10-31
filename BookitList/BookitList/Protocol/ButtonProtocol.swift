@@ -18,4 +18,4 @@ protocol Coloring {
 
 typealias SelectableButton = Titled & CaseIterable & RawRepresentable<Int>
 
-typealias ShowingMenuButton = Titled & Coloring & CaseIterable
+typealias ShowingMenuButton = Titled & Coloring & CaseIterable & Comparable

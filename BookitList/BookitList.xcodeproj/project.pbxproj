@@ -38,6 +38,7 @@
 		637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C902ACC202200730C01 /* BLIndicatorView.swift */; };
 		637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */; };
 		637B5CD52ACD807A00730C01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5CD42ACD807A00730C01 /* SnapKit */; };
+		639E4CBD2AF152EA006646F4 /* BLShowingMenuButtonFromEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
 		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
@@ -77,7 +78,6 @@
 		63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */; };
 		63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */; };
 		63DA060E2AE78AC0007FF18E /* AllRecordsForBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */; };
-		63DA06142AE90B9D007FF18E /* BLStatusOfReadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */; };
 		63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */; };
 		63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */; };
 /* End PBXBuildFile section */
@@ -113,6 +113,7 @@
 		637B5C8C2ACB06D300730C01 /* AladinConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinConstant.swift; sourceTree = "<group>"; };
 		637B5C902ACC202200730C01 /* BLIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLIndicatorView.swift; sourceTree = "<group>"; };
 		637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLShowingMenuButtonFromEnum.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
 		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -150,7 +151,6 @@
 		63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinAPIManager.swift; sourceTree = "<group>"; };
 		63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowReadingBookCell.swift; sourceTree = "<group>"; };
 		63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordsForBookViewController.swift; sourceTree = "<group>"; };
-		63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLStatusOfReadingLabel.swift; sourceTree = "<group>"; };
 		63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordCell.swift; sourceTree = "<group>"; };
 		63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -225,8 +225,8 @@
 				637B5C902ACC202200730C01 /* BLIndicatorView.swift */,
 				63B5B3682AD1CA2100477536 /* BLTextField.swift */,
 				63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */,
+				639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */,
 				639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */,
-				63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */,
 				63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */,
 				63222D572AEA5BA70070F43A /* BLNoteTypeLabel.swift */,
 				63222D5D2AEBF4490070F43A /* BLContentWrappingTableView.swift */,
@@ -484,7 +484,6 @@
 			files = (
 				63222D5A2AEBC2240070F43A /* Date+.swift in Sources */,
 				63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */,
-				63DA06142AE90B9D007FF18E /* BLStatusOfReadingLabel.swift in Sources */,
 				637B5C632AC877B200730C01 /* BLDirectionView.swift in Sources */,
 				637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */,
 				63B5B36E2AD47CD500477536 /* ButtonProtocol.swift in Sources */,
@@ -500,6 +499,7 @@
 				63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */,
 				63A673572AC3FD13004F43F4 /* BookType.swift in Sources */,
 				637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */,
+				639E4CBD2AF152EA006646F4 /* BLShowingMenuButtonFromEnum.swift in Sources */,
 				637B5C802ACAA24100730C01 /* SearchBookViewModel.swift in Sources */,
 				63A6734D2AC34C2E004F43F4 /* ReadingHistory.swift in Sources */,
 				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
