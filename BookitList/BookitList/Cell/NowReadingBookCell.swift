@@ -14,7 +14,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
             let path = ImageFilePath.cover(bookID: book._id.stringValue)
             let url = ImageFileManager().makeFullFilePath(from: path)
             let provider = LocalFileImageDataProvider(fileURL: url)
-            let placeholder = BLDirectionView(symbolName: "photo", direction: nil)
+            let placeholder = BLDirectionView(symbolName: "book.circle", direction: book.title)
             coverImageView.kf.setImage(with: provider, placeholder: placeholder)
             titleLabel.text = book.title
         }
