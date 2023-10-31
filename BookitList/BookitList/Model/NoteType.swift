@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-enum NoteType: Int, CaseIterable, PersistableEnum {
+enum NoteType: Int, PersistableEnum {
     case quote
     case summary
     case thinking

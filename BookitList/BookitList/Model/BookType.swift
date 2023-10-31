@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-enum BookType: Int, CaseIterable, PersistableEnum {
+enum BookType: Int, PersistableEnum {
     case paper = 1
     case ebook
     case audio
@@ -23,3 +23,4 @@ extension BookType: ButtonMakable {
         }
     }
 }
+

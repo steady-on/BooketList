@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-enum StatusOfReading: Int, CaseIterable, PersistableEnum {
+enum StatusOfReading: Int, PersistableEnum {
     case notYet
     case reading
     case finished
