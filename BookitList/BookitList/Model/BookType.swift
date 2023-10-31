@@ -14,12 +14,20 @@ enum BookType: Int, PersistableEnum {
     case audio
 }
 
-extension BookType: ButtonMakable {
-    var buttonTitle: String {
+extension BookType: Titled {
+    var title: String {
         switch self {
         case .paper: return "종이책"
         case .ebook: return "전자책"
         case .audio: return "오디오북"
+        }
+    }
+    
+    var iconImageName: String {
+        switch self {
+        case .paper: return "book.closed"
+        case .ebook: return "ipad.homebutton"
+        case .audio: return "headphones"
         }
     }
 }

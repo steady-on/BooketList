@@ -60,7 +60,7 @@
 		63B5B35B2ACE88DE00477536 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B35A2ACE88DE00477536 /* UIImageView+.swift */; };
 		63B5B3692AD1CA2100477536 /* BLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B3682AD1CA2100477536 /* BLTextField.swift */; };
 		63B5B36B2AD475B400477536 /* BLSelectButtonFromEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */; };
-		63B5B36E2AD47CD500477536 /* ButtonMakable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B36D2AD47CD500477536 /* ButtonMakable.swift */; };
+		63B5B36E2AD47CD500477536 /* ButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B36D2AD47CD500477536 /* ButtonProtocol.swift */; };
 		63B5B3762AD52A2800477536 /* AddBookDetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B3752AD52A2800477536 /* AddBookDetailInfoViewModel.swift */; };
 		63B5B37B2AD6A6AE00477536 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B37A2AD6A6AE00477536 /* ImageFileManager.swift */; };
 		63B5B37D2AD6A6BC00477536 /* ImageFilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B37C2AD6A6BC00477536 /* ImageFilePath.swift */; };
@@ -133,7 +133,7 @@
 		63B5B35A2ACE88DE00477536 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		63B5B3682AD1CA2100477536 /* BLTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTextField.swift; sourceTree = "<group>"; };
 		63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLSelectButtonFromEnum.swift; sourceTree = "<group>"; };
-		63B5B36D2AD47CD500477536 /* ButtonMakable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMakable.swift; sourceTree = "<group>"; };
+		63B5B36D2AD47CD500477536 /* ButtonProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonProtocol.swift; sourceTree = "<group>"; };
 		63B5B3752AD52A2800477536 /* AddBookDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookDetailInfoViewModel.swift; sourceTree = "<group>"; };
 		63B5B37A2AD6A6AE00477536 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		63B5B37C2AD6A6BC00477536 /* ImageFilePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilePath.swift; sourceTree = "<group>"; };
@@ -303,11 +303,11 @@
 		63A673472AC34411004F43F4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				63A673482AC3447B004F43F4 /* StatusOfReading.swift */,
 				63A673562AC3FD13004F43F4 /* BookType.swift */,
+				63A673482AC3447B004F43F4 /* StatusOfReading.swift */,
+				63222D552AEA569A0070F43A /* NoteType.swift */,
 				631821EB2AD8016B0034573B /* Caution.swift */,
 				637B5C7D2ACAA13900730C01 /* Observable.swift */,
-				63222D552AEA569A0070F43A /* NoteType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,7 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				63222D5B2AEBC80C0070F43A /* ReuseIdentifier.swift */,
-				63B5B36D2AD47CD500477536 /* ButtonMakable.swift */,
+				63B5B36D2AD47CD500477536 /* ButtonProtocol.swift */,
 				631821ED2AD983B90034573B /* Cautionable.swift */,
 			);
 			path = Protocol;
@@ -487,7 +487,7 @@
 				63DA06142AE90B9D007FF18E /* BLStatusOfReadingLabel.swift in Sources */,
 				637B5C632AC877B200730C01 /* BLDirectionView.swift in Sources */,
 				637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */,
-				63B5B36E2AD47CD500477536 /* ButtonMakable.swift in Sources */,
+				63B5B36E2AD47CD500477536 /* ButtonProtocol.swift in Sources */,
 				631821EA2AD7DEBE0034573B /* FileManageError.swift in Sources */,
 				637B5C602AC86BE000730C01 /* BaseView.swift in Sources */,
 				63222D542AEA4B890070F43A /* SimpleNoteCell.swift in Sources */,
