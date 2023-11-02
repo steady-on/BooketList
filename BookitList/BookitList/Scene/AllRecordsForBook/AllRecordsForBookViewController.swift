@@ -117,7 +117,7 @@ class AllRecordsForBookViewController: BaseViewController {
         textView.textColor = .secondaryLabel
         textView.textContainerInset = .zero
         textView.textContainer.lineBreakMode = .byTruncatingTail
-        textView.textContainer.maximumNumberOfLines = 0
+        textView.textContainer.maximumNumberOfLines = 1
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.isSelectable = false
@@ -161,7 +161,7 @@ class AllRecordsForBookViewController: BaseViewController {
             allRecordsView.addSubview(component)
         }
         
-//        overviewButton.addTarget(self, action: #selector(overviewButtonTapped), for: .touchUpInside)
+        overviewButton.addTarget(self, action: #selector(overviewButtonTapped), for: .touchUpInside)
         
         let infoStackComponents = [titleLabel, authorLabel]
         infoStackComponents.forEach { component in
