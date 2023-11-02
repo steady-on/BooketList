@@ -126,6 +126,8 @@ class AllRecordsForBookViewController: BaseViewController {
     
     private let noteTableHeaderView = BLTitleSupplementaryButton(title: "작성된 노트")
     
+    private let emptyNoteView = BLDirectionView(symbolName: "note", direction: "아직 작성된 노트가 없습니다.")
+    
     private let noteTableView: BLContentWrappingTableView = {
         let tableView = BLContentWrappingTableView()
         tableView.register(SimpleNoteCell.self, forCellReuseIdentifier: SimpleNoteCell.identifier)
@@ -154,7 +156,7 @@ class AllRecordsForBookViewController: BaseViewController {
             contentView.addSubview(component)
         }
         
-        let allRecordsComponents = [infoStackView, overviewButton, overviewTextView, noteTableHeaderView, noteTableView]
+        let allRecordsComponents = [infoStackView, overviewButton, overviewTextView, noteTableHeaderView, noteTableView, emptyNoteView]
         allRecordsComponents.forEach { component in
             allRecordsView.addSubview(component)
         }
@@ -223,6 +225,12 @@ class AllRecordsForBookViewController: BaseViewController {
             make.leading.equalTo(allRecordsView.layoutMarginsGuide)
         }
         
+        emptyNoteView.snp.makeConstraints { make in
+            make.top.equalTo(noteTableHeaderView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         noteTableView.snp.makeConstraints { make in
             make.top.equalTo(noteTableHeaderView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
@@ -256,11 +264,13 @@ class AllRecordsForBookViewController: BaseViewController {
         overviewTextView.text = book.overview
         
         updateNoteSnapshot(for: viewModel.notes)
+        emptyNoteView.isHidden = viewModel.notes.isEmpty == false
     }
     
     @objc private func addNoteButtonTapped() {
-        let writeNoteViewController = WriteNoteViewController(book: viewModel.book.value) {
-            self.updateNoteSnapshot(for: self.viewModel.notes)
+        let writeNoteViewController = WriteNoteViewController(book: viewModel.book.value) { [weak self] in
+            self?.updateNoteSnapshot(for: self?.viewModel.notes ?? [])
+            self?.emptyNoteView.isHidden = self?.viewModel.notes.isEmpty == false
         }
         let navigationController = UINavigationController(rootViewController: writeNoteViewController)
         self.present(navigationController, animated: true)
