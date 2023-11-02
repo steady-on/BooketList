@@ -174,9 +174,13 @@ extension ReadingBoardViewController {
         let nowReadingBookCellRegistration = UICollectionView.CellRegistration<NowReadingBookCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
             cell.detailInfoButtonHandler = {
-                let book = self.viewModel.selectNowReadingBook(for: indexPath)
-                let allRecordsForBookViewController = AllRecordsForBookViewController(book: book)
+                let allRecordsForBookViewController = AllRecordsForBookViewController(book: itemIdentifier)
                 self.navigationController?.pushViewController(allRecordsForBookViewController, animated: true)
+            }
+            cell.addNoteButtonHandler = {
+                let writeNoteViewController = WriteNoteViewController(book: itemIdentifier)
+                let navigationController = UINavigationController(rootViewController: writeNoteViewController)
+                self.present(navigationController, animated: true)
             }
         }
         
