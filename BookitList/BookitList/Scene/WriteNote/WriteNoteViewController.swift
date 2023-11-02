@@ -118,11 +118,28 @@ class WriteNoteViewController: BaseViewController {
     }
     
     @objc private func pageButtonTapped() {
-        let pageInputViewController = PageInputSheetViewController(bookTitle: viewModel.book.value.title, page: viewModel.page.value) { page in
-            self.viewModel.page.value = page
+        let pageInputAlert = UIAlertController(title: "몇 페이지에 대한 노트인가요?", message: nil, preferredStyle: .alert)
+        pageInputAlert.addTextField { [weak self] textField in
+            if let page = self?.viewModel.page.value {
+                textField.text = "\(page)"
+            }
+            textField.keyboardType = .numberPad
+            textField.delegate = self
+            textField.clearButtonMode = .always
+            textField.placeholder = "숫자만 입력 가능"
         }
-        let navigationController = UINavigationController(rootViewController: pageInputViewController)
-        present(navigationController, animated: true)
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let input = UIAlertAction(title: "입력", style: .default) { [weak self] _ in
+            let inputValue = pageInputAlert.textFields?.first?.text ?? ""
+            let page = Int(inputValue)
+            self?.viewModel.page.value = page
+        }
+        
+        pageInputAlert.addAction(cancel)
+        pageInputAlert.addAction(input)
+        
+        present(pageInputAlert, animated: true)
     }
     
     private func presentCloseAlert() {
@@ -143,5 +160,13 @@ class WriteNoteViewController: BaseViewController {
 extension WriteNoteViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         viewModel.content.value = textView.text
+    }
+}
+
+extension WriteNoteViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard string.isEmpty || Int(string) != nil else { return false }
+        
+        return true
     }
 }
