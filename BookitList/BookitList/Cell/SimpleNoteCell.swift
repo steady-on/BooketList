@@ -76,7 +76,8 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
     
     override func setConstraints() {
         backdropView.snp.makeConstraints { make in
-            make.edges.equalTo(layoutMarginsGuide)
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.verticalEdges.equalToSuperview().inset(5)
         }
         
         typeLabel.snp.makeConstraints { make in
