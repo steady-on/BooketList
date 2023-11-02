@@ -13,7 +13,7 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
             typeLabel.setNoteType(to: note.type)
             
             if let page = note.page {
-                pageLabel.text = "\(page)쪽"
+                pageLabel.text = "P. \(page)"
             }
             
             createdAtLabel.text = note.createdAt.basicString
@@ -42,6 +42,7 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .callout)
         label.textColor = .secondaryLabel
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -72,6 +73,9 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
         components.forEach { component in
             backdropView.addSubview(component)
         }
+        
+        createdAtLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        pageLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
     }
     
     override func setConstraints() {
@@ -86,6 +90,7 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
         
         pageLabel.snp.makeConstraints { make in
             make.leading.equalTo(typeLabel.snp.trailing).offset(8)
+            make.trailing.lessThanOrEqualTo(createdAtLabel.snp.leading).offset(-8)
             make.centerY.equalTo(typeLabel)
         }
         
