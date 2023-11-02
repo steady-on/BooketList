@@ -42,7 +42,6 @@
 		639E4CC12AF184F3006646F4 /* WriteNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */; };
 		639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */; };
 		639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */; };
-		639E4CCA2AF36811006646F4 /* PageInputSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
 		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
@@ -121,7 +120,6 @@
 		639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewController.swift; sourceTree = "<group>"; };
 		639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewController.swift; sourceTree = "<group>"; };
 		639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewModel.swift; sourceTree = "<group>"; };
-		639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewModel.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
 		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -269,7 +267,6 @@
 				639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */,
 				639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */,
 				639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */,
-				639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */,
 			);
 			path = WriteNote;
 			sourceTree = "<group>";
@@ -504,7 +501,6 @@
 			files = (
 				63222D5A2AEBC2240070F43A /* Date+.swift in Sources */,
 				63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */,
-				639E4CCA2AF36811006646F4 /* PageInputSheetViewModel.swift in Sources */,
 				637B5C632AC877B200730C01 /* BLDirectionView.swift in Sources */,
 				637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */,
 				63B5B36E2AD47CD500477536 /* ButtonProtocol.swift in Sources */,
