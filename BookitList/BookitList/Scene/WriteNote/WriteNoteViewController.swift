@@ -10,6 +10,7 @@ import UIKit
 class WriteNoteViewController: BaseViewController {
     
     private let viewModel: WriteNoteViewModel
+    private let dismissHandler: (() -> Void)?
     
     private lazy var noteTypeButton: BLShowingMenuButtonFromEnum<NoteType> = {
         BLShowingMenuButtonFromEnum(selectedCase: .quote) { [weak self] selectedCase in
@@ -119,7 +120,9 @@ class WriteNoteViewController: BaseViewController {
     
     @objc private func saveButtonTapped() {
         viewModel.saveNote()
-        dismiss(animated: true)
+        dismiss(animated: true) { [weak self] in
+            self?.dismissHandler?()
+        }
     }
     
     @objc private func pageButtonTapped() {

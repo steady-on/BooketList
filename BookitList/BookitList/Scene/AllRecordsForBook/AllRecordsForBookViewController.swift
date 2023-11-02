@@ -236,6 +236,12 @@ class AllRecordsForBookViewController: BaseViewController {
         }
     }
     
+    override func configureNavigationBar() {
+        let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "note.text.badge.plus"), style: .plain, target: self, action: #selector(addNoteButtonTapped))
+        
+        navigationItem.rightBarButtonItems = [addNoteButton]
+    }
+    
     private func configureComponents(for book: Book) {
         let imagePath = viewModel.checkCoverImagePath()
         let provider = LocalFileImageDataProvider(fileURL: imagePath)
@@ -247,11 +253,17 @@ class AllRecordsForBookViewController: BaseViewController {
         let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
         authorLabel.text = authors
         statusOfReadingLabel.setSelectedCase(to: book.statusOfReading)
-//        configureStatusOfReadingButtonMenu(now: book.statusOfReading)
         overviewTextView.text = book.overview
         
-        let notes = Array(book.notes)
-        updateNoteSnapshot(for: notes)
+        updateNoteSnapshot(for: viewModel.notes)
+    }
+    
+    @objc private func addNoteButtonTapped() {
+        let writeNoteViewController = WriteNoteViewController(book: viewModel.book.value) {
+            self.updateNoteSnapshot(for: self.viewModel.notes)
+        }
+        let navigationController = UINavigationController(rootViewController: writeNoteViewController)
+        self.present(navigationController, animated: true)
     }
     
     @objc private func overviewButtonTapped() {
@@ -259,22 +271,6 @@ class AllRecordsForBookViewController: BaseViewController {
         overviewTextView.textContainer.maximumNumberOfLines = currentNumberOfLines == 0 ? 1 : 0
         overviewTextView.invalidateIntrinsicContentSize()
     }
-    
-//    private func configureStatusOfReadingButtonMenu(now: StatusOfReading) {
-//        let actions: [UIAction] = StatusOfReading.allCases.map { status in
-//            UIAction(title: status.title) { _ in
-////                self.statusOfReadingLabel.setStatus(for: status)
-//                self.viewModel.updateStatusOfReading(to: status)
-//            }
-//        }
-//        
-//        actions[now.rawValue].state = .on
-//        statusOfReadingLabel.setStatus(for: now)
-//        
-//        let menu = UIMenu(title: "독서 상태", options: .singleSelection, children: actions)
-//        
-//        statusOfReadingLabel.menu = menu
-//    }
 }
 
 extension AllRecordsForBookViewController {

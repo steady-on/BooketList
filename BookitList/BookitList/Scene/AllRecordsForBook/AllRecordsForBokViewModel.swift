@@ -10,6 +10,10 @@ import Foundation
 final class AllRecordsForBokViewModel: Cautionable {
     
     let book: Observable<Book>
+    var notes: [Note] {
+        let noteResults = book.value.notes.sorted(byKeyPath: "createdAt", ascending: false)
+        return Array(noteResults)
+    }
     
     let caution = Observable(Caution(isPresent: false, willDismiss: false))
     
