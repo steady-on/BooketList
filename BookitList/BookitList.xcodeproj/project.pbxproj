@@ -39,7 +39,9 @@
 		637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */; };
 		637B5CD52ACD807A00730C01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5CD42ACD807A00730C01 /* SnapKit */; };
 		639E4CBD2AF152EA006646F4 /* BLShowingMenuButtonFromEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */; };
+		639E4CC12AF184F3006646F4 /* WriteNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */; };
 		639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */; };
+		639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */; };
 		639E4CCA2AF36811006646F4 /* PageInputSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
 		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
@@ -116,7 +118,9 @@
 		637B5C902ACC202200730C01 /* BLIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLIndicatorView.swift; sourceTree = "<group>"; };
 		637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLShowingMenuButtonFromEnum.swift; sourceTree = "<group>"; };
+		639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewController.swift; sourceTree = "<group>"; };
 		639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewController.swift; sourceTree = "<group>"; };
+		639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewModel.swift; sourceTree = "<group>"; };
 		639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewModel.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
 		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
@@ -204,6 +208,7 @@
 				637B5C542AC6DB3800730C01 /* SeachBook */,
 				63B5B3562ACE801F00477536 /* AddBookDetailInfo */,
 				63B44DAC2AE7587B009813B2 /* AllRecordsForBook */,
+				639E4CBF2AF184D3006646F4 /* WriteNote */,
 				637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */,
 				637B5C502AC4E79900730C01 /* NoteViewController.swift */,
 				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
@@ -261,6 +266,8 @@
 		639E4CBF2AF184D3006646F4 /* WriteNote */ = {
 			isa = PBXGroup;
 			children = (
+				639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */,
+				639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */,
 				639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */,
 				639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */,
 			);
@@ -524,6 +531,7 @@
 				637B5C732AC987DB00730C01 /* BLBookmarkImageView.swift in Sources */,
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63A673462AC33BCD004F43F4 /* Book.swift in Sources */,
+				639E4CC12AF184F3006646F4 /* WriteNoteViewController.swift in Sources */,
 				637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */,
 				637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
@@ -551,6 +559,7 @@
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */,
 				639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */,
+				639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */,
 				637B5C6F2AC97D2300730C01 /* BaseCollectionViewCell.swift in Sources */,
 				63A673552AC3F555004F43F4 /* PurchaseHistory.swift in Sources */,
 				63A673492AC3447B004F43F4 /* StatusOfReading.swift in Sources */,

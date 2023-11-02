@@ -13,11 +13,20 @@ final class Note: Object {
     @Persisted var createdAt: Date
     @Persisted var type: NoteType
     @Persisted var page: Int?
-    @Persisted var content: String?
+    @Persisted var content: String
     
     @Persisted var haveImage: Bool
     @Persisted var comments: List<Comment>
     
     @Persisted var readingHistory: ReadingHistory?
     @Persisted(originProperty: "notes") var book: LinkingObjects<Book>
+    
+    convenience init(type: NoteType, page: Int?, content: String) {
+        self.init()
+        
+        self.createdAt = Date.now
+        self.type = type
+        self.page = page
+        self.content = content
+    }
 }
