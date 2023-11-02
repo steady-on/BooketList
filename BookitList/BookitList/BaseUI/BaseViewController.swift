@@ -24,6 +24,7 @@ class BaseViewController: UIViewController {
         configureHiararchy()
         setConstraints()
         bindComponentWithObservable()
+        configureNavigationBar()
     }
 
     func configureHiararchy() {
@@ -33,6 +34,8 @@ class BaseViewController: UIViewController {
     func setConstraints() {}
     
     func bindComponentWithObservable() {}
+    
+    func configureNavigationBar() {}
     
     func presentCautionAlert(title: String?, message: String? = nil, handler: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)

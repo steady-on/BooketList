@@ -39,7 +39,6 @@ class PageInputSheetViewController: BaseViewController {
         
         pageTextField.delegate = self
         
-        configureNavigationBar()
         modalTransitionStyle = .partialCurl
         sheetPresentationController?.detents = [.medium()]
         sheetPresentationController?.prefersGrabberVisible = true
@@ -61,7 +60,7 @@ class PageInputSheetViewController: BaseViewController {
         }
     }
     
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "입력", style: .done, target: self, action: #selector(inputButtonTapped))
     }
     

@@ -38,7 +38,6 @@ final class ReadingBoardViewController: BaseViewController {
     override func configureHiararchy() {
         super.configureHiararchy()
         
-        configureNavigationBar()
         configureCollectionView()
         
         let components = [nowReadingBookTitleButton, nowReadingBookCollectionView, waitingBookTitleButton, waitingBookCollectionView, emptyNowReadingBookView, emptyWaitingBookView, placeholderView]
@@ -86,7 +85,7 @@ final class ReadingBoardViewController: BaseViewController {
         }
     }
     
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(pushSearchBookView))
     }
 

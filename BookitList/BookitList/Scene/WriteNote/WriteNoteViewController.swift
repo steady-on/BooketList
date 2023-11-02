@@ -55,8 +55,6 @@ class WriteNoteViewController: BaseViewController {
         super.configureHiararchy()
         view.directionalLayoutMargins = .init(top: 0, leading: 16, bottom: 0, trailing: 16)
         
-        configureNavigationBar()
-        
         contentTextView.delegate = self
         
         let components = [noteTypeButton, pageButton, contentTextView]
@@ -100,7 +98,7 @@ class WriteNoteViewController: BaseViewController {
         }
     }
     
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonTapped))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveButtonTapped))
     }
