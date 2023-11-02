@@ -39,6 +39,8 @@
 		637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */; };
 		637B5CD52ACD807A00730C01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5CD42ACD807A00730C01 /* SnapKit */; };
 		639E4CBD2AF152EA006646F4 /* BLShowingMenuButtonFromEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */; };
+		639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */; };
+		639E4CCA2AF36811006646F4 /* PageInputSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
 		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
@@ -114,6 +116,8 @@
 		637B5C902ACC202200730C01 /* BLIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLIndicatorView.swift; sourceTree = "<group>"; };
 		637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLShowingMenuButtonFromEnum.swift; sourceTree = "<group>"; };
+		639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewController.swift; sourceTree = "<group>"; };
+		639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewModel.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
 		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -252,6 +256,15 @@
 				637B5C8C2ACB06D300730C01 /* AladinConstant.swift */,
 			);
 			path = NameSpace;
+			sourceTree = "<group>";
+		};
+		639E4CBF2AF184D3006646F4 /* WriteNote */ = {
+			isa = PBXGroup;
+			children = (
+				639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */,
+				639E4CC92AF36811006646F4 /* PageInputSheetViewModel.swift */,
+			);
+			path = WriteNote;
 			sourceTree = "<group>";
 		};
 		639F358A2AE5B1F500226402 /* ReadingBoard */ = {
@@ -484,6 +497,7 @@
 			files = (
 				63222D5A2AEBC2240070F43A /* Date+.swift in Sources */,
 				63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */,
+				639E4CCA2AF36811006646F4 /* PageInputSheetViewModel.swift in Sources */,
 				637B5C632AC877B200730C01 /* BLDirectionView.swift in Sources */,
 				637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */,
 				63B5B36E2AD47CD500477536 /* ButtonProtocol.swift in Sources */,
@@ -529,6 +543,7 @@
 				63222D602AEFE9E50070F43A /* AllRecordsForBokViewModel.swift in Sources */,
 				631821EE2AD983B90034573B /* Cautionable.swift in Sources */,
 				63023E6F2AE1CF18000B26A9 /* WaitingBookCell.swift in Sources */,
+				639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */,
 				63A673512AC35AE3004F43F4 /* Note.swift in Sources */,
 				63B5B37D2AD6A6BC00477536 /* ImageFilePath.swift in Sources */,
 				63B5B3692AD1CA2100477536 /* BLTextField.swift in Sources */,
