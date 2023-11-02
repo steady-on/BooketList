@@ -21,6 +21,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     }
     
     var detailInfoButtonHandler: (() -> Void)!
+    var addNoteButtonHandler: (() -> Void)!
     
     private let coverImageView = {
         let imageView = UIImageView()
@@ -40,7 +41,8 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .title2)
         label.textColor = .white
-        label.numberOfLines = 0
+        label.numberOfLines = 3
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -121,6 +123,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
 //        }
         
         detailInfoButton.addTarget(self, action: #selector(detailInfoButtonTapped), for: .touchUpInside)
+        playButton.addTarget(self, action: #selector(addNoteButtonTapped), for: .touchUpInside)
     }
     
     func toggleIsHiddenAccessaryView() {
@@ -187,5 +190,9 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     @objc func detailInfoButtonTapped() {
         detailInfoButtonHandler()
+    }
+    
+    @objc func addNoteButtonTapped() {
+        addNoteButtonHandler()
     }
 }
