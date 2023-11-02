@@ -42,12 +42,13 @@ class WriteNoteViewController: BaseViewController {
         return textView
     }()
     
-    init(book: Book) {
     private lazy var saveBarButton: UIBarButtonItem = {
         UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveButtonTapped))
     }()
     
+    init(book: Book, dismissHandler: (() -> Void)? = nil) {
         self.viewModel = WriteNoteViewModel(book: book)
+        self.dismissHandler = dismissHandler
         super.init()
     }
     
@@ -150,8 +151,8 @@ class WriteNoteViewController: BaseViewController {
         let alert = UIAlertController(title: "앗, 잠시만요!", message: "지금까지 작성한 내용이 모두 사라집니다. 정말 창을 닫을까요?", preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "아니요!", style: .cancel)
-        let okay = UIAlertAction(title: "창 닫기", style: .destructive) { _ in
-            self.dismiss(animated: true)
+        let okay = UIAlertAction(title: "창 닫기", style: .destructive) { [weak self] _ in
+            self?.dismiss(animated: true)
         }
         
         alert.addAction(cancel)
