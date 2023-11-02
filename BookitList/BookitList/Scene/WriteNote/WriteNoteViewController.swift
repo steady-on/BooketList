@@ -43,6 +43,10 @@ class WriteNoteViewController: BaseViewController {
     }()
     
     init(book: Book) {
+    private lazy var saveBarButton: UIBarButtonItem = {
+        UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveButtonTapped))
+    }()
+    
         self.viewModel = WriteNoteViewModel(book: book)
         super.init()
     }
@@ -94,13 +98,13 @@ class WriteNoteViewController: BaseViewController {
         }
         
         viewModel.content.bind { [weak self] content in
-            self?.navigationItem.rightBarButtonItem?.isEnabled = content.isEmpty == false
+            self?.saveBarButton.isEnabled = content.isEmpty == false
         }
     }
     
     override func configureNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeButtonTapped))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveButtonTapped))
+        navigationItem.rightBarButtonItem = saveBarButton
     }
     
     @objc private func closeButtonTapped() {
