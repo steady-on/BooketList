@@ -42,6 +42,7 @@
 		639E4CC12AF184F3006646F4 /* WriteNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */; };
 		639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */; };
 		639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */; };
+		639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
 		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
@@ -120,6 +121,7 @@
 		639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewController.swift; sourceTree = "<group>"; };
 		639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewController.swift; sourceTree = "<group>"; };
 		639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewModel.swift; sourceTree = "<group>"; };
+		639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
 		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				63023E6E2AE1CF18000B26A9 /* WaitingBookCell.swift */,
 				63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */,
 				63222D532AEA4B890070F43A /* SimpleNoteCell.swift */,
+				639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */,
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */,
+				639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */,
 				639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */,
 				639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */,
 				637B5C6F2AC97D2300730C01 /* BaseCollectionViewCell.swift in Sources */,

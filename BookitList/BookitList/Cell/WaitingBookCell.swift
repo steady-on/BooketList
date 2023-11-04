@@ -34,13 +34,11 @@ final class WaitingBookCell: BaseCollectionViewCell {
     }()
     
     override func configureHiararchy() {
-        
         addSubview(backdropView)
         backdropView.addSubview(titleLabel)
     }
     
     private func setConstraints(for size: Size?) {
-        
         let minimumWidth = titleLabel.font.lineHeight + backdropView.layoutMargins.left + backdropView.layoutMargins.right
         let maximumHeight = bounds.height
         let standardHeight = maximumHeight * 0.8
