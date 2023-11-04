@@ -9,16 +9,7 @@ import UIKit
 
 class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
     var note: Note! {
-        didSet {
-            typeLabel.setNoteType(to: note.type)
-            
-            if let page = note.page {
-                pageLabel.text = "P. \(page)"
-            }
-            
-            createdAtLabel.text = note.createdAt.basicString
-            noteContentTextView.text = note.content
-        }
+        didSet { configureComponents(for: note) }
     }
     
     private let backdropView: UIView = {
@@ -46,14 +37,6 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
         return label
     }()
     
-    private let noteImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.cornerRadius = 10
-        imageView.clipsToBounds = true
-        return imageView
-    }()
-    
     private let noteContentTextView: UITextView = {
         let textView = UITextView()
         textView.font = .preferredFont(forTextStyle: .body)
@@ -69,7 +52,7 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
         backgroundColor = .clear
         addSubview(backdropView)
         
-        let components = [typeLabel, pageLabel, createdAtLabel, noteImageView, noteContentTextView]
+        let components = [typeLabel, pageLabel, createdAtLabel, noteContentTextView]
         components.forEach { component in
             backdropView.addSubview(component)
         }
@@ -99,16 +82,21 @@ class SimpleNoteCell: BaseTableViewCell, ReuseIdentifier {
             make.centerY.equalTo(typeLabel)
         }
         
-        noteImageView.snp.makeConstraints { make in
-            make.top.equalTo(typeLabel.snp.bottom).offset(4)
-            make.horizontalEdges.equalTo(backdropView.layoutMarginsGuide)
-            make.height.equalTo(noteImageView.snp.width)
-        }
-        
         noteContentTextView.snp.makeConstraints { make in
             make.top.equalTo(typeLabel.snp.bottom).offset(4)
             make.horizontalEdges.equalTo(backdropView.layoutMarginsGuide)
             make.bottom.equalTo(backdropView.layoutMarginsGuide)
         }
+    }
+    
+    private func configureComponents(for note: Note) {
+        typeLabel.setNoteType(to: note.type)
+        
+        if let page = note.page {
+            pageLabel.text = "P. \(page)"
+        }
+        
+        createdAtLabel.text = note.createdAt.basicString
+        noteContentTextView.text = note.content
     }
 }
