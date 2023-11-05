@@ -38,7 +38,7 @@ final class MyNoteViewModel: Cautionable {
     func searchNotes(for keyword: String) -> [Note] {
         guard let notes else { return [] }
         let result = notes.where {
-            $0.content.contains(keyword) || $0.book.title.contains(keyword) || $0.book.originalTitle.contains(keyword)
+            $0.content.contains(keyword, options: .caseInsensitive) || $0.book.title.contains(keyword, options: .caseInsensitive) || $0.book.originalTitle.contains(keyword, options: .caseInsensitive)
         }
         return Array(result)
     }

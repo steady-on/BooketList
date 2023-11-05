@@ -122,9 +122,10 @@ extension MyNoteViewController: UITableViewDelegate {
             return
         }
         
-        let editNoteViewController = EditNoteViewController(note: selectedNote) {
+        let editNoteViewController = EditNoteViewController(note: selectedNote) { [weak self] in
             guard let cell = tableView.cellForRow(at: indexPath) as? NoteTableViewCell else { return }
             cell.note = selectedNote
+            self?.viewModel.fetchNotes()
         }
         let navigationController = UINavigationController(rootViewController: editNoteViewController)
         present(navigationController, animated: true)
