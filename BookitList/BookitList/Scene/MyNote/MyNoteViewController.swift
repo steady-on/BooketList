@@ -42,7 +42,7 @@ final class MyNoteViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        updateNoteSnapshot(for: [])
         viewModel.fetchNotes()
     }
     
