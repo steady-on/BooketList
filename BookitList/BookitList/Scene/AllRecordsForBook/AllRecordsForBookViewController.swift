@@ -147,6 +147,8 @@ class AllRecordsForBookViewController: BaseViewController {
     override func configureHiararchy() {
         super.configureHiararchy()
         
+        noteTableView.delegate = self
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -242,6 +244,11 @@ class AllRecordsForBookViewController: BaseViewController {
         viewModel.book.bind { [weak self] book in
             self?.configureComponents(for: book)
         }
+        
+        viewModel.notes.bind { [weak self] notes in
+            self?.updateNoteSnapshot(for: notes)
+            self?.emptyNoteView.isHidden = notes.isEmpty == false
+        }
     }
     
     override func configureNavigationBar() {
@@ -262,15 +269,11 @@ class AllRecordsForBookViewController: BaseViewController {
         authorLabel.text = authors
         statusOfReadingLabel.setSelectedCase(to: book.statusOfReading)
         overviewTextView.text = book.overview
-        
-        updateNoteSnapshot(for: viewModel.notes)
-        emptyNoteView.isHidden = viewModel.notes.isEmpty == false
     }
     
     @objc private func addNoteButtonTapped() {
         let writeNoteViewController = WriteNoteViewController(book: viewModel.book.value) { [weak self] in
-            self?.updateNoteSnapshot(for: self?.viewModel.notes ?? [])
-            self?.emptyNoteView.isHidden = self?.viewModel.notes.isEmpty == false
+            self?.viewModel.fetchNotes()
         }
         let navigationController = UINavigationController(rootViewController: writeNoteViewController)
         self.present(navigationController, animated: true)
@@ -297,5 +300,23 @@ extension AllRecordsForBookViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(notes)
         noteDataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension AllRecordsForBookViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedNote = noteDataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        
+        let editNoteViewController = EditNoteViewController(note: selectedNote) { [weak self] in
+            guard let cell = tableView.cellForRow(at: indexPath) as? SimpleNoteCell else { return }
+            cell.note = selectedNote
+            self?.viewModel.fetchNotes()
+        }
+        let navigationController = UINavigationController(rootViewController: editNoteViewController)
+        present(navigationController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
