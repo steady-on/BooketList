@@ -70,6 +70,15 @@ final class MyNoteViewController: BaseViewController {
         navigationItem.title = "나의 노트"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
+        
+        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(navigationSearchButtonTapped))
+
+        navigationItem.rightBarButtonItem = searchButton
+        
+    }
+    
+    @objc private func navigationSearchButtonTapped() {
+        searchController.searchBar.becomeFirstResponder()
     }
 }
 
