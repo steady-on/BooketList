@@ -11,6 +11,8 @@ import RealmSwift
 final class MyNoteViewModel: Cautionable {
     let notes: Observable<[Note]> = Observable([])
     
+    var isNotesEmpty: Bool { notes.value.isEmpty }
+    
     let caution = Observable(Caution(isPresent: false, willDismiss: false))
     
     private lazy var realmRepository = try? RealmRepository()

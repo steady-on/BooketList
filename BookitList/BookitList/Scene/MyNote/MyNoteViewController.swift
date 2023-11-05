@@ -15,7 +15,6 @@ final class MyNoteViewController: BaseViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "책제목, 노트내용..."
         searchController.searchBar.searchTextField.clearButtonMode = .always
-        searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchBar.returnKeyType = .search
         return searchController
     }()
@@ -26,10 +25,13 @@ final class MyNoteViewController: BaseViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         return tableView
     }()
     
     private var noteDataSource: UITableViewDiffableDataSource<Int, Note>!
+    
+    private let placeholderView = BLDirectionView(symbolName: "doc", direction: "아직 작성된 노트가 없습니다.\n책을 읽으면서 여러가지 노트를 남겨보세요.\n아직 등록된 책이 없다면, 도서부터 등록해보세요!")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,8 @@ final class MyNoteViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         viewModel.fetchNotes()
+        placeholderView.isHidden = viewModel.isNotesEmpty == false
+        searchController.searchBar.searchTextField.isEnabled = viewModel.isNotesEmpty == false
         updateNoteSnapshot(for: viewModel.notes.value)
     }
     
@@ -46,12 +50,19 @@ final class MyNoteViewController: BaseViewController {
         super.configureHiararchy()
         configureNoteDataSource()
         
-        view.addSubview(noteTableView)
+        let components = [noteTableView, placeholderView]
+        components.forEach { component in
+            view.addSubview(component)
+        }
     }
     
     override func setConstraints() {
         noteTableView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        placeholderView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)            
         }
     }
     
