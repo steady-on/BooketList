@@ -44,6 +44,8 @@
 		639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */; };
 		639E4CD82AF68896006646F4 /* MyNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD72AF68896006646F4 /* MyNoteViewModel.swift */; };
 		639E4CDA2AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD92AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift */; };
+		639E4CDD2AF7ADDF006646F4 /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CDC2AF7ADDF006646F4 /* EditNoteViewController.swift */; };
+		639E4CDF2AF7AE30006646F4 /* EditNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CDE2AF7AE30006646F4 /* EditNoteViewModel.swift */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
 		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
@@ -124,6 +126,8 @@
 		639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		639E4CD72AF68896006646F4 /* MyNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoteViewModel.swift; sourceTree = "<group>"; };
 		639E4CD92AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoteSearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		639E4CDC2AF7ADDF006646F4 /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
+		639E4CDE2AF7AE30006646F4 /* EditNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewModel.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
 		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				63B44DAC2AE7587B009813B2 /* AllRecordsForBook */,
 				639E4CBF2AF184D3006646F4 /* WriteNote */,
 				637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */,
+				639E4CDB2AF7ADB9006646F4 /* EditNote */,
 				639E4CD62AF6887E006646F4 /* MyNote */,
 				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
 			);
@@ -283,6 +288,15 @@
 				639E4CD92AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift */,
 			);
 			path = MyNote;
+			sourceTree = "<group>";
+		};
+		639E4CDB2AF7ADB9006646F4 /* EditNote */ = {
+			isa = PBXGroup;
+			children = (
+				639E4CDC2AF7ADDF006646F4 /* EditNoteViewController.swift */,
+				639E4CDE2AF7AE30006646F4 /* EditNoteViewModel.swift */,
+			);
+			path = EditNote;
 			sourceTree = "<group>";
 		};
 		639F358A2AE5B1F500226402 /* ReadingBoard */ = {
@@ -519,6 +533,7 @@
 				637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */,
 				63B5B36E2AD47CD500477536 /* ButtonProtocol.swift in Sources */,
 				631821EA2AD7DEBE0034573B /* FileManageError.swift in Sources */,
+				639E4CDF2AF7AE30006646F4 /* EditNoteViewModel.swift in Sources */,
 				637B5C602AC86BE000730C01 /* BaseView.swift in Sources */,
 				63222D542AEA4B890070F43A /* SimpleNoteCell.swift in Sources */,
 				63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */,
@@ -561,6 +576,7 @@
 				637B5C8D2ACB06D300730C01 /* AladinConstant.swift in Sources */,
 				63222D602AEFE9E50070F43A /* AllRecordsForBokViewModel.swift in Sources */,
 				631821EE2AD983B90034573B /* Cautionable.swift in Sources */,
+				639E4CDD2AF7ADDF006646F4 /* EditNoteViewController.swift in Sources */,
 				63023E6F2AE1CF18000B26A9 /* WaitingBookCell.swift in Sources */,
 				639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */,
 				63A673512AC35AE3004F43F4 /* Note.swift in Sources */,

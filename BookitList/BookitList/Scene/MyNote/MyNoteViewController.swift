@@ -44,15 +44,13 @@ final class MyNoteViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         viewModel.fetchNotes()
-        placeholderView.isHidden = viewModel.isNotesEmpty == false
-        searchController.searchBar.searchTextField.isEnabled = viewModel.isNotesEmpty == false
-        updateNoteSnapshot(for: viewModel.noteArray.value)
     }
     
     override func configureHiararchy() {
         super.configureHiararchy()
         
         definesPresentationContext = true
+        noteTableView.delegate = self
         configureNoteDataSource()
         
         let components = [noteTableView, placeholderView]
@@ -79,7 +77,14 @@ final class MyNoteViewController: BaseViewController {
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(navigationSearchButtonTapped))
 
         navigationItem.rightBarButtonItem = searchButton
-        
+    }
+    
+    override func bindComponentWithObservable() {
+        viewModel.noteArray.bind { [weak self] notes in
+            self?.updateNoteSnapshot(for: notes)
+            self?.placeholderView.isHidden = notes.isEmpty == false
+            self?.searchController.searchBar.searchTextField.isEnabled = notes.isEmpty == false
+        }
     }
     
     @objc private func navigationSearchButtonTapped() {
@@ -100,7 +105,7 @@ extension MyNoteViewController {
         var snapshot = NSDiffableDataSourceSnapshot<Int, Note>()
         snapshot.appendSections([0])
         snapshot.appendItems(notes)
-        noteDataSource.apply(snapshot, animatingDifferences: true)
+        noteDataSource.apply(snapshot, animatingDifferences: false)
     }
 }
 
@@ -108,5 +113,22 @@ extension MyNoteViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let keyword = searchController.searchBar.text else { return }
         searchResultsTableViewController.updateSnapshot(for: viewModel.searchNotes(for: keyword))
+    }
+}
+
+extension MyNoteViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedNote = noteDataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        
+        let editNoteViewController = EditNoteViewController(note: selectedNote) {
+            guard let cell = tableView.cellForRow(at: indexPath) as? NoteTableViewCell else { return }
+            cell.note = selectedNote
+        }
+        let navigationController = UINavigationController(rootViewController: editNoteViewController)
+        present(navigationController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }

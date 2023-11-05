@@ -89,6 +89,12 @@ class NoteTableViewCell: BaseTableViewCell, ReuseIdentifier {
         return textView
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        coverImageView.image = nil
+        pageLabel.text = nil
+    }
+    
     override func configureHiararchy() {
         backgroundColor = .clear
         directionalLayoutMargins = .init(top: 8, leading: 16, bottom: 8, trailing: 16)
