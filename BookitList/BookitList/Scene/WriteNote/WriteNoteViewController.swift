@@ -102,6 +102,18 @@ class WriteNoteViewController: BaseViewController {
         viewModel.content.bind { [weak self] content in
             self?.saveBarButton.isEnabled = content.isEmpty == false
         }
+        
+        viewModel.caution.bind { [weak self] caution in
+            guard caution.isPresent else { return }
+            
+            let popViewAction = { () -> Void in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            
+            let handler: () -> Void = caution.willDismiss ? popViewAction : {}
+            
+            self?.presentCautionAlert(title: caution.title, message: caution.message, handler: handler)
+        }
     }
     
     override func configureNavigationBar() {
