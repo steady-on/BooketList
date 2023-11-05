@@ -173,8 +173,9 @@ extension ReadingBoardViewController {
         let nowReadingBookCellRegistration = UICollectionView.CellRegistration<NowReadingBookCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
             cell.detailInfoButtonHandler = {
-                let allRecordsForBookViewController = AllRecordsForBookViewController(book: itemIdentifier)
-                self.navigationController?.pushViewController(allRecordsForBookViewController, animated: true)
+                let allRecordsForBookView = AllRecordsForBookViewController(book: itemIdentifier)
+                allRecordsForBookView.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(allRecordsForBookView, animated: true)
             }
             cell.addNoteButtonHandler = {
                 let writeNoteViewController = WriteNoteViewController(book: itemIdentifier)
@@ -219,8 +220,9 @@ extension ReadingBoardViewController: UICollectionViewDelegate {
             return
         }
         
-        let book = viewModel.selectWaitingBook(for: indexPath)
-        let allRecordsForBookViewController = AllRecordsForBookViewController(book: book)
-        navigationController?.pushViewController(allRecordsForBookViewController, animated: true)
+        guard let book = waitingBookDataSource.itemIdentifier(for: indexPath) else { return }
+        let allRecordsForBookView = AllRecordsForBookViewController(book: book)
+        allRecordsForBookView.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(allRecordsForBookView, animated: true)
     }
 }
