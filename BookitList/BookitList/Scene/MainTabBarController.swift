@@ -11,7 +11,7 @@ final class MainTabBarController: UITabBarController {
     
     private let readingRecordViewController = ReadingBoardViewController()
     private let bookShelfViewController = BookShelfViewController()
-    private let noteViewController = NoteViewController()
+    private let noteViewController = MyNoteViewController()
     private let settingsViewController = SettingsViewController()
     
     override func viewDidLoad() {

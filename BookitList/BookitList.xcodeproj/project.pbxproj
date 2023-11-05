@@ -21,7 +21,7 @@
 		637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */; };
 		637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */; };
 		637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */; };
-		637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C502AC4E79900730C01 /* NoteViewController.swift */; };
+		637B5C512AC4E79900730C01 /* MyNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C502AC4E79900730C01 /* MyNoteViewController.swift */; };
 		637B5C532AC4E7AB00730C01 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */; };
 		637B5C562AC6DB5600730C01 /* SearchBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C552AC6DB5600730C01 /* SearchBookViewController.swift */; };
 		637B5C602AC86BE000730C01 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C5F2AC86BE000730C01 /* BaseView.swift */; };
@@ -43,6 +43,7 @@
 		639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */; };
 		639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */; };
 		639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */; };
+		639E4CD82AF68896006646F4 /* MyNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD72AF68896006646F4 /* MyNoteViewModel.swift */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
 		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
@@ -102,7 +103,7 @@
 		637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewController.swift; sourceTree = "<group>"; };
 		637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
-		637B5C502AC4E79900730C01 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		637B5C502AC4E79900730C01 /* MyNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoteViewController.swift; sourceTree = "<group>"; };
 		637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		637B5C552AC6DB5600730C01 /* SearchBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookViewController.swift; sourceTree = "<group>"; };
 		637B5C5F2AC86BE000730C01 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -122,6 +123,7 @@
 		639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewController.swift; sourceTree = "<group>"; };
 		639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewModel.swift; sourceTree = "<group>"; };
 		639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		639E4CD72AF68896006646F4 /* MyNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoteViewModel.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
 		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -210,7 +212,7 @@
 				63B44DAC2AE7587B009813B2 /* AllRecordsForBook */,
 				639E4CBF2AF184D3006646F4 /* WriteNote */,
 				637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */,
-				637B5C502AC4E79900730C01 /* NoteViewController.swift */,
+				639E4CD62AF6887E006646F4 /* MyNote */,
 				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
 				637B5C792ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift */,
 			);
@@ -272,6 +274,15 @@
 				639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */,
 			);
 			path = WriteNote;
+			sourceTree = "<group>";
+		};
+		639E4CD62AF6887E006646F4 /* MyNote */ = {
+			isa = PBXGroup;
+			children = (
+				637B5C502AC4E79900730C01 /* MyNoteViewController.swift */,
+				639E4CD72AF68896006646F4 /* MyNoteViewModel.swift */,
+			);
+			path = MyNote;
 			sourceTree = "<group>";
 		};
 		639F358A2AE5B1F500226402 /* ReadingBoard */ = {
@@ -513,6 +524,7 @@
 				63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */,
 				63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */,
 				63B5B3582ACE81AB00477536 /* AddBookDetailInfoViewController.swift in Sources */,
+				639E4CD82AF68896006646F4 /* MyNoteViewModel.swift in Sources */,
 				63B5B36B2AD475B400477536 /* BLSelectButtonFromEnum.swift in Sources */,
 				63A6735A2AC3FD6B004F43F4 /* CheckoutHistory.swift in Sources */,
 				63A6735C2AC40380004F43F4 /* Series.swift in Sources */,
@@ -540,7 +552,7 @@
 				63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */,
 				63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */,
 				63A6734B2AC3451C004F43F4 /* Author.swift in Sources */,
-				637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */,
+				637B5C512AC4E79900730C01 /* MyNoteViewController.swift in Sources */,
 				63B5B37B2AD6A6AE00477536 /* ImageFileManager.swift in Sources */,
 				637B5C852ACAAA2200730C01 /* BaseTableViewCell.swift in Sources */,
 				637B5C7A2ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift in Sources */,
