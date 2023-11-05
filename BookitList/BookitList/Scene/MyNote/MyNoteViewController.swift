@@ -144,4 +144,41 @@ extension MyNoteViewController: UITableViewDelegate {
         
         tableView.deselectRow(at: indexPath, animated: false)
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let selectedNote = noteDataSource.itemIdentifier(for: indexPath) else {
+            return UISwipeActionsConfiguration()
+        }
+        
+        let delete = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, _ in
+            self?.showDeleteNoteAlert(for: selectedNote)
+        }
+        delete.image = UIImage(systemName: "trash")
+        
+        let actionConfig = UISwipeActionsConfiguration(actions: [delete])
+        return actionConfig
+    }
+}
+
+extension MyNoteViewController {
+    private func showDeleteNoteAlert(for note: Note) {
+        let alert = UIAlertController(title: "노트 삭제", message: "선택한 노트가 삭제되며, 삭제된 노트는 되돌릴 수 없습니다. 그래도 삭제하시겠습니까?", preferredStyle: .alert)
+        
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { [weak self] action in
+            self?.deleteNote(for: note)
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(cancel)
+        alert.addAction(delete)
+        present(alert, animated: true)
+    }
+    
+    private func deleteNote(for note: Note) {
+        var newSnapshot = noteDataSource.snapshot()
+        newSnapshot.deleteItems([note])
+        noteDataSource.apply(newSnapshot)
+        viewModel.deleteNotes(for: note)
+    }
 }

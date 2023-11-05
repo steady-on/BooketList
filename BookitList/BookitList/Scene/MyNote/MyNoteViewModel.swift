@@ -35,6 +35,19 @@ final class MyNoteViewModel: Cautionable {
         notes = fetchNotes
     }
     
+    func deleteNotes(for note: Note) {
+        guard let realmRepository else {
+            caution.value = Caution(isPresent: true, title: "DB 에러", message: String(describing: RealmError.notInitialized), willDismiss: false)
+            return
+        }
+        
+        do {
+            try realmRepository.deleteItem(note)
+        } catch {
+            caution.value = Caution(isPresent: true, title: "노트 삭제 에러", message: String(describing: RealmError.notInitialized), willDismiss: false)
+        }
+    }
+    
     func searchNotes(for keyword: String) -> [Note] {
         guard let notes else { return [] }
         let result = notes.where {
