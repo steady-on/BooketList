@@ -13,6 +13,8 @@ final class Author: Object {
     @Persisted(indexed: true) var authorID: Int?
     @Persisted var name: String
     
+    @Persisted(originProperty: "authors") var books: LinkingObjects<Book>
+    
     convenience init(authorID: Int? = nil, name: String) {
         self.init()
         

@@ -62,7 +62,11 @@ class AllRecordsForBookViewController: BaseViewController {
         return view
     }()
     
-    private let statusOfReadingLabel = BLStatusOfReadingLabel(for: .notYet)
+    private lazy var statusOfReadingLabel: BLShowingMenuButtonFromEnum<StatusOfReading> = {
+        BLShowingMenuButtonFromEnum(selectedCase: .notYet) { selectedCase in
+            self.viewModel.updateStatusOfReading(to: selectedCase)
+        }
+    }()
     
     private let infoStackView: UIStackView = {
         let stackView = UIStackView()
@@ -113,7 +117,7 @@ class AllRecordsForBookViewController: BaseViewController {
         textView.textColor = .secondaryLabel
         textView.textContainerInset = .zero
         textView.textContainer.lineBreakMode = .byTruncatingTail
-        textView.textContainer.maximumNumberOfLines = 0
+        textView.textContainer.maximumNumberOfLines = 1
         textView.isScrollEnabled = false
         textView.isEditable = false
         textView.isSelectable = false
@@ -121,6 +125,8 @@ class AllRecordsForBookViewController: BaseViewController {
     }()
     
     private let noteTableHeaderView = BLTitleSupplementaryButton(title: "작성된 노트")
+    
+    private let emptyNoteView = BLDirectionView(symbolName: "note", direction: "아직 작성된 노트가 없습니다.")
     
     private let noteTableView: BLContentWrappingTableView = {
         let tableView = BLContentWrappingTableView()
@@ -141,6 +147,8 @@ class AllRecordsForBookViewController: BaseViewController {
     override func configureHiararchy() {
         super.configureHiararchy()
         
+        noteTableView.delegate = self
+        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -150,12 +158,12 @@ class AllRecordsForBookViewController: BaseViewController {
             contentView.addSubview(component)
         }
         
-        let allRecordsComponents = [infoStackView, overviewButton, overviewTextView, noteTableHeaderView, noteTableView]
+        let allRecordsComponents = [infoStackView, overviewButton, overviewTextView, noteTableHeaderView, noteTableView, emptyNoteView]
         allRecordsComponents.forEach { component in
             allRecordsView.addSubview(component)
         }
         
-//        overviewButton.addTarget(self, action: #selector(overviewButtonTapped), for: .touchUpInside)
+        overviewButton.addTarget(self, action: #selector(overviewButtonTapped), for: .touchUpInside)
         
         let infoStackComponents = [titleLabel, authorLabel]
         infoStackComponents.forEach { component in
@@ -219,6 +227,12 @@ class AllRecordsForBookViewController: BaseViewController {
             make.leading.equalTo(allRecordsView.layoutMarginsGuide)
         }
         
+        emptyNoteView.snp.makeConstraints { make in
+            make.top.equalTo(noteTableHeaderView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         noteTableView.snp.makeConstraints { make in
             make.top.equalTo(noteTableHeaderView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
@@ -230,6 +244,29 @@ class AllRecordsForBookViewController: BaseViewController {
         viewModel.book.bind { [weak self] book in
             self?.configureComponents(for: book)
         }
+        
+        viewModel.notes.bind { [weak self] notes in
+            self?.updateNoteSnapshot(for: notes)
+            self?.emptyNoteView.isHidden = notes.isEmpty == false
+        }
+        
+        viewModel.caution.bind { [weak self] caution in
+            guard caution.isPresent else { return }
+            
+            let popViewAction = { () -> Void in
+                self?.navigationController?.popViewController(animated: true)
+            }
+            
+            let handler: () -> Void = caution.willDismiss ? popViewAction : {}
+            
+            self?.presentCautionAlert(title: caution.title, message: caution.message, handler: handler)
+        }
+    }
+    
+    override func configureNavigationBar() {
+        let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "note.text.badge.plus"), style: .plain, target: self, action: #selector(addNoteButtonTapped))
+        
+        navigationItem.rightBarButtonItems = [addNoteButton]
     }
     
     private func configureComponents(for book: Book) {
@@ -242,33 +279,22 @@ class AllRecordsForBookViewController: BaseViewController {
         
         let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
         authorLabel.text = authors
-        configureStatusOfReadingButtonMenu(now: book.statusOfReading)
+        statusOfReadingLabel.setSelectedCase(to: book.statusOfReading)
         overviewTextView.text = book.overview
-        
-        let notes = Array(book.notes)
-        updateNoteSnapshot(for: notes)
+    }
+    
+    @objc private func addNoteButtonTapped() {
+        let writeNoteViewController = WriteNoteViewController(book: viewModel.book.value) { [weak self] in
+            self?.viewModel.fetchNotes()
+        }
+        let navigationController = UINavigationController(rootViewController: writeNoteViewController)
+        self.present(navigationController, animated: true)
     }
     
     @objc private func overviewButtonTapped() {
         let currentNumberOfLines = overviewTextView.textContainer.maximumNumberOfLines
         overviewTextView.textContainer.maximumNumberOfLines = currentNumberOfLines == 0 ? 1 : 0
         overviewTextView.invalidateIntrinsicContentSize()
-    }
-    
-    private func configureStatusOfReadingButtonMenu(now: StatusOfReading) {
-        let actions: [UIAction] = StatusOfReading.allCases.map { status in
-            UIAction(title: status.title) { _ in
-                self.statusOfReadingLabel.setStatus(for: status)
-                self.viewModel.updateStatusOfReading(to: status)
-            }
-        }
-        
-        actions[now.rawValue].state = .on
-        statusOfReadingLabel.setStatus(for: now)
-        
-        let menu = UIMenu(title: "독서 상태", options: .singleSelection, children: actions)
-        
-        statusOfReadingLabel.menu = menu
     }
 }
 
@@ -286,5 +312,60 @@ extension AllRecordsForBookViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(notes)
         noteDataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension AllRecordsForBookViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedNote = noteDataSource.itemIdentifier(for: indexPath) else {
+            return
+        }
+        
+        let editNoteViewController = EditNoteViewController(note: selectedNote) { [weak self] in
+            guard let cell = tableView.cellForRow(at: indexPath) as? SimpleNoteCell else { return }
+            cell.note = selectedNote
+            self?.viewModel.fetchNotes()
+        }
+        let navigationController = UINavigationController(rootViewController: editNoteViewController)
+        present(navigationController, animated: true)
+        
+        tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        guard let selectedNote = noteDataSource.itemIdentifier(for: indexPath) else {
+            return UISwipeActionsConfiguration()
+        }
+        
+        let delete = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, _ in
+            self?.showDeleteNoteAlert(for: selectedNote)
+        }
+        delete.image = UIImage(systemName: "trash")
+        
+        let actionConfig = UISwipeActionsConfiguration(actions: [delete])
+        return actionConfig
+    }
+}
+
+extension AllRecordsForBookViewController {
+    private func showDeleteNoteAlert(for note: Note) {
+        let alert = UIAlertController(title: "노트 삭제", message: "선택한 노트가 삭제되며, 삭제된 노트는 되돌릴 수 없습니다. 그래도 삭제하시겠습니까?", preferredStyle: .alert)
+        
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { [weak self] action in
+            self?.deleteNote(for: note)
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(cancel)
+        alert.addAction(delete)
+        present(alert, animated: true)
+    }
+    
+    private func deleteNote(for note: Note) {
+        var newSnapshot = noteDataSource.snapshot()
+        newSnapshot.deleteItems([note])
+        noteDataSource.apply(newSnapshot)
+        viewModel.deleteNotes(for: note)
     }
 }

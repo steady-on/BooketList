@@ -38,7 +38,6 @@ final class ReadingBoardViewController: BaseViewController {
     override func configureHiararchy() {
         super.configureHiararchy()
         
-        configureNavigationBar()
         configureCollectionView()
         
         let components = [nowReadingBookTitleButton, nowReadingBookCollectionView, waitingBookTitleButton, waitingBookCollectionView, emptyNowReadingBookView, emptyWaitingBookView, placeholderView]
@@ -86,7 +85,7 @@ final class ReadingBoardViewController: BaseViewController {
         }
     }
     
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(pushSearchBookView))
     }
 
@@ -174,9 +173,14 @@ extension ReadingBoardViewController {
         let nowReadingBookCellRegistration = UICollectionView.CellRegistration<NowReadingBookCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
             cell.detailInfoButtonHandler = {
-                let book = self.viewModel.selectNowReadingBook(for: indexPath)
-                let allRecordsForBookViewController = AllRecordsForBookViewController(book: book)
-                self.navigationController?.pushViewController(allRecordsForBookViewController, animated: true)
+                let allRecordsForBookView = AllRecordsForBookViewController(book: itemIdentifier)
+                allRecordsForBookView.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(allRecordsForBookView, animated: true)
+            }
+            cell.addNoteButtonHandler = {
+                let writeNoteViewController = WriteNoteViewController(book: itemIdentifier)
+                let navigationController = UINavigationController(rootViewController: writeNoteViewController)
+                self.present(navigationController, animated: true)
             }
         }
         
@@ -216,8 +220,9 @@ extension ReadingBoardViewController: UICollectionViewDelegate {
             return
         }
         
-        let book = viewModel.selectWaitingBook(for: indexPath)
-        let allRecordsForBookViewController = AllRecordsForBookViewController(book: book)
-        navigationController?.pushViewController(allRecordsForBookViewController, animated: true)
+        guard let book = waitingBookDataSource.itemIdentifier(for: indexPath) else { return }
+        let allRecordsForBookView = AllRecordsForBookViewController(book: book)
+        allRecordsForBookView.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(allRecordsForBookView, animated: true)
     }
 }

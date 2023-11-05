@@ -132,7 +132,6 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     override func configureHiararchy() {
         super.configureHiararchy()
-        configureNavigationBar()
         
         let components = [scrollView, indicatorView]
         components.forEach { component in
@@ -239,6 +238,16 @@ class AddBookDetailInfoViewController: BaseViewController {
         originalTitleTextField.addTarget(self, action: #selector(originalTitleValueChanged), for: .editingChanged)
     }
     
+    override func configureNavigationBar() {
+        let navigationAppearance = UINavigationBarAppearance()
+        navigationAppearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = navigationAppearance
+        
+        let saveButton = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveBarButtonTapped))
+        
+        navigationItem.rightBarButtonItem = saveButton
+    }
+    
     private func configureComponents(for itemDetail: ItemDetail) {
         let thumbnailURLString = itemDetail.cover ?? ""
         let fullURLString = itemDetail.subInfo.previewImgList?.first ?? thumbnailURLString
@@ -310,16 +319,6 @@ extension AddBookDetailInfoViewController {
 }
 
 extension AddBookDetailInfoViewController {
-    private func configureNavigationBar() {
-        let navigationAppearance = UINavigationBarAppearance()
-        navigationAppearance.configureWithTransparentBackground()
-        navigationController?.navigationBar.standardAppearance = navigationAppearance
-        
-        let saveButton = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveBarButtonTapped))
-        
-        navigationItem.rightBarButtonItem = saveButton
-    }
-    
     @objc private func saveBarButtonTapped() {
         guard let titleValue = titleTextField.text, titleValue.isEmpty == false else {
             viewModel.caution.value = Caution(isPresent: true, title: "책 제목을 입력해주세요.", message: "책 제목은 반드시 입력되어야 합니다. 제목을 입력해주세요.", willDismiss: false)
@@ -327,7 +326,7 @@ extension AddBookDetailInfoViewController {
             return
         }
         
-        viewModel.saveBookInfo(coverImage: backdropImageView.image)
+        viewModel.saveBookInfo(coverImage: coverImageView.image)
         navigationController?.popViewController(animated: true)
     }
 }

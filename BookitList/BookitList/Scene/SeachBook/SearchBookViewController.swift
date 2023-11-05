@@ -89,7 +89,6 @@ final class SearchBookViewController: BaseViewController {
         
         searchController.searchBar.delegate = self
         
-        configureNavigationBar()
         configureCollectionView()
         configureDataSource()
                 
@@ -101,7 +100,7 @@ final class SearchBookViewController: BaseViewController {
         state = .enter
     }
     
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
         title = "도서 검색"
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false

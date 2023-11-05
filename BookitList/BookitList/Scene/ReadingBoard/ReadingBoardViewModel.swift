@@ -10,11 +10,23 @@ import RealmSwift
 
 final class ReadingBoardViewModel: Cautionable {
     
-    private var books: [Book] = []
+    private var books: Results<Book>? {
+        didSet {
+            guard let books else {
+                nowReadingBooks.value = []
+                waitingBooks.value = []
+                return
+            }
+            
+            nowReadingBooks.value = books.filter { $0.statusOfReading == .reading }
+            waitingBooks.value = books.filter { $0.statusOfReading == .notYet }
+        }
+    }
+    
     let nowReadingBooks: Observable<[Book]> = Observable([])
     let waitingBooks: Observable<[Book]> = Observable([])
     
-    var isEmptyBooks: Bool { books.isEmpty }
+    var isEmptyBooks: Bool { books?.isEmpty ?? true }
     var isEmptyNowReadingBooks: Bool { nowReadingBooks.value.isEmpty }
     var isEmptyWaitingBooks: Bool { waitingBooks.value.isEmpty }
     
@@ -29,9 +41,7 @@ final class ReadingBoardViewModel: Cautionable {
         }
         
         let fetchedBooks: Results<Book> = realmRepository.fetchTable(sortedBy: "registeredAt")
-        self.books = Array(fetchedBooks)
-        self.nowReadingBooks.value = fetchedBooks.filter { $0.statusOfReading == .reading }
-        self.waitingBooks.value = fetchedBooks.filter { $0.statusOfReading == .notYet }
+        self.books = fetchedBooks
     }
     
     func selectWaitingBook(for indexPath: IndexPath) -> Book {

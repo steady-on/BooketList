@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class BLSelectButtonFromEnum<T: ButtonMakable & CaseIterable & RawRepresentable<Int>>: UIStackView {
+final class BLSelectButtonFromEnum<T: SelectableButton>: UIStackView {
     
     var seletedButtonTag: Int {
         guard let selectedButton = buttonGroup.first(where: { $0.isSelected }) else { return 0 }
@@ -37,7 +37,7 @@ final class BLSelectButtonFromEnum<T: ButtonMakable & CaseIterable & RawRepresen
         var buttons = [UIButton]()
 
         baseEnum.allCases.forEach { buttonCase in
-            let button = makeButton(title: buttonCase.buttonTitle, tag: buttonCase.rawValue)
+            let button = makeButton(title: buttonCase.title, tag: buttonCase.rawValue)
             buttons.append(button)
         }
         

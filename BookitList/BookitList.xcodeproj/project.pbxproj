@@ -21,7 +21,7 @@
 		637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */; };
 		637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */; };
 		637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */; };
-		637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C502AC4E79900730C01 /* NoteViewController.swift */; };
+		637B5C512AC4E79900730C01 /* MyNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C502AC4E79900730C01 /* MyNoteViewController.swift */; };
 		637B5C532AC4E7AB00730C01 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */; };
 		637B5C562AC6DB5600730C01 /* SearchBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C552AC6DB5600730C01 /* SearchBookViewController.swift */; };
 		637B5C602AC86BE000730C01 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C5F2AC86BE000730C01 /* BaseView.swift */; };
@@ -30,7 +30,6 @@
 		637B5C712AC980F700730C01 /* SearchResultCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C702AC980F700730C01 /* SearchResultCollectionCell.swift */; };
 		637B5C732AC987DB00730C01 /* BLBookmarkImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C722AC987DB00730C01 /* BLBookmarkImageView.swift */; };
 		637B5C762AC98F2600730C01 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5C752AC98F2600730C01 /* Kingfisher */; };
-		637B5C7A2ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C792ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift */; };
 		637B5C7E2ACAA13900730C01 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C7D2ACAA13900730C01 /* Observable.swift */; };
 		637B5C802ACAA24100730C01 /* SearchBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C7F2ACAA24100730C01 /* SearchBookViewModel.swift */; };
 		637B5C852ACAAA2200730C01 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C842ACAAA2200730C01 /* BaseTableViewCell.swift */; };
@@ -38,6 +37,15 @@
 		637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5C902ACC202200730C01 /* BLIndicatorView.swift */; };
 		637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */; };
 		637B5CD52ACD807A00730C01 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 637B5CD42ACD807A00730C01 /* SnapKit */; };
+		639E4CBD2AF152EA006646F4 /* BLShowingMenuButtonFromEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */; };
+		639E4CC12AF184F3006646F4 /* WriteNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */; };
+		639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */; };
+		639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */; };
+		639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */; };
+		639E4CD82AF68896006646F4 /* MyNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD72AF68896006646F4 /* MyNoteViewModel.swift */; };
+		639E4CDA2AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CD92AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift */; };
+		639E4CDD2AF7ADDF006646F4 /* EditNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CDC2AF7ADDF006646F4 /* EditNoteViewController.swift */; };
+		639E4CDF2AF7AE30006646F4 /* EditNoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639E4CDE2AF7AE30006646F4 /* EditNoteViewModel.swift */; };
 		639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */; };
 		639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */; };
 		63A673402AC33AFD004F43F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 63A6733F2AC33AFD004F43F4 /* Realm */; };
@@ -60,7 +68,7 @@
 		63B5B35B2ACE88DE00477536 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B35A2ACE88DE00477536 /* UIImageView+.swift */; };
 		63B5B3692AD1CA2100477536 /* BLTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B3682AD1CA2100477536 /* BLTextField.swift */; };
 		63B5B36B2AD475B400477536 /* BLSelectButtonFromEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */; };
-		63B5B36E2AD47CD500477536 /* ButtonMakable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B36D2AD47CD500477536 /* ButtonMakable.swift */; };
+		63B5B36E2AD47CD500477536 /* ButtonProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B36D2AD47CD500477536 /* ButtonProtocol.swift */; };
 		63B5B3762AD52A2800477536 /* AddBookDetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B3752AD52A2800477536 /* AddBookDetailInfoViewModel.swift */; };
 		63B5B37B2AD6A6AE00477536 /* ImageFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B37A2AD6A6AE00477536 /* ImageFileManager.swift */; };
 		63B5B37D2AD6A6BC00477536 /* ImageFilePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B5B37C2AD6A6BC00477536 /* ImageFilePath.swift */; };
@@ -77,7 +85,6 @@
 		63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */; };
 		63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */; };
 		63DA060E2AE78AC0007FF18E /* AllRecordsForBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */; };
-		63DA06142AE90B9D007FF18E /* BLStatusOfReadingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */; };
 		63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */; };
 		63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */; };
 /* End PBXBuildFile section */
@@ -98,7 +105,7 @@
 		637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		637B5C4C2AC4E71D00730C01 /* ReadingBoardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewController.swift; sourceTree = "<group>"; };
 		637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfViewController.swift; sourceTree = "<group>"; };
-		637B5C502AC4E79900730C01 /* NoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteViewController.swift; sourceTree = "<group>"; };
+		637B5C502AC4E79900730C01 /* MyNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoteViewController.swift; sourceTree = "<group>"; };
 		637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		637B5C552AC6DB5600730C01 /* SearchBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookViewController.swift; sourceTree = "<group>"; };
 		637B5C5F2AC86BE000730C01 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -106,13 +113,21 @@
 		637B5C6E2AC97D2300730C01 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		637B5C702AC980F700730C01 /* SearchResultCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionCell.swift; sourceTree = "<group>"; };
 		637B5C722AC987DB00730C01 /* BLBookmarkImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLBookmarkImageView.swift; sourceTree = "<group>"; };
-		637B5C792ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsCollectionViewController.swift; sourceTree = "<group>"; };
 		637B5C7D2ACAA13900730C01 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		637B5C7F2ACAA24100730C01 /* SearchBookViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBookViewModel.swift; sourceTree = "<group>"; };
 		637B5C842ACAAA2200730C01 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		637B5C8C2ACB06D300730C01 /* AladinConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinConstant.swift; sourceTree = "<group>"; };
 		637B5C902ACC202200730C01 /* BLIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLIndicatorView.swift; sourceTree = "<group>"; };
 		637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLShowingMenuButtonFromEnum.swift; sourceTree = "<group>"; };
+		639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewController.swift; sourceTree = "<group>"; };
+		639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInputSheetViewController.swift; sourceTree = "<group>"; };
+		639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteNoteViewModel.swift; sourceTree = "<group>"; };
+		639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		639E4CD72AF68896006646F4 /* MyNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoteViewModel.swift; sourceTree = "<group>"; };
+		639E4CD92AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyNoteSearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		639E4CDC2AF7ADDF006646F4 /* EditNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewController.swift; sourceTree = "<group>"; };
+		639E4CDE2AF7AE30006646F4 /* EditNoteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNoteViewModel.swift; sourceTree = "<group>"; };
 		639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryButton.swift; sourceTree = "<group>"; };
 		639F358B2AE5B20D00226402 /* ReadingBoardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingBoardViewModel.swift; sourceTree = "<group>"; };
 		63A673452AC33BCD004F43F4 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
@@ -133,7 +148,7 @@
 		63B5B35A2ACE88DE00477536 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		63B5B3682AD1CA2100477536 /* BLTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTextField.swift; sourceTree = "<group>"; };
 		63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLSelectButtonFromEnum.swift; sourceTree = "<group>"; };
-		63B5B36D2AD47CD500477536 /* ButtonMakable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMakable.swift; sourceTree = "<group>"; };
+		63B5B36D2AD47CD500477536 /* ButtonProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonProtocol.swift; sourceTree = "<group>"; };
 		63B5B3752AD52A2800477536 /* AddBookDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookDetailInfoViewModel.swift; sourceTree = "<group>"; };
 		63B5B37A2AD6A6AE00477536 /* ImageFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFileManager.swift; sourceTree = "<group>"; };
 		63B5B37C2AD6A6BC00477536 /* ImageFilePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilePath.swift; sourceTree = "<group>"; };
@@ -150,7 +165,6 @@
 		63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinAPIManager.swift; sourceTree = "<group>"; };
 		63C1A69F2ADDB2E70067FCF1 /* NowReadingBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowReadingBookCell.swift; sourceTree = "<group>"; };
 		63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordsForBookViewController.swift; sourceTree = "<group>"; };
-		63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLStatusOfReadingLabel.swift; sourceTree = "<group>"; };
 		63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordCell.swift; sourceTree = "<group>"; };
 		63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -200,10 +214,11 @@
 				637B5C542AC6DB3800730C01 /* SeachBook */,
 				63B5B3562ACE801F00477536 /* AddBookDetailInfo */,
 				63B44DAC2AE7587B009813B2 /* AllRecordsForBook */,
+				639E4CBF2AF184D3006646F4 /* WriteNote */,
 				637B5C4E2AC4E77A00730C01 /* BookShelfViewController.swift */,
-				637B5C502AC4E79900730C01 /* NoteViewController.swift */,
+				639E4CDB2AF7ADB9006646F4 /* EditNote */,
+				639E4CD62AF6887E006646F4 /* MyNote */,
 				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
-				637B5C792ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -225,8 +240,8 @@
 				637B5C902ACC202200730C01 /* BLIndicatorView.swift */,
 				63B5B3682AD1CA2100477536 /* BLTextField.swift */,
 				63B5B36A2AD475B400477536 /* BLSelectButtonFromEnum.swift */,
+				639E4CBC2AF152E1006646F4 /* BLShowingMenuButtonFromEnum.swift */,
 				639F35882AE59A4700226402 /* BLTitleSupplementaryButton.swift */,
-				63DA06132AE90B9D007FF18E /* BLStatusOfReadingLabel.swift */,
 				63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */,
 				63222D572AEA5BA70070F43A /* BLNoteTypeLabel.swift */,
 				63222D5D2AEBF4490070F43A /* BLContentWrappingTableView.swift */,
@@ -242,6 +257,7 @@
 				63023E6E2AE1CF18000B26A9 /* WaitingBookCell.swift */,
 				63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */,
 				63222D532AEA4B890070F43A /* SimpleNoteCell.swift */,
+				639E4CD42AF67550006646F4 /* NoteTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -252,6 +268,35 @@
 				637B5C8C2ACB06D300730C01 /* AladinConstant.swift */,
 			);
 			path = NameSpace;
+			sourceTree = "<group>";
+		};
+		639E4CBF2AF184D3006646F4 /* WriteNote */ = {
+			isa = PBXGroup;
+			children = (
+				639E4CC02AF184F3006646F4 /* WriteNoteViewController.swift */,
+				639E4CC72AF2B686006646F4 /* WriteNoteViewModel.swift */,
+				639E4CC52AF2AD6B006646F4 /* PageInputSheetViewController.swift */,
+			);
+			path = WriteNote;
+			sourceTree = "<group>";
+		};
+		639E4CD62AF6887E006646F4 /* MyNote */ = {
+			isa = PBXGroup;
+			children = (
+				637B5C502AC4E79900730C01 /* MyNoteViewController.swift */,
+				639E4CD72AF68896006646F4 /* MyNoteViewModel.swift */,
+				639E4CD92AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift */,
+			);
+			path = MyNote;
+			sourceTree = "<group>";
+		};
+		639E4CDB2AF7ADB9006646F4 /* EditNote */ = {
+			isa = PBXGroup;
+			children = (
+				639E4CDC2AF7ADDF006646F4 /* EditNoteViewController.swift */,
+				639E4CDE2AF7AE30006646F4 /* EditNoteViewModel.swift */,
+			);
+			path = EditNote;
 			sourceTree = "<group>";
 		};
 		639F358A2AE5B1F500226402 /* ReadingBoard */ = {
@@ -303,11 +348,11 @@
 		63A673472AC34411004F43F4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				63A673482AC3447B004F43F4 /* StatusOfReading.swift */,
 				63A673562AC3FD13004F43F4 /* BookType.swift */,
+				63A673482AC3447B004F43F4 /* StatusOfReading.swift */,
+				63222D552AEA569A0070F43A /* NoteType.swift */,
 				631821EB2AD8016B0034573B /* Caution.swift */,
 				637B5C7D2ACAA13900730C01 /* Observable.swift */,
-				63222D552AEA569A0070F43A /* NoteType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -343,7 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				63222D5B2AEBC80C0070F43A /* ReuseIdentifier.swift */,
-				63B5B36D2AD47CD500477536 /* ButtonMakable.swift */,
+				63B5B36D2AD47CD500477536 /* ButtonProtocol.swift */,
 				631821ED2AD983B90034573B /* Cautionable.swift */,
 			);
 			path = Protocol;
@@ -484,22 +529,24 @@
 			files = (
 				63222D5A2AEBC2240070F43A /* Date+.swift in Sources */,
 				63C1A6A02ADDB2E70067FCF1 /* NowReadingBookCell.swift in Sources */,
-				63DA06142AE90B9D007FF18E /* BLStatusOfReadingLabel.swift in Sources */,
 				637B5C632AC877B200730C01 /* BLDirectionView.swift in Sources */,
 				637B5C912ACC202200730C01 /* BLIndicatorView.swift in Sources */,
-				63B5B36E2AD47CD500477536 /* ButtonMakable.swift in Sources */,
+				63B5B36E2AD47CD500477536 /* ButtonProtocol.swift in Sources */,
 				631821EA2AD7DEBE0034573B /* FileManageError.swift in Sources */,
+				639E4CDF2AF7AE30006646F4 /* EditNoteViewModel.swift in Sources */,
 				637B5C602AC86BE000730C01 /* BaseView.swift in Sources */,
 				63222D542AEA4B890070F43A /* SimpleNoteCell.swift in Sources */,
 				63BB13B92AC164D50060073D /* BaseViewController.swift in Sources */,
 				63BB13B52AC164D50060073D /* AppDelegate.swift in Sources */,
 				63B5B3582ACE81AB00477536 /* AddBookDetailInfoViewController.swift in Sources */,
+				639E4CD82AF68896006646F4 /* MyNoteViewModel.swift in Sources */,
 				63B5B36B2AD475B400477536 /* BLSelectButtonFromEnum.swift in Sources */,
 				63A6735A2AC3FD6B004F43F4 /* CheckoutHistory.swift in Sources */,
 				63A6735C2AC40380004F43F4 /* Series.swift in Sources */,
 				63BB13B72AC164D50060073D /* SceneDelegate.swift in Sources */,
 				63A673572AC3FD13004F43F4 /* BookType.swift in Sources */,
 				637B5C4B2AC4E1FF00730C01 /* MainTabBarController.swift in Sources */,
+				639E4CBD2AF152EA006646F4 /* BLShowingMenuButtonFromEnum.swift in Sources */,
 				637B5C802ACAA24100730C01 /* SearchBookViewModel.swift in Sources */,
 				63A6734D2AC34C2E004F43F4 /* ReadingHistory.swift in Sources */,
 				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
@@ -510,32 +557,37 @@
 				637B5C732AC987DB00730C01 /* BLBookmarkImageView.swift in Sources */,
 				63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */,
 				63A673462AC33BCD004F43F4 /* Book.swift in Sources */,
+				639E4CC12AF184F3006646F4 /* WriteNoteViewController.swift in Sources */,
 				637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */,
 				637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */,
 				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
+				639E4CDA2AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift in Sources */,
 				639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */,
 				63222D5C2AEBC80C0070F43A /* ReuseIdentifier.swift in Sources */,
 				63222D562AEA569A0070F43A /* NoteType.swift in Sources */,
 				63A673622AC4772E004F43F4 /* RealmRepository.swift in Sources */,
 				63A6736A2AC4A25B004F43F4 /* RealmError.swift in Sources */,
 				63A6734B2AC3451C004F43F4 /* Author.swift in Sources */,
-				637B5C512AC4E79900730C01 /* NoteViewController.swift in Sources */,
+				637B5C512AC4E79900730C01 /* MyNoteViewController.swift in Sources */,
 				63B5B37B2AD6A6AE00477536 /* ImageFileManager.swift in Sources */,
 				637B5C852ACAAA2200730C01 /* BaseTableViewCell.swift in Sources */,
-				637B5C7A2ACA6B5C00730C01 /* SearchResultsCollectionViewController.swift in Sources */,
 				637B5C562AC6DB5600730C01 /* SearchBookViewController.swift in Sources */,
 				63A6735E2AC41488004F43F4 /* Tag.swift in Sources */,
 				637B5C8D2ACB06D300730C01 /* AladinConstant.swift in Sources */,
 				63222D602AEFE9E50070F43A /* AllRecordsForBokViewModel.swift in Sources */,
 				631821EE2AD983B90034573B /* Cautionable.swift in Sources */,
+				639E4CDD2AF7ADDF006646F4 /* EditNoteViewController.swift in Sources */,
 				63023E6F2AE1CF18000B26A9 /* WaitingBookCell.swift in Sources */,
+				639E4CC62AF2AD6B006646F4 /* PageInputSheetViewController.swift in Sources */,
 				63A673512AC35AE3004F43F4 /* Note.swift in Sources */,
 				63B5B37D2AD6A6BC00477536 /* ImageFilePath.swift in Sources */,
 				63B5B3692AD1CA2100477536 /* BLTextField.swift in Sources */,
 				637B5C4F2AC4E77B00730C01 /* BookShelfViewController.swift in Sources */,
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */,
+				639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */,
 				639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */,
+				639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */,
 				637B5C6F2AC97D2300730C01 /* BaseCollectionViewCell.swift in Sources */,
 				63A673552AC3F555004F43F4 /* PurchaseHistory.swift in Sources */,
 				63A673492AC3447B004F43F4 /* StatusOfReading.swift in Sources */,
