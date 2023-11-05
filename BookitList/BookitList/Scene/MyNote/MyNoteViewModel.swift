@@ -9,9 +9,17 @@ import Foundation
 import RealmSwift
 
 final class MyNoteViewModel: Cautionable {
-    let notes: Observable<[Note]> = Observable([])
     
-    var isNotesEmpty: Bool { notes.value.isEmpty }
+    private var notes: Results<Note>? {
+        didSet {
+            guard let notes else { return }
+            noteArray.value = Array(notes)
+        }
+    }
+    
+    let noteArray: Observable<[Note]> = Observable([])
+    
+    var isNotesEmpty: Bool { noteArray.value.isEmpty }
     
     let caution = Observable(Caution(isPresent: false, willDismiss: false))
     
@@ -24,6 +32,14 @@ final class MyNoteViewModel: Cautionable {
         }
         
         let fetchNotes: Results<Note> = realmRepository.fetchTable(sortedBy: "createdAt")
-        notes.value = Array(fetchNotes)
+        notes = fetchNotes
+    }
+    
+    func searchNotes(for keyword: String) -> [Note] {
+        guard let notes else { return [] }
+        let result = notes.where {
+            $0.content.contains(keyword) || $0.book.title.contains(keyword) || $0.book.originalTitle.contains(keyword)
+        }
+        return Array(result)
     }
 }

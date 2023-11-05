@@ -11,11 +11,14 @@ final class MyNoteViewController: BaseViewController {
     
     private let viewModel = MyNoteViewModel()
     
-    private let searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
+    private let searchResultsTableViewController = MyNoteSearchResultsTableViewController()
+    
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: searchResultsTableViewController)
         searchController.searchBar.placeholder = "책제목, 노트내용..."
         searchController.searchBar.searchTextField.clearButtonMode = .always
         searchController.searchBar.returnKeyType = .search
+        searchController.searchResultsUpdater = self
         return searchController
     }()
     
@@ -43,11 +46,13 @@ final class MyNoteViewController: BaseViewController {
         viewModel.fetchNotes()
         placeholderView.isHidden = viewModel.isNotesEmpty == false
         searchController.searchBar.searchTextField.isEnabled = viewModel.isNotesEmpty == false
-        updateNoteSnapshot(for: viewModel.notes.value)
+        updateNoteSnapshot(for: viewModel.noteArray.value)
     }
     
     override func configureHiararchy() {
         super.configureHiararchy()
+        
+        definesPresentationContext = true
         configureNoteDataSource()
         
         let components = [noteTableView, placeholderView]
@@ -96,5 +101,12 @@ extension MyNoteViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(notes)
         noteDataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
+extension MyNoteViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let keyword = searchController.searchBar.text else { return }
+        searchResultsTableViewController.updateSnapshot(for: viewModel.searchNotes(for: keyword))
     }
 }
