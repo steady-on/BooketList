@@ -26,6 +26,9 @@ class NoteTableViewCell: BaseTableViewCell, ReuseIdentifier {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.kf.indicatorType = .activity
+        imageView.layer.shadowColor = UIColor.systemGray.cgColor
+        imageView.layer.shadowOffset = .init(width: 3, height: 3)
+        imageView.layer.shadowOpacity = 0.7
         return imageView
     }()
     
