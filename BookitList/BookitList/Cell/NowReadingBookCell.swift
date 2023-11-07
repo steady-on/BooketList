@@ -16,6 +16,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
             let provider = LocalFileImageDataProvider(fileURL: url)
             let placeholder = BLDirectionView(symbolName: "book.circle", direction: book.title)
             coverImageView.kf.setImage(with: provider, placeholder: placeholder)
+            updateConstraints(for: book.size)
             titleLabel.text = book.title
         }
     }
@@ -25,8 +26,10 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     private let coverImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleToFill
+        imageView.layer.shadowOffset = CGSize(width: 3, height: 3)
+        imageView.layer.shadowOpacity = 0.5
+        imageView.layer.shadowColor = UIColor.systemGray.cgColor
         return imageView
     }()
     
@@ -98,12 +101,10 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        coverImageView.layer.shadowPath = UIBezierPath(rect: coverImageView.bounds).cgPath
     }
     
     override func configureHiararchy() {
-        configureShadow()
-    
         let components = [coverImageView, accessoryView] // bottomAccessoryView
         components.forEach { component in
             contentView.addSubview(component)
@@ -132,10 +133,6 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     }
     
     override func setConstraints() {
-        coverImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
-        
         accessoryView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -181,11 +178,22 @@ final class NowReadingBookCell: BaseCollectionViewCell {
 //        }
     }
     
-    private func configureShadow() {
-        layer.shadowOffset = CGSize(width: 3, height: 3)
-        layer.shadowOpacity = 0.5
-        layer.shadowColor = UIColor.systemGray.cgColor
-        layer.masksToBounds = false
+    private func updateConstraints(for size: Size?) {
+        coverImageView.snp.removeConstraints()
+        
+        guard let size else {
+            coverImageView.snp.makeConstraints { make in
+                make.edges.equalToSuperview()
+            }
+            return
+        }
+        
+        coverImageView.snp.makeConstraints { make in
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(size.height / size.width)
+            make.horizontalEdges.bottom.equalToSuperview()
+        }
+        
+        layoutIfNeeded()
     }
     
     @objc func detailInfoButtonTapped() {
