@@ -11,13 +11,8 @@ import Kingfisher
 final class NowReadingBookCell: BaseCollectionViewCell {
     var book: Book! {
         didSet {
-            let path = ImageFilePath.cover(bookID: book._id.stringValue)
-            let url = ImageFileManager().makeFullFilePath(from: path)
-            let provider = LocalFileImageDataProvider(fileURL: url)
-            let placeholder = BLDirectionView(symbolName: "book.circle", direction: book.title)
-            coverImageView.kf.setImage(with: provider, placeholder: placeholder)
-            updateConstraints(for: book.size)
-            titleLabel.text = book.title
+            configureComponents()
+            remakeCoverImageViewConstraints()
         }
     }
     
@@ -26,7 +21,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     private let coverImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.shadowOffset = CGSize(width: 3, height: 3)
         imageView.layer.shadowOpacity = 0.5
         imageView.layer.shadowColor = UIColor.systemGray.cgColor
@@ -133,6 +128,10 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     }
     
     override func setConstraints() {
+        coverImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         accessoryView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -178,22 +177,22 @@ final class NowReadingBookCell: BaseCollectionViewCell {
 //        }
     }
     
-    private func updateConstraints(for size: Size?) {
-        coverImageView.snp.removeConstraints()
+    private func configureComponents() {
+        let path = ImageFilePath.cover(bookID: book._id.stringValue)
+        let url = ImageFileManager().makeFullFilePath(from: path)
+        let provider = LocalFileImageDataProvider(fileURL: url)
+        let placeholder = BLDirectionView(symbolName: "book.circle", direction: book.title)
+        coverImageView.kf.setImage(with: provider, placeholder: placeholder)
+        titleLabel.text = book.title
+    }
+    
+    private func remakeCoverImageViewConstraints() {
+        guard let size = book.size else { return }
         
-        guard let size else {
-            coverImageView.snp.makeConstraints { make in
-                make.edges.equalToSuperview()
-            }
-            return
-        }
-        
-        coverImageView.snp.makeConstraints { make in
+        coverImageView.snp.remakeConstraints { make in
             make.height.equalTo(coverImageView.snp.width).multipliedBy(size.height / size.width)
             make.horizontalEdges.bottom.equalToSuperview()
         }
-        
-        layoutIfNeeded()
     }
     
     @objc func detailInfoButtonTapped() {
