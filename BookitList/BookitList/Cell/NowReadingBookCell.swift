@@ -13,6 +13,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         didSet {
             configureComponents()
             remakeCoverImageViewConstraints()
+            layoutIfNeeded()
         }
     }
     
@@ -93,6 +94,14 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         button.tintColor = .secondaryAccent
         return button
     }()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        coverImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
     
     override func layoutSubviews() {
         super.layoutSubviews()
