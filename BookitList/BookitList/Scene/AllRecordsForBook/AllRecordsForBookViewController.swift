@@ -144,6 +144,12 @@ class AllRecordsForBookViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        coverImageView.layer.shadowPath = UIBezierPath(rect: coverImageView.bounds).cgPath
+    }
+    
     override func configureHiararchy() {
         super.configureHiararchy()
         
@@ -243,6 +249,7 @@ class AllRecordsForBookViewController: BaseViewController {
     override func bindComponentWithObservable() {
         viewModel.book.bind { [weak self] book in
             self?.configureComponents(for: book)
+            self?.remakeCoverImageViewConstraints(for: book.size)
         }
         
         viewModel.notes.bind { [weak self] notes in
@@ -281,6 +288,19 @@ class AllRecordsForBookViewController: BaseViewController {
         authorLabel.text = authors
         statusOfReadingLabel.setSelectedCase(to: book.statusOfReading)
         overviewTextView.text = book.overview
+    }
+    
+    private func remakeCoverImageViewConstraints(for size: Size?) {
+        guard let size else { return }
+        
+        coverImageView.snp.remakeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.35)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(size.height / size.width)
+            make.centerY.equalTo(backdropImageView.snp.bottom)
+            make.leading.equalTo(contentView.layoutMarginsGuide).offset(8)
+        }
+        
+        scrollView.layoutIfNeeded()
     }
     
     @objc private func addNoteButtonTapped() {
