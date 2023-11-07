@@ -66,6 +66,8 @@ final class AddBookDetailInfoViewModel: Cautionable {
             if let coverImage {
                 try imageManager.saveImage(coverImage, to: .cover(bookID: book._id.stringValue))
                 book.existCover = true
+                book.size?.width = Double(coverImage.size.width)
+                book.size?.height = Double(coverImage.size.height)
             }
             try realmRepository.addItem(book)
         } catch {
