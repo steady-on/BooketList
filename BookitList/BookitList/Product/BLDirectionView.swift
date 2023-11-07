@@ -56,8 +56,12 @@ final class BLDirectionView: BaseView {
         }
         
         symbolImageView.snp.makeConstraints { make in
-            make.width.equalTo(layoutMarginsGuide).multipliedBy(0.2)
+            make.width.equalTo(layoutMarginsGuide).multipliedBy(0.25)
             make.height.equalTo(symbolImageView.snp.width)
+        }
+        
+        directionLabel.snp.makeConstraints { make in
+            make.bottom.lessThanOrEqualTo(layoutMarginsGuide)
         }
     }
 }
