@@ -11,7 +11,11 @@ import Kingfisher
 class AddBookDetailInfoViewController: BaseViewController {
     
     private let viewModel: AddBookDetailInfoViewModel!
-    private var coverImageViewRatio = 1.3
+    private var coverImageViewRatio = 1.3 {
+        didSet {
+            setCoverImageViewConstraints()
+        }
+    }
     
     init(itemID: Int) {
         self.viewModel = AddBookDetailInfoViewModel(itemID: itemID)
@@ -55,9 +59,9 @@ class AddBookDetailInfoViewController: BaseViewController {
         imageView.kf.indicatorType = .activity
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .secondaryAccent
-        imageView.layer.shadowColor = UIColor.systemGray.cgColor
-        imageView.layer.shadowOffset = .init(width: 3, height: 3)
-        imageView.layer.shadowOpacity = 0.7
+        imageView.backgroundColor = .systemGray4
+        imageView.layer.cornerRadius = 3
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -122,12 +126,6 @@ class AddBookDetailInfoViewController: BaseViewController {
         viewModel.requestBookDetailInfo()
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        coverImageView.layer.shadowPath = UIBezierPath(rect: coverImageView.bounds).cgPath
-    }
-    
     override func configureHiararchy() {
         super.configureHiararchy()
         
@@ -184,6 +182,13 @@ class AddBookDetailInfoViewController: BaseViewController {
         formView.snp.makeConstraints { make in
             make.top.equalTo(backdropImageView.snp.bottom).inset(12)
             make.horizontalEdges.bottom.equalToSuperview()
+        }
+        
+        coverImageView.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.35)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(coverImageViewRatio)
+            make.bottom.equalTo(formView.snp.top).inset(8)
         }
         
         formStackView.snp.makeConstraints { make in
@@ -256,8 +261,6 @@ class AddBookDetailInfoViewController: BaseViewController {
             case .success(let success):
                 let imageSize = success.image.size
                 self?.coverImageViewRatio = imageSize.height / imageSize.width
-                self?.setCoverImageViewConstraints()
-                self?.scrollView.layoutIfNeeded()
             case .failure(_):
                 break
             }
@@ -279,7 +282,7 @@ class AddBookDetailInfoViewController: BaseViewController {
     }
     
     private func setCoverImageViewConstraints() {
-        coverImageView.snp.makeConstraints { make in
+        coverImageView.snp.remakeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.35)
             make.height.equalTo(coverImageView.snp.width).multipliedBy(coverImageViewRatio)
