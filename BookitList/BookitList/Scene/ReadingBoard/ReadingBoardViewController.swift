@@ -174,7 +174,7 @@ extension ReadingBoardViewController {
     }
     
     private func configureDataSource() {
-        let nowReadingBookCellRegistration = UICollectionView.CellRegistration<NowReadingBookCell, Book> { cell, indexPath, itemIdentifier in
+        let nowReadingBookCellRegistration = UICollectionView.CellRegistration<BookCoverGridCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
             cell.detailInfoButtonHandler = {
                 let allRecordsForBookView = AllRecordsForBookViewController(book: itemIdentifier)
@@ -192,7 +192,7 @@ extension ReadingBoardViewController {
             return collectionView.dequeueConfiguredReusableCell(using: nowReadingBookCellRegistration, for: indexPath, item: itemIdentifier)
         }
         
-        let waitingBookCellRegistration = UICollectionView.CellRegistration<WaitingBookCell, Book> { cell, indexPath, itemIdentifier in
+        let waitingBookCellRegistration = UICollectionView.CellRegistration<BookShelfCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
         }
 
@@ -219,7 +219,7 @@ extension ReadingBoardViewController {
 extension ReadingBoardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == nowReadingBookCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? NowReadingBookCell else { return }
+            guard let cell = collectionView.cellForItem(at: indexPath) as? BookCoverGridCell else { return }
             cell.toggleIsHiddenAccessaryView()
             return
         }

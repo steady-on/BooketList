@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-final class NowReadingBookCell: BaseCollectionViewCell {
+final class BookCoverGridCell: BaseCollectionViewCell {
     var book: Book! {
         didSet {
             configureComponents()
