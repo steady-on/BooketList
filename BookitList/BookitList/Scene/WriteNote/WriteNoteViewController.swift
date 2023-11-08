@@ -12,6 +12,12 @@ class WriteNoteViewController: BaseViewController {
     private let viewModel: WriteNoteViewModel
     private let dismissHandler: (() -> Void)?
     
+    init(book: Book, dismissHandler: (() -> Void)? = nil) {
+        self.viewModel = WriteNoteViewModel(book: book)
+        self.dismissHandler = dismissHandler
+        super.init()
+    }
+    
     private lazy var noteTypeButton: BLShowingMenuButtonFromEnum<NoteType> = {
         BLShowingMenuButtonFromEnum(selectedCase: .quote) { [weak self] selectedCase in
             self?.viewModel.changeNoteType(to: selectedCase)
@@ -46,12 +52,6 @@ class WriteNoteViewController: BaseViewController {
     private lazy var saveBarButton: UIBarButtonItem = {
         UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveButtonTapped))
     }()
-    
-    init(book: Book, dismissHandler: (() -> Void)? = nil) {
-        self.viewModel = WriteNoteViewModel(book: book)
-        self.dismissHandler = dismissHandler
-        super.init()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

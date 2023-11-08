@@ -8,6 +8,19 @@
 import UIKit
 
 final class BLTextField: UITextField {
+    override var placeholder: String? {
+        didSet {
+            placeholderLabel.text = placeholder
+            attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [
+                NSAttributedString.Key.foregroundColor: UIColor.placeholderText
+            ])
+        }
+    }
+    
+    init(placeholder: String) {
+        super.init(frame: .zero)
+        self.placeholder = placeholder
+    }
 
     private let underLine: UIView = {
         let view = UIView()
@@ -44,11 +57,6 @@ final class BLTextField: UITextField {
         UIEdgeInsets(top: labelHeight + labelPadding, left: 0, bottom: underLinePadding, right: 0)
     }
     
-    init(placeholder: String) {
-        super.init(frame: .zero)
-        self.placeholder = placeholder
-    }
-    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -67,15 +75,6 @@ final class BLTextField: UITextField {
 
     override var intrinsicContentSize: CGSize {
         return CGSize(width: bounds.width, height: textInsets.top + textFieldHeight + textInsets.bottom)
-    }
-
-    override var placeholder: String? {
-        didSet {
-            placeholderLabel.text = placeholder
-            attributedPlaceholder = NSAttributedString(string: placeholder ?? "", attributes: [
-                NSAttributedString.Key.foregroundColor: UIColor.placeholderText
-            ])
-        }
     }
 
     override func editingRect(forBounds bounds: CGRect) -> CGRect {

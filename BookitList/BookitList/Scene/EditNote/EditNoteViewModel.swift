@@ -15,6 +15,14 @@ final class EditNoteViewModel: Cautionable {
     let page: Observable<Int?>
     let content: Observable<String>
     
+    init(note: Note) {
+        self.note = note
+        
+        self.noteType = Observable(note.type)
+        self.page = Observable(note.page)
+        self.content = Observable(note.content)
+    }
+    
     let caution = Observable(Caution(isPresent: false, willDismiss: false))
     
     var isChanged: Bool {
@@ -24,14 +32,6 @@ final class EditNoteViewModel: Cautionable {
     }
     
     private lazy var realmRepository = try? RealmRepository()
-    
-    init(note: Note) {
-        self.note = note
-        
-        self.noteType = Observable(note.type)
-        self.page = Observable(note.page)
-        self.content = Observable(note.content)
-    }
     
     func changeNoteType(to type: NoteType) {
         self.noteType.value = type

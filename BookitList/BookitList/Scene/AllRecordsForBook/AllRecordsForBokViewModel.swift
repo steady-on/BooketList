@@ -13,15 +13,15 @@ final class AllRecordsForBokViewModel: Cautionable {
     var notes: Observable<[Note]>
     let caution = Observable(Caution(isPresent: false, willDismiss: false))
     
-    private lazy var imageFileManager = ImageFileManager()
-    private lazy var realmRepository = try? RealmRepository()
-    
     init(book: Book) {
         self.book = Observable(book)
         
         let notesResults = book.notes.sorted(byKeyPath: "createdAt", ascending: false)
         self.notes = Observable(Array(notesResults))
     }
+    
+    private lazy var imageFileManager = ImageFileManager()
+    private lazy var realmRepository = try? RealmRepository()
     
     func checkCoverImagePath() -> URL {
         return imageFileManager.makeFullFilePath(from: .cover(bookID: book.value._id.stringValue))

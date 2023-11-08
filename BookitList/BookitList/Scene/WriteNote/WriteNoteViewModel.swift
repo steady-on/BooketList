@@ -9,6 +9,11 @@ import Foundation
 
 final class WriteNoteViewModel: Cautionable {
     let book: Observable<Book>
+    
+    init(book: Book) {
+        self.book = Observable(book)
+    }
+    
     let page: Observable<Int?> = Observable(nil)
     let content = Observable("")
     
@@ -17,10 +22,6 @@ final class WriteNoteViewModel: Cautionable {
     let caution = Observable(Caution(isPresent: false, willDismiss: false))
     
     private lazy var realmRepository = try? RealmRepository()
-    
-    init(book: Book) {
-        self.book = Observable(book)
-    }
     
     func changeNoteType(to noteType: NoteType) {
         self.noteType = noteType

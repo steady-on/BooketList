@@ -9,13 +9,19 @@ import UIKit
 
 final class BLSelectButtonFromEnum<T: SelectableButton>: UIStackView {
     
+    private let title: String
+    private let baseEnum: T.Type
+    
+    init(title: String, baseEnum: T.Type) {
+        self.title = title
+        self.baseEnum = baseEnum
+        super.init(frame: .zero)
+    }
+    
     var seletedButtonTag: Int {
         guard let selectedButton = buttonGroup.first(where: { $0.isSelected }) else { return 0 }
         return selectedButton.tag
     }
-    
-    private let title: String
-    private let baseEnum: T.Type
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -51,12 +57,6 @@ final class BLSelectButtonFromEnum<T: SelectableButton>: UIStackView {
         let stackHeight = buttonStackView.frame.height
         
         return CGSize(width: bounds.width, height: labelHeight + spacing + stackHeight)
-    }
-    
-    init(title: String, baseEnum: T.Type) {
-        self.title = title
-        self.baseEnum = baseEnum
-        super.init(frame: .zero)
     }
     
     @available(*, unavailable)

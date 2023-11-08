@@ -19,6 +19,11 @@ class AddBookDetailInfoViewController: BaseViewController {
         }
     }
     
+    init(itemID: Int) {
+        self.itemID = itemID
+        super.init()
+    }
+    
     private let scrollView = {
         let scrollView = UIScrollView()
         scrollView.keyboardDismissMode = .onDrag
@@ -118,11 +123,6 @@ class AddBookDetailInfoViewController: BaseViewController {
     }()
     
     private let indicatorView = BLIndicatorView(direction: "책 정보를 불러오는 중 입니다.")
-    
-    init(itemID: Int) {
-        self.itemID = itemID
-        super.init()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
