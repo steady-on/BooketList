@@ -17,7 +17,7 @@ final class WaitingBookCell: BaseCollectionViewCell {
     
     private let backdropView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .tertiarySystemBackground
         view.layer.borderColor = UIColor.reverseBackground.cgColor
         view.layer.borderWidth = 1
         view.layer.cornerRadius = 7

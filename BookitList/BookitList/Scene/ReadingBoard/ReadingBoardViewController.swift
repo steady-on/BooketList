@@ -132,7 +132,7 @@ extension ReadingBoardViewController {
         nowReadingBookCollectionView.delegate = self
         
         waitingBookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createWaitingBooksLayout())
-        waitingBookCollectionView.backgroundColor = .tertiarySystemGroupedBackground
+        waitingBookCollectionView.backgroundColor = .background
         waitingBookCollectionView.isScrollEnabled = false
         waitingBookCollectionView.delegate = self
     }
