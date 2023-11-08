@@ -69,7 +69,8 @@ final class AddBookDetailInfoViewModel: Cautionable {
         
         do {
             if let coverImage {
-                try imageManager.saveImage(coverImage, to: .cover(bookID: book._id.stringValue))
+                let compression = selectedBook.value?.subInfo.previewImgList?.first != nil
+                try imageManager.saveImage(coverImage, to: .cover(bookID: book._id.stringValue), compression: compression)
                 book.coverImageSize = ImageSize(from: coverImage.size)
             }
             try realmRepository.addItem(book)
