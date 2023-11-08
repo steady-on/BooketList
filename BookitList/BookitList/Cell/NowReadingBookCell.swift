@@ -22,11 +22,17 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     private let coverImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.shadowOffset = CGSize(width: 3, height: 3)
-        imageView.layer.shadowOpacity = 0.5
-        imageView.layer.shadowColor = UIColor.systemGray.cgColor
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
+    }()
+    
+    private let coverShadowView: UIView = {
+        let view = UIView()
+        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = UIColor.systemGray.cgColor
+        return view
     }()
     
     private let accessoryView: UIView = {
@@ -105,11 +111,11 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        coverImageView.layer.shadowPath = UIBezierPath(rect: coverImageView.bounds).cgPath
+        coverShadowView.layer.shadowPath = UIBezierPath(rect: coverShadowView.bounds).cgPath
     }
     
     override func configureHiararchy() {
-        let components = [coverImageView, accessoryView] // bottomAccessoryView
+        let components = [coverShadowView, coverImageView, accessoryView] // bottomAccessoryView
         components.forEach { component in
             contentView.addSubview(component)
         }
@@ -139,6 +145,10 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     override func setConstraints() {
         coverImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        coverShadowView.snp.makeConstraints { make in
+            make.edges.equalTo(coverImageView)
         }
         
         accessoryView.snp.makeConstraints { make in
@@ -200,6 +210,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         
         coverImageView.snp.remakeConstraints { make in
             make.height.equalTo(coverImageView.snp.width).multipliedBy(imageSize.height / imageSize.width)
+            make.top.greaterThanOrEqualToSuperview()
             make.horizontalEdges.bottom.equalToSuperview()
         }
     }
