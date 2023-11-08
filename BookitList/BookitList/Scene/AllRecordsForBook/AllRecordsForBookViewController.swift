@@ -249,7 +249,7 @@ class AllRecordsForBookViewController: BaseViewController {
     override func bindComponentWithObservable() {
         viewModel.book.bind { [weak self] book in
             self?.configureComponents(for: book)
-            self?.remakeCoverImageViewConstraints(for: book.size)
+            self?.remakeCoverImageViewConstraints(for: book.coverImageSize)
         }
         
         viewModel.notes.bind { [weak self] notes in
@@ -290,7 +290,7 @@ class AllRecordsForBookViewController: BaseViewController {
         overviewTextView.text = book.overview
     }
     
-    private func remakeCoverImageViewConstraints(for size: Size?) {
+    private func remakeCoverImageViewConstraints(for size: ImageSize?) {
         guard let size else { return }
         
         coverImageView.snp.remakeConstraints { make in
