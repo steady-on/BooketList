@@ -52,6 +52,7 @@ final class SearchResultCollectionCell: BaseCollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.lineBreakStrategy = .pushOut
         label.numberOfLines = 0
         return label
     }()
