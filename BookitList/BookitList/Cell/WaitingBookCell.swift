@@ -11,7 +11,7 @@ final class WaitingBookCell: BaseCollectionViewCell {
     var book: Book! {
         didSet {
             titleLabel.text = book.title
-            setConstraints(for: book.size)
+            remakeBackdropViewConstraints(for: book.actualSize)
         }
     }
     
@@ -38,22 +38,9 @@ final class WaitingBookCell: BaseCollectionViewCell {
         backdropView.addSubview(titleLabel)
     }
     
-    private func setConstraints(for size: Size?) {
-        let minimumWidth = titleLabel.font.lineHeight + backdropView.layoutMargins.left + backdropView.layoutMargins.right
-        let maximumHeight = bounds.height
-        let standardHeight = maximumHeight * 0.8
-        
-        let width = size?.depth ?? minimumWidth
-        let height = size?.height ?? standardHeight
-        let heightRatio = standardHeight / height
-        
-        let cellWidth = width < minimumWidth ? minimumWidth : width
-        let cellHeight = maximumHeight * heightRatio
-        
+    override func setConstraints() {
         backdropView.snp.makeConstraints { make in
-            make.width.equalTo(cellWidth)
-            make.height.equalTo(cellHeight)
-            make.top.greaterThanOrEqualToSuperview()
+            make.height.equalToSuperview().multipliedBy(0.8)
             make.horizontalEdges.bottom.equalToSuperview()
         }
         
@@ -61,6 +48,28 @@ final class WaitingBookCell: BaseCollectionViewCell {
             make.center.equalTo(backdropView.layoutMarginsGuide)
             make.height.equalTo(backdropView.layoutMarginsGuide.snp.width)
             make.width.equalTo(backdropView.layoutMarginsGuide.snp.height)
+        }
+    }
+    
+    private func remakeBackdropViewConstraints(for size: ActualSize?) {
+        guard let size else { return }
+        
+        let minimumWidth = titleLabel.font.lineHeight + backdropView.layoutMargins.left + backdropView.layoutMargins.right
+        let maximumHeight = bounds.height
+        let standardHeight = maximumHeight * 0.8
+        
+        let width = size.depth
+        let height = size.height
+        let heightRatio = standardHeight / height
+        
+        let cellWidth = width < minimumWidth ? minimumWidth : width
+        let cellHeight = height == 0 ? standardHeight : maximumHeight * heightRatio
+        
+        backdropView.snp.remakeConstraints { make in
+            make.width.equalTo(cellWidth)
+            make.height.equalTo(cellHeight)
+            make.top.greaterThanOrEqualToSuperview()
+            make.horizontalEdges.bottom.equalToSuperview()
         }
     }
     
