@@ -72,6 +72,7 @@ final class ImageSize: EmbeddedObject {
     @Persisted var height: Double
     
     convenience init(from size: CGSize) {
+        self.init()
         self.width = size.width
         self.height = size.height
     }
