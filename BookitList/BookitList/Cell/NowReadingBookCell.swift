@@ -196,10 +196,10 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     }
     
     private func remakeCoverImageViewConstraints() {
-        guard let size = book.size else { return }
+        guard let imageSize = book.coverImageSize else { return }
         
         coverImageView.snp.remakeConstraints { make in
-            make.height.equalTo(coverImageView.snp.width).multipliedBy(size.height / size.width)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(imageSize.height / imageSize.width)
             make.horizontalEdges.bottom.equalToSuperview()
         }
     }
