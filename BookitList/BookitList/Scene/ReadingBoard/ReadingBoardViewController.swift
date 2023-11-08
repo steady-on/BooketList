@@ -33,6 +33,10 @@ final class ReadingBoardViewController: BaseViewController {
         
         viewModel.fetchBooks()
         placeholderView.isHidden = viewModel.isEmptyBooks == false
+        
+        if viewModel.isEmptyBooks == false {
+            nowReadingBookCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
+        }
     }
     
     override func configureHiararchy() {

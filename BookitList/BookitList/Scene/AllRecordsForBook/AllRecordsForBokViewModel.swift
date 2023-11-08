@@ -55,6 +55,7 @@ final class AllRecordsForBokViewModel: Cautionable {
         do {
             try realmRepository.updateItem {
                 self.book.value.statusOfReading = status
+                self.book.value.latestUpdatedAt = Date.now
             }
         } catch {
             caution.value = Caution(isPresent: true, title: "데이터 수정 오류", message: String(describing: error),  willDismiss: true)

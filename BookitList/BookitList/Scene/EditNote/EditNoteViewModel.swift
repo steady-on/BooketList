@@ -56,6 +56,7 @@ final class EditNoteViewModel: Cautionable {
                 self.note.type = self.noteType.value
                 self.note.page = self.page.value
                 self.note.content = self.content.value
+                self.note.book.first?.latestUpdatedAt = Date.now
             }
         } catch {
             caution.value = Caution(isPresent: true, title: "노트 수정 오류", message: String(describing: error), willDismiss: false)

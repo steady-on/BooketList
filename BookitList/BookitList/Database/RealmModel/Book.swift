@@ -24,6 +24,7 @@ final class Book: Object {
     @Persisted var isOutOfPrint: Bool?
     @Persisted var statusOfReading: StatusOfReading
     @Persisted var registeredAt: Date
+    @Persisted var latestUpdatedAt: Date
     
     @Persisted var authors: List<Author>
     @Persisted var readingHistories: List<ReadingHistory>
@@ -52,6 +53,7 @@ final class Book: Object {
         
         self.statusOfReading = .notYet
         self.registeredAt = Date.now
+        self.latestUpdatedAt = Date.now
         
         self.authors = List<Author>()
         artists.forEach { author in

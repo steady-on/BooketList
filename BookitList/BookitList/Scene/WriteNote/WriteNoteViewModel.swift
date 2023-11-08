@@ -37,6 +37,7 @@ final class WriteNoteViewModel: Cautionable {
         do {
             try realmRepository.updateItem {
                 self.book.value.notes.append(note)
+                self.book.value.latestUpdatedAt = Date.now
             }
         } catch {
             caution.value = Caution(isPresent: true, title: "노트 작성 오류", message: String(describing: error), willDismiss: false)

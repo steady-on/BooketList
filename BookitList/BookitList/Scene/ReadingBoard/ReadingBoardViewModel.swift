@@ -40,7 +40,7 @@ final class ReadingBoardViewModel: Cautionable {
             return
         }
         
-        let fetchedBooks: Results<Book> = realmRepository.fetchTable(sortedBy: "registeredAt")
+        let fetchedBooks: Results<Book> = realmRepository.fetchTable(sortedBy: "latestUpdatedAt")
         self.books = fetchedBooks
     }
     

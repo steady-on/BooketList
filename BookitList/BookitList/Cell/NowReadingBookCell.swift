@@ -104,6 +104,7 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         
+        accessoryView.isHidden = true
         coverImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
