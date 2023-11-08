@@ -10,17 +10,10 @@ import Kingfisher
 
 class AddBookDetailInfoViewController: BaseViewController {
     
-    private let viewModel = AddBookDetailInfoViewModel()
-    private let itemID: Int
-    private var authors: [Artist]? {
-        didSet {
-            guard let authors else { return }
-            arrangeArtistButtons(for: authors)
-        }
-    }
+    private let viewModel: AddBookDetailInfoViewModel!
     
     init(itemID: Int) {
-        self.itemID = itemID
+        self.viewModel = AddBookDetailInfoViewModel(itemID: itemID)
         super.init()
     }
     
@@ -127,7 +120,7 @@ class AddBookDetailInfoViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.requestBookDetailInfo(for: itemID)
+        viewModel.requestBookDetailInfo()
     }
     
     override func configureHiararchy() {
@@ -214,12 +207,15 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     override func bindComponentWithObservable() {
         viewModel.selectedBook.bind { [weak self] itemDetail in
-            guard itemDetail != nil else { return }
-            self?.configureComponents(for: itemDetail!)
+            guard let itemDetail else { return }
+            self?.configureComponents(for: itemDetail)
         }
         
         viewModel.isRequesting.bind { [weak self] bool in
             self?.indicatorView.isHidden = bool == false
+            
+            guard bool == false, let authors = self?.viewModel.authors else { return }
+            self?.arrangeArtistButtons(for: authors)
         }
         
         viewModel.caution.bind { [weak self] caution in
@@ -264,10 +260,6 @@ class AddBookDetailInfoViewController: BaseViewController {
         publishedAtTextField.text = itemDetail.pubDate
         totalPagesTextField.text = "\(itemDetail.subInfo.itemPage)"
         overviewTextView.text = itemDetail.description ?? itemDetail.fullDescription
-
-        if authors == nil {
-            authors = itemDetail.subInfo.authors
-        }
         
         guard let originalTitle = itemDetail.subInfo.originalTitle else {
             originalTitleTextField.isHidden = true
