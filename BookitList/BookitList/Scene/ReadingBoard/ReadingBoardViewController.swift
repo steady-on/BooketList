@@ -33,10 +33,6 @@ final class ReadingBoardViewController: BaseViewController {
         
         viewModel.fetchBooks()
         placeholderView.isHidden = viewModel.isEmptyBooks == false
-        
-        if viewModel.isEmptyBooks == false {
-            nowReadingBookCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .left, animated: true)
-        }
     }
     
     override func configureHiararchy() {
@@ -177,7 +173,7 @@ extension ReadingBoardViewController {
         let nowReadingBookCellRegistration = UICollectionView.CellRegistration<BookCoverGridCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
             cell.detailInfoButtonHandler = {
-                let allRecordsForBookView = AllRecordsForBookViewController(book: itemIdentifier)
+                let allRecordsForBookView = AllRecordsForBookViewController(objectID: itemIdentifier._id)
                 allRecordsForBookView.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(allRecordsForBookView, animated: true)
             }
@@ -225,7 +221,7 @@ extension ReadingBoardViewController: UICollectionViewDelegate {
         }
         
         guard let book = waitingBookDataSource.itemIdentifier(for: indexPath) else { return }
-        let allRecordsForBookView = AllRecordsForBookViewController(book: book)
+        let allRecordsForBookView = AllRecordsForBookViewController(objectID: book._id)
         allRecordsForBookView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(allRecordsForBookView, animated: true)
     }

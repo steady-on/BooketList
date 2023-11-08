@@ -284,9 +284,9 @@ extension SearchBookViewController: UICollectionViewDelegate {
         
         let viewController: BaseViewController
         
-        if selectedItem.isRegistered {
+        if let objectID = selectedItem.objectID {
             // TODO: 등록된 책을 보여주는 view로 추후 변경
-            viewController = AddBookDetailInfoViewController(itemID: selectedItem.itemID)
+            viewController = AllRecordsForBookViewController(objectID: objectID)
         } else {
             viewController = AddBookDetailInfoViewController(itemID: selectedItem.itemID)
         }

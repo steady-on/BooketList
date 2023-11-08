@@ -6,14 +6,16 @@
 //
 
 import UIKit
+import RealmSwift
 import Kingfisher
 
 class AllRecordsForBookViewController: BaseViewController {
     
     private let viewModel: AllRecordsForBokViewModel
     
-    init(book: Book) {
-        self.viewModel = AllRecordsForBokViewModel(book: book)
+    init(objectID: ObjectId) {
+        self.viewModel = AllRecordsForBokViewModel(objectID: objectID)
+        viewModel.loadBook()
         super.init()
     }
 

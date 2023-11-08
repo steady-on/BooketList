@@ -21,7 +21,7 @@ final class SearchResultCollectionCell: BaseCollectionViewCell {
             titleLabel.text = item.title
             authorLabel.text = item.author
             overviewTextView.text = item.description
-            bookmarkImageView.isHidden = item.isRegistered == false
+            bookmarkImageView.isHidden = item.objectID == nil
         }
     }
     
