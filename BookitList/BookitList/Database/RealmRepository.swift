@@ -20,8 +20,6 @@ final class RealmRepository {
     }
     
     func addItem<T: Object>(_ item: T) throws {
-        print(realm.configuration.fileURL)
-        
         do {
             try realm.write { realm.add(item) }
         } catch {
@@ -61,6 +59,7 @@ final class RealmRepository {
     }
     
     func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Results<T> {
+        print(realm.configuration.fileURL)
         let fetchData = realm.objects(T.self).sorted(byKeyPath: keypath, ascending: ascending)
         return fetchData
     }
