@@ -20,7 +20,7 @@ final class MyShelfViewController: BaseViewController {
     
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: searchResultsCollectionViewController)
-        searchController.searchBar.placeholder = "책제목, 작가 이름..."
+        searchController.searchBar.placeholder = "책 제목, 작가 이름..."
         searchController.searchBar.searchTextField.clearButtonMode = .always
         searchController.searchBar.returnKeyType = .search
         searchController.searchResultsUpdater = self

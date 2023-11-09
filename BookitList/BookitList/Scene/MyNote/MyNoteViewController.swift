@@ -17,7 +17,7 @@ final class MyNoteViewController: BaseViewController {
     
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: searchResultsTableViewController)
-        searchController.searchBar.placeholder = "책제목, 노트내용..."
+        searchController.searchBar.placeholder = "책 제목, 작가이름, 노트내용..."
         searchController.searchBar.searchTextField.clearButtonMode = .always
         searchController.searchBar.returnKeyType = .search
         searchController.searchResultsUpdater = self
