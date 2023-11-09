@@ -12,6 +12,8 @@ final class MyNoteViewController: BaseViewController {
     private let viewModel = MyNoteViewModel()
     
     private let searchResultsTableViewController = MyNoteSearchResultsTableViewController()
+    private var searchResultsDataSource: UITableViewDiffableDataSource<Int, Note>!
+    private var searchResultsSnapshot = NSDiffableDataSourceSnapshot<Int, Note>()
     
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: searchResultsTableViewController)
@@ -33,6 +35,7 @@ final class MyNoteViewController: BaseViewController {
     }()
     
     private var noteDataSource: UITableViewDiffableDataSource<Int, Note>!
+    private var noteSnapshot = NSDiffableDataSourceSnapshot<Int, Note>()
     
     private let placeholderView = BLDirectionView(symbolName: "doc", direction: "아직 작성된 노트가 없습니다.\n책을 읽으면서 여러가지 노트를 남겨보세요.\n아직 등록된 책이 없다면, 도서부터 등록해보세요!")
     
@@ -42,12 +45,16 @@ final class MyNoteViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateNoteSnapshot(for: [])
+        updateSnapshot(for: [])
         viewModel.fetchNotes()
     }
     
     override func configureHiararchy() {
         super.configureHiararchy()
+        
+        searchResultsTableViewController.tableView.delegate = self
+        configureSearchResultsDataSource()
+        
         
         definesPresentationContext = true
         noteTableView.delegate = self
@@ -81,7 +88,7 @@ final class MyNoteViewController: BaseViewController {
     
     override func bindComponentWithObservable() {
         viewModel.noteArray.bind { [weak self] notes in
-            self?.updateNoteSnapshot(for: notes)
+            self?.updateSnapshot(for: notes)
             self?.placeholderView.isHidden = notes.isEmpty == false
             self?.searchController.searchBar.searchTextField.isEnabled = notes.isEmpty == false
         }
@@ -107,11 +114,28 @@ extension MyNoteViewController {
         }
     }
     
-    private func updateNoteSnapshot(for notes: [Note]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Note>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(notes)
-        noteDataSource.apply(snapshot, animatingDifferences: false)
+    private func updateSnapshot(for notes: [Note]) {
+        noteSnapshot = NSDiffableDataSourceSnapshot<Int, Note>()
+        noteSnapshot.appendSections([0])
+        noteSnapshot.appendItems(notes)
+        noteDataSource.apply(noteSnapshot, animatingDifferences: false)
+    }
+}
+
+extension MyNoteViewController {
+    private func configureSearchResultsDataSource() {
+        searchResultsDataSource = UITableViewDiffableDataSource<Int, Note>(tableView: searchResultsTableViewController.tableView) { tableView, indexPath, itemIdentifier in
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: NoteTableViewCell.identifier) as? NoteTableViewCell else { return UITableViewCell() }
+            cell.note = itemIdentifier
+            return cell
+        }
+    }
+    
+    private func updateSearchResultsSnapshot(for notes: [Note]) {
+        searchResultsSnapshot = NSDiffableDataSourceSnapshot<Int, Note>()
+        searchResultsSnapshot.appendSections([0])
+        searchResultsSnapshot.appendItems(notes)
+        searchResultsDataSource.apply(searchResultsSnapshot, animatingDifferences: true)
     }
 }
 
@@ -120,25 +144,40 @@ extension MyNoteViewController: UISearchResultsUpdating {
         guard let keyword = searchController.searchBar.text else { return }
         
         let searchResults = viewModel.searchNotes(for: keyword)
-        searchResultsTableViewController.updateSnapshot(for: searchResults)
+        updateSearchResultsSnapshot(for: searchResults)
     }
 }
 
 extension MyNoteViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let selectedNote = noteDataSource.itemIdentifier(for: indexPath) else {
-            return
+        
+        let selectedNote: Note?
+        
+        if tableView === noteTableView {
+            selectedNote = noteDataSource.itemIdentifier(for: indexPath)
+        } else {
+            selectedNote = searchResultsDataSource.itemIdentifier(for: indexPath)
         }
+
+        guard let selectedNote else { return }
         
         let editNoteViewController = EditNoteViewController(note: selectedNote) { [weak self] in
-            guard let cell = tableView.cellForRow(at: indexPath) as? NoteTableViewCell else { return }
-            cell.note = selectedNote
-            self?.viewModel.fetchNotes()
+            self?.updateTableViewCellData(tableView, item: selectedNote)
         }
         let navigationController = UINavigationController(rootViewController: editNoteViewController)
         present(navigationController, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: false)
+    }
+    
+    private func updateTableViewCellData(_ tableView: UITableView, item: Note) {
+        if tableView === searchResultsTableViewController.tableView {
+            searchResultsSnapshot.reloadItems([item])
+            searchResultsDataSource.apply(searchResultsSnapshot)
+        }
+        
+        noteSnapshot.reloadItems([item])
+        noteDataSource.apply(noteSnapshot)
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
