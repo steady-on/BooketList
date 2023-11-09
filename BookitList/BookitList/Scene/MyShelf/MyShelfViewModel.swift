@@ -11,6 +11,7 @@ import RealmSwift
 final class MyShelfViewModel: Cautionable {
     
     let books: Observable<[Book]> = Observable([])
+    let layout: Observable<CollectionLayoutStyle> = Observable(.grid)
     
     let caution = Observable(Caution(isPresent: false, willDismiss: false))
     

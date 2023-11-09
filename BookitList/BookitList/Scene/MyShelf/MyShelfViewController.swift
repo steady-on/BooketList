@@ -21,6 +21,10 @@ final class MyShelfViewController: BaseViewController {
         return searchController
     }()
     
+    private lazy var changeLayoutButton = {
+        UIBarButtonItem(image: UIImage(systemName: "books.vertical.fill"), style: .plain, target: self, action: #selector(changeLayoutButtonTapped))
+    }()
+    
     private var bookCollectionView: UICollectionView! = nil
     private var dataSource: UICollectionViewDiffableDataSource<Int, Book>! = nil
     
@@ -37,9 +41,10 @@ final class MyShelfViewController: BaseViewController {
     
     override func configureHiararchy() {
         super.configureHiararchy()
-        
+
+        configureNavigationBar()
         configureCollectionView()
-        configureDataSource()
+        configureDataSource(for: .grid)
         
         view.addSubview(bookCollectionView)
     }
@@ -55,6 +60,13 @@ final class MyShelfViewController: BaseViewController {
             self?.updateSnapshot(for: books)
         }
         
+        viewModel.layout.bind { [weak self] layout in
+            self?.changeLayoutButton.image = UIImage(systemName: layout.nextLayoutIconName)
+            self?.changeLayout(for: layout)
+            self?.configureDataSource(for: layout)
+            self?.updateSnapshot(for: self?.viewModel.books.value ?? [])
+        }
+        
         viewModel.caution.bind { [weak self] caution in
             guard caution.isPresent else { return }
             
@@ -67,22 +79,37 @@ final class MyShelfViewController: BaseViewController {
         navigationItem.searchController = searchController
         
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(navigationSearchButtonTapped))
-
-        navigationItem.rightBarButtonItem = searchButton
+        
+        navigationItem.rightBarButtonItems = [searchButton, changeLayoutButton]
     }
     
     @objc private func navigationSearchButtonTapped() {
         searchController.searchBar.becomeFirstResponder()
     }
+    
+    @objc private func changeLayoutButtonTapped() {
+        viewModel.changeLayout()
+    }
 }
 
 extension MyShelfViewController {
     private func configureCollectionView() {
-        bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createListLayout())
+        bookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createGridLayout())
         bookCollectionView.showsVerticalScrollIndicator = false
         bookCollectionView.showsHorizontalScrollIndicator = false
         bookCollectionView.backgroundColor = .tertiarySystemGroupedBackground
         bookCollectionView.delegate = self
+    }
+    
+    private func changeLayout(for layout: CollectionLayoutStyle) {
+        switch layout {
+        case .grid:
+            bookCollectionView.collectionViewLayout = createGridLayout()
+        case .shelf:
+            bookCollectionView.collectionViewLayout = createShelfLayout()
+        case .list:
+            bookCollectionView.collectionViewLayout = createListLayout()
+        }
     }
     
     private func createGridLayout() -> UICollectionViewLayout {
@@ -130,7 +157,7 @@ extension MyShelfViewController {
         return layout
     }
     
-    private func configureDataSource() {
+    private func configureDataSource(for layout: CollectionLayoutStyle) {
         let gridCellRegistration = UICollectionView.CellRegistration<BookCoverGridCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
         }
@@ -144,7 +171,14 @@ extension MyShelfViewController {
         }
         
         dataSource = UICollectionViewDiffableDataSource<Int, Book>(collectionView: bookCollectionView) { collectionView, indexPath, itemIdentifier in
-            return collectionView.dequeueConfiguredReusableCell(using: listCellRegistration, for: indexPath, item: itemIdentifier)
+            switch layout {
+            case .grid:
+                return collectionView.dequeueConfiguredReusableCell(using: gridCellRegistration, for: indexPath, item: itemIdentifier)
+            case .shelf:
+                return collectionView.dequeueConfiguredReusableCell(using: shelfCellRegistration, for: indexPath, item: itemIdentifier)
+            case .list:
+                return collectionView.dequeueConfiguredReusableCell(using: listCellRegistration, for: indexPath, item: itemIdentifier)
+            }
         }
     }
     
