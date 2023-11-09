@@ -12,10 +12,6 @@ final class MyShelfViewController: BaseViewController {
     
     private let viewModel = MyShelfViewModel()
     
-    private lazy var searchResultsCollectionViewController = {
-        MyShelfSearchResultsCollectionViewController(collectionViewLayout: createListLayout())
-    }()
-    
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: searchResultsCollectionViewController)
         searchController.searchBar.placeholder = "책제목, 작가 이름..."
@@ -32,6 +28,10 @@ final class MyShelfViewController: BaseViewController {
     private var bookCollectionView: UICollectionView! = nil
     private var dataSource: UICollectionViewDiffableDataSource<Int, Book>! = nil
     
+    private var searchResultsCollectionViewController: MyShelfSearchResultsCollectionViewController!
+    
+    private var searchResultsDataSource: UICollectionViewDiffableDataSource<Int, Book>!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,9 +46,13 @@ final class MyShelfViewController: BaseViewController {
     override func configureHiararchy() {
         super.configureHiararchy()
 
+        configureSearchResultsCollectionView()
+        configureSearchResultsDataSource()
+        
         configureNavigationBar()
         configureCollectionView()
         configureDataSource(for: .grid)
+        
         
         view.addSubview(bookCollectionView)
     }
@@ -194,11 +198,44 @@ extension MyShelfViewController {
     }
 }
 
+extension MyShelfViewController {
+    private func configureSearchResultsCollectionView() {
+        searchResultsCollectionViewController = MyShelfSearchResultsCollectionViewController(collectionViewLayout: createListLayout())
+        
+        searchResultsCollectionViewController.collectionView.delegate = self
+    }
+    
+    private func configureSearchResultsDataSource() {
+        let cellRegistration = UICollectionView.CellRegistration<BookListCell, Book> { cell, indexPath, itemIdentifier in
+            cell.book = itemIdentifier
+        }
+        
+        searchResultsDataSource = UICollectionViewDiffableDataSource<Int, Book>(collectionView: searchResultsCollectionViewController.collectionView) { collectionView, indexPath, itemIdentifier in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        }
+    }
+    
+    private func updateSearchResultsSnapshot(for books: [Book]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Int, Book>()
+        snapshot.appendSections([0])
+        snapshot.appendItems(books)
+        searchResultsDataSource.apply(snapshot, animatingDifferences: true)
+    }
+}
+
 extension MyShelfViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let book = dataSource.itemIdentifier(for: indexPath) else { return }
         
-        let allRecordsForBookView = AllRecordsForBookViewController(objectID: book._id)
+        let selectedBook: Book?
+        if collectionView === bookCollectionView {
+            selectedBook = dataSource.itemIdentifier(for: indexPath)
+        } else {
+            selectedBook = searchResultsDataSource.itemIdentifier(for: indexPath)
+        }
+        
+        guard let selectedBook else { return }
+        
+        let allRecordsForBookView = AllRecordsForBookViewController(objectID: selectedBook._id)
         allRecordsForBookView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(allRecordsForBookView, animated: true)
     }
@@ -209,6 +246,6 @@ extension MyShelfViewController: UISearchResultsUpdating {
         guard let keyword = searchController.searchBar.text else { return }
         
         let searchResults = viewModel.searchBook(for: keyword)
-        searchResultsCollectionViewController.updateSnapshot(for: searchResults)
+        updateSearchResultsSnapshot(for: searchResults)
     }
 }
