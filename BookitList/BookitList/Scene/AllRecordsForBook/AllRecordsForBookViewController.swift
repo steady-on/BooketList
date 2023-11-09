@@ -12,9 +12,11 @@ import Kingfisher
 class AllRecordsForBookViewController: BaseViewController {
     
     private let viewModel: AllRecordsForBokViewModel
+    private let dismissHandler: (() -> Void)?
     
-    init(objectID: ObjectId) {
+    init(objectID: ObjectId, dismissHandler: (() -> Void)? = nil) {
         self.viewModel = AllRecordsForBokViewModel(objectID: objectID)
+        self.dismissHandler = dismissHandler
         viewModel.loadBook()
         super.init()
     }
@@ -142,6 +144,12 @@ class AllRecordsForBookViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        dismissHandler?()
     }
     
     override func viewDidLayoutSubviews() {

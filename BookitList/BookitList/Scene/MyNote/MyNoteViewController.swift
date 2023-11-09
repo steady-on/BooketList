@@ -162,7 +162,7 @@ extension MyNoteViewController: UITableViewDelegate {
         guard let selectedNote else { return }
         
         let editNoteViewController = EditNoteViewController(note: selectedNote) { [weak self] in
-            self?.updateTableViewCellData(tableView, item: selectedNote)
+            self?.updateTableViewCellData(tableView, data: selectedNote)
         }
         let navigationController = UINavigationController(rootViewController: editNoteViewController)
         present(navigationController, animated: true)
@@ -170,13 +170,13 @@ extension MyNoteViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    private func updateTableViewCellData(_ tableView: UITableView, item: Note) {
+    private func updateTableViewCellData(_ tableView: UITableView, data: Note) {
         if tableView === searchResultsTableViewController.tableView {
-            searchResultsSnapshot.reloadItems([item])
+            searchResultsSnapshot.reconfigureItems([data])
             searchResultsDataSource.apply(searchResultsSnapshot)
         }
         
-        noteSnapshot.reloadItems([item])
+        noteSnapshot.reconfigureItems([data])
         noteDataSource.apply(noteSnapshot)
     }
     

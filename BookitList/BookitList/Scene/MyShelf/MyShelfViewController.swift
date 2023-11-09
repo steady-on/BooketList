@@ -12,6 +12,12 @@ final class MyShelfViewController: BaseViewController {
     
     private let viewModel = MyShelfViewModel()
     
+    private var searchResultsCollectionViewController: MyShelfSearchResultsCollectionViewController!
+    
+    private var searchResultsDataSource: UICollectionViewDiffableDataSource<Int, Book>!
+    
+    private var searchResultsSnapShot = NSDiffableDataSourceSnapshot<Int, Book>()
+    
     private lazy var searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: searchResultsCollectionViewController)
         searchController.searchBar.placeholder = "책제목, 작가 이름..."
@@ -26,11 +32,8 @@ final class MyShelfViewController: BaseViewController {
     }()
     
     private var bookCollectionView: UICollectionView! = nil
-    private var dataSource: UICollectionViewDiffableDataSource<Int, Book>! = nil
-    
-    private var searchResultsCollectionViewController: MyShelfSearchResultsCollectionViewController!
-    
-    private var searchResultsDataSource: UICollectionViewDiffableDataSource<Int, Book>!
+    private var bookDataSource: UICollectionViewDiffableDataSource<Int, Book>! = nil
+    private var bookSnapshot = NSDiffableDataSourceSnapshot<Int, Book>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,7 +181,7 @@ extension MyShelfViewController {
             cell.book = itemIdentifier
         }
         
-        dataSource = UICollectionViewDiffableDataSource<Int, Book>(collectionView: bookCollectionView) { collectionView, indexPath, itemIdentifier in
+        bookDataSource = UICollectionViewDiffableDataSource<Int, Book>(collectionView: bookCollectionView) { collectionView, indexPath, itemIdentifier in
             switch layout {
             case .grid:
                 return collectionView.dequeueConfiguredReusableCell(using: gridCellRegistration, for: indexPath, item: itemIdentifier)
@@ -191,10 +194,10 @@ extension MyShelfViewController {
     }
     
     private func updateSnapshot(for books: [Book]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Book>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(books)
-        dataSource.apply(snapshot)
+        bookSnapshot = NSDiffableDataSourceSnapshot<Int, Book>()
+        bookSnapshot.appendSections([0])
+        bookSnapshot.appendItems(books)
+        bookDataSource.apply(bookSnapshot)
     }
 }
 
@@ -216,10 +219,10 @@ extension MyShelfViewController {
     }
     
     private func updateSearchResultsSnapshot(for books: [Book]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, Book>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(books)
-        searchResultsDataSource.apply(snapshot, animatingDifferences: true)
+        searchResultsSnapShot = NSDiffableDataSourceSnapshot<Int, Book>()
+        searchResultsSnapShot.appendSections([0])
+        searchResultsSnapShot.appendItems(books)
+        searchResultsDataSource.apply(searchResultsSnapShot, animatingDifferences: true)
     }
 }
 
@@ -228,16 +231,28 @@ extension MyShelfViewController: UICollectionViewDelegate {
         
         let selectedBook: Book?
         if collectionView === bookCollectionView {
-            selectedBook = dataSource.itemIdentifier(for: indexPath)
+            selectedBook = bookDataSource.itemIdentifier(for: indexPath)
         } else {
             selectedBook = searchResultsDataSource.itemIdentifier(for: indexPath)
         }
         
         guard let selectedBook else { return }
         
-        let allRecordsForBookView = AllRecordsForBookViewController(objectID: selectedBook._id)
+        let allRecordsForBookView = AllRecordsForBookViewController(objectID: selectedBook._id) { [weak self] in
+            self?.updateCollectionViewCellData(collectionView, data: selectedBook)
+        }
         allRecordsForBookView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(allRecordsForBookView, animated: true)
+    }
+    
+    private func updateCollectionViewCellData(_ collectionView: UICollectionView, data: Book) {
+        if collectionView === searchResultsCollectionViewController.collectionView {
+            searchResultsSnapShot.reconfigureItems([data])
+            searchResultsDataSource.apply(searchResultsSnapShot)
+        }
+        
+        bookSnapshot.reconfigureItems([data])
+        bookDataSource.apply(bookSnapshot)
     }
 }
 
