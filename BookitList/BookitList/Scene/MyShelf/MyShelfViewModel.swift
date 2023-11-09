@@ -10,6 +10,8 @@ import RealmSwift
 
 final class MyShelfViewModel: Cautionable {
     
+    private var bookResults: Results<Book>!
+    
     let books: Observable<[Book]> = Observable([])
     let layout: Observable<CollectionLayoutStyle> = Observable(.grid)
     
@@ -23,7 +25,20 @@ final class MyShelfViewModel: Cautionable {
             return
         }
         
-        let fetchedbooks: Results<Book> = realmRepository.fetchTable(sortedBy: "latestUpdatedAt")
-        self.books.value = Array(fetchedbooks)
+        bookResults = realmRepository.fetchTable(sortedBy: "latestUpdatedAt")
+        self.books.value = Array(bookResults)
+    }
+    
+    func changeLayout() {
+        layout.value = layout.value.nextLayout
+    }
+    
+    func searchBook(for keyword: String) -> [Book] {
+        let result = bookResults.where {
+            $0.title.contains(keyword, options: .caseInsensitive)
+            || $0.originalTitle.contains(keyword, options: .caseInsensitive)
+            || $0.authors.name.contains(keyword, options: .caseInsensitive)
+        }
+        return Array(result)
     }
 }

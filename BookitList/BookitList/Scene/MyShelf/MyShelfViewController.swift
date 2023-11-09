@@ -12,12 +12,16 @@ final class MyShelfViewController: BaseViewController {
     
     private let viewModel = MyShelfViewModel()
     
-    private let searchController: UISearchController = {
-        let searchController = UISearchController(searchResultsController: nil)
+    private lazy var searchResultsCollectionViewController = {
+        MyShelfSearchResultsCollectionViewController(collectionViewLayout: createListLayout())
+    }()
+    
+    private lazy var searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: searchResultsCollectionViewController)
         searchController.searchBar.placeholder = "책제목, 작가 이름..."
         searchController.searchBar.searchTextField.clearButtonMode = .always
         searchController.searchBar.returnKeyType = .search
-//        searchController.searchResultsUpdater = self
+        searchController.searchResultsUpdater = self
         return searchController
     }()
     
@@ -197,5 +201,14 @@ extension MyShelfViewController: UICollectionViewDelegate {
         let allRecordsForBookView = AllRecordsForBookViewController(objectID: book._id)
         allRecordsForBookView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(allRecordsForBookView, animated: true)
+    }
+}
+
+extension MyShelfViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let keyword = searchController.searchBar.text else { return }
+        
+        let searchResults = viewModel.searchBook(for: keyword)
+        searchResultsCollectionViewController.updateSnapshot(for: searchResults)
     }
 }

@@ -118,7 +118,9 @@ extension MyNoteViewController {
 extension MyNoteViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let keyword = searchController.searchBar.text else { return }
-        searchResultsTableViewController.updateSnapshot(for: viewModel.searchNotes(for: keyword))
+        
+        let searchResults = viewModel.searchNotes(for: keyword)
+        searchResultsTableViewController.updateSnapshot(for: searchResults)
     }
 }
 

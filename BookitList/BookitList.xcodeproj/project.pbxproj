@@ -90,6 +90,7 @@
 		63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */; };
 		63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */; };
 		63DCC3B32AFC9ED300C5AF08 /* CollectionLayoutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DCC3B22AFC9ED300C5AF08 /* CollectionLayoutStyle.swift */; };
+		63DCC3B92AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DCC3B82AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,6 +174,7 @@
 		63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordCell.swift; sourceTree = "<group>"; };
 		63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryView.swift; sourceTree = "<group>"; };
 		63DCC3B22AFC9ED300C5AF08 /* CollectionLayoutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionLayoutStyle.swift; sourceTree = "<group>"; };
+		63DCC3B82AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyShelfSearchResultsCollectionViewController.swift; path = BookitList/Scene/MyShelf/MyShelfSearchResultsCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +313,7 @@
 			children = (
 				637B5C4E2AC4E77A00730C01 /* MyShelfViewController.swift */,
 				639E4CE62AF8E3D5006646F4 /* MyShelfViewModel.swift */,
+				63DCC3B82AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift */,
 			);
 			path = MyShelf;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				637B5C4F2AC4E77B00730C01 /* MyShelfViewController.swift in Sources */,
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */,
+				63DCC3B92AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift in Sources */,
 				639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */,
 				639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */,
 				639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */,
