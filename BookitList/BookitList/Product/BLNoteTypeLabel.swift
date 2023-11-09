@@ -11,6 +11,11 @@ final class BLNoteTypeLabel: BaseView {
     
     private var noteType: NoteType
     
+    init(noteType: NoteType) {
+        self.noteType = noteType
+        super.init()
+    }
+    
     private let typeLabel = UILabel()
     private let iconImage = UIImageView()
     
@@ -43,11 +48,6 @@ final class BLNoteTypeLabel: BaseView {
         case .report: return "doc.text"
         case .memory: return "calendar"
         }
-    }
-    
-    init(noteType: NoteType) {
-        self.noteType = noteType
-        super.init()
     }
     
     override func configureHiararchy() {

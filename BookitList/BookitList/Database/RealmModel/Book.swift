@@ -16,14 +16,15 @@ final class Book: Object {
     @Persisted var title: String
     @Persisted var originalTitle: String?
     @Persisted var overview: String?
-    @Persisted var existCover: Bool
+    @Persisted var coverImageSize: ImageSize?
     @Persisted var totalPage: Int?
     @Persisted var publishedAt: String?
     @Persisted var publisher: String?
-    @Persisted var size: Size?
+    @Persisted var actualSize: ActualSize?
     @Persisted var isOutOfPrint: Bool?
     @Persisted var statusOfReading: StatusOfReading
     @Persisted var registeredAt: Date
+    @Persisted var latestUpdatedAt: Date
     
     @Persisted var authors: List<Author>
     @Persisted var readingHistories: List<ReadingHistory>
@@ -42,19 +43,17 @@ final class Book: Object {
         self.title = item.title
         self.originalTitle = item.subInfo.originalTitle
         self.overview = item.description ?? item.fullDescription
-        self.existCover = false
         self.totalPage = item.subInfo.itemPage
         self.publishedAt = item.pubDate
         self.publisher = item.publisher
         
-        self.size = Size(width: item.subInfo.packing.sizeWidth, 
-                         height: item.subInfo.packing.sizeHeight,
-                         depth: item.subInfo.packing.sizeDepth)
+        self.actualSize = ActualSize(from: item.subInfo.packing)
         
         self.isOutOfPrint = item.stockStatus == "절판"
         
         self.statusOfReading = .notYet
         self.registeredAt = Date.now
+        self.latestUpdatedAt = Date.now
         
         self.authors = List<Author>()
         artists.forEach { author in
@@ -70,15 +69,26 @@ final class Book: Object {
     }
 }
 
-final class Size: EmbeddedObject {
-    @Persisted var width: Double = 0
-    @Persisted var height: Double = 0
-    @Persisted var depth: Double = 0
+final class ImageSize: EmbeddedObject {
+    @Persisted var width: Double
+    @Persisted var height: Double
     
-    convenience init(width: Int?, height: Int?, depth: Int?) {
+    convenience init(from size: CGSize) {
         self.init()
-        self.width = Double(width ?? 0)
-        self.height = Double(height ?? 0)
-        self.depth = Double(depth ?? 0)
+        self.width = size.width
+        self.height = size.height
+    }
+}
+
+final class ActualSize: EmbeddedObject {
+    @Persisted var width: Double
+    @Persisted var height: Double
+    @Persisted var depth: Double
+    
+    convenience init(from packing: Packing) {
+        self.init()
+        self.width = Double(packing.sizeWidth)
+        self.height = Double(packing.sizeHeight)
+        self.depth = Double(packing.sizeDepth)
     }
 }

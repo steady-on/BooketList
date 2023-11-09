@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import RealmSwift
 import Kingfisher
 
 class AllRecordsForBookViewController: BaseViewController {
     
     private let viewModel: AllRecordsForBokViewModel
+    private let dismissHandler: (() -> Void)?
     
-    init(book: Book) {
-        self.viewModel = AllRecordsForBokViewModel(book: book)
+    init(objectID: ObjectId, dismissHandler: (() -> Void)? = nil) {
+        self.viewModel = AllRecordsForBokViewModel(objectID: objectID)
+        self.dismissHandler = dismissHandler
+        viewModel.loadBook()
         super.init()
     }
 
@@ -46,10 +50,8 @@ class AllRecordsForBookViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .secondaryAccent
         imageView.layer.shadowColor = UIColor.systemGray.cgColor
-        imageView.layer.shadowOffset = .init(width: 3, height: 3)
-        imageView.layer.shadowOpacity = 0.7
-        // FIXME: shadowPath 설정
-//        imageView.layer.shadowPath = UIBezierPath(ovalIn: renderRect).cgPath
+        imageView.layer.shadowOffset = .init(width: 0, height: 0)
+        imageView.layer.shadowOpacity = 0.5
         return imageView
     }()
     
@@ -142,6 +144,18 @@ class AllRecordsForBookViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        dismissHandler?()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        coverImageView.layer.shadowPath = UIBezierPath(rect: coverImageView.bounds).cgPath
     }
     
     override func configureHiararchy() {
@@ -243,6 +257,7 @@ class AllRecordsForBookViewController: BaseViewController {
     override func bindComponentWithObservable() {
         viewModel.book.bind { [weak self] book in
             self?.configureComponents(for: book)
+            self?.remakeCoverImageViewConstraints(for: book.coverImageSize)
         }
         
         viewModel.notes.bind { [weak self] notes in
@@ -281,6 +296,19 @@ class AllRecordsForBookViewController: BaseViewController {
         authorLabel.text = authors
         statusOfReadingLabel.setSelectedCase(to: book.statusOfReading)
         overviewTextView.text = book.overview
+    }
+    
+    private func remakeCoverImageViewConstraints(for size: ImageSize?) {
+        guard let size else { return }
+        
+        coverImageView.snp.remakeConstraints { make in
+            make.width.equalToSuperview().multipliedBy(0.35)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(size.height / size.width)
+            make.centerY.equalTo(backdropImageView.snp.bottom)
+            make.leading.equalTo(contentView.layoutMarginsGuide).offset(8)
+        }
+        
+        scrollView.layoutIfNeeded()
     }
     
     @objc private func addNoteButtonTapped() {
@@ -367,5 +395,12 @@ extension AllRecordsForBookViewController {
         newSnapshot.deleteItems([note])
         noteDataSource.apply(newSnapshot)
         viewModel.deleteNotes(for: note)
+    }
+    
+    // TODO: 버전 대응
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        coverImageView.layer.shadowColor = UIColor.systemGray.cgColor
     }
 }

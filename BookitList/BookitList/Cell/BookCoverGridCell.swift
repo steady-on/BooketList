@@ -8,15 +8,12 @@
 import UIKit
 import Kingfisher
 
-final class NowReadingBookCell: BaseCollectionViewCell {
+final class BookCoverGridCell: BaseCollectionViewCell {
     var book: Book! {
         didSet {
-            let path = ImageFilePath.cover(bookID: book._id.stringValue)
-            let url = ImageFileManager().makeFullFilePath(from: path)
-            let provider = LocalFileImageDataProvider(fileURL: url)
-            let placeholder = BLDirectionView(symbolName: "book.circle", direction: book.title)
-            coverImageView.kf.setImage(with: provider, placeholder: placeholder)
-            titleLabel.text = book.title
+            configureComponents()
+            remakeCoverImageViewConstraints()
+            layoutIfNeeded()
         }
     }
     
@@ -25,9 +22,17 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     private let coverImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleToFill
         imageView.clipsToBounds = true
         return imageView
+    }()
+    
+    private let coverShadowView: UIView = {
+        let view = UIView()
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowColor = UIColor.systemGray.cgColor
+        return view
     }()
     
     private let accessoryView: UIView = {
@@ -96,15 +101,22 @@ final class NowReadingBookCell: BaseCollectionViewCell {
         return button
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        accessoryView.isHidden = true
+        coverImageView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-        layer.shadowPath = UIBezierPath(rect: bounds).cgPath
+        coverShadowView.layer.shadowPath = UIBezierPath(rect: coverShadowView.bounds).cgPath
     }
     
     override func configureHiararchy() {
-        configureShadow()
-    
-        let components = [coverImageView, accessoryView] // bottomAccessoryView
+        let components = [coverShadowView, coverImageView, accessoryView] // bottomAccessoryView
         components.forEach { component in
             contentView.addSubview(component)
         }
@@ -134,6 +146,10 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     override func setConstraints() {
         coverImageView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
+        }
+        
+        coverShadowView.snp.makeConstraints { make in
+            make.edges.equalTo(coverImageView)
         }
         
         accessoryView.snp.makeConstraints { make in
@@ -181,11 +197,23 @@ final class NowReadingBookCell: BaseCollectionViewCell {
 //        }
     }
     
-    private func configureShadow() {
-        layer.shadowOffset = CGSize(width: 3, height: 3)
-        layer.shadowOpacity = 0.5
-        layer.shadowColor = UIColor.systemGray.cgColor
-        layer.masksToBounds = false
+    private func configureComponents() {
+        let path = ImageFilePath.cover(bookID: book._id.stringValue)
+        let url = ImageFileManager().makeFullFilePath(from: path)
+        let provider = LocalFileImageDataProvider(fileURL: url)
+        let placeholder = BLDirectionView(symbolName: "book.circle", direction: book.title)
+        coverImageView.kf.setImage(with: provider, placeholder: placeholder)
+        titleLabel.text = book.title
+    }
+    
+    private func remakeCoverImageViewConstraints() {
+        guard let imageSize = book.coverImageSize else { return }
+        
+        coverImageView.snp.remakeConstraints { make in
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(imageSize.height / imageSize.width)
+            make.top.greaterThanOrEqualToSuperview()
+            make.horizontalEdges.bottom.equalToSuperview()
+        }
     }
     
     @objc func detailInfoButtonTapped() {
@@ -194,5 +222,11 @@ final class NowReadingBookCell: BaseCollectionViewCell {
     
     @objc func addNoteButtonTapped() {
         addNoteButtonHandler()
+    }
+    
+    // TODO: 버전 대응
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        coverShadowView.layer.shadowColor = UIColor.systemGray.cgColor
     }
 }

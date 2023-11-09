@@ -12,11 +12,11 @@ final class Observable<T> {
         didSet { listener?(value) }
     }
     
-    private var listener: ((T) -> Void)?
-    
     init(_ value: T) {
         self.value = value
     }
+    
+    private var listener: ((T) -> Void)?
     
     func bind(listener: @escaping (T) -> Void) {
         listener(value)

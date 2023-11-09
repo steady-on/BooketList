@@ -113,13 +113,7 @@ final class ReadingBoardViewController: BaseViewController {
         viewModel.caution.bind { [weak self] caution in
             guard caution.isPresent else { return }
             
-            let popViewAction = { () -> Void in
-                self?.navigationController?.popViewController(animated: true)
-            }
-            
-            let handler: () -> Void = caution.willDismiss ? popViewAction : {}
-            
-            self?.presentCautionAlert(title: caution.title, message: caution.message, handler: handler)
+            self?.presentCautionAlert(title: caution.title, message: caution.message)
         }
     }
 }
@@ -132,16 +126,17 @@ extension ReadingBoardViewController {
         nowReadingBookCollectionView.delegate = self
         
         waitingBookCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createWaitingBooksLayout())
-        waitingBookCollectionView.backgroundColor = .tertiarySystemGroupedBackground
+        waitingBookCollectionView.backgroundColor = .background
         waitingBookCollectionView.isScrollEnabled = false
         waitingBookCollectionView.delegate = self
     }
     
     private func createReadingBooksLayout() -> UICollectionViewLayout {
-        
+        let itemHorizontalInset = view.bounds.width * 0.09
+
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.6), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 35, bottom: 0, trailing: 35)
+        item.contentInsets = .init(top: 0, leading: itemHorizontalInset, bottom: 0, trailing: itemHorizontalInset)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75), heightDimension: .fractionalHeight(1))
         // TODO: 버전 대응: horizontal(layoutSize:subitem:count:) -> horizontal(layoutSize:repeatingSubitem:count:)
@@ -159,7 +154,7 @@ extension ReadingBoardViewController {
     private func createWaitingBooksLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(30), heightDimension: .fractionalHeight(1.0))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(3.0), heightDimension: .fractionalHeight(1.0))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(5.0), heightDimension: .fractionalHeight(1.0))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(-1)
         
@@ -170,10 +165,10 @@ extension ReadingBoardViewController {
     }
     
     private func configureDataSource() {
-        let nowReadingBookCellRegistration = UICollectionView.CellRegistration<NowReadingBookCell, Book> { cell, indexPath, itemIdentifier in
+        let nowReadingBookCellRegistration = UICollectionView.CellRegistration<BookCoverGridCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
             cell.detailInfoButtonHandler = {
-                let allRecordsForBookView = AllRecordsForBookViewController(book: itemIdentifier)
+                let allRecordsForBookView = AllRecordsForBookViewController(objectID: itemIdentifier._id)
                 allRecordsForBookView.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(allRecordsForBookView, animated: true)
             }
@@ -188,7 +183,7 @@ extension ReadingBoardViewController {
             return collectionView.dequeueConfiguredReusableCell(using: nowReadingBookCellRegistration, for: indexPath, item: itemIdentifier)
         }
         
-        let waitingBookCellRegistration = UICollectionView.CellRegistration<WaitingBookCell, Book> { cell, indexPath, itemIdentifier in
+        let waitingBookCellRegistration = UICollectionView.CellRegistration<BookShelfCell, Book> { cell, indexPath, itemIdentifier in
             cell.book = itemIdentifier
         }
 
@@ -215,13 +210,13 @@ extension ReadingBoardViewController {
 extension ReadingBoardViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == nowReadingBookCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? NowReadingBookCell else { return }
+            guard let cell = collectionView.cellForItem(at: indexPath) as? BookCoverGridCell else { return }
             cell.toggleIsHiddenAccessaryView()
             return
         }
         
         guard let book = waitingBookDataSource.itemIdentifier(for: indexPath) else { return }
-        let allRecordsForBookView = AllRecordsForBookViewController(book: book)
+        let allRecordsForBookView = AllRecordsForBookViewController(objectID: book._id)
         allRecordsForBookView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(allRecordsForBookView, animated: true)
     }

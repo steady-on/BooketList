@@ -10,13 +10,16 @@ import Kingfisher
 
 class AddBookDetailInfoViewController: BaseViewController {
     
-    private let viewModel = AddBookDetailInfoViewModel()
-    private let itemID: Int
-    private var authors: [Artist]? {
+    private let viewModel: AddBookDetailInfoViewModel!
+    private var coverImageViewRatio = 1.3 {
         didSet {
-            guard let authors else { return }
-            arrangeArtistButtons(for: authors)
+            setCoverImageViewConstraints()
         }
+    }
+    
+    init(itemID: Int) {
+        self.viewModel = AddBookDetailInfoViewModel(itemID: itemID)
+        super.init()
     }
     
     private let scrollView = {
@@ -56,11 +59,9 @@ class AddBookDetailInfoViewController: BaseViewController {
         imageView.kf.indicatorType = .activity
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .secondaryAccent
-        imageView.layer.shadowColor = UIColor.systemGray.cgColor
-        imageView.layer.shadowOffset = .init(width: 3, height: 3)
-        imageView.layer.shadowOpacity = 0.7
-        // FIXME: shadowPath 설정
-//        imageView.layer.shadowPath = UIBezierPath(ovalIn: renderRect).cgPath
+        imageView.backgroundColor = .systemGray4
+        imageView.layer.cornerRadius = 3
+        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -119,15 +120,10 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     private let indicatorView = BLIndicatorView(direction: "책 정보를 불러오는 중 입니다.")
     
-    init(itemID: Int) {
-        self.itemID = itemID
-        super.init()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.requestBookDetailInfo(for: itemID)
+        viewModel.requestBookDetailInfo()
     }
     
     override func configureHiararchy() {
@@ -187,11 +183,11 @@ class AddBookDetailInfoViewController: BaseViewController {
             make.top.equalTo(backdropImageView.snp.bottom).inset(12)
             make.horizontalEdges.bottom.equalToSuperview()
         }
-
+        
         coverImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.35)
-            make.height.equalTo(coverImageView.snp.width).multipliedBy(1.3)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(coverImageViewRatio)
             make.bottom.equalTo(formView.snp.top).inset(8)
         }
         
@@ -214,12 +210,15 @@ class AddBookDetailInfoViewController: BaseViewController {
     
     override func bindComponentWithObservable() {
         viewModel.selectedBook.bind { [weak self] itemDetail in
-            guard itemDetail != nil else { return }
-            self?.configureComponents(for: itemDetail!)
+            guard let itemDetail else { return }
+            self?.configureComponents(for: itemDetail)
         }
         
         viewModel.isRequesting.bind { [weak self] bool in
             self?.indicatorView.isHidden = bool == false
+            
+            guard bool == false, let authors = self?.viewModel.authors else { return }
+            self?.arrangeArtistButtons(for: authors)
         }
         
         viewModel.caution.bind { [weak self] caution in
@@ -257,17 +256,22 @@ class AddBookDetailInfoViewController: BaseViewController {
         let placeholderImage = UIImage(systemName: "photo")
         
         backdropImageView.kf.setImage(with: thumbnailURL, placeholder: placeholderImage)
-        coverImageView.kf.setImage(with: fullURL, placeholder: placeholderImage)
+        coverImageView.kf.setImage(with: fullURL, placeholder: placeholderImage) { [weak self] result in
+            switch result {
+            case .success(let success):
+                let imageSize = success.image.size
+                self?.coverImageViewRatio = imageSize.height / imageSize.width
+            case .failure(_):
+                break
+            }
+        }
+        
         titleTextField.text = itemDetail.title
         isbnTextField.text = itemDetail.isbn13 ?? itemDetail.isbn
         publisherTextField.text = itemDetail.publisher
         publishedAtTextField.text = itemDetail.pubDate
         totalPagesTextField.text = "\(itemDetail.subInfo.itemPage)"
         overviewTextView.text = itemDetail.description ?? itemDetail.fullDescription
-
-        if authors == nil {
-            authors = itemDetail.subInfo.authors
-        }
         
         guard let originalTitle = itemDetail.subInfo.originalTitle else {
             originalTitleTextField.isHidden = true
@@ -275,6 +279,15 @@ class AddBookDetailInfoViewController: BaseViewController {
         }
         
         originalTitleTextField.text = originalTitle
+    }
+    
+    private func setCoverImageViewConstraints() {
+        coverImageView.snp.remakeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.35)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(coverImageViewRatio)
+            make.bottom.equalTo(formView.snp.top).inset(8)
+        }
     }
 }
 

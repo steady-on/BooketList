@@ -27,8 +27,8 @@ class NoteTableViewCell: BaseTableViewCell, ReuseIdentifier {
         imageView.contentMode = .scaleAspectFit
         imageView.kf.indicatorType = .activity
         imageView.layer.shadowColor = UIColor.systemGray.cgColor
-        imageView.layer.shadowOffset = .init(width: 3, height: 3)
-        imageView.layer.shadowOpacity = 0.7
+        imageView.layer.shadowOffset = .init(width: 0, height: 0)
+        imageView.layer.shadowOpacity = 0.5
         return imageView
     }()
     
@@ -173,5 +173,12 @@ class NoteTableViewCell: BaseTableViewCell, ReuseIdentifier {
         
         createdAtLabel.text = note.createdAt.basicString
         contentTextView.text = note.content
+    }
+    
+    // TODO: 버전 대응
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        coverImageView.layer.shadowColor = UIColor.systemGray.cgColor
     }
 }

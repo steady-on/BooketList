@@ -21,7 +21,7 @@ final class SearchResultCollectionCell: BaseCollectionViewCell {
             titleLabel.text = item.title
             authorLabel.text = item.author
             overviewTextView.text = item.description
-            bookmarkImageView.isHidden = item.isRegistered == false
+            bookmarkImageView.isHidden = item.objectID == nil
         }
     }
     
@@ -52,6 +52,7 @@ final class SearchResultCollectionCell: BaseCollectionViewCell {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .body)
+        label.lineBreakStrategy = .pushOut
         label.numberOfLines = 0
         return label
     }()

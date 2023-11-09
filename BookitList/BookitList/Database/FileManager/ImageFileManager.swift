@@ -18,10 +18,10 @@ struct ImageFileManager {
         return fileURL
     }
 
-    func saveImage(_ image: UIImage, to filePath: ImageFilePath) throws {
+    func saveImage(_ image: UIImage, to filePath: ImageFilePath, compression: Bool) throws {
         do {
             try prepareFolder(named: filePath.folderPath)
-            let data = try convertToData(from: image)
+            let data = try convertToData(from: image, compression: compression)
             try saveData(data, to: filePath.filePath)
         } catch {
             throw error
@@ -39,8 +39,9 @@ struct ImageFileManager {
         }
     }
     
-    private func convertToData(from image: UIImage) throws -> Data {
-        guard let data = image.jpegData(compressionQuality: 0.5) else {
+    private func convertToData(from image: UIImage, compression: Bool) throws -> Data {
+        let quality = compression ? 0.5 : 1.0
+        guard let data = image.jpegData(compressionQuality: quality) else {
             throw FileManageError.failToConvertImageToData
         }
         

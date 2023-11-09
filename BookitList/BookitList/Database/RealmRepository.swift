@@ -20,8 +20,6 @@ final class RealmRepository {
     }
     
     func addItem<T: Object>(_ item: T) throws {
-        print(realm.configuration.fileURL)
-        
         do {
             try realm.write { realm.add(item) }
         } catch {
@@ -29,27 +27,31 @@ final class RealmRepository {
         }
     }
     
+    func findObject<T: Object>(for objectID: ObjectId) -> T? {
+        return realm.object(ofType: T.self, forPrimaryKey: objectID)
+    }
+    
     func checkBooksInTable(for items: [Item]) -> [Item] {
         let syncedItems = items.map { item in
             var item = item
             
-            guard checkBookInTable(for: item.itemID) else {
+            guard let objectID = checkBookInTable(for: item.itemID) else {
                 return item
             }
             
-            item.isRegistered = true
+            item.objectID = objectID
             return item
         }
 
         return syncedItems
     }
     
-    func checkBookInTable(for itemId: Int) -> Bool {
+    func checkBookInTable(for itemId: Int) -> ObjectId? {
         let books = realm.objects(Book.self)
         let filteredObjects = books.where {
             $0.itemID == itemId
         }
-        return filteredObjects.isEmpty ? false : true
+        return filteredObjects.first?._id
     }
     
     func searchAuthorInTable(for authorId: Int) -> Author? {
@@ -61,6 +63,7 @@ final class RealmRepository {
     }
     
     func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Results<T> {
+        print(realm.configuration.fileURL)
         let fetchData = realm.objects(T.self).sorted(byKeyPath: keypath, ascending: ascending)
         return fetchData
     }

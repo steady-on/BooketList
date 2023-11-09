@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct AladinSearchResponse: Decodable {
     let totalResults, startIndex: Int
@@ -18,7 +19,7 @@ struct Item: Decodable, Hashable {
     let title, author, description: String
     let pubDate, publisher: String
     let cover: String
-    var isRegistered: Bool = false
+    var objectID: ObjectId? = nil
 
     enum CodingKeys: String, CodingKey {
         case itemID = "itemId"
