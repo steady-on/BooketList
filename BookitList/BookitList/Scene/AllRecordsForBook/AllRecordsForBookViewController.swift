@@ -48,10 +48,8 @@ class AllRecordsForBookViewController: BaseViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .secondaryAccent
         imageView.layer.shadowColor = UIColor.systemGray.cgColor
-        imageView.layer.shadowOffset = .init(width: 3, height: 3)
-        imageView.layer.shadowOpacity = 0.7
-        // FIXME: shadowPath 설정
-//        imageView.layer.shadowPath = UIBezierPath(ovalIn: renderRect).cgPath
+        imageView.layer.shadowOffset = .init(width: 0, height: 0)
+        imageView.layer.shadowOpacity = 0.5
         return imageView
     }()
     
@@ -389,5 +387,12 @@ extension AllRecordsForBookViewController {
         newSnapshot.deleteItems([note])
         noteDataSource.apply(newSnapshot)
         viewModel.deleteNotes(for: note)
+    }
+    
+    // TODO: 버전 대응
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        coverImageView.layer.shadowColor = UIColor.systemGray.cgColor
     }
 }

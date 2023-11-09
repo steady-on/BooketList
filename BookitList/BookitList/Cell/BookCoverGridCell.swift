@@ -29,7 +29,7 @@ final class BookCoverGridCell: BaseCollectionViewCell {
     
     private let coverShadowView: UIView = {
         let view = UIView()
-        view.layer.shadowOffset = CGSize(width: 3, height: 3)
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
         view.layer.shadowOpacity = 0.5
         view.layer.shadowColor = UIColor.systemGray.cgColor
         return view
@@ -222,5 +222,11 @@ final class BookCoverGridCell: BaseCollectionViewCell {
     
     @objc func addNoteButtonTapped() {
         addNoteButtonHandler()
+    }
+    
+    // TODO: 버전 대응
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        coverShadowView.layer.shadowColor = UIColor.systemGray.cgColor
     }
 }

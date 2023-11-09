@@ -25,8 +25,10 @@ final class BookListCell: BaseCollectionViewCell {
     
     private let coverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.shadowColor = UIColor.systemGray.cgColor
+        imageView.layer.shadowOffset = .init(width: 0, height: 0)
+        imageView.layer.shadowOpacity = 0.5
         return imageView
     }()
     
@@ -58,6 +60,7 @@ final class BookListCell: BaseCollectionViewCell {
         let label = UILabel()
         label.font = .preferredFont(forTextStyle: .callout)
         label.textColor = .secondaryLabel
+        label.numberOfLines = 0
         return label
     }()
     
@@ -97,6 +100,11 @@ final class BookListCell: BaseCollectionViewCell {
         infoStackComponents.forEach { component in
             infoStackView.addArrangedSubview(component)
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        coverImageView.layer.shadowPath = UIBezierPath(rect: coverImageView.bounds).cgPath
     }
     
     override func setConstraints() {
