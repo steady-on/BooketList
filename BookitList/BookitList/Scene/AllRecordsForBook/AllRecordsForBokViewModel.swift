@@ -59,7 +59,7 @@ final class AllRecordsForBokViewModel: Cautionable {
             try realmRepository.deleteItem(note)
             self.fetchNotes()
         } catch {
-            caution.value = Caution(isPresent: true, title: "노트 삭제 에러", message: String(describing: RealmError.notInitialized), willDismiss: false)
+            caution.value = Caution(isPresent: true, title: "노트 삭제 에러", message: String(describing: error), willDismiss: false)
         }
     }
 
@@ -76,6 +76,20 @@ final class AllRecordsForBokViewModel: Cautionable {
             }
         } catch {
             caution.value = Caution(isPresent: true, title: "데이터 수정 오류", message: String(describing: error),  willDismiss: true)
+        }
+    }
+    
+    func deleteBook() {
+        guard let realmRepository else {
+            caution.value = Caution(isPresent: true, title: "DB 에러", message: String(describing: RealmError.notInitialized), willDismiss: false)
+            return
+        }
+        
+        do {
+            try imageFileManager.deleteData(from: .cover(bookID: book.value._id.stringValue))
+            try realmRepository.deleteBook(book.value)
+        } catch {
+            caution.value = Caution(isPresent: true, title: "도서 삭제 에러", message: String(describing: error), willDismiss: false)
         }
     }
 }

@@ -289,7 +289,9 @@ class AllRecordsForBookViewController: BaseViewController {
     override func configureNavigationBar() {
         let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "note.text.badge.plus"), style: .plain, target: self, action: #selector(addNoteButtonTapped))
         
-        navigationItem.rightBarButtonItems = [addNoteButton]
+        let menuButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: configureMeatbolsMenu())
+        
+        navigationItem.rightBarButtonItems = [menuButton, addNoteButton]
     }
     
     private func configureComponents(for book: Book) {
@@ -332,6 +334,31 @@ class AllRecordsForBookViewController: BaseViewController {
         let currentNumberOfLines = overviewTextView.textContainer.maximumNumberOfLines
         overviewTextView.textContainer.maximumNumberOfLines = currentNumberOfLines == 0 ? 1 : 0
         overviewTextView.invalidateIntrinsicContentSize()
+    }
+}
+
+    private func configureMeatbolsMenu() -> UIMenu {
+        let deleteBook = UIAction(title: "책 삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+            self?.showDeleteBookAlert()
+        }
+        
+        let menu = UIMenu(children: [deleteBook])
+        return menu
+    }
+    
+    private func showDeleteBookAlert() {
+        let alert = UIAlertController(title: "이 책을 삭제하시겠습니까?", message: "책을 삭제하면, 책뿐만 아니라 이 책에 대해 작성된 모든 기록도 모두 사라집니다. 그래도 삭제 하시겠습니까?", preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+            self?.viewModel.deleteBook()
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(delete)
+        
+        present(alert, animated: true)
     }
 }
 

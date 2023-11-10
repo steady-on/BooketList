@@ -31,6 +31,8 @@ final class ReadingBoardViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        updateWaitingBooksSnapshot(for: [])
+        updateNowReadingBooksSnapshot(for: [])
         viewModel.fetchBooks()
         placeholderView.isHidden = viewModel.isEmptyBooks == false
     }

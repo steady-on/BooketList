@@ -44,7 +44,7 @@ final class MyNoteViewModel: Cautionable {
         do {
             try realmRepository.deleteItem(note)
         } catch {
-            caution.value = Caution(isPresent: true, title: "노트 삭제 에러", message: String(describing: RealmError.notInitialized), willDismiss: false)
+            caution.value = Caution(isPresent: true, title: "노트 삭제 에러", message: String(describing: error), willDismiss: false)
         }
     }
     
