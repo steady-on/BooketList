@@ -15,6 +15,9 @@ final class BLDirectionView: BaseView {
         let imageView = UIImageView()
         imageView.tintColor = .placeholderText
         imageView.contentMode = .scaleAspectFit
+        
+        let symbolConfiguration = UIImage.SymbolConfiguration(weight: .light)
+        imageView.preferredSymbolConfiguration = symbolConfiguration
         return imageView
     }()
     

@@ -35,6 +35,8 @@ final class MyShelfViewController: BaseViewController {
     private var bookDataSource: UICollectionViewDiffableDataSource<Int, Book>! = nil
     private var bookSnapshot = NSDiffableDataSourceSnapshot<Int, Book>()
     
+    private let placeholderView = BLDirectionView(symbolName: "tray", direction: "아직 등록된 책이 없습니다.\n첫번째 탭에서 돋보기를 탭하여 책을 검색하고 추가해 보세요.")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +45,8 @@ final class MyShelfViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        updateSnapshot(for: [])
         viewModel.fetchBooks()
     }
     
@@ -56,12 +60,19 @@ final class MyShelfViewController: BaseViewController {
         configureCollectionView()
         configureDataSource(for: .grid)
         
-        
-        view.addSubview(bookCollectionView)
+        let components = [bookCollectionView, placeholderView]
+        components.forEach { component in
+            guard let component else { return }
+            view.addSubview(component)
+        }
     }
     
     override func setConstraints() {
         bookCollectionView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        placeholderView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
@@ -69,6 +80,8 @@ final class MyShelfViewController: BaseViewController {
     override func bindComponentWithObservable() {
         viewModel.books.bind { [weak self] books in
             self?.updateSnapshot(for: books)
+            self?.placeholderView.isHidden = books.isEmpty == false
+            self?.searchController.searchBar.searchTextField.isEnabled = books.isEmpty == false
         }
         
         viewModel.layout.bind { [weak self] layout in
@@ -239,8 +252,11 @@ extension MyShelfViewController: UICollectionViewDelegate {
         guard let selectedBook else { return }
         
         let allRecordsForBookView = AllRecordsForBookViewController(objectID: selectedBook._id) { [weak self] in
-            self?.updateCollectionViewCellData(collectionView, data: selectedBook)
+                self?.updateCollectionViewCellData(collectionView, data: selectedBook)
+        } deleteHandler: { [weak self] in
+            self?.deleteCollectionViewCellData(collectionView, data: selectedBook)
         }
+
         allRecordsForBookView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(allRecordsForBookView, animated: true)
     }
@@ -252,6 +268,16 @@ extension MyShelfViewController: UICollectionViewDelegate {
         }
         
         bookSnapshot.reconfigureItems([data])
+        bookDataSource.apply(bookSnapshot)
+    }
+    
+    private func deleteCollectionViewCellData(_ collectionView: UICollectionView, data: Book) {
+        if collectionView === searchResultsCollectionViewController.collectionView {
+            searchResultsSnapShot.deleteItems([data])
+            searchResultsDataSource.apply(searchResultsSnapShot)
+        }
+        
+        bookSnapshot.deleteItems([data])
         bookDataSource.apply(bookSnapshot)
     }
 }

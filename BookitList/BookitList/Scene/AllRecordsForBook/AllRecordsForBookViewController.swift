@@ -12,11 +12,13 @@ import Kingfisher
 class AllRecordsForBookViewController: BaseViewController {
     
     private let viewModel: AllRecordsForBokViewModel
-    private let dismissHandler: (() -> Void)?
+    private let updateHandler: (() -> Void)?
+    private let deleteHandler: (() -> Void)?
     
-    init(objectID: ObjectId, dismissHandler: (() -> Void)? = nil) {
+    init(objectID: ObjectId, updateHandler: (() -> Void)? = nil, deleteHandler: (() -> Void)? = nil) {
         self.viewModel = AllRecordsForBokViewModel(objectID: objectID)
-        self.dismissHandler = dismissHandler
+        self.updateHandler = updateHandler
+        self.deleteHandler = deleteHandler
         viewModel.loadBook()
         super.init()
     }
@@ -75,20 +77,28 @@ class AllRecordsForBookViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
-        stackView.spacing = 8
+        stackView.spacing = 4
         return stackView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.numberOfLines = 3
+        label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    private let originalTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 2
         return label
     }()
     
     private let authorLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .callout)
         label.textColor = .secondaryLabel
         label.numberOfLines = 1
         return label
@@ -146,10 +156,10 @@ class AllRecordsForBookViewController: BaseViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        dismissHandler?()
+        configureComponents(for: viewModel.book.value)
     }
     
     override func viewDidLayoutSubviews() {
@@ -179,7 +189,7 @@ class AllRecordsForBookViewController: BaseViewController {
         
         overviewButton.addTarget(self, action: #selector(overviewButtonTapped), for: .touchUpInside)
         
-        let infoStackComponents = [titleLabel, authorLabel]
+        let infoStackComponents = [titleLabel, originalTitleLabel, authorLabel]
         infoStackComponents.forEach { component in
             infoStackView.addArrangedSubview(component)
         }
@@ -281,7 +291,9 @@ class AllRecordsForBookViewController: BaseViewController {
     override func configureNavigationBar() {
         let addNoteButton = UIBarButtonItem(image: UIImage(systemName: "note.text.badge.plus"), style: .plain, target: self, action: #selector(addNoteButtonTapped))
         
-        navigationItem.rightBarButtonItems = [addNoteButton]
+        let menuButton = UIBarButtonItem(image: UIImage(systemName: "ellipsis.circle"), menu: configureMeatbolsMenu())
+        
+        navigationItem.rightBarButtonItems = [menuButton, addNoteButton]
     }
     
     private func configureComponents(for book: Book) {
@@ -291,8 +303,9 @@ class AllRecordsForBookViewController: BaseViewController {
         backdropImageView.kf.setImage(with: provider, placeholder: placeholder)
         coverImageView.kf.setImage(with: provider, placeholder: placeholder)
         titleLabel.text = book.title
+        originalTitleLabel.text = book.originalTitle
         
-        let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
+        let authors = Array(book.authors).filter { $0.isTracking }.map { $0.name }.joined(separator: ", ")
         authorLabel.text = authors
         statusOfReadingLabel.setSelectedCase(to: book.statusOfReading)
         overviewTextView.text = book.overview
@@ -314,6 +327,7 @@ class AllRecordsForBookViewController: BaseViewController {
     @objc private func addNoteButtonTapped() {
         let writeNoteViewController = WriteNoteViewController(book: viewModel.book.value) { [weak self] in
             self?.viewModel.fetchNotes()
+            self?.updateHandler?()
         }
         let navigationController = UINavigationController(rootViewController: writeNoteViewController)
         self.present(navigationController, animated: true)
@@ -323,6 +337,42 @@ class AllRecordsForBookViewController: BaseViewController {
         let currentNumberOfLines = overviewTextView.textContainer.maximumNumberOfLines
         overviewTextView.textContainer.maximumNumberOfLines = currentNumberOfLines == 0 ? 1 : 0
         overviewTextView.invalidateIntrinsicContentSize()
+    }
+}
+
+extension AllRecordsForBookViewController {
+    private func configureMeatbolsMenu() -> UIMenu {
+        let editBook = UIAction(title: "책 정보 수정", image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+            self?.moveToEditBookInfo()
+        }
+        
+        let deleteBook = UIAction(title: "책 삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
+            self?.showDeleteBookAlert()
+        }
+        
+        let menu = UIMenu(children: [editBook, deleteBook])
+        return menu
+    }
+    
+    private func moveToEditBookInfo() {
+        let editBookDetailInfoView = EditBookDetailInfoViewController(for: viewModel.book.value)
+        navigationController?.pushViewController(editBookDetailInfoView, animated: true)
+    }
+    
+    private func showDeleteBookAlert() {
+        let alert = UIAlertController(title: "이 책을 삭제하시겠습니까?", message: "책을 삭제하면, 책뿐만 아니라 이 책에 대해 작성된 모든 기록도 모두 사라집니다. 그래도 삭제 하시겠습니까?", preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+            self?.deleteHandler?()
+            self?.viewModel.deleteBook()
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(delete)
+        
+        present(alert, animated: true)
     }
 }
 

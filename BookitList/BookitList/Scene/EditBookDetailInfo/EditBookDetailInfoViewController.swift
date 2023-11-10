@@ -1,27 +1,22 @@
 //
-//  AddBookDetailInfoViewController.swift
+//  EditBookDetailInfoViewController.swift
 //  BookitList
 //
-//  Created by Roen White on 2023/10/05.
+//  Created by Roen White on 2023/11/10.
 //
 
 import UIKit
 import Kingfisher
 
-class AddBookDetailInfoViewController: BaseViewController {
+final class EditBookDetailInfoViewController: BaseViewController {
     
-    private let viewModel: AddBookDetailInfoViewModel
-    private var coverImageViewRatio = 1.3 {
-        didSet {
-            setCoverImageViewConstraints()
-        }
-    }
+    private let viewModel: EditBookDetailInfoViewModel
     
-    init(itemID: Int) {
-        self.viewModel = AddBookDetailInfoViewModel(itemID: itemID)
+    init(for book: Book) {
+        self.viewModel = EditBookDetailInfoViewModel(book: book)
         super.init()
     }
-    
+
     private let scrollView = {
         let scrollView = UIScrollView()
         scrollView.keyboardDismissMode = .onDrag
@@ -93,11 +88,6 @@ class AddBookDetailInfoViewController: BaseViewController {
         stackView.distribution = .fill
         return stackView
     }()
-    
-    private let isbnTextField = BLTextField(placeholder: "ISBN")
-    private let publisherTextField = BLTextField(placeholder: "출판사")
-    private let publishedAtTextField = BLTextField(placeholder: "출판일")
-    private let totalPagesTextField = BLTextField(placeholder: "전체 페이지 수")
         
     private let overviewLabel: UILabel = {
         let label = UILabel()
@@ -114,29 +104,24 @@ class AddBookDetailInfoViewController: BaseViewController {
         textView.adjustsFontForContentSizeCategory = true
         textView.backgroundColor = .systemFill
         textView.isScrollEnabled = false
-        textView.isSelectable = false
-        textView.isEditable = false
         textView.layer.cornerRadius = 10
         return textView
     }()
     
-    private let indicatorView = BLIndicatorView(direction: "책 정보를 불러오는 중 입니다.")
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.requestBookDetailInfo()
+        configureImageView()
+        setCoverImageViewConstraints(for: viewModel.book.coverImageSize)
+        arrangeArtistButtons(for: viewModel.authors.map { $0.author })
     }
-    
+
     override func configureHiararchy() {
         super.configureHiararchy()
         
-        let components = [scrollView, indicatorView]
-        components.forEach { component in
-            view.addSubview(component)
-        }
+        overviewTextView.delegate = self
         
-        indicatorView.isHidden = true
+        view.addSubview(scrollView)
         
         scrollView.addSubview(contentView)
         scrollView.contentInsetAdjustmentBehavior = .never
@@ -148,25 +133,16 @@ class AddBookDetailInfoViewController: BaseViewController {
         let formViewComponents = [formStackView, overviewLabel, overviewTextView]
         formViewComponents.forEach { formView.addSubview($0) }
         
-        let formStackViewComponents = [titleTextField, originalTitleTextField, selectAuthorView, publisherTextField, publishedAtTextField, isbnTextField, totalPagesTextField]
+        let formStackViewComponents = [titleTextField, originalTitleTextField, selectAuthorView]
         formStackViewComponents.forEach { formStackView.addArrangedSubview($0) }
         
         selectAuthorView.addArrangedSubview(authorLabel)
-        
-        publisherTextField.isUserInteractionEnabled = false
-        publishedAtTextField.isUserInteractionEnabled = false
-        isbnTextField.isUserInteractionEnabled = false
-        totalPagesTextField.isUserInteractionEnabled = false
     }
     
     override func setConstraints() {
         scrollView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview()
             make.bottom.equalTo(view.keyboardLayoutGuide.snp.top)
-        }
-        
-        indicatorView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints { make in
@@ -189,7 +165,7 @@ class AddBookDetailInfoViewController: BaseViewController {
         coverImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.35)
-            make.height.equalTo(coverImageView.snp.width).multipliedBy(coverImageViewRatio)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(1.3)
             make.bottom.equalTo(formView.snp.top).inset(8)
         }
         
@@ -210,130 +186,97 @@ class AddBookDetailInfoViewController: BaseViewController {
         }
     }
     
-    override func bindComponentWithObservable() {
-        viewModel.selectedBook.bind { [weak self] itemDetail in
-            guard let itemDetail else { return }
-            self?.configureComponents(for: itemDetail)
-        }
-        
-        viewModel.isRequesting.bind { [weak self] bool in
-            self?.indicatorView.isHidden = bool == false
-            
-            guard bool == false, let authors = self?.viewModel.artists else { return }
-            self?.arrangeArtistButtons(for: authors)
-        }
-        
-        viewModel.caution.bind { [weak self] caution in
-            guard caution.isPresent else { return }
-            
-            let popViewAction = { () -> Void in
-                self?.navigationController?.popViewController(animated: true)
-            }
-            
-            let handler: () -> Void = caution.willDismiss ? popViewAction : {}
-            
-            self?.presentCautionAlert(title: caution.title, message: caution.message, handler: handler)
-        }
-        
-        titleTextField.addTarget(self, action: #selector(titleValueChanged), for: .editingChanged)
-        originalTitleTextField.addTarget(self, action: #selector(originalTitleValueChanged), for: .editingChanged)
-    }
-    
     override func configureNavigationBar() {
         let navigationAppearance = UINavigationBarAppearance()
         navigationAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = navigationAppearance
         
         let saveButton = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveBarButtonTapped))
+        let beforeButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(beforeButtonTapped))
         
         navigationItem.rightBarButtonItem = saveButton
+        navigationItem.leftBarButtonItem = beforeButton
     }
     
-    private func configureComponents(for itemDetail: ItemDetail) {
-        let thumbnailURLString = itemDetail.cover ?? ""
-        let fullURLString = itemDetail.subInfo.previewImgList?.first ?? thumbnailURLString
-        
-        let thumbnailURL = URL(string: thumbnailURLString)
-        let fullURL = URL(string: fullURLString)
-        let placeholderImage = UIImage(systemName: "photo")
-        
-        backdropImageView.kf.setImage(with: thumbnailURL, placeholder: placeholderImage)
-        coverImageView.kf.setImage(with: fullURL, placeholder: placeholderImage) { [weak self] result in
-            switch result {
-            case .success(let success):
-                let imageSize = success.image.size
-                self?.coverImageViewRatio = imageSize.height / imageSize.width
-            case .failure(_):
-                break
-            }
+    override func bindComponentWithObservable() {
+        viewModel.title.bind { [weak self] title in
+            self?.titleTextField.text = title
         }
         
-        titleTextField.text = itemDetail.title
-        isbnTextField.text = itemDetail.isbn13 ?? itemDetail.isbn
-        publisherTextField.text = itemDetail.publisher
-        publishedAtTextField.text = itemDetail.pubDate
-        totalPagesTextField.text = "\(itemDetail.subInfo.itemPage)"
-        overviewTextView.text = itemDetail.description ?? itemDetail.fullDescription
-        
-        guard let originalTitle = itemDetail.subInfo.originalTitle else {
-            originalTitleTextField.isHidden = true
-            return
+        viewModel.originalTitle.bind { [weak self] originalTitle in
+            self?.originalTitleTextField.text = originalTitle
         }
         
-        originalTitleTextField.text = originalTitle
-    }
-    
-    private func setCoverImageViewConstraints() {
-        coverImageView.snp.remakeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.equalToSuperview().multipliedBy(0.35)
-            make.height.equalTo(coverImageView.snp.width).multipliedBy(coverImageViewRatio)
-            make.bottom.equalTo(formView.snp.top).inset(8)
+        viewModel.overviewText.bind { [weak self] overview in
+            self?.overviewTextView.text = overview
         }
-    }
-}
+        
+        viewModel.caution.bind { [weak self] caution in
+            guard caution.isPresent else { return }
 
-extension AddBookDetailInfoViewController {
+            self?.presentCautionAlert(title: caution.title, message: caution.message)
+        }
+        
+        titleTextField.addTarget(self, action: #selector(titleValueChanged), for: .editingChanged)
+        originalTitleTextField.addTarget(self, action: #selector(originalTitleValueChanged), for: .editingChanged)
+    }
+    
     @objc func titleValueChanged(_ sender: UITextField) {
-        guard let title = sender.text else { return }
-        viewModel.selectedBook.value?.title = title
+        guard let value = sender.text else { return }
+        viewModel.title.value = value
     }
     
     @objc func originalTitleValueChanged(_ sender: UITextField) {
-        guard let originalTitle = sender.text else { return }
-        viewModel.selectedBook.value?.subInfo.originalTitle = originalTitle
+        viewModel.originalTitle.value = sender.text
     }
     
-    private func arrangeArtistButtons(for authors: [Artist]) {
-        zip(authors, 1...).forEach { (artist, tagValue) in
-            let button = makeButton(for: artist, tagValue: tagValue)
+    private func configureImageView() {
+        let imagePath = viewModel.checkCoverImagePath()
+        let provider = LocalFileImageDataProvider(fileURL: imagePath)
+        let placeholder = BLDirectionView(symbolName: "photo", direction: nil)
+        backdropImageView.kf.setImage(with: provider, placeholder: placeholder)
+        coverImageView.kf.setImage(with: provider, placeholder: placeholder)
+    }
+    
+    private func setCoverImageViewConstraints(for size: ImageSize?) {
+        guard let size else { return }
+        
+        coverImageView.snp.remakeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.35)
+            make.height.equalTo(coverImageView.snp.width).multipliedBy(size.height / size.width)
+            make.bottom.equalTo(formView.snp.top).inset(8)
+        }
+    }
+    
+    private func arrangeArtistButtons(for authors: [Author]) {
+        zip(authors, 1...).forEach { (author, tagValue) in
+            let button = makeButton(for: author, tagValue: tagValue)
             button.addTarget(self, action: #selector(buttonSelected), for: .touchUpInside)
             selectAuthorView.addArrangedSubview(button)
         }
     }
     
-    private func makeButton(for artist: Artist, tagValue: Int) -> UIButton {
+    private func makeButton(for author: Author, tagValue: Int) -> UIButton {
         let button = UIButton()
         button.contentHorizontalAlignment = .leading
         
         var config = UIButton.Configuration.tinted()
-        config.title = artist.authorName
-        config.subtitle = artist.authorTypeDesc
+        config.title = author.name
+        config.subtitle = author.typeDescriptions[viewModel.book._id.stringValue]
         config.titleAlignment = .leading
         
         button.configuration = config
         button.tag = tagValue
-        button.isSelected = artist.isTracking
+        button.isSelected = author.isTracking
         return button
     }
     
     @objc private func buttonSelected(_ sender: UIButton) {
         sender.isSelected.toggle()
-        viewModel.toggleIsTrackingArtist(tag: sender.tag)
+        viewModel.toggleIsTrackingAuthor(tag: sender.tag)
     }
-}
-
-extension AddBookDetailInfoViewController {
+    
     @objc private func saveBarButtonTapped() {
         guard let titleValue = titleTextField.text, titleValue.isEmpty == false else {
             viewModel.caution.value = Caution(isPresent: true, title: "책 제목을 입력해주세요.", message: "책 제목은 반드시 입력되어야 합니다. 제목을 입력해주세요.", willDismiss: false)
@@ -341,7 +284,27 @@ extension AddBookDetailInfoViewController {
             return
         }
         
-        viewModel.saveBookInfo(coverImage: coverImageView.image)
+        viewModel.saveUpdatedInfo()
         navigationController?.popViewController(animated: true)
+    }
+    
+    @objc private func beforeButtonTapped() {
+        let alert = UIAlertController(title: "앗, 잠시만요!", message: "지금까지 작성한 내용이 모두 사라집니다. 정말 창을 닫을까요?", preferredStyle: .alert)
+        
+        let cancel = UIAlertAction(title: "아니요!", style: .cancel)
+        let okay = UIAlertAction(title: "창 닫기", style: .destructive) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        alert.addAction(cancel)
+        alert.addAction(okay)
+        
+        present(alert, animated: true)
+    }
+}
+
+extension EditBookDetailInfoViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.overviewText.value = textView.text
     }
 }

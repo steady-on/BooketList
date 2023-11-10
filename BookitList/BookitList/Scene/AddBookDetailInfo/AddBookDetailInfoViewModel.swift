@@ -8,14 +8,15 @@
 import UIKit
 
 final class AddBookDetailInfoViewModel: Cautionable {
-    private var itemID: Int!
+    
+    private var itemID: Int
     
     init(itemID: Int) {
         self.itemID = itemID
     }
     
     let selectedBook: Observable<ItemDetail?> = Observable(nil)
-    var authors: [Artist]? = nil
+    var artists: [Artist]? = nil
     
     let isRequesting = Observable(false)
     let caution = Observable(Caution(isPresent: false, willDismiss: false))
@@ -34,7 +35,7 @@ final class AddBookDetailInfoViewModel: Cautionable {
                     return
                 }
                 self?.selectedBook.value = itemDetail
-                self?.authors = itemDetail.subInfo.authors
+                self?.artists = itemDetail.subInfo.authors
             case .failure(let error):
                 self?.caution.value = Caution(isPresent: true, title: "해당 도서의 정보를 찾을 수 없습니다. 다시 시도해 주세요.", willDismiss: true)
                 dump(error)
@@ -50,22 +51,28 @@ final class AddBookDetailInfoViewModel: Cautionable {
             return
         }
         
-        guard let item = selectedBook.value, let authors else { return }
+        guard let item = selectedBook.value, let artists else { return }
             
-        let selectedArtist = authors.filter { $0.willRegister }
-        guard selectedArtist.isEmpty == false else {
+        guard artists.filter({ $0.isTracking }).isEmpty == false else {
             caution.value = Caution(isPresent: true, title: "작가 선택", message: "등록할 작가를 반드시 한 명 이상 선택해 주세요.", willDismiss: false)
             return
         } 
         
-        let registeredAuthor = selectedArtist.map { artist in
+        let book = Book(from: item)
+        
+        let authors = artists.map { artist in
             guard let registeredAuthor = realmRepository.searchAuthorInTable(for: artist.authorId) else {
-                return Author(authorID: artist.authorId, name: artist.authorName)
+                return Author(from: artist, for: book._id.stringValue)
             }
+            
+            try? realmRepository.updateItem {
+                registeredAuthor.typeDescriptions.setValue(artist.authorTypeDesc, forKey: book._id.stringValue)
+            }
+            
             return registeredAuthor
         }
         
-        let book = Book(from: item, artists: registeredAuthor)
+        book.authors.append(objectsIn: authors)
         
         do {
             if let coverImage {
@@ -88,7 +95,7 @@ final class AddBookDetailInfoViewModel: Cautionable {
         }
     }
     
-    func selectRegisterAuthor(tag: Int) {
-        authors?[tag-1].willRegister.toggle()
+    func toggleIsTrackingArtist(tag: Int) {
+        artists?[tag-1].isTracking.toggle()
     }
 }

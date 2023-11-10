@@ -34,7 +34,7 @@ final class Book: Object {
     @Persisted var series: List<Series>
     @Persisted var tags: List<Tag>
     
-    convenience init(from item: ItemDetail, artists: [Author]) {
+    convenience init(from item: ItemDetail) {
         self.init()
         
         self.itemID = item.itemID
@@ -54,11 +54,6 @@ final class Book: Object {
         self.statusOfReading = .notYet
         self.registeredAt = Date.now
         self.latestUpdatedAt = Date.now
-        
-        self.authors = List<Author>()
-        artists.forEach { author in
-            self.authors.append(author)
-        }
         
         self.readingHistories = List<ReadingHistory>()
         self.notes = List<Note>()
