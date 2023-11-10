@@ -156,6 +156,12 @@ class AllRecordsForBookViewController: BaseViewController {
         super.viewDidLoad()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        configureComponents(for: viewModel.book.value)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -336,12 +342,21 @@ class AllRecordsForBookViewController: BaseViewController {
 
 extension AllRecordsForBookViewController {
     private func configureMeatbolsMenu() -> UIMenu {
+        let editBook = UIAction(title: "책 정보 수정", image: UIImage(systemName: "square.and.pencil")) { [weak self] _ in
+            self?.moveToEditBookInfo()
+        }
+        
         let deleteBook = UIAction(title: "책 삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
             self?.showDeleteBookAlert()
         }
         
-        let menu = UIMenu(children: [deleteBook])
+        let menu = UIMenu(children: [editBook, deleteBook])
         return menu
+    }
+    
+    private func moveToEditBookInfo() {
+        let editBookDetailInfoView = EditBookDetailInfoViewController(for: viewModel.book.value)
+        navigationController?.pushViewController(editBookDetailInfoView, animated: true)
     }
     
     private func showDeleteBookAlert() {

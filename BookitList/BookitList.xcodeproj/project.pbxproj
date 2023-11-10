@@ -86,6 +86,8 @@
 		63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D42AC189160060073D /* AladinLookUpResponse.swift */; };
 		63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */; };
 		63C1A6A02ADDB2E70067FCF1 /* BookCoverGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A69F2ADDB2E70067FCF1 /* BookCoverGridCell.swift */; };
+		63C946022AFE69360045F231 /* EditBookDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C946012AFE69360045F231 /* EditBookDetailInfoViewController.swift */; };
+		63C946042AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C946032AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift */; };
 		63DA060E2AE78AC0007FF18E /* AllRecordsForBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */; };
 		63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */; };
 		63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */; };
@@ -170,6 +172,8 @@
 		63BB13D42AC189160060073D /* AladinLookUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinLookUpResponse.swift; sourceTree = "<group>"; };
 		63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinAPIManager.swift; sourceTree = "<group>"; };
 		63C1A69F2ADDB2E70067FCF1 /* BookCoverGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverGridCell.swift; sourceTree = "<group>"; };
+		63C946012AFE69360045F231 /* EditBookDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookDetailInfoViewController.swift; sourceTree = "<group>"; };
+		63C946032AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookDetailInfoViewModel.swift; sourceTree = "<group>"; };
 		63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordsForBookViewController.swift; sourceTree = "<group>"; };
 		63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordCell.swift; sourceTree = "<group>"; };
 		63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryView.swift; sourceTree = "<group>"; };
@@ -221,6 +225,7 @@
 				639F358A2AE5B1F500226402 /* ReadingBoard */,
 				637B5C542AC6DB3800730C01 /* SeachBook */,
 				63B5B3562ACE801F00477536 /* AddBookDetailInfo */,
+				63C946002AFE69060045F231 /* EditBookDetailInfo */,
 				63B44DAC2AE7587B009813B2 /* AllRecordsForBook */,
 				639E4CE52AF8E3BE006646F4 /* MyShelf */,
 				639E4CBF2AF184D3006646F4 /* WriteNote */,
@@ -367,12 +372,12 @@
 		63A673472AC34411004F43F4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				63DCC3B22AFC9ED300C5AF08 /* CollectionLayoutStyle.swift */,
 				63A673562AC3FD13004F43F4 /* BookType.swift */,
 				63A673482AC3447B004F43F4 /* StatusOfReading.swift */,
 				63222D552AEA569A0070F43A /* NoteType.swift */,
 				631821EB2AD8016B0034573B /* Caution.swift */,
 				637B5C7D2ACAA13900730C01 /* Observable.swift */,
-				63DCC3B22AFC9ED300C5AF08 /* CollectionLayoutStyle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -462,6 +467,15 @@
 				63BB13D42AC189160060073D /* AladinLookUpResponse.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		63C946002AFE69060045F231 /* EditBookDetailInfo */ = {
+			isa = PBXGroup;
+			children = (
+				63C946012AFE69360045F231 /* EditBookDetailInfoViewController.swift */,
+				63C946032AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift */,
+			);
+			path = EditBookDetailInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -609,12 +623,14 @@
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */,
 				63DCC3B92AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift in Sources */,
+				63C946022AFE69360045F231 /* EditBookDetailInfoViewController.swift in Sources */,
 				639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */,
 				639F35892AE59A4700226402 /* BLTitleSupplementaryButton.swift in Sources */,
 				639E4CC82AF2B686006646F4 /* WriteNoteViewModel.swift in Sources */,
 				637B5C6F2AC97D2300730C01 /* BaseCollectionViewCell.swift in Sources */,
 				63A673552AC3F555004F43F4 /* PurchaseHistory.swift in Sources */,
 				63A673492AC3447B004F43F4 /* StatusOfReading.swift in Sources */,
+				63C946042AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift in Sources */,
 				63222D582AEA5BA70070F43A /* BLNoteTypeLabel.swift in Sources */,
 				63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */,
 				63222D5E2AEBF4490070F43A /* BLContentWrappingTableView.swift in Sources */,

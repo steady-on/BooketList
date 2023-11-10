@@ -8,7 +8,8 @@
 import UIKit
 
 final class AddBookDetailInfoViewModel: Cautionable {
-    private var itemID: Int!
+    
+    private var itemID: Int
     
     init(itemID: Int) {
         self.itemID = itemID
@@ -94,7 +95,7 @@ final class AddBookDetailInfoViewModel: Cautionable {
         }
     }
     
-    func selectRegisterAuthor(tag: Int) {
+    func toggleIsTrackingArtist(tag: Int) {
         artists?[tag-1].isTracking.toggle()
     }
 }
