@@ -337,6 +337,7 @@ class AllRecordsForBookViewController: BaseViewController {
     }
 }
 
+extension AllRecordsForBookViewController {
     private func configureMeatbolsMenu() -> UIMenu {
         let deleteBook = UIAction(title: "책 삭제", image: UIImage(systemName: "trash"), attributes: .destructive) { [weak self] _ in
             self?.showDeleteBookAlert()
