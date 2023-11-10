@@ -12,11 +12,13 @@ import Kingfisher
 class AllRecordsForBookViewController: BaseViewController {
     
     private let viewModel: AllRecordsForBokViewModel
-    private let dismissHandler: (() -> Void)?
+    private let updateHandler: (() -> Void)?
+    private let deleteHandler: (() -> Void)?
     
-    init(objectID: ObjectId, dismissHandler: (() -> Void)? = nil) {
+    init(objectID: ObjectId, updateHandler: (() -> Void)? = nil, deleteHandler: (() -> Void)? = nil) {
         self.viewModel = AllRecordsForBokViewModel(objectID: objectID)
-        self.dismissHandler = dismissHandler
+        self.updateHandler = updateHandler
+        self.deleteHandler = deleteHandler
         viewModel.loadBook()
         super.init()
     }
@@ -152,12 +154,6 @@ class AllRecordsForBookViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        dismissHandler?()
     }
     
     override func viewDidLayoutSubviews() {
@@ -325,6 +321,7 @@ class AllRecordsForBookViewController: BaseViewController {
     @objc private func addNoteButtonTapped() {
         let writeNoteViewController = WriteNoteViewController(book: viewModel.book.value) { [weak self] in
             self?.viewModel.fetchNotes()
+            self?.updateHandler?()
         }
         let navigationController = UINavigationController(rootViewController: writeNoteViewController)
         self.present(navigationController, animated: true)
@@ -352,6 +349,7 @@ extension AllRecordsForBookViewController {
         
         let cancel = UIAlertAction(title: "취소", style: .cancel)
         let delete = UIAlertAction(title: "삭제", style: .destructive) { [weak self] _ in
+            self?.deleteHandler?()
             self?.viewModel.deleteBook()
             self?.navigationController?.popViewController(animated: true)
         }

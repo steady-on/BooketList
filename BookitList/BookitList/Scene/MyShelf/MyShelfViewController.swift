@@ -43,6 +43,8 @@ final class MyShelfViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        updateSnapshot(for: [])
         viewModel.fetchBooks()
     }
     
@@ -239,8 +241,11 @@ extension MyShelfViewController: UICollectionViewDelegate {
         guard let selectedBook else { return }
         
         let allRecordsForBookView = AllRecordsForBookViewController(objectID: selectedBook._id) { [weak self] in
-            self?.updateCollectionViewCellData(collectionView, data: selectedBook)
+                self?.updateCollectionViewCellData(collectionView, data: selectedBook)
+        } deleteHandler: { [weak self] in
+            self?.deleteCollectionViewCellData(collectionView, data: selectedBook)
         }
+
         allRecordsForBookView.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(allRecordsForBookView, animated: true)
     }
@@ -252,6 +257,16 @@ extension MyShelfViewController: UICollectionViewDelegate {
         }
         
         bookSnapshot.reconfigureItems([data])
+        bookDataSource.apply(bookSnapshot)
+    }
+    
+    private func deleteCollectionViewCellData(_ collectionView: UICollectionView, data: Book) {
+        if collectionView === searchResultsCollectionViewController.collectionView {
+            searchResultsSnapShot.deleteItems([data])
+            searchResultsDataSource.apply(searchResultsSnapShot)
+        }
+        
+        bookSnapshot.deleteItems([data])
         bookDataSource.apply(bookSnapshot)
     }
 }
