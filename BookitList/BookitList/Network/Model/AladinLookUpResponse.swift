@@ -93,7 +93,7 @@ struct Artist: Decodable {
     let authorName: String
     let authorType: String
     let authorTypeDesc: String
-    var willRegister: Bool
+    var isTracking: Bool
     
     enum CodingKeys: CodingKey {
         case authorId, authorName, authorType, authorTypeDesc
@@ -108,6 +108,6 @@ struct Artist: Decodable {
         let authorTypeDesc = try container.decode(String.self, forKey: .authorTypeDesc)
         self.authorTypeDesc = authorTypeDesc
         
-        self.willRegister = ["지은이", "원작"].contains(authorTypeDesc)
+        self.isTracking = ["지은이", "원작"].contains(authorTypeDesc)
     }
 }

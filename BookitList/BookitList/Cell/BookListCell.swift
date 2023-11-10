@@ -141,7 +141,7 @@ final class BookListCell: BaseCollectionViewCell {
         
         titleLabel.text = book.title
         
-        let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
+        let authors = Array(book.authors).filter { $0.isTracking }.map { $0.name }.joined(separator: ", ")
         authorLabel.text = authors
         
         let publishInfo = [book.publisher, book.publishedAt].compactMap { $0 }.joined(separator: " | ")

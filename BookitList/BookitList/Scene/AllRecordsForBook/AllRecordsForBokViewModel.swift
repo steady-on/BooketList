@@ -87,6 +87,16 @@ final class AllRecordsForBokViewModel: Cautionable {
         
         do {
             try imageFileManager.deleteData(from: .cover(bookID: book.value._id.stringValue))
+            
+            try book.value.authors.forEach { author in
+                try realmRepository.updateItem {
+                    author.typeDescriptions.setValue(nil, forKey: self.book.value._id.stringValue)
+                }
+                if author.typeDescriptions.count == 0 {
+                    try realmRepository.deleteItem(author)
+                }
+            }
+            
             try realmRepository.deleteBook(book.value)
         } catch {
             caution.value = Caution(isPresent: true, title: "도서 삭제 에러", message: String(describing: error), willDismiss: false)

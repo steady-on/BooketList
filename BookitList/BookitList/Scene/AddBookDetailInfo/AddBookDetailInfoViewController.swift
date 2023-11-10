@@ -217,7 +217,7 @@ class AddBookDetailInfoViewController: BaseViewController {
         viewModel.isRequesting.bind { [weak self] bool in
             self?.indicatorView.isHidden = bool == false
             
-            guard bool == false, let authors = self?.viewModel.authors else { return }
+            guard bool == false, let authors = self?.viewModel.artists else { return }
             self?.arrangeArtistButtons(for: authors)
         }
         
@@ -321,7 +321,7 @@ extension AddBookDetailInfoViewController {
         
         button.configuration = config
         button.tag = tagValue
-        button.isSelected = artist.willRegister
+        button.isSelected = artist.isTracking
         return button
     }
     

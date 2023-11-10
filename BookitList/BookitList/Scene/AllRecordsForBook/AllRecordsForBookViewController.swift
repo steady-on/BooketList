@@ -299,7 +299,7 @@ class AllRecordsForBookViewController: BaseViewController {
         titleLabel.text = book.title
         originalTitleLabel.text = book.originalTitle
         
-        let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
+        let authors = Array(book.authors).filter { $0.isTracking }.map { $0.name }.joined(separator: ", ")
         authorLabel.text = authors
         statusOfReadingLabel.setSelectedCase(to: book.statusOfReading)
         overviewTextView.text = book.overview

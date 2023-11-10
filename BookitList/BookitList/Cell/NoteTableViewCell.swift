@@ -164,7 +164,7 @@ class NoteTableViewCell: BaseTableViewCell, ReuseIdentifier {
         typeLabel.setNoteType(to: note.type)
         titleLabel.text = book.title
         
-        let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
+        let authors = Array(book.authors).filter { $0.isTracking }.map { $0.name }.joined(separator: ", ")
         authorLabel.text = authors
         
         if let page = note.page {

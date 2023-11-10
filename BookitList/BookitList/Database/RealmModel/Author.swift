@@ -12,13 +12,17 @@ final class Author: Object {
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted(indexed: true) var authorID: Int?
     @Persisted var name: String
+    @Persisted var isTracking: Bool
+    @Persisted var typeDescriptions: Map<String, String>
     
     @Persisted(originProperty: "authors") var books: LinkingObjects<Book>
     
-    convenience init(authorID: Int? = nil, name: String) {
+    convenience init(from artist: Artist, for bookId: String) {
         self.init()
         
-        self.authorID = authorID
-        self.name = name
+        self.authorID = artist.authorId
+        self.name = artist.authorName
+        self.isTracking = artist.isTracking
+        self.typeDescriptions.setValue(artist.authorTypeDesc, forKey: bookId)
     }
 }
