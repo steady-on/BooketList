@@ -75,20 +75,28 @@ class AllRecordsForBookViewController: BaseViewController {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
-        stackView.spacing = 8
+        stackView.spacing = 4
         return stackView
     }()
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .title3)
-        label.numberOfLines = 3
+        label.font = .preferredFont(forTextStyle: .body)
+        label.numberOfLines = 2
+        return label
+    }()
+    
+    private let originalTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .preferredFont(forTextStyle: .subheadline)
+        label.textColor = .secondaryLabel
+        label.numberOfLines = 2
         return label
     }()
     
     private let authorLabel: UILabel = {
         let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .body)
+        label.font = .preferredFont(forTextStyle: .callout)
         label.textColor = .secondaryLabel
         label.numberOfLines = 1
         return label
@@ -179,7 +187,7 @@ class AllRecordsForBookViewController: BaseViewController {
         
         overviewButton.addTarget(self, action: #selector(overviewButtonTapped), for: .touchUpInside)
         
-        let infoStackComponents = [titleLabel, authorLabel]
+        let infoStackComponents = [titleLabel, originalTitleLabel, authorLabel]
         infoStackComponents.forEach { component in
             infoStackView.addArrangedSubview(component)
         }
@@ -291,6 +299,7 @@ class AllRecordsForBookViewController: BaseViewController {
         backdropImageView.kf.setImage(with: provider, placeholder: placeholder)
         coverImageView.kf.setImage(with: provider, placeholder: placeholder)
         titleLabel.text = book.title
+        originalTitleLabel.text = book.originalTitle
         
         let authors = Array(book.authors).map { $0.name }.joined(separator: ", ")
         authorLabel.text = authors
