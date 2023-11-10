@@ -181,12 +181,17 @@ extension MyNoteViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        guard let selectedNote = noteDataSource.itemIdentifier(for: indexPath) else {
-            return UISwipeActionsConfiguration()
+        let selectedNote: Note?
+        if tableView === noteTableView {
+            selectedNote = noteDataSource.itemIdentifier(for: indexPath)
+        } else {
+            selectedNote = searchResultsDataSource.itemIdentifier(for: indexPath)
         }
         
+        guard let selectedNote else { return UISwipeActionsConfiguration() }
+        
         let delete = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, _ in
-            self?.showDeleteNoteAlert(for: selectedNote)
+            self?.showDeleteNoteAlert(tableView, for: selectedNote)
         }
         delete.image = UIImage(systemName: "trash")
         
@@ -196,11 +201,11 @@ extension MyNoteViewController: UITableViewDelegate {
 }
 
 extension MyNoteViewController {
-    private func showDeleteNoteAlert(for note: Note) {
+    private func showDeleteNoteAlert(_ tableView: UITableView, for note: Note) {
         let alert = UIAlertController(title: "노트 삭제", message: "선택한 노트가 삭제되며, 삭제된 노트는 되돌릴 수 없습니다. 그래도 삭제하시겠습니까?", preferredStyle: .alert)
         
         let delete = UIAlertAction(title: "삭제", style: .destructive) { [weak self] action in
-            self?.deleteNote(for: note)
+            self?.deleteNote(tableView, data: note)
         }
         
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -210,10 +215,13 @@ extension MyNoteViewController {
         present(alert, animated: true)
     }
     
-    private func deleteNote(for note: Note) {
-        var newSnapshot = noteDataSource.snapshot()
-        newSnapshot.deleteItems([note])
-        noteDataSource.apply(newSnapshot)
-        viewModel.deleteNotes(for: note)
+    private func deleteNote(_ tableView: UITableView, data: Note) {
+        if tableView === searchResultsTableViewController.tableView {
+            searchResultsSnapshot.deleteItems([data])
+            searchResultsDataSource.apply(searchResultsSnapshot)
+        }
+        
+        noteSnapshot.deleteItems([data])
+        noteDataSource.apply(noteSnapshot)
     }
 }
