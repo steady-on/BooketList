@@ -88,6 +88,8 @@
 		63C1A6A02ADDB2E70067FCF1 /* BookCoverGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C1A69F2ADDB2E70067FCF1 /* BookCoverGridCell.swift */; };
 		63C946022AFE69360045F231 /* EditBookDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C946012AFE69360045F231 /* EditBookDetailInfoViewController.swift */; };
 		63C946042AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C946032AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift */; };
+		63C9460B2AFFBD450045F231 /* TextModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9460A2AFFBD450045F231 /* TextModalViewController.swift */; };
+		63C9460F2AFFDEF30045F231 /* Terms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9460E2AFFDEF30045F231 /* Terms.swift */; };
 		63DA060E2AE78AC0007FF18E /* AllRecordsForBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */; };
 		63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */; };
 		63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */; };
@@ -174,6 +176,8 @@
 		63C1A69F2ADDB2E70067FCF1 /* BookCoverGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCoverGridCell.swift; sourceTree = "<group>"; };
 		63C946012AFE69360045F231 /* EditBookDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookDetailInfoViewController.swift; sourceTree = "<group>"; };
 		63C946032AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookDetailInfoViewModel.swift; sourceTree = "<group>"; };
+		63C9460A2AFFBD450045F231 /* TextModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModalViewController.swift; sourceTree = "<group>"; };
+		63C9460E2AFFDEF30045F231 /* Terms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terms.swift; sourceTree = "<group>"; };
 		63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordsForBookViewController.swift; sourceTree = "<group>"; };
 		63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordCell.swift; sourceTree = "<group>"; };
 		63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryView.swift; sourceTree = "<group>"; };
@@ -231,7 +235,7 @@
 				639E4CBF2AF184D3006646F4 /* WriteNote */,
 				639E4CDB2AF7ADB9006646F4 /* EditNote */,
 				639E4CD62AF6887E006646F4 /* MyNote */,
-				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
+				63C946082AFEB4830045F231 /* Settings */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -280,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				637B5C8C2ACB06D300730C01 /* AladinConstant.swift */,
+				63C9460E2AFFDEF30045F231 /* Terms.swift */,
 			);
 			path = NameSpace;
 			sourceTree = "<group>";
@@ -478,6 +483,23 @@
 			path = EditBookDetailInfo;
 			sourceTree = "<group>";
 		};
+		63C946082AFEB4830045F231 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				637B5C522AC4E7AB00730C01 /* SettingsViewController.swift */,
+				63C946092AFEB48D0045F231 /* SubViews */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		63C946092AFEB48D0045F231 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				63C9460A2AFFBD450045F231 /* TextModalViewController.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -588,6 +610,7 @@
 				63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */,
 				63B5B3762AD52A2800477536 /* AddBookDetailInfoViewModel.swift in Sources */,
 				637B5C712AC980F700730C01 /* SearchResultCollectionCell.swift in Sources */,
+				63C9460B2AFFBD450045F231 /* TextModalViewController.swift in Sources */,
 				63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */,
 				63B5B35B2ACE88DE00477536 /* UIImageView+.swift in Sources */,
 				637B5C732AC987DB00730C01 /* BLBookmarkImageView.swift in Sources */,
@@ -638,6 +661,7 @@
 				63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */,
 				63DA060E2AE78AC0007FF18E /* AllRecordsForBookViewController.swift in Sources */,
 				63A6734F2AC35810004F43F4 /* ReadingRecord.swift in Sources */,
+				63C9460F2AFFDEF30045F231 /* Terms.swift in Sources */,
 				637B5C532AC4E7AB00730C01 /* SettingsViewController.swift in Sources */,
 				631821EC2AD8016B0034573B /* Caution.swift in Sources */,
 			);
