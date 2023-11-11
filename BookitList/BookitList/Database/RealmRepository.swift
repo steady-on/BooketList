@@ -63,7 +63,7 @@ final class RealmRepository {
     }
     
     func fetchTable<T: Object>(sortedBy keypath: String, ascending: Bool = false) -> Results<T> {
-        print(realm.configuration.fileURL)
+//        print(realm.configuration.fileURL)
         let fetchData = realm.objects(T.self).sorted(byKeyPath: keypath, ascending: ascending)
         return fetchData
     }
