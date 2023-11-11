@@ -11,10 +11,11 @@ final class TextModalViewController: BaseViewController {
     
     private let content: String
     
-    init(content: String) {
+    init(title: String, content: String) {
         self.content = content
         
         super.init()
+        navigationItem.title = title
     }
 
     private let contentTextView: UITextView = {
@@ -44,8 +45,6 @@ final class TextModalViewController: BaseViewController {
     }
     
     override func configureNavigationBar() {
-        navigationItem.title = "개인정보 처리방침"
-        
         let confirm = UIBarButtonItem(title: "확인", style: .done, target: self, action: #selector(confirmButtonTapped))
         
         navigationItem.rightBarButtonItem = confirm

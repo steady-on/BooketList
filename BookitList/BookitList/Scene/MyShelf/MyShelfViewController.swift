@@ -13,9 +13,7 @@ final class MyShelfViewController: BaseViewController {
     private let viewModel = MyShelfViewModel()
     
     private var searchResultsCollectionViewController: MyShelfSearchResultsCollectionViewController!
-    
     private var searchResultsDataSource: UICollectionViewDiffableDataSource<Int, Book>!
-    
     private var searchResultsSnapShot = NSDiffableDataSourceSnapshot<Int, Book>()
     
     private lazy var searchController: UISearchController = {

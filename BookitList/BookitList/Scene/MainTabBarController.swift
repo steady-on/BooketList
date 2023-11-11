@@ -12,7 +12,7 @@ final class MainTabBarController: UITabBarController {
     private let readingRecordViewController = ReadingBoardViewController()
     private let bookShelfViewController = MyShelfViewController()
     private let noteViewController = MyNoteViewController()
-    private let settingsViewController = SettingsViewController()
+    private let settingsViewController = SettingsViewController(style: .insetGrouped)
     
     override func viewDidLoad() {
         super.viewDidLoad()
