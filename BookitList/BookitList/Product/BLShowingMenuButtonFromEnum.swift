@@ -43,7 +43,6 @@ class BLShowingMenuButtonFromEnum<T: ShowingMenuButton>: UIButton {
         var config = UIButton.Configuration.filled()
         config.cornerStyle = .capsule
         config.buttonSize = .mini
-        config.image = UIImage(systemName: "chevron.down", withConfiguration: symbolConfig)
         config.imagePlacement = .trailing
         config.imagePadding = 8
         configuration = config
