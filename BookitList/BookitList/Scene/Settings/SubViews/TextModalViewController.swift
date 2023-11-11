@@ -24,6 +24,7 @@ final class TextModalViewController: BaseViewController {
         textView.backgroundColor = .clear
         textView.isSelectable = false
         textView.isEditable = false
+        textView.showsVerticalScrollIndicator = false
         return textView
     }()
     
