@@ -38,12 +38,9 @@ class BLShowingMenuButtonFromEnum<T: ShowingMenuButton>: UIButton {
         showsMenuAsPrimaryAction = true
         changesSelectionAsPrimaryAction = true
         
-        let symbolConfig = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .caption1))
-        
         var config = UIButton.Configuration.filled()
         config.cornerStyle = .capsule
         config.buttonSize = .mini
-        config.image = UIImage(systemName: "chevron.down", withConfiguration: symbolConfig)
         config.imagePlacement = .trailing
         config.imagePadding = 8
         configuration = config
