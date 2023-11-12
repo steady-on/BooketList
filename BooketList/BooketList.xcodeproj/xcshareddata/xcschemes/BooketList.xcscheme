@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "63BB13B02AC164D50060073D"
-               BuildableName = "BookitList.app"
-               BlueprintName = "BookitList"
-               ReferencedContainer = "container:BookitList.xcodeproj">
+               BuildableName = "BooketList.app"
+               BlueprintName = "BooketList"
+               ReferencedContainer = "container:BooketList.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "63BB13B02AC164D50060073D"
-            BuildableName = "BookitList.app"
-            BlueprintName = "BookitList"
-            ReferencedContainer = "container:BookitList.xcodeproj">
+            BuildableName = "BooketList.app"
+            BlueprintName = "BooketList"
+            ReferencedContainer = "container:BooketList.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <EnvironmentVariables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "63BB13B02AC164D50060073D"
-            BuildableName = "BookitList.app"
-            BlueprintName = "BookitList"
-            ReferencedContainer = "container:BookitList.xcodeproj">
+            BuildableName = "BooketList.app"
+            BlueprintName = "BooketList"
+            ReferencedContainer = "container:BooketList.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

@@ -105,7 +105,7 @@
 /* Begin PBXFileReference section */
 		63023E6E2AE1CF18000B26A9 /* BookShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfCell.swift; sourceTree = "<group>"; };
 		630F19212B007AE7009456A2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		631821D42AD77C0B0034573B /* BookitList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookitList.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		631821D42AD77C0B0034573B /* BooketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BooketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		631821E92AD7DEBE0034573B /* FileManageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManageError.swift; sourceTree = "<group>"; };
 		631821EB2AD8016B0034573B /* Caution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caution.swift; sourceTree = "<group>"; };
 		631821ED2AD983B90034573B /* Cautionable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cautionable.swift; sourceTree = "<group>"; };
@@ -183,12 +183,12 @@
 		63C946032AFE6BD80045F231 /* EditBookDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookDetailInfoViewModel.swift; sourceTree = "<group>"; };
 		63C9460A2AFFBD450045F231 /* TextModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModalViewController.swift; sourceTree = "<group>"; };
 		63C9460E2AFFDEF30045F231 /* Terms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terms.swift; sourceTree = "<group>"; };
-		63C9461E2B0015650045F231 /* BookitList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookitList.entitlements; sourceTree = "<group>"; };
+		63C9461E2B0015650045F231 /* BooketList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BooketList.entitlements; sourceTree = "<group>"; };
 		63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordsForBookViewController.swift; sourceTree = "<group>"; };
 		63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordCell.swift; sourceTree = "<group>"; };
 		63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryView.swift; sourceTree = "<group>"; };
 		63DCC3B22AFC9ED300C5AF08 /* CollectionLayoutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionLayoutStyle.swift; sourceTree = "<group>"; };
-		63DCC3B82AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyShelfSearchResultsCollectionViewController.swift; path = BookitList/Scene/MyShelf/MyShelfSearchResultsCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
+		63DCC3B82AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyShelfSearchResultsCollectionViewController.swift; path = BooketList/Scene/MyShelf/MyShelfSearchResultsCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		63E389722B007EEC00C5D68C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63E389782B00808F00C5D68C /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -440,14 +440,14 @@
 			isa = PBXGroup;
 			children = (
 				63BB13B32AC164D50060073D /* BookitList */,
-				631821D42AD77C0B0034573B /* BookitList.app */,
+				631821D42AD77C0B0034573B /* BooketList.app */,
 			);
 			sourceTree = "<group>";
 		};
 		63BB13B32AC164D50060073D /* BookitList */ = {
 			isa = PBXGroup;
 			children = (
-				63C9461E2B0015650045F231 /* BookitList.entitlements */,
+				63C9461E2B0015650045F231 /* BooketList.entitlements */,
 				63BB13B42AC164D50060073D /* AppDelegate.swift */,
 				63BB13B62AC164D50060073D /* SceneDelegate.swift */,
 				637B5C8B2ACB06AF00730C01 /* NameSpace */,
@@ -465,7 +465,8 @@
 				63BB13C22AC164D70060073D /* Info.plist */,
 				63E389722B007EEC00C5D68C /* GoogleService-Info.plist */,
 			);
-			path = BookitList;
+			name = BookitList;
+			path = BooketList;
 			sourceTree = "<group>";
 		};
 		63BB13CB2AC17A910060073D /* Network */ = {
@@ -509,9 +510,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		63BB13B02AC164D50060073D /* BookitList */ = {
+		63BB13B02AC164D50060073D /* BooketList */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 63BB13C52AC164D70060073D /* Build configuration list for PBXNativeTarget "BookitList" */;
+			buildConfigurationList = 63BB13C52AC164D70060073D /* Build configuration list for PBXNativeTarget "BooketList" */;
 			buildPhases = (
 				63BB13AD2AC164D50060073D /* Sources */,
 				63BB13AE2AC164D50060073D /* Frameworks */,
@@ -522,7 +523,7 @@
 			);
 			dependencies = (
 			);
-			name = BookitList;
+			name = BooketList;
 			packageProductDependencies = (
 				63BB13C92AC17A610060073D /* Alamofire */,
 				63A6733F2AC33AFD004F43F4 /* Realm */,
@@ -535,7 +536,7 @@
 				63C946172B000FE00045F231 /* FirebaseMessaging */,
 			);
 			productName = BookitList;
-			productReference = 631821D42AD77C0B0034573B /* BookitList.app */;
+			productReference = 631821D42AD77C0B0034573B /* BooketList.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -553,7 +554,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 63BB13AC2AC164D50060073D /* Build configuration list for PBXProject "BookitList" */;
+			buildConfigurationList = 63BB13AC2AC164D50060073D /* Build configuration list for PBXProject "BooketList" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = ko;
 			hasScannedForEncodings = 0;
@@ -573,7 +574,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				63BB13B02AC164D50060073D /* BookitList */,
+				63BB13B02AC164D50060073D /* BooketList */,
 			);
 		};
 /* End PBXProject section */
@@ -849,13 +850,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
-				CODE_SIGN_ENTITLEMENTS = BookitList/BookitList.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BooketList/BooketList.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 39J2PNZP7V;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BookitList/Info.plist;
+				INFOPLIST_FILE = BooketList/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북킷리스트";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -870,6 +872,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.steady-on.BooketList";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -886,13 +889,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
-				CODE_SIGN_ENTITLEMENTS = BookitList/BookitList.entitlements;
+				CODE_SIGN_ENTITLEMENTS = BooketList/BooketList.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 39J2PNZP7V;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = BookitList/Info.plist;
+				INFOPLIST_FILE = BooketList/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "북킷리스트";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -907,6 +911,7 @@
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.steady-on.BooketList";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -919,7 +924,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		63BB13AC2AC164D50060073D /* Build configuration list for PBXProject "BookitList" */ = {
+		63BB13AC2AC164D50060073D /* Build configuration list for PBXProject "BooketList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63BB13C32AC164D70060073D /* Debug */,
@@ -928,7 +933,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		63BB13C52AC164D70060073D /* Build configuration list for PBXNativeTarget "BookitList" */ = {
+		63BB13C52AC164D70060073D /* Build configuration list for PBXNativeTarget "BooketList" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				63BB13C62AC164D70060073D /* Debug */,
