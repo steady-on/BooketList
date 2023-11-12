@@ -100,7 +100,7 @@ final class MyShelfViewController: BaseViewController {
         navigationItem.title = "나의 서재"
         navigationItem.searchController = searchController
         
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(navigationSearchButtonTapped))
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.and.text.magnifyingglass"), style: .plain, target: self, action: #selector(navigationSearchButtonTapped))
         
         navigationItem.rightBarButtonItems = [searchButton, changeLayoutButton]
     }

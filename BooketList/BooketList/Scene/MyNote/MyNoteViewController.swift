@@ -81,7 +81,7 @@ final class MyNoteViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchController
         
-        let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(navigationSearchButtonTapped))
+        let searchButton = UIBarButtonItem(image: UIImage(systemName: "rectangle.and.text.magnifyingglass"), style: .plain, target: self, action: #selector(navigationSearchButtonTapped))
 
         navigationItem.rightBarButtonItem = searchButton
     }
