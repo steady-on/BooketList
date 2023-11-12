@@ -81,7 +81,6 @@
 		63BB13C12AC164D70060073D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */; };
 		63BB13CA2AC17A610060073D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 63BB13C92AC17A610060073D /* Alamofire */; };
 		63BB13CD2AC17B510060073D /* AladinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13CC2AC17B510060073D /* AladinRouter.swift */; };
-		63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13CF2AC17BAB0060073D /* APIKey.swift */; };
 		63BB13D32AC181C10060073D /* AladinSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D22AC181C10060073D /* AladinSearchResponse.swift */; };
 		63BB13D52AC189160060073D /* AladinLookUpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13D42AC189160060073D /* AladinLookUpResponse.swift */; };
 		63BB13DB2AC2D37A0060073D /* AladinAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */; };
@@ -94,12 +93,13 @@
 		63C946142B000FE00045F231 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 63C946132B000FE00045F231 /* FirebaseAnalyticsSwift */; };
 		63C946162B000FE00045F231 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 63C946152B000FE00045F231 /* FirebaseCrashlytics */; };
 		63C946182B000FE00045F231 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 63C946172B000FE00045F231 /* FirebaseMessaging */; };
-		63C946202B0016860045F231 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63C9461F2B0016860045F231 /* GoogleService-Info.plist */; };
 		63DA060E2AE78AC0007FF18E /* AllRecordsForBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */; };
 		63DA06162AE969AF007FF18E /* ReadingRecordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */; };
 		63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */; };
 		63DCC3B32AFC9ED300C5AF08 /* CollectionLayoutStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DCC3B22AFC9ED300C5AF08 /* CollectionLayoutStyle.swift */; };
 		63DCC3B92AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63DCC3B82AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift */; };
+		63E389732B007EED00C5D68C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 63E389722B007EEC00C5D68C /* GoogleService-Info.plist */; };
+		63E389792B00808F00C5D68C /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E389782B00808F00C5D68C /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -175,7 +175,6 @@
 		63BB13C02AC164D70060073D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63BB13C22AC164D70060073D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63BB13CC2AC17B510060073D /* AladinRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinRouter.swift; sourceTree = "<group>"; };
-		63BB13CF2AC17BAB0060073D /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		63BB13D22AC181C10060073D /* AladinSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinSearchResponse.swift; sourceTree = "<group>"; };
 		63BB13D42AC189160060073D /* AladinLookUpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinLookUpResponse.swift; sourceTree = "<group>"; };
 		63BB13DA2AC2D37A0060073D /* AladinAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AladinAPIManager.swift; sourceTree = "<group>"; };
@@ -185,12 +184,13 @@
 		63C9460A2AFFBD450045F231 /* TextModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModalViewController.swift; sourceTree = "<group>"; };
 		63C9460E2AFFDEF30045F231 /* Terms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Terms.swift; sourceTree = "<group>"; };
 		63C9461E2B0015650045F231 /* BookitList.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BookitList.entitlements; sourceTree = "<group>"; };
-		63C9461F2B0016860045F231 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		63DA060D2AE78AC0007FF18E /* AllRecordsForBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllRecordsForBookViewController.swift; sourceTree = "<group>"; };
 		63DA06152AE969AF007FF18E /* ReadingRecordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadingRecordCell.swift; sourceTree = "<group>"; };
 		63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLTitleSupplementaryView.swift; sourceTree = "<group>"; };
 		63DCC3B22AFC9ED300C5AF08 /* CollectionLayoutStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionLayoutStyle.swift; sourceTree = "<group>"; };
 		63DCC3B82AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MyShelfSearchResultsCollectionViewController.swift; path = BookitList/Scene/MyShelf/MyShelfSearchResultsCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
+		63E389722B007EEC00C5D68C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		63E389782B00808F00C5D68C /* APIKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -463,7 +463,7 @@
 				63BB13BF2AC164D70060073D /* LaunchScreen.storyboard */,
 				63BB13BD2AC164D70060073D /* Assets.xcassets */,
 				63BB13C22AC164D70060073D /* Info.plist */,
-				63C9461F2B0016860045F231 /* GoogleService-Info.plist */,
+				63E389722B007EEC00C5D68C /* GoogleService-Info.plist */,
 			);
 			path = BookitList;
 			sourceTree = "<group>";
@@ -472,7 +472,7 @@
 			isa = PBXGroup;
 			children = (
 				637B5CCB2ACD7C2F00730C01 /* NetworkMonitor.swift */,
-				63BB13CF2AC17BAB0060073D /* APIKey.swift */,
+				63E389782B00808F00C5D68C /* APIKey.swift */,
 				63BB13D12AC1816C0060073D /* Model */,
 				63A673322AC307DF004F43F4 /* AladinAPI */,
 			);
@@ -585,7 +585,7 @@
 			files = (
 				63BB13C12AC164D70060073D /* LaunchScreen.storyboard in Resources */,
 				63BB13BE2AC164D70060073D /* Assets.xcassets in Resources */,
-				63C946202B0016860045F231 /* GoogleService-Info.plist in Resources */,
+				63E389732B007EED00C5D68C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,7 +658,6 @@
 				639E4CC12AF184F3006646F4 /* WriteNoteViewController.swift in Sources */,
 				637B5CCC2ACD7C2F00730C01 /* NetworkMonitor.swift in Sources */,
 				637B5C4D2AC4E71D00730C01 /* ReadingBoardViewController.swift in Sources */,
-				63BB13D02AC17BAB0060073D /* APIKey.swift in Sources */,
 				639E4CDA2AF795B0006646F4 /* MyNoteSearchResultsTableViewController.swift in Sources */,
 				639F358C2AE5B20D00226402 /* ReadingBoardViewModel.swift in Sources */,
 				63222D5C2AEBC80C0070F43A /* ReuseIdentifier.swift in Sources */,
@@ -684,6 +683,7 @@
 				637B5C4F2AC4E77B00730C01 /* MyShelfViewController.swift in Sources */,
 				63A673532AC36132004F43F4 /* Comment.swift in Sources */,
 				63DA06182AE9858A007FF18E /* BLTitleSupplementaryView.swift in Sources */,
+				63E389792B00808F00C5D68C /* APIKey.swift in Sources */,
 				63DCC3B92AFCBBA300C5AF08 /* MyShelfSearchResultsCollectionViewController.swift in Sources */,
 				63C946022AFE69360045F231 /* EditBookDetailInfoViewController.swift in Sources */,
 				639E4CD52AF67550006646F4 /* NoteTableViewCell.swift in Sources */,
