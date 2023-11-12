@@ -115,10 +115,12 @@ extension SettingsViewController {
         """
         
         let mailComposeViewController = MFMailComposeViewController()
+        mailComposeViewController.delegate = self
+        mailComposeViewController.mailComposeDelegate = self
+        
         mailComposeViewController.setToRecipients(["roen.steady.on@gmail.com"])
         mailComposeViewController.setSubject("[북킷리스트] 문의하기 및 의견보내기")
         mailComposeViewController.setMessageBody(messageBody, isHTML: false)
-        mailComposeViewController.delegate = self
         present(mailComposeViewController, animated: true)
     }
     
@@ -134,7 +136,8 @@ extension SettingsViewController {
 
 extension SettingsViewController: MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        dismiss(animated: true)
+        
+        controller.dismiss(animated: true)
     }
 }
 
