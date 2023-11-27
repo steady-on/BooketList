@@ -17,16 +17,19 @@
 ### 기술 스택
 
 - Deployment Target: iOS 15.0
-
 - 개발 환경: Swift 5, Xcode 15.0.1
-
 - 라이브러리: Realm, SnapKit, KingFisher, Alamofire, Firebase
-
 - 아키텍처: MVVM
-
 - 그 외 활용 기술: Codable, Compositional Layout, Diffable DataSource, NWPathMonitor
-
 - open API: 알라딘 API
+
+### 핵심 구현 요소
+
+- Custom Observable class를 정의하고 MVVM을 적용하는 것으로 `ViewController`는 화면을 그리는 역할을, `ViewModel`은 데이터 및 비즈니스 로직 관리, 화면 전환 요청 등을 담당하도록 역할 분리
+- Alamofire의 URLRequestConvertible으로 Routing 패턴을 적용하여 요청 URL의 엔드포인트를 효율적으로 관리
+- NWPathMonitor를 활용하여 기기의 네트워크 통신 상태에 따라 도서 검색 기능의 활성화 여부를 반응형 View로 구성
+- Swift의 Generic을 활용하여 타입에 유연하게 동작할 수 있는 코드 작성
+- Custom 프로토콜을 정의하고 하나의 Type으로 사용하여 재사용 가능한 코드 작성
 
 ## 📂 파일 디렉토리 구조
 
