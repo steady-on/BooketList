@@ -27,3 +27,35 @@
 - 그 외 활용 기술: Codable, Compositional Layout, Diffable DataSource, NWPathMonitor
 
 - open API: 알라딘 API
+
+## 📂 파일 디렉토리 구조
+
+```bash
+├── BooketList
+│   ├── NameSpace
+│   ├── Scene
+│   │   ├── AddBookDetailInfo
+│   │   ├── AllRecordsForBook
+│   │   ├── EditBookDetailInfo
+│   │   ├── EditNote
+│   │   ├── MyNote
+│   │   ├── MyShelf
+│   │   ├── ReadingBoard
+│   │   ├── SeachBook
+│   │   ├── Settings
+│   │   └── WriteNote
+│   ├── Cell
+│   ├── Product
+│   ├── BaseUI
+│   ├── Model
+│   ├── Database
+│   │   ├── FileManager
+│   │   └── RealmModel
+│   ├── Network
+│   │   ├── AladinAPI
+│   │   └── Model
+│   ├── Extension
+│   ├── Protocol
+│   └── ko.lproj
+└── BooketList.xcodeproj
+```
