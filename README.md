@@ -63,5 +63,3 @@
 │   └── ko.lproj
 └── BooketList.xcodeproj
 ```
-
-## Trouble Shooting
