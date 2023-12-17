@@ -244,9 +244,18 @@ class AddBookDetailInfoViewController: BaseViewController {
         navigationAppearance.configureWithTransparentBackground()
         navigationController?.navigationBar.standardAppearance = navigationAppearance
         
-        let saveButton = UIBarButtonItem(title: "저장", style: .done, target: self, action: #selector(saveBarButtonTapped))
+        let saveButton: UIButton = {
+            let button = UIButton()
+            button.setTitle("저장", for: .normal)
+            button.setTitleColor(.accent, for: .normal)
+            button.layer.shadowColor = UIColor.white.cgColor
+            button.layer.shadowOffset = .zero
+            button.layer.shadowOpacity = 0.8
+            button.addTarget(self, action: #selector(saveBarButtonTapped), for: .touchUpInside)
+            return button
+        }()
         
-        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: saveButton)
     }
     
     private func configureComponents(for itemDetail: ItemDetail) {
