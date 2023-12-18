@@ -251,6 +251,7 @@ class AddBookDetailInfoViewController: BaseViewController {
             button.layer.shadowColor = UIColor.white.cgColor
             button.layer.shadowOffset = .zero
             button.layer.shadowOpacity = 0.8
+            button.layer.shadowRadius = 2.5
             button.addTarget(self, action: #selector(saveBarButtonTapped), for: .touchUpInside)
             return button
         }()
