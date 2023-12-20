@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		63023E6F2AE1CF18000B26A9 /* BookShelfCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63023E6E2AE1CF18000B26A9 /* BookShelfCell.swift */; };
+		631617652B332A0E00043FE3 /* BLScanTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631617642B332A0E00043FE3 /* BLScanTextView.swift */; };
 		631821EA2AD7DEBE0034573B /* FileManageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821E92AD7DEBE0034573B /* FileManageError.swift */; };
 		631821EC2AD8016B0034573B /* Caution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821EB2AD8016B0034573B /* Caution.swift */; };
 		631821EE2AD983B90034573B /* Cautionable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631821ED2AD983B90034573B /* Cautionable.swift */; };
@@ -105,6 +106,7 @@
 /* Begin PBXFileReference section */
 		63023E6E2AE1CF18000B26A9 /* BookShelfCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookShelfCell.swift; sourceTree = "<group>"; };
 		630F19212B007AE7009456A2 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		631617642B332A0E00043FE3 /* BLScanTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BLScanTextView.swift; path = BooketList/Product/BLScanTextView.swift; sourceTree = SOURCE_ROOT; };
 		631821D42AD77C0B0034573B /* BooketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BooketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		631821E92AD7DEBE0034573B /* FileManageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManageError.swift; sourceTree = "<group>"; };
 		631821EB2AD8016B0034573B /* Caution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caution.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				63DA06172AE9858A007FF18E /* BLTitleSupplementaryView.swift */,
 				63222D572AEA5BA70070F43A /* BLNoteTypeLabel.swift */,
 				63222D5D2AEBF4490070F43A /* BLContentWrappingTableView.swift */,
+				631617642B332A0E00043FE3 /* BLScanTextView.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -673,6 +676,7 @@
 				637B5C562AC6DB5600730C01 /* SearchBookViewController.swift in Sources */,
 				63A6735E2AC41488004F43F4 /* Tag.swift in Sources */,
 				637B5C8D2ACB06D300730C01 /* AladinConstant.swift in Sources */,
+				631617652B332A0E00043FE3 /* BLScanTextView.swift in Sources */,
 				63222D602AEFE9E50070F43A /* AllRecordsForBokViewModel.swift in Sources */,
 				631821EE2AD983B90034573B /* Cautionable.swift in Sources */,
 				639E4CDD2AF7ADDF006646F4 /* EditNoteViewController.swift in Sources */,
