@@ -8,9 +8,11 @@
 import UIKit
 
 class BLScanTextView: UITextView {
+
+    
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-        if action == #selector(UIResponder.captureTextFromCamera(_:)) {
-            return true
+        if action == #selector(UIAction.captureTextFromCamera(responder:identifier:)) {
+            return false
         }
         
         return super.canPerformAction(action, withSender: sender)
