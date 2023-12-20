@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 import Kingfisher
 
 final class BLDirectionView: BaseView {
