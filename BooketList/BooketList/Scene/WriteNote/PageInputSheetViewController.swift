@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PageInputSheetViewController: BaseViewController {
+final class PageInputSheetViewController: BaseViewController {
     
     private var inputHandler: ((Int?) -> Void)?
     
