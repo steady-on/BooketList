@@ -202,11 +202,8 @@ extension WriteNoteViewController: UITextViewDelegate {
 
 extension WriteNoteViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
         if string.isEmpty { return true }
-        
-        guard let inputNumber = Int(string), inputNumber >= 0 || string.isEmpty else { return false }
-        
+        guard let inputNumber = Int(string), inputNumber >= 0 else { return false }
         return true
     }
 }
