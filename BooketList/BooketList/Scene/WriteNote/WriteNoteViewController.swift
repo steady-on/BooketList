@@ -24,6 +24,16 @@ class WriteNoteViewController: BaseViewController {
         }
     }()
     
+    private let scanTextButton: UIButton = {
+        let button = UIButton()
+        var config = UIButton.Configuration.filled()
+        config.image = UIImage(systemName: "text.viewfinder")
+        config.buttonSize = .mini
+        config.cornerStyle = .capsule
+        button.configuration = config
+        return button
+    }()
+    
     private let pageButton: UIButton = {
         let button = UIButton()
         var config = UIButton.Configuration.plain()
@@ -63,12 +73,13 @@ class WriteNoteViewController: BaseViewController {
         
         contentTextView.delegate = self
         
-        let components = [noteTypeButton, pageButton, contentTextView]
+        let components = [noteTypeButton, pageButton, scanTextButton, contentTextView]
         components.forEach { component in
             view.addSubview(component)
         }
         
         pageButton.addTarget(self, action: #selector(pageButtonTapped), for: .touchUpInside)
+        scanTextButton.addAction(UIAction.captureTextFromCamera(responder: contentTextView, identifier: nil), for: .touchUpInside)
     }
     
     override func setConstraints() {
@@ -80,6 +91,11 @@ class WriteNoteViewController: BaseViewController {
         pageButton.snp.makeConstraints { make in
             make.centerY.equalTo(noteTypeButton)
             make.trailing.equalTo(view.directionalLayoutMargins)
+        }
+        
+        scanTextButton.snp.makeConstraints { make in
+            make.centerY.equalTo(noteTypeButton)
+            make.trailing.equalTo(pageButton.snp.leading).offset(-8)
         }
         
         contentTextView.snp.makeConstraints { make in
