@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WriteNoteViewController: BaseViewController {
+final class WriteNoteViewController: BaseViewController {
     
     private let viewModel: WriteNoteViewModel
     private let dismissHandler: (() -> Void)?
@@ -155,6 +155,7 @@ class WriteNoteViewController: BaseViewController {
     
     @objc private func pageButtonTapped() {
         let pageInputAlert = UIAlertController(title: "몇 페이지에 대한 노트인가요?", message: nil, preferredStyle: .alert)
+        
         pageInputAlert.addTextField { [weak self] textField in
             if let page = self?.viewModel.page.value {
                 textField.text = "\(page)"
@@ -201,8 +202,8 @@ extension WriteNoteViewController: UITextViewDelegate {
 
 extension WriteNoteViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard string.isEmpty || Int(string) != nil else { return false }
-        
+        if string.isEmpty { return true }
+        guard let inputNumber = Int(string), inputNumber >= 0 else { return false }
         return true
     }
 }
