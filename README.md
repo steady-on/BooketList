@@ -69,3 +69,9 @@
 │   └── ko.lproj
 └── BooketList.xcodeproj
 ```
+
+## 🚨 Trouble Shooting
+
+- instrinctContentSize를 활용해서 Custom TextField의 Height이 자동으로 계산되도록 한것
+- 책의 사이즈를 가져와서 Cell에 반영한것
+-
