@@ -74,4 +74,6 @@
 
 - instrinctContentSize를 활용해서 Custom TextField의 Height이 자동으로 계산되도록 한것
 - 책의 사이즈를 가져와서 Cell에 반영한것
--
+- NWPathMonitor로 Network 상태 감시
+- Text Scan 기능
+- 타입으로써의 프로토콜
