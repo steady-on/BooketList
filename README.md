@@ -77,3 +77,5 @@
 - NWPathMonitor로 Network 상태 감시
 - Text Scan 기능
 - 타입으로써의 프로토콜
+
+무슨 내용을 써야한다는 말인가!!!1
