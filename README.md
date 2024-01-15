@@ -31,7 +31,7 @@
 
 ### 핵심 구현 요소
 
-- Custom Observable class를 정의하고 MVVM을 적용하는 것으로 `ViewController`는 화면을 그리는 역할을, `ViewModel`은 데이터 및 비즈니스 로직 관리, 화면 전환 요청 등을 담당하도록 역할 분리
+- Custom Observable class로 MVVM을 적용하여 `ViewController`와 `ViewModel`의 역할을 분리
 - Custom Component를 구현하여 코드의 재사용성을 높임
 - Alamofire의 URLRequestConvertible으로 Routing 패턴을 적용하여 요청 URL의 엔드포인트를 효율적으로 관리
 - NWPathMonitor를 활용하여 기기의 네트워크 통신 상태에 따라 도서 검색 기능의 활성화 여부를 반응형 View로 구성
@@ -70,12 +70,51 @@
 └── BooketList.xcodeproj
 ```
 
-## 🚨 Trouble Shooting
+## ✨ 구현 Point!
 
-- instrinctContentSize를 활용해서 Custom TextField의 Height이 자동으로 계산되도록 한것
-- 책의 사이즈를 가져와서 Cell에 반영한것
+### 실제 책 사이즈의 비율을 반영한 책꽂이 - Modern Collection View
+
+#### 스크린샷( Home & MyShelf Tab )
+
+| ![Home](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/ea2171b3-13a4-458b-838f-8d43cfda3b35) | ![Grid](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/95c2e984-45c2-4708-a208-51b56a1312c2) | ![Shelf](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/4c831c9a-2e93-47d3-80fb-59cb9581dfad) | ![List](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/edaab05c-eabc-4e10-89c5-7bd95cb57c34) |
+| -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+
+#### 실제 책의 사이즈를 반영할 수는 없을까?
+
+그리드, 책꽂이, 리스트형태로 책을 보여줄 때 책의 실제 크기를 반영해서 책의 높이나 두께와 같은 부분들도 눈에 띄게 보이면 재밌을 것 같았습니다. 다행히 제가 사용한 알라딘 API에서는 사이즈를 요청하면 실제 책의 가로, 세로, 높이에 대한 정보를 받아볼 수 있었습니다. 그래서 해당 정보를 활용해서 Cell에 반영해주자고 생각했습니다.
+
+책커버 이미지가 셀을 전체적으로 덮는 BookCoverGridCell에서는 cell에 책의 정보를 받아올 프로퍼티에 속성 감시자를 활용했습니다. 책에 대한 정보가 셀에 전달되면, 커버 이미지를 불러와 imageView에 넣어주고 스냅킷의 `remakeConstraints` 메서드를 활용하여 imageView의 높이를 책의 가로세로 비율에 맞도록 재설정해주었습니다. 또, 오래된 책의 경우 size 정보가 없는 경우도 있었기 때문에 셀의 재사용 매커니즘 상 이전 책의 비율이 남아있지 않도록 하기 위해서 `prepareForReuse`에서 imageView의 크기를 셀의 크기와 동일하게 맞춰주도록 했습니다.
+
+사실 이 작업에서 가장 공과 시간을 많이 들인 부분은 책꽂이처럼 보이도록 하는 `BookShelfCell`입니다. 책꽂이처럼 보이려면, 책의 두께와 높이를 반영해야 했는데, 두께가 충분하지 않으면 책 제목이 안 보이게 될 수도 있었고, Cell이 들어갈 CollectionView의 높이도 어느 정도 고려하지 않으면 높이차이가 없는 것처럼 보일 수 있었기 때문입니다. 속성 감시자를 활용해서 `remakeConstraints`로 cell의 레이아웃을 다시 잡아주는 동작은 그대로 가져가면서, cell의 minimumWidth와 maximumHeight을 계산해주었습니다. minimumWidth는 view의 layoutMargin과 titleLabel의 lineHeight로 계산해서 책의 두께가 제목을 보여주기에 충분하지 않으면, minimumWidth로 셀의 가로 길이가 반영되게 했습니다. maximumHeight는 셀의 화면에 그려지는 크기로 잡고 standardHeight를 그 수치의 80%로 잡아 API에서 사이즈 정보가 없는 경우에는 지정 높이로 그려지도록 했습니다. 그리고 실제 두께와 높이 비율을 계산해서 view에 사이즈를 반영했습니다.
+
+```swift
+private func remakeBackdropViewConstraints(for size: ActualSize?) {
+        guard let size else { return }
+
+        let minimumWidth = titleLabel.font.lineHeight + backdropView.layoutMargins.left + backdropView.layoutMargins.right
+        let maximumHeight = bounds.height
+        let standardHeight = maximumHeight * 0.8
+
+        let width = size.depth
+        let height = size.height
+        let heightRatio = standardHeight / height
+
+        let cellWidth = width < minimumWidth ? minimumWidth : width
+        let cellHeight = height == 0 ? standardHeight : maximumHeight * heightRatio
+
+        backdropView.snp.remakeConstraints { make in
+            make.width.equalTo(cellWidth)
+            make.height.equalTo(cellHeight)
+            make.top.greaterThanOrEqualToSuperview()
+            make.horizontalEdges.bottom.equalToSuperview()
+        }
+    }
+```
+
+### font의 사이즈에 따라 자동으로 높이가 계산되는 CustomTextField - instrinctContentSize
+
+![CustomTextField](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/5fb6786b-6668-477a-a490-608730672d63)
+
 - NWPathMonitor로 Network 상태 감시
 - Text Scan 기능
 - 타입으로써의 프로토콜
-
-무슨 내용을 써야한다는 말인가!!!1
