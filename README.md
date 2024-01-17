@@ -72,7 +72,7 @@
 
 ## ✨ 구현 Point!
 
-### 실제 책 사이즈의 비율을 반영한 책꽂이 - Modern Collection View
+### 1. 실제 책 사이즈의 비율을 반영한 책꽂이 - Modern Collection View
 
 #### 스크린샷( Home & MyShelf Tab )
 
@@ -111,10 +111,28 @@ private func remakeBackdropViewConstraints(for size: ActualSize?) {
     }
 ```
 
-### font의 사이즈에 따라 자동으로 높이가 계산되는 CustomTextField - instrinctContentSize
+### 2. font의 사이즈에 따라 자동으로 높이가 계산되는 CustomTextField - instrinctContentSize
+
+#### 스크린샷
 
 ![CustomTextField](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/5fb6786b-6668-477a-a490-608730672d63)
 
-- NWPathMonitor로 Network 상태 감시
+#### 마음에 드는 라이브러리가 없다? 그럼 직접 구현하면 되지!!
+
+View를 디자인할 때, 활성화 상태나 입력 여부에 따라서 반응하는 TextField를 넣고 싶었습니다. 몇몇 라이브러리를 설치해봤지만,
+사용에 있어서 수정할 수 있는 제약이 많았습니다. 특히 가장 참을 수 없던건 stack에 넣었을 때, 높이를 rawValue로 지정해주지 않으면 모양이 흐트러져 버린다는 것이었습니다. 높이를 명확한 수치로 잡아버리면, font 변경에 유연하게 대처하지 못한 다는 점, 또 사용자의 디바이스에서 설정한 글씨 크기에 따라 앱의 글자 크기도 변경되는 Dynamic Font Size에도 대응할 수 없다는 점이 가장 큰 단점으로 생각되었습니다. 그래서 font의 사이즈에 따라 알아서 자신의 높이를 계산하는 TextField를 만들었습니다. 이때, `UIView`의 `intrinsicContentSize`를 오버라이드 하여 TextField의 기본 크기를 계산하도록 해주었습니다.
+
+```swift
+override var intrinsicContentSize: CGSize {
+    return CGSize(width: bounds.width, height: textInsets.top + textFieldHeight + textInsets.bottom)
+}
+```
+
+이렇게 해서 height Constraint를 지정하지않고도 font의 size에 따라 높이가 자동으로 계산되는 TextField를 만들 수 있었습니다.
+
+### 3. Device의 Network 상태에 따라 변화하는 책검색 View - NWPathMonitor
+
+---
+
 - Text Scan 기능
 - 타입으로써의 프로토콜
