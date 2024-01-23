@@ -36,7 +36,6 @@
 - Alamofire의 URLRequestConvertible으로 Routing 패턴을 적용하여 요청 URL의 엔드포인트를 효율적으로 관리
 - NWPathMonitor를 활용하여 기기의 네트워크 통신 상태에 따라 도서 검색 기능의 활성화 여부를 반응형 View로 구성
 - Swift의 Generic을 활용하여 타입에 유연하게 동작할 수 있는 코드 작성
-- 프로토콜을 정의하고 하나의 Type으로 사용하여 재사용 가능한 코드 작성
 
 ## 📂 파일 디렉토리 구조
 
@@ -130,9 +129,28 @@ override var intrinsicContentSize: CGSize {
 
 이렇게 해서 height Constraint를 지정하지않고도 font의 size에 따라 높이가 자동으로 계산되는 TextField를 만들 수 있었습니다.
 
-### 3. Device의 Network 상태에 따라 변화하는 책검색 View - NWPathMonitor
-
 ---
 
-- Text Scan 기능
-- 타입으로써의 프로토콜
+### 3. Device의 Network 상태에 따라 변화하는 책검색 View - NWPathMonitor
+
+#### 스크린샷
+
+![네트워 상태에 따라 변화하는 View](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/62230b01-8d56-4be2-8f5a-d743a0baf161)
+
+#### 디바이스의 인터넷 상태에 따라 책 검색 기능을 비활성화 할 수는 없을까?
+
+검색을 통해 책의 정보를 가져오는 것은 알라딘 API를 통해서 하고 있었기 때문에 기기의 인터넷 연결이 반드시 필요한 기능입니다. 그래서 기기의 인터넷 연결이 끊어졌을 때 사용자에게 해당 사실을 알리고, 검색 기능을 막을 수 있는 방법을 고민했습니다. 먼저, `Network` 프레임워크의 `NWPathMonitor`로 기기의 현재 네트워크 상태를 전달 받을 수 있는 `NetworkMonitor` 클래스를 구현하여 `SceneDelegate`에서 앱이 실행될 때, 백그라운드에서 네트워크 감시가 시작되도록 했고, 앱이 종료될 때 함께 종료되도록 해주었습니다.
+
+`NetworkMonitor` 클래스는 하나의 인스턴스에서 현재 기기의 네트워크 상태를 전달하면 충분하므로 Singleton 패턴을 적용했습니다. Custom Observable 타입인 `currentStatus` 변수에 `NWPath.Status(현재 네트워크 상태)`를 전달하여, ViewContoller에서 프로퍼티 감시자 `didSet`을 통해 변경되는 상태에 대해 대처할 수 있도록 했습니다. 상태 감시는 백그라운드에서 진행되지만, 바뀌는 상태에 대한 대응은 UI에서 일어나므로 Thread-safe 할 수 있도록 `currentStatus` 변수에 값을 전달할 때는 Main 스레드에서 값을 넘겨주도록 구현해주었습니다.
+
+```swift
+func startMonitoring() {
+    monitor.start(queue: queue)
+    currentStatus.value = monitor.currentPath.status
+    monitor.pathUpdateHandler = { [weak self] path in
+        DispatchQueue.main.sync {
+            self?.currentStatus.value = path.status
+        }
+    }
+}
+```
