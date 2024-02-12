@@ -99,7 +99,7 @@
 > | 책 선택 시(책 상세보기)                                                                                         | 책 읽음상태 변경                                                                                                      | 책 정보 수정                                                                                                    |                                                                                                                     |
 > | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 > | ![책 상세보기](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/967e5c45-4173-4a1b-b3df-bb49254c358d) | ![책 읽음 상태 변경](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/1e4e3b40-7789-45de-a132-a4858dfb7ff9) | ![책정보 수정](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/d082598b-ffe8-4beb-a6b4-82bd7b6d3489) | ![NoImages_iPhone](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/a87e35f4-63c3-432f-98c9-ce41ff7747b9) |
-> |  |
+> |                                                                                                                 |
 
 > ### 나의 노트 탭
 >
@@ -128,11 +128,16 @@
 
 #### 실제 책의 사이즈를 반영할 수는 없을까?
 
-그리드, 책꽂이, 리스트형태로 책을 보여줄 때 책의 실제 크기를 반영해서 책의 높이나 두께와 같은 부분들도 눈에 띄게 보이면 재밌을 것 같았습니다. 다행히 제가 사용한 알라딘 API에서는 사이즈를 요청하면 실제 책의 가로, 세로, 높이에 대한 정보를 받아볼 수 있었습니다. 그래서 해당 정보를 활용해서 Cell에 반영해주자고 생각했습니다.
+> 속성 감시자와 `remakeConstraints`를 활용하여 실제 책 크기의 비율을 Cell에 반영하여 현실감 있는 책장 구현! `prepareForReuse`를 통해서 이전 cell에서 사용했던 사이즈 정보가 남지 않도록 지워주는 것까지 알뜰하게 챙겼습니다.
+
+<details>
+<summary> 자세한 내용 보기 </summary>
+
+그리드, 책꽂이, 리스트형태로 책을 보여줄 때 책의 실제 크기를 반영해서 책의 높이나 두께와 같은 부분들도 눈에 띄게 보이면 재밌겠다고 생각했습니다. 다행히 제가 사용한 알라딘 API에서는 사이즈를 요청하면 실제 책의 가로, 세로, 높이에 대한 정보를 받아볼 수 있었습니다. 그래서 해당 정보를 활용해서 Cell에 반영해주자고 생각했습니다.
 
 책커버 이미지가 셀을 전체적으로 덮는 BookCoverGridCell에서는 cell에 책의 정보를 받아올 프로퍼티에 속성 감시자를 활용했습니다. 책에 대한 정보가 셀에 전달되면, 커버 이미지를 불러와 imageView에 넣어주고 스냅킷의 `remakeConstraints` 메서드를 활용하여 imageView의 높이를 책의 가로세로 비율에 맞도록 재설정해주었습니다. 또, 오래된 책의 경우 size 정보가 없는 경우도 있었기 때문에 셀의 재사용 매커니즘 상 이전 책의 비율이 남아있지 않도록 하기 위해서 `prepareForReuse`에서 imageView의 크기를 셀의 크기와 동일하게 맞춰주도록 했습니다.
 
-사실 이 작업에서 가장 공과 시간을 많이 들인 부분은 책꽂이처럼 보이도록 하는 `BookShelfCell`입니다. 책꽂이처럼 보이려면, 책의 두께와 높이를 반영해야 했는데, 두께가 충분하지 않으면 책 제목이 안 보이게 될 수도 있었고, Cell이 들어갈 CollectionView의 높이도 어느 정도 고려하지 않으면 높이차이가 없는 것처럼 보일 수 있었기 때문입니다. 속성 감시자를 활용해서 `remakeConstraints`로 cell의 레이아웃을 다시 잡아주는 동작은 그대로 가져가면서, cell의 minimumWidth와 maximumHeight을 계산해주었습니다. minimumWidth는 view의 layoutMargin과 titleLabel의 lineHeight로 계산해서 책의 두께가 제목을 보여주기에 충분하지 않으면, minimumWidth로 셀의 가로 길이가 반영되게 했습니다. maximumHeight는 셀의 화면에 그려지는 크기로 잡고 standardHeight를 그 수치의 80%로 잡아 API에서 사이즈 정보가 없는 경우에는 지정 높이로 그려지도록 했습니다. 그리고 실제 두께와 높이 비율을 계산해서 view에 사이즈를 반영했습니다.
+사실 이 작업에서 가장 공과 시간을 많이 들인 부분은 책꽂이처럼 보이도록 하는 `BookShelfCell`입니다. 책꽂이처럼 보이려면, 책의 두께와 높이를 반영해야 했는데, 두께가 충분하지 않으면 책 제목이 안 보이게 될 수도 있었고, Cell이 들어갈 CollectionView의 높이도 어느 정도 고려하지 않으면 높이 차이가 없는 것처럼 보일 수 있었기 때문입니다. 속성 감시자를 활용해서 `remakeConstraints`로 cell의 레이아웃을 다시 잡아주는 동작은 그대로 가져가면서, cell의 minimumWidth와 maximumHeight을 계산해주었습니다. minimumWidth는 view의 layoutMargin과 titleLabel의 lineHeight로 계산해서 책의 두께가 제목을 보여주기에 충분하지 않으면, minimumWidth로 셀의 가로 길이가 반영되게 했습니다. maximumHeight는 셀의 화면에 그려지는 크기로 잡고 standardHeight를 그 수치의 80%로 잡아 API에서 사이즈 정보가 없는 경우에는 지정 높이로 그려지도록 했습니다. 그리고 실제 두께와 높이 비율을 계산해서 view에 사이즈를 반영했습니다.
 
 ```swift
 private func remakeBackdropViewConstraints(for size: ActualSize?) {
@@ -158,6 +163,8 @@ private func remakeBackdropViewConstraints(for size: ActualSize?) {
     }
 ```
 
+</details>
+
 ### 2. font의 사이즈에 따라 자동으로 높이가 계산되는 CustomTextField - instrinctContentSize
 
 #### 스크린샷
@@ -165,6 +172,13 @@ private func remakeBackdropViewConstraints(for size: ActualSize?) {
 ![CustomTextField](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/5fb6786b-6668-477a-a490-608730672d63)
 
 #### 마음에 드는 라이브러리가 없다? 그럼 직접 구현하면 되지!!
+
+> 반응형 TextField! 근데 이제 폰트에 따라 스스로 높이를 계산하는...
+>
+> `intrinsicContentSize`를 오버라이드 하여 textField에 설정된 font의 height에 따라 TextField의 높이가 계산되도록 구현하였습니다.
+
+<details>
+<summary> 자세한 내용 보기 </summary>
 
 View를 디자인할 때, 활성화 상태나 입력 여부에 따라서 반응하는 TextField를 넣고 싶었습니다. 몇몇 라이브러리를 설치해봤지만,
 사용에 있어서 수정할 수 있는 제약이 많았습니다. 특히 가장 참을 수 없던건 stack에 넣었을 때, 높이를 rawValue로 지정해주지 않으면 모양이 흐트러져 버린다는 것이었습니다. 높이를 명확한 수치로 잡아버리면, font 변경에 유연하게 대처하지 못한 다는 점, 또 사용자의 디바이스에서 설정한 글씨 크기에 따라 앱의 글자 크기도 변경되는 Dynamic Font Size에도 대응할 수 없다는 점이 가장 큰 단점으로 생각되었습니다. 그래서 font의 사이즈에 따라 알아서 자신의 높이를 계산하는 TextField를 만들었습니다. 이때, `UIView`의 `intrinsicContentSize`를 오버라이드 하여 TextField의 기본 크기를 계산하도록 해주었습니다.
@@ -177,6 +191,8 @@ override var intrinsicContentSize: CGSize {
 
 이렇게 해서 height Constraint를 지정하지않고도 font의 size에 따라 높이가 자동으로 계산되는 TextField를 만들 수 있었습니다.
 
+</details>
+
 ---
 
 ### 3. Device의 Network 상태에 따라 변화하는 책검색 View - NWPathMonitor
@@ -186,6 +202,11 @@ override var intrinsicContentSize: CGSize {
 ![네트워크 상태에 따라 변화하는 View](https://github.com/steady-on/SeSAC_iOS_3rd/assets/73203944/62230b01-8d56-4be2-8f5a-d743a0baf161)
 
 #### 디바이스의 인터넷 상태에 따라 책 검색 기능을 비활성화 할 수는 없을까?
+
+> `Network` 프레임워크의 `NWPathMonitor`를 활용하여 기기의 현재 네트워크 상태에 따라 사용자에게 적절한 알림을 띄우고, View를 변경! Thread Safe함 까지 스마트하게 챙겼습니다.
+
+<details>
+<summary> 자세한 내용 보기 </summary>
 
 검색을 통해 책의 정보를 가져오는 것은 알라딘 API를 통해서 하고 있었기 때문에 기기의 인터넷 연결이 반드시 필요한 기능입니다. 그래서 기기의 인터넷 연결이 끊어졌을 때 사용자에게 해당 사실을 알리고, 검색 기능을 막을 수 있는 방법을 고민했습니다. 먼저, `Network` 프레임워크의 `NWPathMonitor`로 기기의 현재 네트워크 상태를 전달 받을 수 있는 `NetworkMonitor` 클래스를 구현하여 `SceneDelegate`에서 앱이 실행될 때, 백그라운드에서 네트워크 감시가 시작되도록 했고, 앱이 종료될 때 함께 종료되도록 해주었습니다.
 
@@ -202,3 +223,5 @@ func startMonitoring() {
     }
 }
 ```
+
+</details>
