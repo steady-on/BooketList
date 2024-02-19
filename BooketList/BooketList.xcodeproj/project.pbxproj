@@ -239,7 +239,7 @@
 			children = (
 				637B5C4A2AC4E1FF00730C01 /* MainTabBarController.swift */,
 				639F358A2AE5B1F500226402 /* ReadingBoard */,
-				637B5C542AC6DB3800730C01 /* SeachBook */,
+				637B5C542AC6DB3800730C01 /* SearchBook */,
 				63B5B3562ACE801F00477536 /* AddBookDetailInfo */,
 				63C946002AFE69060045F231 /* EditBookDetailInfo */,
 				63B44DAC2AE7587B009813B2 /* AllRecordsForBook */,
@@ -252,13 +252,13 @@
 			path = Scene;
 			sourceTree = "<group>";
 		};
-		637B5C542AC6DB3800730C01 /* SeachBook */ = {
+		637B5C542AC6DB3800730C01 /* SearchBook */ = {
 			isa = PBXGroup;
 			children = (
 				637B5C552AC6DB5600730C01 /* SearchBookViewController.swift */,
 				637B5C7F2ACAA24100730C01 /* SearchBookViewModel.swift */,
 			);
-			path = SeachBook;
+			path = SearchBook;
 			sourceTree = "<group>";
 		};
 		637B5C612AC86CB300730C01 /* Product */ = {
