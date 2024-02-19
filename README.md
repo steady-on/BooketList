@@ -21,6 +21,7 @@
 
 - Deployment Target: iOS 15.0
 - 개발 환경: Swift 5, Xcode 15.0.1
+- 프레임워크: UIKit
 - 라이브러리: Realm, SnapKit, KingFisher, Alamofire, Firebase Crashlytics & Messaging
 - 아키텍처: MVVM
 - 그 외 활용 기술: Codable, Compositional Layout, Diffable DataSource, NWPathMonitor
@@ -35,7 +36,10 @@
 - Swift의 Generic을 활용하여 타입에 유연하게 동작할 수 있는 코드 작성
 - 다크모드 지원
 
-## 📂 파일 디렉토리 구조
+<br>
+
+<details>
+<summary>📂 파일 디렉토리 구조</summary>
 
 ```bash
 ├── BooketList
@@ -48,7 +52,7 @@
 │   │   ├── MyNote
 │   │   ├── MyShelf
 │   │   ├── ReadingBoard
-│   │   ├── SeachBook
+│   │   ├── SearchBook
 │   │   ├── Settings
 │   │   └── WriteNote
 │   ├── Cell
@@ -66,6 +70,8 @@
 │   └── ko.lproj
 └── BooketList.xcodeproj
 ```
+
+</details>
 
 ## 📱 주요 화면 및 기능
 
